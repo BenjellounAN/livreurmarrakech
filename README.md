@@ -10,6 +10,7 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             background-color: #f8f8f8;
+            overflow-x: hidden; /* منع التمرير الأفقي */
         }
         header {
             background: #800000; /* أحمر داكن */
@@ -17,21 +18,64 @@
             padding: 15px;
             text-align: center;
             font-size: 24px;
-        }
-        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
             display: flex;
+            align-items: center;
             justify-content: center;
-            background: #333; /* أسود */
-            padding: 10px 0;
         }
-        nav a {
+        .menu-button {
+            position: absolute;
+            left: 15px;
+            background: transparent; /* خلفية شفافة */
             color: #fff;
+            padding: 10px 15px;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2); /* تأثير شفاف عند التمرير */
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* البداية خارج الشاشة */
+            width: 250px;
+            height: 100%;
+            background: #d3d3d3; /* رمادي فاتح */
+            color: #333;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease; /* تأثير الإزاحة */
+        }
+        .sidebar.active {
+            left: 0; /* تظهر القائمة */
+        }
+        .sidebar a {
+            color: #333;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 10px 0;
             font-size: 18px;
         }
-        nav a:hover {
+        .sidebar a:hover {
             text-decoration: underline;
+        }
+        .close-button {
+            align-self: flex-end;
+            background: transparent;
+            color: #333;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
         }
         .hero {
             background: url('https://source.unsplash.com/1600x900/?marrakech') no-repeat center center/cover;
@@ -41,6 +85,7 @@
             align-items: center;
             color: #fff;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 60px; /* لتعويض العنوان الثابت */
         }
         .hero h1 {
             font-size: 48px;
@@ -128,13 +173,18 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <header>Visit Marrakech - اكتشف مراكش</header>
-    <nav>
+    <header>
+        <button class="menu-button" onclick="toggleSidebar()">☰</button>
+        Visit Marrakech - اكتشف مراكش
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <button class="close-button" onclick="toggleSidebar()">×</button>
         <a href="#attractions">المعالم السياحية</a>
         <a href="#activities">الأنشطة</a>
         <a href="#map">الخريطة</a>
         <a href="#about">عن مراكش</a>
-    </nav>
+    </div>
 
     <div class="hero">
         <h1>مرحبًا بك في مراكش</h1>
@@ -176,88 +226,65 @@
             <div class="card">
                 <img src="https://source.unsplash.com/400x300/?spa" alt="الاسترخاء في الحمام التقليدي">
                 <h3>الاسترخاء في الحمام التقليدي</h3>
-                <p>جرب الحمامات التقليدية لتجديد طاقتك والاسترخاء.</p>
+                <p>جرب الحمامات التقليدية في مراكش لتجديد نشاطك.</p>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?shopping" alt="التسوق في الأسواق">
+                <h3>التسوق في الأسواق</h3>
+                <p>تمتع بتجربة التسوق في أسواق مراكش التقليدية.</p>
             </div>
         </div>
         <button onclick="showMore('activities-grid', moreActivities)">عرض المزيد</button>
     </section>
 
+    <section id="about">
+        <h2>عن مراكش</h2>
+        <p>مراكش هي واحدة من أشهر المدن السياحية في المغرب، وتتميز بتاريخها العريق ومعالمها السياحية المدهشة. اكتشف أكثر عن مراكش بما في ذلك المعالم السياحية الفريدة والأنشطة المثيرة التي يمكنك الاستمتاع بها هنا.</p>
+        <div id="more-about">
+            <p>تعد مراكش مركزًا ثقافيًا مهمًا في المغرب، وتتميز بمزيج من الثقافة العربية والأمازيغية، مع تأثيرات فرنسية وأندلسية. المدينة مليئة بالحياة، ولها تاريخ طويل يعكس تأثيرات هذه الحضارات المتنوعة.</p>
+        </div>
+        <button id="read-more" onclick="toggleMore()">اقرأ المزيد</button>
+    </section>
+
     <section id="map">
-        <h2>استكشف مراكش على الخريطة</h2>
+        <h2>خريطة مراكش</h2>
         <div id="map"></div>
     </section>
 
-    <section id="about">
-        <h2>عن مراكش</h2>
-        <p>مراكش مدينة غنية بالتاريخ والحضارة...</p>
-        <p id="more-about" style="display:none;">... تمتاز بأجوائها الفريدة، الأسواق النابضة، والمناظر المذهلة التي تأخذ الأنفاس. إنها وجهة رائعة لعشاق الاستكشاف والثقافة.</p>
-        <button id="read-more" onclick="toggleAbout()">اقرأ المزيد</button>
-    </section>
-
     <footer>
-        &copy; 2024 Visit Marrakech - جميع الحقوق محفوظة.
+        <p>&copy; 2024 Visit Marrakech. كل الحقوق محفوظة.</p>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        const moreAttractions = [
-            {
-                img: "https://source.unsplash.com/400x300/?bahia-palace",
-                title: "قصر الباهية",
-                desc: "تحفة معمارية من العصر الملكي في مراكش.",
-                coords: [31.6202, -7.9806]
-            },
-            {
-                img: "https://source.unsplash.com/400x300/?saadian-tombs",
-                title: "مقابر السعديين",
-                desc: "أحد المواقع التاريخية العريقة في المدينة.",
-                coords: [31.6257, -7.9860]
-            }
-        ];
+        let moreAttractions = false;
+        let moreActivities = false;
 
-        const moreActivities = [
-            {
-                img: "https://source.unsplash.com/400x300/?hot-air-balloon",
-                title: "الطيران بالمناطيد",
-                desc: "استمتع بمشاهدة مراكش من السماء.",
-            },
-            {
-                img: "https://source.unsplash.com/400x300/?atlas-trekking",
-                title: "التنزه في جبال الأطلس",
-                desc: "اكتشف الطبيعة الساحرة في جبال الأطلس.",
-            }
-        ];
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
 
-        function showMore(gridId, data) {
-            const grid = document.getElementById(gridId);
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.innerHTML = `
-                    <img src="${item.img}" alt="${item.title}">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
-                    <a href="#map" onclick="focusMap([${item.coords.join(',')}], '${item.title}')">عرض الموقع</a>
-                `;
-                grid.appendChild(card);
-            });
+        function showMore(sectionId, flag) {
+            flag = !flag;
+            const section = document.getElementById(sectionId);
+            const button = section.querySelector('button');
+            button.textContent = flag ? 'عرض أقل' : 'عرض المزيد';
+        }
+
+        function toggleMore() {
+            const moreContent = document.getElementById('more-about');
+            const readMoreButton = document.getElementById('read-more');
+            moreContent.style.display = moreContent.style.display === 'block' ? 'none' : 'block';
+            readMoreButton.textContent = moreContent.style.display === 'block' ? 'اقرأ أقل' : 'اقرأ المزيد';
         }
 
         function focusMap(coords, title) {
             const map = L.map('map').setView(coords, 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            L.marker(coords).addTo(map).bindPopup(`<b>${title}</b>`).openPopup();
-        }
-
-        function toggleAbout() {
-            const moreText = document.getElementById('more-about');
-            const btn = document.getElementById('read-more');
-            if (moreText.style.display === "none") {
-                moreText.style.display = "block";
-                btn.textContent = "اقرأ أقل";
-            } else {
-                moreText.style.display = "none";
-                btn.textContent = "اقرأ المزيد";
-            }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            L.marker(coords).addTo(map).bindPopup(title).openPopup();
         }
     </script>
 </body>
