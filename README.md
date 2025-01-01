@@ -185,7 +185,7 @@
         <a href="#map">الخريطة</a>
         <a href="#about">عن مراكش</a>
     </div>
-
+<img src="[https://source.unsplash.com/400x300/?koutoubia](https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" 
     <div class="hero">
         <h1>مرحبًا بك في مراكش</h1>
     </div>
@@ -194,19 +194,19 @@
         <h2>أفضل المعالم السياحية في مراكش</h2>
         <div class="grid" id="attractions-grid">
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?koutoubia" alt="مسجد الكتبية">
+                <img src="[https://source.unsplash.com/400x300/?koutoubia](https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" alt="مسجد الكتبية">
                 <h3>مسجد الكتبية</h3>
                 <p>يُعد مسجد الكتبية من أشهر المعالم التاريخية في مراكش.</p>
                 <a href="#map" onclick="focusMap([31.6258, -7.9892], 'مسجد الكتبية')">عرض الموقع</a>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?jemaa-el-fnaa" alt="ساحة جامع الفنا">
+                <img src="[https://source.unsplash.com/400x300/?jemaa-el-fnaa](https://www.lesjardinsdelamedina.com/blog/wp-content/uploads/2020/07/jama-el-fnaa-678x381.jpg)" alt="ساحة جامع الفنا">
                 <h3>ساحة جامع الفنا</h3>
                 <p>قلب مراكش النابض حيث تجد الأسواق الشعبية والأنشطة الترفيهية.</p>
                 <a href="#map" onclick="focusMap([31.6253, -7.9899], 'ساحة جامع الفنا')">عرض الموقع</a>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?majorelle" alt="حدائق ماجوريل">
+                <img src="[https://source.unsplash.com/400x300/?majorelle](https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg)" alt="حدائق ماجوريل">
                 <h3>حدائق ماجوريل</h3>
                 <p>واحدة من أجمل الحدائق في المغرب.</p>
                 <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
@@ -219,7 +219,7 @@
         <h2>أفضل الأنشطة في مراكش</h2>
         <div class="grid" id="activities-grid">
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?camel-ride" alt="ركوب الجمال">
+                <img src="[https://source.unsplash.com/400x300/?camel-ride](https://media.istockphoto.com/id/1463923990/photo/moroccan-camel-driver-leading-asian-chinese-female-tourist-crossing-sahara-desert-in-evening.jpg?s=612x612&w=0&k=20&c=3zK3UoUgsyLjoc4sCKi0bWUkoBnR47eV76fMCLtymL8=)" alt="ركوب الجمال">
                 <h3>ركوب الجمال</h3>
                 <p>استمتع بتجربة صحراوية أصيلة في مراكش.</p>
             </div>
