@@ -184,9 +184,9 @@
         <a href="#activities">الأنشطة</a>
         <a href="#map">الخريطة</a>
         <a href="#about">عن مراكش</a>
-    </div>
-<img src="[https://source.unsplash.com/400x300/?koutoubia](https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" 
+    </div> 
     <div class="hero">
+    <img src="https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0="
         <h1>مرحبًا بك في مراكش</h1>
     </div>
 
