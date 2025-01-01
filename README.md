@@ -193,7 +193,7 @@
         <h2>أفضل المعالم السياحية في مراكش</h2>
         <div class="grid" id="attractions-grid">
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?koutoubia](https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" alt="مسجد الكتبية">
+                <img src="https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" alt="مسجد الكتبية">
                 <h3>مسجد الكتبية</h3>
                 <p>يُعد مسجد الكتبية من أشهر المعالم التاريخية في مراكش.</p>
                 <a href="#map" onclick="focusMap([31.6258, -7.9892], 'مسجد الكتبية')">عرض الموقع</a>
