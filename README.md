@@ -200,13 +200,13 @@
                 <a href="#map" onclick="focusMap([31.6258, -7.9892], 'مسجد الكتبية')">عرض الموقع</a>
             </div>
             <div class="card">
-                <img src="[https://source.unsplash.com/400x300/?jemaa-el-fnaa](https://www.lesjardinsdelamedina.com/blog/wp-content/uploads/2020/07/jama-el-fnaa-678x381.jpg)" alt="ساحة جامع الفنا">
+                <img src="https://source.unsplash.com/400x300/?jemaa-el-fnaa](https://www.lesjardinsdelamedina.com/blog/wp-content/uploads/2020/07/jama-el-fnaa-678x381.jpg" alt="ساحة جامع الفنا">
                 <h3>ساحة جامع الفنا</h3>
                 <p>قلب مراكش النابض حيث تجد الأسواق الشعبية والأنشطة الترفيهية.</p>
                 <a href="#map" onclick="focusMap([31.6253, -7.9899], 'ساحة جامع الفنا')">عرض الموقع</a>
             </div>
             <div class="card">
-                <img src="[https://source.unsplash.com/400x300/?majorelle](https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg)" alt="حدائق ماجوريل">
+                <img src="https://source.unsplash.com/400x300/?majorelle](https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg" alt="حدائق ماجوريل">
                 <h3>حدائق ماجوريل</h3>
                 <p>واحدة من أجمل الحدائق في المغرب.</p>
                 <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
