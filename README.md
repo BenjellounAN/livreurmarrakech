@@ -204,13 +204,25 @@
                 <p>قلب مراكش النابض حيث تجد الأسواق الشعبية والأنشطة الترفيهية.</p>
                 <a href="#map" onclick="focusMap([31.6253, -7.9899], 'ساحة جامع الفنا')">عرض الموقع</a>
             </div>
+            div class="card">
+                <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg" alt="حدائق ماجوريل">
+                <h3>GAREDN MAJOREL </h3>
+                <p>واحدة من أجمل الحدائق في المغرب.</p>
+                <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
+            </div>
             <div class="card">
                 <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg" alt="حدائق ماجوريل">
                 <h3>GAREDN MAJOREL </h3>
                 <p>واحدة من أجمل الحدائق في المغرب.</p>
                 <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
             </div>
-        </div>
+            div class="card">
+                <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg" alt="حدائق ماجوريل">
+                <h3>GAREDN MAJOREL </h3>
+                <p>واحدة من أجمل الحدائق في المغرب.</p>
+                <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
+            </div>
+            </div>
         <button onclick="showMore('attractions-grid', moreAttractions)">عرض المزيد</button>
     </section>
 
