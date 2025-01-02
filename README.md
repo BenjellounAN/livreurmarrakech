@@ -175,7 +175,7 @@
 <body>
     <header>
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
-        Visit Marrakech - اكتشف مراكش
+        VISIT MARRAKECH 
     </header>
 
     <div class="sidebar" id="sidebar">
@@ -186,7 +186,8 @@
         <a href="#about">عن مراكش</a>
     </div> 
     <div class="hero">
-<h2>مرحبًا بك في مراكش</h2>
+<h2>WELCOME IN MARRAKECH 
+the best things to do in marrakech</h2>
     </div>
 
     <section id="attractions">
