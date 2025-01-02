@@ -78,7 +78,7 @@
             margin-bottom: 20px;
         }
         .hero {
-            background: url('https://source.unsplash.com/1600x900/?marrakech') no-repeat center center/cover;
+            background: url('https://www.going.com/_next/image?url=https%3A%2F%2Fgoing-cms-strapi.s3.amazonaws.com%2F64c560f74b6cce8852db5230_marrakeshheader_be5f3363f7.webp&w=3840&q=100&dpl=dpl_7CCbA1H61dmeiF7cVJav6N5AgtGM') no-repeat center center/cover;
             height: 400px;
             display: flex;
             justify-content: center;
