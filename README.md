@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -222,16 +221,19 @@ the best things to do in marrakech</h2>
                 <img src="https://agafayquad.com/wp-content/uploads/2022/10/sunset-agafay-camel-ride-in-agafay-esedrt-marrakech.webp" alt="ركوب الجمال">
                 <h3>ركوب الجمال</h3>
                 <p>استمتع بتجربة صحراوية أصيلة في مراكش.</p>
+                <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
             </div>
             <div class="card">
                 <img src="https://images.squarespace-cdn.com/content/v1/5c71bfa3797f74142d485f11/1564718624635-V1ZCCLQM0YYK3D5V26XK/IMG_2534.jpg" alt="الاسترخاء في الحمام التقليدي">
                 <h3>الاسترخاء في الحمام التقليدي</h3>
                 <p>جرب الحمامات التقليدية في مراكش لتجديد نشاطك.</p>
+           <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a> 
             </div>
             <div class="card">
                 <img src="https://marrakech-foryou.com/wp-content/uploads/2024/07/activites-marrakech-pourquoi-souks-celebres-mondialement.jpg" alt="التسوق في الأسواق">
                 <h3>التسوق في الأسواق</h3>
                 <p>تمتع بتجربة التسوق في أسواق مراكش التقليدية.</p>
+          <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
             </div>
         </div>
         <button onclick="showMore('activities-grid', moreActivities)">عرض المزيد</button>
