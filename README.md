@@ -193,7 +193,7 @@
         <h2>أفضل المعالم السياحية في مراكش</h2>
         <div class="grid" id="attractions-grid">
             <div class="card">
-                <img src="https://media.istockphoto.com/id/1294321554/photo/koutoubia-mosque-in-the-morning-marrakesh-morocco.jpg?s=612x612&w=0&k=20&c=pT-d0PhwqvBYqT6_fTHzUUCdxlXCnNk-HN1rYqlH0k0=)" alt="مسجد الكتبية">
+                <img src="https://www.villasmarrakech.com/images/magazine/article_547_0_1564484509.jpg" alt="مسجد الكتبية">
                 <h3>مسجد الكتبية</h3>
                 <p>يُعد مسجد الكتبية من أشهر المعالم التاريخية في مراكش.</p>
                 <a href="#map" onclick="focusMap([31.6258, -7.9892], 'مسجد الكتبية')">عرض الموقع</a>
@@ -218,17 +218,17 @@
         <h2>أفضل الأنشطة في مراكش</h2>
         <div class="grid" id="activities-grid">
             <div class="card">
-                <img src="https://media.istockphoto.com/id/1463923990/photo/moroccan-camel-driver-leading-asian-chinese-female-tourist-crossing-sahara-desert-in-evening.jpg?s=612x612&w=0&k=20&c=3zK3UoUgsyLjoc4sCKi0bWUkoBnR47eV76fMCLtymL8=)" alt="ركوب الجمال">
+                <img src="https://agafayquad.com/wp-content/uploads/2022/10/sunset-agafay-camel-ride-in-agafay-esedrt-marrakech.webp" alt="ركوب الجمال">
                 <h3>ركوب الجمال</h3>
                 <p>استمتع بتجربة صحراوية أصيلة في مراكش.</p>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?spa" alt="الاسترخاء في الحمام التقليدي">
+                <img src="https://images.squarespace-cdn.com/content/v1/5c71bfa3797f74142d485f11/1564718624635-V1ZCCLQM0YYK3D5V26XK/IMG_2534.jpg" alt="الاسترخاء في الحمام التقليدي">
                 <h3>الاسترخاء في الحمام التقليدي</h3>
                 <p>جرب الحمامات التقليدية في مراكش لتجديد نشاطك.</p>
             </div>
             <div class="card">
-                <img src="https://source.unsplash.com/400x300/?shopping" alt="التسوق في الأسواق">
+                <img src="https://marrakech-foryou.com/wp-content/uploads/2024/07/activites-marrakech-pourquoi-souks-celebres-mondialement.jpg" alt="التسوق في الأسواق">
                 <h3>التسوق في الأسواق</h3>
                 <p>تمتع بتجربة التسوق في أسواق مراكش التقليدية.</p>
             </div>
