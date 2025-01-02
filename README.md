@@ -185,8 +185,8 @@
         <a href="#about">عن مراكش</a>
     </div> 
     <div class="hero">
-<h2>WELCOME IN MARRAKECH 
-the best things to do in marrakech</h2>
+<h2> THE BEST THINGS TO DO IN 
+         MARRAKECH </h2>
     </div>
 
     <section id="attractions">
