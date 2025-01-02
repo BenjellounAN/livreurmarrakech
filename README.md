@@ -190,23 +190,23 @@
     </div>
 
     <section id="attractions">
-        <h2>أفضل المعالم السياحية في مراكش</h2>
+        <h2>BEST TOURIST ATTRACTIONS IN MARRAKECH </h2>
         <div class="grid" id="attractions-grid">
             <div class="card">
-                <img src="https://www.villasmarrakech.com/images/magazine/article_547_0_1564484509.jpg" alt="مسجد الكتبية">
+                <img src="https://www.villasmarrakech.com/images/magazine/article_547_0_1564484509.jpg" alt="KOUTOUBIA MOUSQUE">
                 <h3>مسجد الكتبية</h3>
                 <p>يُعد مسجد الكتبية من أشهر المعالم التاريخية في مراكش.</p>
                 <a href="#map" onclick="focusMap([31.6258, -7.9892], 'مسجد الكتبية')">عرض الموقع</a>
             </div>
             <div class="card">
-                <img src="https://www.lesjardinsdelamedina.com/blog/wp-content/uploads/2020/07/jama-el-fnaa-678x381.jpg" alt="ساحة جامع الفنا">
+                <img src="https://www.lesjardinsdelamedina.com/blog/wp-content/uploads/2020/07/jama-el-fnaa-678x381.jpg" alt="JAMAA LFRNA SQUIR">
                 <h3>ساحة جامع الفنا</h3>
                 <p>قلب مراكش النابض حيث تجد الأسواق الشعبية والأنشطة الترفيهية.</p>
                 <a href="#map" onclick="focusMap([31.6253, -7.9899], 'ساحة جامع الفنا')">عرض الموقع</a>
             </div>
             <div class="card">
                 <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/b2/a0/af.jpg" alt="حدائق ماجوريل">
-                <h3>حدائق ماجوريل</h3>
+                <h3>GAREDN MAJOREL </h3>
                 <p>واحدة من أجمل الحدائق في المغرب.</p>
                 <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
             </div>
@@ -215,17 +215,17 @@
     </section>
 
     <section id="activities">
-        <h2>أفضل الأنشطة في مراكش</h2>
+        <h2>THE BEST ACTIVITIES IN MARRAKECH </h2>
         <div class="grid" id="activities-grid">
             <div class="card">
                 <img src="https://agafayquad.com/wp-content/uploads/2022/10/sunset-agafay-camel-ride-in-agafay-esedrt-marrakech.webp" alt="ركوب الجمال">
-                <h3>ركوب الجمال</h3>
+                <h3>RIDE CAMELS IN THE DESIRT AGAFAY</h3>
                 <p>استمتع بتجربة صحراوية أصيلة في مراكش.</p>
                 <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a>
             </div>
             <div class="card">
                 <img src="https://images.squarespace-cdn.com/content/v1/5c71bfa3797f74142d485f11/1564718624635-V1ZCCLQM0YYK3D5V26XK/IMG_2534.jpg" alt="الاسترخاء في الحمام التقليدي">
-                <h3>الاسترخاء في الحمام التقليدي</h3>
+                <h3>HAMMAM MAROCCAIN</h3>
                 <p>جرب الحمامات التقليدية في مراكش لتجديد نشاطك.</p>
            <a href="#map" onclick="focusMap([31.6408, -8.0084], 'حدائق ماجوريل')">عرض الموقع</a> 
             </div>
