@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Services in Marrakech</title>
+  <style>
+    /* --- عام --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: withe;
+      color: #333;
+    }
+
+    /* --- الهيدر --- */
+    header {
+      background-color: #ffffff;
+      color: #0000;
+      padding: 30px;
+      text-align: center;
+      font-size: 24px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      position: fixed;
+      width: 35%;
+      top: 2.5%;
+      left: 35%;
+      font-size: 80px;
+    }
+
+    /* --- قسم البطل --- */
+    .hero {
+      width: 100%;
+      height: 430px;
+      /* ارتفاع الـ Hero */
+      background: url('https://github.com/user-attachments/assets/9722db85-c23b-483a-932e-3200398e25f2') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .service-header {
+      background-image: url('https://source.unsplash.com/1600x400/?delivery');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .service-header h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    /* --- قسم الخدمات --- */
+    .services {
+      padding: 50px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .service-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card img:hover {
+      transform: scale(1.1);
+    }
+
+    .service-card h2 {
+      padding: 15px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .service-card p {
+      padding: 0 15px 15px;
+      font-size: 16px;
+      color: #777;
+    }
+
+    /* --- الأزرار الدائرية للواتساب والمكالمات --- */
+    .contact-buttons {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-button {
+      background-color: #25D366;
+      /* اللون المميز للواتساب */
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .contact-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-button i {
+      color: white;
+      font-size: 30px;
+    }
+
+    .contact-button.call {
+      background-color: #4CAF50;
+      /* اللون للمكالمات */
+    }
+
+    /* --- تأثير الاهتزاز لشعار المكالمات --- */
+    @keyframes shake {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-10px);
+      }
+
+      50% {
+        transform: translateX(10px);
+      }
+
+      75% {
+        transform: translateX(-10px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    /* تطبيق تأثير الاهتزاز عند تحميل الصفحة */
+    .contact-button.call {
+      animation: shake 2s ease-in-out infinite;
+    }
+
+    .slider-container {
+      width: 100vw;
+      /* عرض السلايدر */
+      height: 150px;
+      /* ارتفاع السلايدر */
+      overflow: hidden;
+      /* يخفي الأجزاء الزائدة */
+      position: relative;
+      border: 2px solid #0000;
+    }
+
+    .slider-track {
+      display: flex;
+      width: calc(300px * 6);
+      /* عدد الصور مضروبًا في عرض كل صورة */
+      animation: moveCar 19s linear infinite;
+      /* حركة مستمرة بدون توقف */
+    }
+
+    @keyframes moveCar {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+
+      /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
+    }
+
+    .slide {
+      width: 300px;
+      height: 150px;
+      flex-shrink: 0;
+      /* يمنع الصور من الانكماش */
+    }
+
+    .container {
+      text-align: center;
+      /* توسيط النص */
+      padding: 50px;
+    }
+
+    .service-text {
+      font-size: 15px;
+      /* حجم الخط */
+      color: #333;
+      /* اللون الرمادي الغامق */
+      margin-top: 20px;
+      /* المسافة بين العبارات */
+      transition: opacity 0.5s ease-in-out;
+      /* تأثير سلس عند العرض */
+    }
+
+    .service-toxt {
+      font-size: 24px;
+      /* حجم الخط */
+      color: #333;
+      /* اللون الرمادي الغامق */
+      margin-top: 20px;
+      /* المسافة بين العبارات */
+      transition: opacity 0.5s ease-in-out;
+
+      .container:hover .service-text {
+        opacity: 1;
+        /* التأثير عند التمرير فوق العنصر */
+      }
+  </style>
+  <!-- إضافة أيقونات -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <img src="https://github.com/user-attachments/assets/40eb6644-c067-4cbe-9eb0-d3031d3a8aeb" alt="livreur marrakech / delivery services in marrakech" class="logo">
+  </header>
+
+  <div class="hero">
+    <h1>Livreur Marrakech 24h/24</h1>
+  </div>
+
+  <!-- قسم البطل -->
+
+  <div class="slider-container">
+    <div class="slider-track">
+
+      <img class="slide" src="https://github.com/user-attachments/assets/fb69b137-a5c6-4721-b2f5-c12167d55e1a" alt="livreur marrakech / delivery services in marrakech">
+
+      <img class="slide" src="https://github.com/user-attachments/assets/370f57f1-2dd2-43da-b0e8-320ee8e41f70" alt="livreur marrakech / delivery services in marrakech">
+
+      <img class="slide" src="https://github.com/user-attachments/assets/d4fdba9c-d54d-4651-8e4c-2395b4683006" alt="livreur marrakech / delivery services in marrakech">
+      <!-- نكرر الصور لضمان حركة سلسة بدون توقف -->
+      <img class="slide" src="https://github.com/user-attachments/assets/fb69b137-a5c6-4721-b2f5-c12167d55e1a" alt="livreur marrakech / delivery services in marrakech ">
+      <img class="slide" src="https://github.com/user-attachments/assets/370f57f1-2dd2-43da-b0e8-320ee8e41f70" alt="livreur marrakech / delivery services in marrakech">
+      <img class="slide" src="https://github.com/user-attachments/assets/d4fdba9c-d54d-4651-8e4c-2395b4683006" alt="livreur marrakech / delivery services in marrakech">
+
+    </div>
+  </div>
+  <div class="container">
+    <h2 class="service-toxt">BEST TEAM DELIVERY SERVICE IN MARRAKECH </h2>
+    <p class="service-text">أفضل خدمة توصيل في مراكش على مدار 24 ساعة, سرعة وموثوقية لا مثيل لها</p>
+    <p class="service-text">Meilleur service de livraison à Marrakech 24h/24 Rapide et fiable</p>
+    <p class="service-text">Best Delivery Services in Marrakech 24/7 Fast and Reliable</p>
+  </div>
+  <h2 class="service-toxt"> OUR SERVICES IS </h2>
+  </div>
+  </div>
+
+  <!-- قسم الخدمات -->
+  <div class="services">
+
+    <div class="service-card">
+<a href="https://wa.me/+212709191563">
+      <img src="https://github.com/user-attachments/assets/e8f552de-3b02-4c97-b31b-926603c73187" alt="livreur fast food marrakech / delivery service marrakech">
+      <h2>🍔 توصيل الطعام</h2>
+      <p>نحن نوصل لك أشهى الوجبات من المطاعم المفضلة لديك، بسرعة وجودة عالية</p>
+    </div>
+
+    <div class="service-card">
+<a href="https://wa.me/+212709191563">
+      <img src="https://github.com/user-attachments/assets/eb5589cc-d3f3-4e4c-961f-781d2cdd2054" alt="Medicine Delivery marrakech / livreur médicament marrakech ">
+      <h2>💊 توصيل الأدوية</h2>
+      <p>احصل على أدويتك بسرعة وأمان، أينما كنت وفي أي وقت.</p>
+    </div>
+
+    <div class="service-card">
+      <a href="https://wa.me/+212709191563">
+      <img src="https://github.com/user-attachments/assets/3d9ee0f9-c464-4fba-bdaa-dd825527aae0" alt="Grocery Delivery / livreur marrakech">
+      
+      <h2>🛒 توصيل من السوبر ماركت</h2>
+      <p>كل احتياجاتك اليومية من السوبر ماركت تصل إلى باب منزلك في أسرع وقت.</p>
+    </div>
+
+ 
+   <div class="service-card">
+     <a href="https://wa.me/+212709191563">
+      <img src="https://github.com/user-attachments/assets/6ed0c2ec-389d-4a45-9150-d000a1279d49" alt="Flower Delivery / livraison les fleurs a marrakech ">
+
+      <h2>💐 توصيل الزهور</h2>
+      <p>أرسل الزهور لمن تحب في أي وقت مع خدمة توصيل الزهور لدينا.</p>
+    </a>
+    </div>
+  </div>
+
+  <!-- الفوتر -->
+  <footer>
+    جميع الحقوق محفوظة © 2025 - خدمات التوصيل في مراكش
+  </footer>
+
+  <!-- الأزرار الدائرية -->
+  <div class="contact-buttons">
+    <!-- زر الواتساب -->
+    <div class="contact-button whatsapp">
+      <a href="https://wa.me/+212709191563" target="_blank">
+        <i class="fab fa-whatsapp"></i> <!-- أيقونة الواتساب -->
+      </a>
+    </div>
+
+    <!-- زر المكالمات -->
+    <div class="contact-button call">
+      <a href="tel:+212709191563">
+        <i class="fas fa-phone-alt"></i> <!-- أيقونة المكالمات -->
+      </a>
+    </div>
+  </div>
+  </div>
+  <script>
+
+  </script>
+
+</body>
+
+</html>
