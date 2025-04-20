@@ -4,11 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Alike&display=swap" rel="stylesheet">
   <title>Livreur Marrakech 24h/24 | Fast Food & Pharmacy Delivery</title> <!-- Google tag (gtag.js) -->
   <meta name="description" content="Service de livraison à Marrakech 24h/24. Livraison rapide de McDonald's, pharmacie, nourriture et plus. Commandez maintenant avec Livreur Marrakech.">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6V256YPG3Y"></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -18,295 +21,418 @@
 
   <!-- Logo schema for SEO -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "url": "https://livreurmaroc.com",
-    "logo": "https://i.postimg.cc/v802j8YD/Logo-of-benjelloun-express-1.jpg"
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://livreurmaroc.com",
+      "logo": "https://i.postimg.cc/v802j8YD/Logo-of-benjelloun-express-1.jpg"
+    }
   </script>
 </head>
-  <style>
-    /* --- عام --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
+<style>
+  /* --- عام --- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Alike', serif;
+  }
+
+  body {
+    background-color: #F5F5F5;
+    color: #333;
+  }
+
+  footer {
+    margin-top: absolute;
+  }
+
+  /* --- الهيدر --- */
+  header {
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0);
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 101%;
+    z-index: 100;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    position: fixed;
+    width: 35%;
+    top: 2.5%;
+    left: 35%;
+    font-size: 80px;
+  }
+
+  /* --- قسم البطل --- */
+  .hero {
+    width: 100%;
+    height: 430px;
+    /* ارتفاع الـ Hero */
+    background: url('https://i.postimg.cc/wj6VVnV8/21-B465-F3-E8-C0-448-D-99-BB-9-D9966-E05289.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .service-header {
+    background-image: url('https://source.unsplash.com/1600x400/?delivery');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .service-header h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  /* --- قسم الخدمات --- */
+  .services {
+    padding: 50px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .service-card {
+    background-color: white;
+    width: 330px;
+    height: 345px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .service-card img:hover {
+    transform: scale(1.1);
+  }
+
+  .service-card h2 {
+    padding: 10px;
+    font-size: 15px;
+    color: #333;
+  }
+
+  .service-card p {
+    padding: 0 15px 15px;
+    font-size: 16px;
+    color: #777;
+  }
+
+  /* --- الأزرار الدائرية للواتساب والمكالمات --- */
+  .whatsapp-popup {
+    position: fixed;
+    bottom: 100px;
+    left: 10px;
+    background-color: white;
+    color: black;
+    padding: 10px 15px 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: visible;
+    /* السماح بخروج الأيقونة */
+  }
+
+  .whatsapp-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+    left: 15px;
+  }
+
+  .whatsapp-popup img {
+    width: 80px;
+    /* تكبير الأيقونة */
+    height: 80px;
+    margin-left: -15px;
+    position: absolute;
+    left: 2px;
+    /* تحريك الأيقونة للخارج */
+  }
+
+  .whatsapp-popup span {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .call-button {
+    width: 60px;
+    height: 60px;
+    left: 10px;
+    right: ;
+    bottom: 20px;
+    background-color: #4fce5d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* الصورة داخل زر المكالمات */
+  .call-button img {
+    width: 75px;
+    height: 110px;
+    animation: ring 1.5s infinite ease-in-out;
+  }
+
+  /* تأثير الاهتزاز */
+  @keyframes ring {
+    0% {
+      transform: rotate(0);
     }
 
-    body {
-      background-color: withe;
-      color: #333;
+    15% {
+      transform: rotate(-10deg);
     }
 
-    /* --- الهيدر --- */
-    header {
-      background-color: #ffffff;
-      color: #0000;
-      padding: 30px;
-      text-align: center;
-      font-size: 24px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 101%;
-      z-index: 100;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    30% {
+      transform: rotate(10deg);
     }
 
-    .logo {
-      position: fixed;
-      width: 35%;
-      top: 2.5%;
-      left: 35%;
-      font-size: 80px;
+    45% {
+      transform: rotate(-10deg);
     }
 
-    /* --- قسم البطل --- */
-    .hero {
-      width: 100%;
-      height: 430px;
-      /* ارتفاع الـ Hero */
-      background: url('https://i.postimg.cc/wj6VVnV8/21-B465-F3-E8-C0-448-D-99-BB-9-D9966-E05289.png') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      text-align: center;
+    60% {
+      transform: rotate(10deg);
     }
 
-    .service-header {
-      background-image: url('https://source.unsplash.com/1600x400/?delivery');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
+    75% {
+      transform: rotate(-5deg);
     }
 
-    .service-header h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
+    100% {
+      transform: rotate(0);
+    }
+  }
+
+  .slider-container {
+    width: 100vw;
+    /* عرض السلايدر */
+    height: 150px;
+    /* ارتفاع السلايدر */
+    overflow: hidden;
+    /* يخفي الأجزاء الزائدة */
+    position: relative;
+    border: 2px solid #0000;
+  }
+
+  .slider-track {
+    display: flex;
+    width: calc(300px * 6);
+    /* عدد الصور مضروبًا في عرض كل صورة */
+    animation: moveCar 19s linear infinite;
+    /* حركة مستمرة بدون توقف */
+  }
+
+  @keyframes moveCar {
+    from {
+      transform: translateX(0);
     }
 
-    /* --- قسم الخدمات --- */
-    .services {
-      padding: 50px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
+    to {
+      transform: translateX(-50%);
     }
 
-    .service-card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+    /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
+  }
 
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    }
+  .slide {
+    width: 300px;
+    height: 150px;
+    flex-shrink: 0;
+    /* يمنع الصور من الانكماش */
+  }
 
-    .service-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
+  .container {
+    text-align: absolute;
+    /* توسيط النص */
+    padding: 15px;
+  }
 
-    .service-card img:hover {
-      transform: scale(1.1);
-    }
+  .service-text {
+    font-size: 15px;
+    /* حجم الخط */
+    color: #333;
+    /* اللون الرمادي الغامق */
+    margin-top: 21px;
+    /* المسافة بين العبارات */
+    transition: opacity 0.5s ease-in-out;
+    /* تأثير سلس عند العرض */
+  }
 
-    .service-card h2 {
-      padding: 15px;
-      font-size: 22px;
-      color: #333;
-    }
+  .container {
+    text-align: center;
+    /* توسيط النص */
+    padding: 10px;
+  }
 
-    .service-card p {
-      padding: 0 15px 15px;
-      font-size: 16px;
-      color: #777;
-    }
+  .service-toxt {
+    font-size: 24px;
+    /* حجم الخط */
+    color: #333;
+    /* اللون الرمادي الغامق */
+    margin-top: 25px;
+    /* المسافة بين العبارات */
+    transition: opacity 0.5s ease-in-out;
+  }
 
-    /* --- الأزرار الدائرية للواتساب والمكالمات --- */
-    .whatsapp-popup {
-      position: fixed;
-      bottom: 100px;
-      left: 10px;
-      background-color: white;
-      color: black;
-      padding: 10px 15px 10px 20px;
-      border-radius: 20px;
-      box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      overflow: visible;
-      /* السماح بخروج الأيقونة */
-    }
+  .service-toxt h2 {
+    margin-top: 5px;
+  }
 
-    .whatsapp-popup.show {
-      opacity: 1;
-      transform: translateY(0);
-      left: 15px;
-    }
+  .container:hover .service-text {
+    opacity: 1;
+    /* التأثير عند التمرير فوق العنصر */
+  }
 
-    .whatsapp-popup img {
-      width: 65px;
-      /* تكبير الأيقونة */
-      height: 80px;
-      margin-left: -15px;
-      position: absolute;
-      left: 9px;
-      /* تحريك الأيقونة للخارج */
-    }
+  #whatsapp-popup {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    width: 320px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    font-family: Arial, sans-serif;
+    display: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
 
-    .whatsapp-popup span {
-      font-size: 14px;
-      font-weight: bold;
-    }
+  #whatsapp-header {
+    background-color: #075E54;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .call-button {
-      width: 60px;
-      height: 60px;
-      left: 10px;
-      right: ;
-      bottom: 20px;
-      background-color: #4fce5d;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-      position: fixed;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  #whatsapp-header .left {
+    display: flex;
+    align-items: center;
+  }
 
-    /* الصورة داخل زر المكالمات */
-    .call-button img {
-      width: 75px;
-      height: 110px;
-      animation: ring 1.5s infinite ease-in-out;
-    }
+  #whatsapp-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 
-    /* تأثير الاهتزاز */
-    @keyframes ring {
-      0% {
-        transform: rotate(0);
-      }
+  #whatsapp-header .name {
+    font-weight: bold;
+    font-size: 16px;
+  }
 
-      15% {
-        transform: rotate(-10deg);
-      }
+  #whatsapp-header .status {
+    font-size: 12px;
+    color: #ddd;
+  }
 
-      30% {
-        transform: rotate(10deg);
-      }
+  #whatsapp-header .close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+  }
 
-      45% {
-        transform: rotate(-10deg);
-      }
+  #whatsapp-body {
+    background-color: #ece5dd;
+    padding: 15px;
+    font-size: 14px;
+  }
 
-      60% {
-        transform: rotate(10deg);
-      }
+  #whatsapp-body .message {
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 80%;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  }
 
-      75% {
-        transform: rotate(-5deg);
-      }
+  #whatsapp-footer {
+    padding: 15px;
+    text-align: center;
+    background: #ece5dd;
+  }
 
-      100% {
-        transform: rotate(0);
-      }
-    }
+  #whatsapp-footer a {
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    display: inline-block;
+    transition: background 0.3s ease;
+  }
 
-    .slider-container {
-      width: 100vw;
-      /* عرض السلايدر */
-      height: 150px;
-      /* ارتفاع السلايدر */
-      overflow: hidden;
-      /* يخفي الأجزاء الزائدة */
-      position: relative;
-      border: 2px solid #0000;
-    }
+  #whatsapp-footer a:hover {
+    background-color: #1ebd5a;
+  }
 
-    .slider-track {
-      display: flex;
-      width: calc(300px * 6);
-      /* عدد الصور مضروبًا في عرض كل صورة */
-      animation: moveCar 19s linear infinite;
-      /* حركة مستمرة بدون توقف */
-    }
-
-    @keyframes moveCar {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-
-      /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
-    }
-
-    .slide {
-      width: 300px;
-      height: 150px;
-      flex-shrink: 0;
-      /* يمنع الصور من الانكماش */
-    }
-   .container {
-      text-align: center;
-      /* توسيط النص */
-      padding: 49px;
-    }
-
-    .service-text {
-      font-size: 15px;
-      /* حجم الخط */
-      color: #333;
-      /* اللون الرمادي الغامق */
-      margin-top: 21px;
-      /* المسافة بين العبارات */
-      transition: opacity 0.5s ease-in-out;
-      /* تأثير سلس عند العرض */
-    }
-
-    .service-toxt {
-      font-size: 24px;
-      /* حجم الخط */
-      color: #333;
-      /* اللون الرمادي الغامق */
-      margin-top: 20px;
-    m
-      /* المسافة بين العبارات */
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    .container:hover .service-text {
-      opacity: 1;
-      /* التأثير عند التمرير فوق العنصر */
-    }
-  </style>
-  <!-- إضافة أيقونات -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  footer {
+    background-color: #DCDCDC;
+    /* خلفية داكنة */
+    color: black;
+    /* لون النص أبيض */
+    text-align: center;
+    /* توسيط النص */
+    padding: 20px 10px;
+    /* مسافة داخلية مريحة */
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    /* ظل خفيف من الأعلى */
+    position: absolute;
+    z-index: 10;
+  }
+</style>
+<!-- إضافة أيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -338,137 +464,153 @@
     </div>
   </div>
   <div class="container">
-    <h2 class="service-toxt">Delivery Services in Marrakech 24hours 7days a week</h2>
+    <h2 class="service-toxt">Delivery Service in Marrakech 24hours 7days a week</h2>
+  </div>
+  <div class="container">
     <p class="service-text">
       Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
     </p>
 
     <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
   </div>
-<div class="container">
-    <h2 class="service-toxt">Livraison Food a marrakech 24h/24</h2>
- </div>
+  <div class="container">
+    <h2 class="service-toxt"> OUR SERVICES ABOUT </h2>
+  </div>
 
   <!-- قسم الخدمات -->
   <div class="services">
+
+    <a href="macdonalds.html">
+
+      <!-- الرابط يغلف البطاقة بالكامل -->
+      <div class="service-card">
+
+        <img src="https://i.postimg.cc/gkPNBS1S/IMG-8940.jpg" alt="livreur fast food marrakech / delivery service marrakech">
+    </a>
+    <h2>🍔 Livraison food a marrakech</h2>
+    <h2>🍕 Delivery Food in Marrakech</h2>
+    <h2>🍟 توصيل الطعام في مراكش</h2>
+    <p>نحن نوصل لك أشهى الوجبات من المطاعم المفضلة لديك، بسرعة وجودة عالية</p>
+    <p>Service de livraison McDonald's ou KFC ou Pizza ou tous les restaurants à Marrakech</p>
+    <p>Delivery food service from McDonald's or KFC or Pizza Hut or any restaurant you want</p>
+  </div>
+
+  </div>
+  <div class="container">
+    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
+  </div>
+  <div class="services">
     <a href="macdonalds.html">
       <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
-        <img src="https://i.postimg.cc/gkPNBS1S/IMG-8940.jpg" alt="livreur fast food marrakech / delivery service marrakech">
-        <h2>🍔 توصيل الطعام في مراكش</h2>
-        <h2>🍕 Livraison restaurant à Marrakech</h2>
-        <h2>🍟 Delivery food in Marrakech</h2>
-        <p>نحن نوصل لك أشهى الوجبات من المطاعم المفضلة لديك، بسرعة وجودة عالية</p>
-        <p>Service de livraison McDonald's ou KFC ou Pizza ou tous les restaurants à Marrakech</p>
-        <p>Delivery food service from McDonald's or KFC or Pizza Hut or any restaurant you want</p>
+        <img src="https://i.postimg.cc/J03cL8ST/IMG-0098.png" alt="Medicine Delivery marrakech / livreur médicament marrakech ">
+        <h2> 💊 Delivery Medicine in marrakech</h2>
+        <h2> 🏥 Livraison médicament a marrakech</h2>
+        <h2> Delivery medicine in marrakech</h2>
+        <p>احصل على أدويتك بسرعة وأمان، أينما كنت وفي أي وقت.</p>
+        <p>livraison médicament a marrakech 24h/7j disponible chez nous</p>
+        <p>delivery medecine in marrakech availble with is </p>
       </div>
     </a>
   </div>
-<div class="container">
-  <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
-</div>
-  
-<div class="container">
-    <h2 class="service-toxt">Delivery Medicines in Marrakech 24hours 7days a week</h2>
-    </div>
-  
-  <div class="services">
-    <a href="pharmacie.html">
-      <!-- الرابط يغلف البطاقة بالكامل -->
-      
-      <div class="service-card">
-    <img src="https://i.postimg.cc/J03cL8ST/IMG-0098.png" alt="Medicine Delivery marrakech / livreur médicament marrakech ">
-    <h2> 💊 توصيل الادوية في مراكش</h2>
-    <h2> 🏥 Livraison médicament a marrakech</h2>
-    <h2> Delivery medicine in marrakech</h2>
-    <p>احصل على أدويتك بسرعة وأمان، أينما كنت وفي أي وقت.</p>
-    <p>livraison médicament a marrakech 24h/7j disponible chez nous</p>
-    <p>delivery medecine in marrakech availble with is </p>
-  </div>
-      </a>
-  </div>
   <div class="container">
-  <p class="service-text">
-    Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
-  </p>
+    <p class="service-text">
+      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
+    </p>
   </div>
 
-  <div class="container">
-    <h2 class="service-toxt">livraison les courses carrefour ou marjane a Marrakech 24h/24 </h2>
-  </div>
   <div class="services">
     <a href="macdonalds.html">
       <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
-    <img src="https://i.postimg.cc/sgsH16cQ/F19-FAA21-DBD5-42-E4-A830-BF4-A8-A3394-E8.jpg" alt="Grocery Delivery / livreur marrakech">
-    <h2>🛒 توصيل من السوبر ماركت في مراكش</h2>
-    <h2> LIVRAISON LES COURSES CARREFOUR</h2>
+        <img src="https://i.postimg.cc/sgsH16cQ/F19-FAA21-DBD5-42-E4-A830-BF4-A8-A3394-E8.jpg" alt="Grocery Delivery / livreur marrakech">
+        <h2>🛒 Delivery Supermarket in marrakech </h2>
+        <h2> LIVRAISON LES COURSES CARREFOUR</h2>
         <p>كل احتياجاتك اليومية من السوبر ماركت تصل إلى باب منزلك في أسرع وقت.
         </p>
         <p>Tous vos besoins quotidiens en supermarché livrés à votre porte à tout moment.</p>
         <p>all things you need from market are near to your home with us ,just message us in whatsapp </p>
-  </div>
-     </a>
+      </div>
+    </a>
   </div>
 
   <div class="container">
-  <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
+    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
   </div>
   <div class="services">
     <a href="macdonalds.html">
       <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
-    <img src="https://i.postimg.cc/TY9qNRV1/0-F900-DCE-1196-47-CD-9884-DF3227-E1-D9-AC.jpg" alt="Flower Delivery / livraison les fleurs a marrakech ">
-    <h2> 💐 توصيل الزهور في مراكش</h2>
-    <h2> Livraison les floures a marrakech</h2>
-    <h2> Delivery flowers in marrakech</h2>
-    <p>أرسل الزهور لمن تحب في أي وقت مع خدمة توصيل الزهور لدينا في مراكش </p>
+        <img src="https://i.postimg.cc/TY9qNRV1/0-F900-DCE-1196-47-CD-9884-DF3227-E1-D9-AC.jpg" alt="Flower Delivery / livraison les fleurs a marrakech ">
+        <h2> 💐 Delivery Flowers in marrakech</h2>
+        <h2> Livraison les floures a marrakech</h2>
+        <h2> Delivery flowers in marrakech</h2>
+        <p>أرسل الزهور لمن تحب في أي وقت مع خدمة توصيل الزهور لدينا في مراكش </p>
 
-    <p> service de livraison les flourse a marrakech chez nous</p>
-    <p>with us you can send flowers to any one and any time you want , this service available now just in marrakech </p>
-  </div>
-      </a>
+        <p> service de livraison les flourse a marrakech chez nous</p>
+        <p>with us you can send flowers to any one and any time you want , this service available now just in marrakech </p>
+      </div>
+    </a>
   </div>
 
   <div class="container">
-  <p class="service-text">
-    Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
-  </p>
+    <p class="service-text">
+      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
+    </p>
   </div>
 
-<div class="services">
+  <div class="services">
     <a href="macdonalds.html">
       <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
-    <img src="https://i.postimg.cc/Pr9CSD0y/IMG-0845.jpg" alt="macdonalds Delivery marrakech/ livraison macdonald´s a marrakech ">
-    <h2>🍔 توصيل ماكدونالدز في مراكش</h2>
-    <h2>🍕 Livraison macdonald´s a marrakech</h2>
-    <h2> 🍟 Delivery macdonalds in marrakech</h2>
-    <p>أرسل الزهور لمن تحب في أي وقت مع خدمة توصيل الزهور لدينا في مراكش </p>
+        <img src="https://i.postimg.cc/Pr9CSD0y/IMG-0845.jpg" alt="macdonalds Delivery marrakech/ livraison macdonald´s a marrakech ">
+        <h2>🍔 Delivery Mcdonald´s kfc papa johns marrkaech</h2>
+        <h2>🍕 Livraison macdonald´s ou Kfc ou papa Jhons marrakech</h2>
+        <h2> 🍟 Delivery macdonalds in marrakech</h2>
+        <p>أرسل الزهور لمن تحب في أي وقت مع خدمة توصيل الزهور لدينا في مراكش </p>
 
-    <p> 🍟livraison macdonalds a marrakech 24h </p>
-    <p> 🥤 delivery macdonalds in marrakech 24h </p>
+        <p> 🍟livraison macdonalds a marrakech 24h </p>
+        <p> 🥤 delivery macdonalds in marrakech 24h </p>
+      </div>
+    </a>
   </div>
-      </a>
+  <div id="whatsapp-popup">
+    <div id="whatsapp-header">
+      <div class="left">
+        <img src="https://i.postimg.cc/wj6VVnV8/Background-image.png" alt="Profile">
+        <div>
+          <div class="name">Delivery Marrakech</div>
+          <div class="status">Typically replies in a few seconds</div>
+        </div>
+      </div>
+      <button class="close-btn" onclick="document.getElementById('whatsapp-popup').style.display='none'">×</button>
+    </div>
+    <div id="whatsapp-body">
+      <div class="message">Hello, how can we help you?</div>
+    </div>
+    <div id="whatsapp-footer">
+      <a href="https://wa.me/212642620325?text=hello i want order " target="_blank">Start Chat</a>
+    </div>
   </div>
-
- 
 
   <footer>
-    جميع الحقوق محفوظة © 2025 - BENJELLOUN EXPRESS MARRAKECH
+    <p> جميع الحقوق محفوظة © 2025 - BENJELLOUN EXPRESS MARRAKECH</p>
+    <p>Contact : +212 6 42 62 03 25</p>
+    <p> Email : contact@livreurmaroc.com</p>
+    <p>L'adresse : Marrakech Guelize rue alhouria residance salam 2eme etage bureau n 12</p>
   </footer>
 
   <!-- الأزرار الدائرية -->
- <div id="whatsappPopup" class="whatsapp-popup" onclick="window.open('https://wa.me/+212642620325?text=Hello i want order now', '_blank');">
-    <img src="https://i.postimg.cc/V5yP3Gs1/IMG-1427.png" alt="WhatsApp livreur marrakech">
-    <span style="color: white;">oidi </span>
-    <span style="color: black;">Send your order here.</span>
+  <div id="whatsappPopup" class="whatsapp-popup" onclick="window.open('https://wa.me/+212709191563?text=Hello i want order now', '_blank');">
+    <img src="https://i.postimg.cc/3W5Bw2hp/IMG-1812.png" alt="WhatsApp">
+    <span style="color: white;"></span>
+    <span style="color: #25D366 ;">OiL Live chat</span>
   </div>
   <div class="call-button">
-    <a href="tel:+212642620325">
-      <img src="https://i.postimg.cc/zBdSxvSY/IMG-1430.png" alt="call delivery marrakech ">
+    <a href="tel:+212709191563">
+      <img src="https://i.postimg.cc/zBdSxvSY/IMG-1430.png" alt="Call">
     </a>
-  </div>!-- أيقونة المكالمات -->
+  </div>
   </a>
   </div>
   </div>
@@ -477,12 +619,17 @@
     document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function() {
         document.getElementById("whatsappPopup").classList.add("show");
-      }, 2000); // يظهر بعد 4 ثوانٍ
+      }, 0000); // يظهر بعد 4 ثوانٍ
       // إخفاء الرسالة عند النقر عليها
       document.getElementById("whatsappPopup").addEventListener("click", function() {
         this.style.display = "flex";
       });
     });
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('whatsapp-popup').style.display = 'block';
+      }, 6000);
+    };
   </script>
 
 </body>
