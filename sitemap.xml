@@ -4,14 +4,27 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- الصفحة الرئيسية -->
   <url>
     <loc>https://livreurmaroc.com/</loc>
-    <lastmod>2025-03-08T16:43:37+00:00</lastmod>
+    <lastmod>2025-04-28T16:43:37+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- يمكنك إضافة صفحات أخرى هنا بنفس الطريقة -->
-  
+  <!-- صفحة ماكدونالدز -->
+  <url>
+    <loc>https://livreurmaroc.com/macdonalds.html</loc>
+    <lastmod>2025-04-28T16:43:37+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- صفحة الصيدليات -->
+  <url>
+    <loc>https://livreurmaroc.com/pharmacie.html</loc>
+    <lastmod>2025-04-28T16:43:37+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
