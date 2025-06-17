@@ -29,4 +29,4 @@
 
 </body>
 </html>
-![image alt](https://github.com/BenjellounAN/livreurmarrakech/blob/601521492385e5d9eb88399ee227f2ddfb79f291/IMG_2572.webp)
+![image alt](https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/601521492385e5d9eb88399ee227f2ddfb79f291/IMG_2572.webp)
