@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livraison de médicaments à Marrakech – Rapide, Fiable, 24h/24</title>
+  <meta name="description" content="Service de livraison de médicaments rapide et fiable à Marrakech. Commandez vos ordonnances 24h/24 via WhatsApp avec une réponse rapide. Livraison sécurisée, pratique et directement à votre porte.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to right, #e0f7ef, #f9fcfb);
+      color: #111;
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffffee;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      z-index: 1000;
+    }
+
+    header img.logo {
+      height: 45px;
+    }
+
+    header a.whatsapp-header {
+      background: linear-gradient(45deg, #25D366, #128C7E);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s;
+    }
+
+    .hero {
+      padding-top: 50px;
+      text-align: center;
+      background: linear-gradient(to right, #e0f7ef, #f9fcfb);
+      color: #111;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      color: #0a3c32;
+    }
+
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .hero a {
+      background: #25D366;
+      color: white;
+      padding: 12px 14px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s;
+    }
+
+    .hero a:hover {
+      background: #1ebc5a;
+    }
+
+    .steps {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .steps h2 {
+      font-size: 2em;
+      margin-bottom: 40px;
+    }
+
+    .step-box {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      width: 300px;
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+    }
+
+    .step img {
+      width: 90px;
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #0a3c32;
+    }
+
+    .gallery {
+      padding: 60px 20px;
+      background: linear-gradient(to right, #e0f7ef, #f9fcfb);
+    }
+
+    .gallery h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+    }
+
+    .images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .images img {
+      width: 75%;
+      /* تم تصغير الحجم */
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      /* لضمان التوسيط */
+    }
+
+    .images img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      background: #0a3c32;
+      color: white;
+    }
+
+    .whatsapp-widget {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      /* ⬅️ غيّر إلى right: 20px لو أردته يمينًا */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* ✅ أيقونة الواتساب */
+    .whatsapp-icon {
+      width: 60px;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-widget {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      /* لتكون في الزاوية اليسرى – غيّر إلى right إذا أردت */
+      display: flex;
+      flex-direction: column;
+      /* فوق بعض */
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* ✅ أيقونة الواتساب */
+    .whatsapp-icon {
+      width: 60px;
+      margin-top: 10px;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* ✅ فقاعة الكتابة */
+    .chat-typing-bubble {
+      background: #f0f0f0;
+      max-width: fit-content;
+      padding: 10px 14px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .chat-typing-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 20px;
+      border-top: 6px solid #f0f0f0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    /* ✅ النقاط المتحركة */
+    .dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dots span {
+      width: 8px;
+      height: 8px;
+      background-color: #25D366;
+      border-radius: 50%;
+      animation: typing 1.5s infinite ease-in-out;
+    }
+
+    .dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    .review-box {
+      background: linear-gradient(to right, #e0f7ef, #f9fcfb);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-box h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .stars {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .star {
+      font-size: 30px;
+      cursor: pointer;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+
+    .star.selected {
+      color: #FFD700;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .reviews-output {
+      margin-top: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .review {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .review .stars-display {
+      color: #FFD700;
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img src="https://nagamuthumedicals.com/assets/images/icons/free-home-delivery.png" alt="medicine delivery in marrakech " class="logo">
+    <a href="https://wa.me/212642620325?text=Bonjour, je suis malade. Pouvez-vous m’aider ?" class="whatsapp-header" target="_blank">💬 Chat avec nous maintenant</a>
+  </header>
+  <div style="height: 60px;"></div>
+  <section class="hero">
+
+    <h1>Livraison de médicaments à Marrakech – 24h/24</h1>
+    <p> Discutez avec nous sur WhatsApp à propos de votre état, et nous vous aiderons à trouver le bon médicament.</p>
+    <a href="https://wa.me/212642620325?text= Bonjour, je suis malade. Pouvez-vous m’aider ?" target="_blank">💬 Commandez maintenant via WhatsApp</a>
+  </section>
+  <div style="height: 50px;"></div>
+  <section class="steps">
+    <h2>Comment fonctionne notre service ?</h2>
+    <div class="step-box">
+      <div class="step">
+        <img src="https://media.istockphoto.com/id/1263955446/vector/smartphone-screen-with-male-therapist-on-chat-in-messenger-and-an-online-consultation-vector.jpg?s=612x612&w=0&k=20&c=-jsSaP4M9d5VAc3XajwOZLdf7pjbYPljKrOIUd0hDdQ=" alt=" chat with us in whatsapp ">
+        <h3>.1</h3>
+        <h3> Discutez avec nous maintenant sur WhatsApp à propos de votre maladie</h3>
+        <p>Nous trouverons le médicament le plus adapté pour vous</p>
+      </div>
+      <div class="step">
+        <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-delivery-pharmacy-illustration-download-in-svg-png-gif-file-formats--service-mobile-phone-app-pack-healthcare-medical-illustrations-5901172.png" alt=" delivery medicine in marrakech ">
+        <h3>.2</h3>
+        <h3>Préparation de votre commande</h3>
+        <p>Depuis la pharmacie la plus proche jusqu’à vous</p>
+      </div>
+      <div class="step">
+        <img src="https://iblogistics.co.uk/images/pharma.jpg" alt="الخطوة 3">
+        <h3>Livraison rapide, priorisant les besoins urgents </h3>
+        <h3>.3</h3>
+        <p>À tout moment, n’importe où</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <h2>Vos médicaments livrés à domicile à Marrakech – 24h/24, 7j/7</h2>
+    <div class="images">
+      <img src="https://www.medznat.ru/uploads/images/post_content/5243/image_2/1648794675image_2.webp" alt=" delivery pharmacy marrakech 24/7">
+      <center>Livraison de médicaments rapide et fiable à Marrakech, spécialisée dans les cas urgents. Recevez vos ordonnances en toute sécurité chez vous en moins de 30 minutes. Disponible 24h/24 et 7j/7 avec commande facile via WhatsApp et réponse rapide.</center>
+      <img src="https://img.etimg.com/thumb/width-1200,height-900,imgsize-129432,resizemode-75,msid-106171057/small-biz/sme-sector/navigating-the-dynamics-of-scaling-an-online-pharmacy-business.jpg" alt="delivery marrakech">
+      <center> Nous proposons un service professionnel de livraison de médicaments à Marrakech, avec priorité aux situations d’urgence. Vos médicaments essentiels sont livrés chez vous en moins de 30 minutes. Commandez à tout moment via WhatsApp pour un service rapide et sécurisé. </center>
+
+      <img src="https://static.actu.fr/uploads/2023/02/73eaa41156e36f7eaa41156e36ceaav-960x640.jpg" alt="medicine delivery marrakech">
+      <center>Votre partenaire de confiance pour la livraison de médicaments à Marrakech. Nous nous concentrons sur les besoins urgents et garantissons une livraison en moins de 30 minutes. Un service pratique disponible 24h/24, avec assistance WhatsApp pour rester connecté et pris en charge.
+      </center>
+
+      <img src="https://api.hub.jhu.edu/factory/sites/default/files/styles/landscape/public/pharmacy_050720.jpg" alt="medicine delivery marrakech">
+    </div>
+  </section>
+
+  <div class="review-box">
+    <h2>Laissez votre avis
+    </h2>
+    <input type="text" id="username" placeholder="Your name" />
+    <textarea id="comment" placeholder="Write your comment here..." rows="4"></textarea>
+
+    <div class="stars" id="stars">
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <button onclick="submitReview()">Envoyer
+    </button>
+  </div>
+
+  <div class="reviews-output" id="reviewsOutput">
+    <!-- التعليقات ستظهر هنا -->
+  </div>
+
+  
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <footer>
+    © 2025 BENJELLOUNEXPRESS - All rights reserved
+
+  </footer>
+
+  <div class="whatsapp-widget">
+    <!-- Typing Bubble يظهر فوق -->
+    <div class="chat-typing-bubble">
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- أيقونة WhatsApp -->
+    <a href="https://wa.me/212642620325?text=Bonjour, je suis malade. Pouvez-vous m’aider ?" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon" />
+    </a>
+  </div>
+
+  <!-- Typing Bubble -->
+
+  </div>
+  <script>
+    let selectedRating = 0;
+    // التحكم في اختيار النجوم
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', function() {
+        selectedRating = parseInt(this.getAttribute('data-value'));
+        document.querySelectorAll('.star').forEach(s => {
+          s.classList.remove('selected');
+        });
+        for (let i = 0; i < selectedRating; i++) {
+          document.querySelectorAll('.star')[i].classList.add('selected');
+        }
+      });
+    });
+    // عند الضغط على زر الإرسال
+    function submitReview() {
+      const username = document.getElementById('username').value.trim();
+      const comment = document.getElementById('comment').value.trim();
+      if (!username || !comment || selectedRating === 0) {
+        alert("Please fill in all fields and select a rating.");
+        return;
+      }
+      const reviewHTML = `
+      <div class="review">
+        <strong>${username}</strong><br/>
+        <div class="stars-display">${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}</div>
+        <p>${comment}</p>
+      </div>
+    `;
+      document.getElementById('reviewsOutput').innerHTML += reviewHTML;
+      // إعادة تعيين النموذج
+      document.getElementById('username').value = '';
+      document.getElementById('comment').value = '';
+      selectedRating = 0;
+      document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+    }
+    
+  </script>
+</body>
+
+</html>
