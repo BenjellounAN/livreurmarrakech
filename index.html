@@ -86,19 +86,46 @@
   }
 
   /* --- قسم البطل --- */
-  .hero {
-    width: 100%;
-    height: 430px;
-    /* ارتفاع الـ Hero */
-    background: url('https://i.ibb.co/wZd7KxQP/Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech.webp" alt="Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech" ') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    text-align: center;
-  }
+ .hero {
+  position: relative; /* أساس لوضع النص فوق الصورة */
+  width: 100%;
+  height: 70vh; /* استخدام vh بدلاً من % للارتفاع */
+  overflow: hidden; /* لمنع تجاوز المحتوى للحاوية */
+}
 
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* يحل محل background-size: cover */
+  display: block; /* يزيل المسافة تحت الصورة */
+}
+
+.hero__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  z-index: 2; /* التأكد من ظهور النص فوق الصورة */
+}
+
+/* طبقة تظليل اختيارية لتحسين قراءة النص */
+.hero__content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* تظليل خفيف */
+  z-index: -1;
+}
   .logo {
     position: absolute;
     top: 20px;
@@ -122,7 +149,6 @@
     overflow: hidden;
     position: fixed;
     width: 100%;
-     
   }
 
   /* تحسين ظهور القائمة */
@@ -144,8 +170,7 @@
 
   .mega-menu.show {
     display: flex;
-    color:white;
-    
+    color: white;
   }
 
   .menu-btn {
@@ -191,7 +216,6 @@
   /* حالة الزر عند الفتح */
   .menu-btn.active .line:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
-   
   }
 
   .menu-btn.active .line:nth-child(2) {
@@ -316,7 +340,6 @@
     align-items: center;
     flex-direction: row-reverse;
     gap: 15px;
-    
     animation: none !important;
     transition: none !important;
   }
@@ -343,7 +366,7 @@
   .whatsapp-btn img {
     width: 86px;
     height: 86px;
-    position :absolute; 
+    position: absolute;
     transition: transform 0.3s ease;
   }
 
@@ -540,11 +563,6 @@
     transition-delay: 0.3s;
   }
 
-
- 
-
-
-
   .underline-gradient {
     display: inline-block;
     position: relative;
@@ -586,8 +604,20 @@
       </div>
     </button>
   </header>
-
-  <div class="mega-menu" id="megaMenu">
+  
+  
+  <div class="hero">
+  <!-- الصورة الأساسية -->
+  <img src="https://i.ibb.co/wZd7KxQP/Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech.webp" fetchpriority="high" loading="eager" alt="delivery service in marrakech / livreur marrakech " class="hero__image">
+  
+  <!-- النص فوق الصورة -->
+  <div class="hero__content"><h1>
+livreur marrakech 24h </h2>
+  </div>
+</div>
+  
+  
+<div class="mega-menu" id="megaMenu">
     <div class="menu-column">
       <h3>OUR DELIVERY</h3>
       <ul>
@@ -613,9 +643,7 @@
     </div>
 
   </div>
-  <div class="hero">
-    <h1>Livreur Marrakech </h1>
-  </div>
+
 
   <!-- قسم البطل -->
 
@@ -745,7 +773,6 @@
       </div>
     </a>
   </div>
-  
 
   <!-- HTML -->
   <div class="whatsapp-float">
@@ -847,19 +874,17 @@
       // 3. زر الواتساب مع الرسالة المنبثقة
       const whatsappBtn = document.getElementById('whatsappBtn');
       const whatsappMessage = document.getElementById('whatsappMessage');
- animateWhatsappMessage(3000);
+      animateWhatsappMessage(3000);
+
       function animateWhatsappMessage() {
         setTimeout(() => {
           whatsappMessage.classList.add('show');
           setTimeout(() => {
-           
-      
-       whatsappMessage.classList.remove('show');
+            whatsappMessage.classList.remove('show');
             setTimeout(animateWhatsappMessage, 8000);
           }, 5000);
         }, 3000);
       }
-     
       whatsappBtn.addEventListener('click', function() {
         window.open('https://wa.me/212642620325?text=Hello, i would like to order now please', '_blank');
       });
