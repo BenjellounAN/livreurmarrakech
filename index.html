@@ -45,554 +45,828 @@
   </script>
 </head>
 <style>
-  /* --- عام --- */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  body {
-    background-color: white;
-    color: #333;
-  }
-
-  footer {
-    margin-top: absolute;
-  }
-
-  /* --- الهيدر --- */
-  header {
-    background-color: #ffffff;
-    padding: 20px 30px;
-    /* تم تقليل البادينغ العمودي ليكون أكثر تناسقًا */
-    text-align: center;
-    font-size: 14px;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    /* جديد: لترتيب العناصر داخله */
-    justify-content: center;
-    /* جديد: لتوسيط العناصر */
-    align-items: center;
-    /* جديد: لتحسين المحاذاة الرأسية */
-    height: 80px;
-    /* ارتفاع ثابت للهيدر (عدل حسب الحاجة) */
-  }
-
-  /* --- قسم البطل --- */
- .hero {
-  position: relative; /* أساس لوضع النص فوق الصورة */
-  width: 100%;
-  height: 70vh; /* استخدام vh بدلاً من % للارتفاع */
-  overflow: hidden; /* لمنع تجاوز المحتوى للحاوية */
-}
-
-.hero__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* يحل محل background-size: cover */
-  display: block; /* يزيل المسافة تحت الصورة */
-}
-
-.hero__content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 24px;
-  text-align: center;
-  z-index: 2; /* التأكد من ظهور النص فوق الصورة */
-}
-
-/* طبقة تظليل اختيارية لتحسين قراءة النص */
-.hero__content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* تظليل خفيف */
-  z-index: -1;
-}
-  .logo {
-    position: absolute;
-    top: 20px;
-    /* مسافة من الأعلى */
-    left: 50%;
-    /* تبدأ من منتصف الصفحة */
-    transform: translateX(-50%);
-    /* تحريكها إلى اليسار بنصف عرضها لتصبح في المنتصف تمامًا */
-    font-size: 24px;
-    /* حجم مناسب (عدل حسب الحاجة) */
-    font-weight: bold;
-    color: #000;
-    z-index: 101;
-    /* أعلى من الـ header لضمان ظهورها */
-    max-width: 200px;
-    /* لمنع تجاوز الحجم على الشاشات الصغيرة */
-  }
-
-  /* تنسيقات الزر الجديدة */
-  .menu-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
-
-  /* تحسين ظهور القائمة */
-  .mega-menu {
-    display: none;
-    position: fixed;
-    top: 80px;
-    /* يتناسب مع ارتفاع الهيدر */
-    right: 0;
-    width: 100%;
-    max-width: 900px;
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;
-    background: linear-gradient(135deg, #8B0000 0%, #330000 50%, #000000 100%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    z-index: 99;
-  }
-
-  .mega-menu.show {
-    display: flex;
-    color: white;
-  }
-
-  .menu-btn {
-    position: fixed;
-    top: 25px;
-    right: 30px;
-    background: transparent !important;
-    border: none;
-    cursor: pointer;
-    z-index: 110;
-    padding: 10px;
-  }
-
-  .hamburger {
-    width: 30px;
-    height: 24px;
-    position: relative;
-    transition: all 0.3s;
-  }
-
-  .line {
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: #8B0000;
-    border-radius: 3px;
-    transition: all 0.3s;
-  }
-
-  .line:nth-child(1) {
-    top: 0;
-  }
-
-  .line:nth-child(2) {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .line:nth-child(3) {
-    bottom: 0;
-  }
-
-  /* حالة الزر عند الفتح */
-  .menu-btn.active .line:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
-  }
-
-  .menu-btn.active .line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-btn.active .line:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  /* تأثيرات القائمة */
-  .mega-menu {
-    opacity: 0;
-    transform: translateY(-20px);
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-
-  .mega-menu.show {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-  }
-
-  /* تنسيقات القائمة (يمكن تخصيصها) */
-  .menu-column h3 {
-    color: white;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #8B0000;
-    padding-bottom: 5px;
-  }
-
-  .menu-column ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .menu-column ul li a:hover {
-    color: white;
-  }
-
-  .service-header {
-    background-image: url('https://source.unsplash.com/1600x400/?delivery');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-  }
-
-  .service-header h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-
-  /* --- قسم الخدمات --- */
-  .services {
-    padding: 50px 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .service-card {
-    background: linear-gradient(135deg, #8B0000 40%, #330000 80%, #000000 100%);
-    width: 330px;
-    height: 345px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .service-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .service-card img:hover {
-    transform: scale(1.1);
-  }
-
-  .service-card h2 {
-    padding: 10px;
-    font-size: 15px;
-    color: white;
-  }
-
-  .service-card p {
-    padding: 0 15px 15px;
-    font-size: 16px;
-    color: white;
-  }
-
-  :root {
-    --whatsapp-green: #25D366;
-    --whatsapp-dark: #075E54;
-    --whatsapp-light: #dcf8c6;
-    --animation-duration: 0.4s;
-    --shadow-normal: 0 4px 15px rgba(37, 211, 102, 0.4);
-    --shadow-hover: 0 6px 20px rgba(37, 211, 102, 0.6);
-  }
-
-  /* الهيكل الأساسي */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 80px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    gap: 15px;
-    animation: none !important;
-    transition: none !important;
-  }
-
-  /* تصميم زر الواتساب */
-  .whatsapp-btn {
-    width: 36px;
-    height: 36px;
-    background: var(--whatsapp-green);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    box-shadow: var(--shadow-normal);
-    cursor: pointer;
-    transition: all var(--animation-duration) ease;
-    position: relative;
-  }
-
-  .whatsapp-btn:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .whatsapp-btn img {
-    width: 86px;
-    height: 86px;
-    position: absolute;
-    transition: transform 0.3s ease;
-  }
-
-  /* تصميم فقاعة الرسالة */
-  .whatsapp-message {
-    background: white;
-    color: var(--whatsapp-dark);
-    padding: 12px 20px;
-    border-radius: 30px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    font-weight: bold;
-    font-size: 15px;
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    transition:
-      max-width var(--animation-duration) ease,
-      opacity var(--animation-duration) ease,
-      padding var(--animation-duration) ease;
-    transform-origin: right center;
-    will-change: transform, opacity;
-    /* تحسين الأداء */
-  }
-
-  .whatsapp-message.show {
-    max-width: 300px;
-    opacity: 1;
-  }
-
-  /* تأثيرات الحركة */
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
+‎    /* --- عام --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    50% {
+    body {
+      background-color: white;
+      color: #333;
+    }
+
+    footer {
+      margin-top: absolute;
+    }
+
+‎    /* --- الهيدر --- */
+    header {
+      background-color: #ffffff;
+      padding: 20px 30px;
+‎      /* تم تقليل البادينغ العمودي ليكون أكثر تناسقًا */
+      text-align: center;
+      font-size: 14px;
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+‎      /* جديد: لترتيب العناصر داخله */
+      justify-content: center;
+‎      /* جديد: لتوسيط العناصر */
+      align-items: center;
+‎      /* جديد: لتحسين المحاذاة الرأسية */
+      height: 80px;
+‎      /* ارتفاع ثابت للهيدر (عدل حسب الحاجة) */
+    }
+
+‎    /* --- قسم البطل --- */
+    .hero {
+      position: relative;
+‎      /* أساس لوضع النص فوق الصورة */
+      width: 100%;
+      height: 70vh;
+‎      /* استخدام vh بدلاً من % للارتفاع */
+      overflow: hidden;
+‎      /* لمنع تجاوز المحتوى للحاوية */
+    }
+
+    .hero__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+‎      /* يحل محل background-size: cover */
+      display: block;
+‎      /* يزيل المسافة تحت الصورة */
+    }
+
+    .hero__content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      z-index: 2;
+‎      /* التأكد من ظهور النص فوق الصورة */
+    }
+
+‎    /* طبقة تظليل اختيارية لتحسين قراءة النص */
+    .hero__content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+‎      /* تظليل خفيف */
+      z-index: -1;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+‎      /* مسافة من الأعلى */
+      left: 50%;
+‎      /* تبدأ من منتصف الصفحة */
+      transform: translateX(-50%);
+‎      /* تحريكها إلى اليسار بنصف عرضها لتصبح في المنتصف تمامًا */
+      font-size: 24px;
+‎      /* حجم مناسب (عدل حسب الحاجة) */
+      font-weight: bold;
+      color: #000;
+      z-index: 101;
+‎      /* أعلى من الـ header لضمان ظهورها */
+      max-width: 200px;
+‎      /* لمنع تجاوز الحجم على الشاشات الصغيرة */
+    }
+
+‎    /* تنسيقات الزر الجديدة */
+‎    /* القائمة المفتوحة - منع التمرير عند ظهور القائمة */
+    .menu-open {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+‎    /* زر القائمة */
+    .menu-btn {
+      position: fixed;
+      top: 25px;
+      right: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 110;
+      padding: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+‎    /* أيقونة القائمة (هامبرغر) */
+    .hamburger {
+      width: 30px;
+‎      /* تغيير العرض */
+      height: 24px;
+      position: absolute;
+      transition: all 0.3s ease;
+    }
+
+    .line {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #8B0000;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .line:nth-child(1) {
+      top: 0;
+    }
+
+    .line:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .line:nth-child(3) {
+      bottom: 0;
+    }
+
+‎    /* حالة الزر عند الفتح */
+    .menu-btn.active .line:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    .menu-btn.active .line:nth-child(2) {
+      opacity: 0;
+      transform: translateY(-50%) scale(0);
+    }
+
+    .menu-btn.active .line:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+‎    /* القائمة الكبيرة */
+    .mega-menu {
+      position: fixed;
+      top: 80px;
+      right: 0;
+      width: 100%;
+      max-width: 900px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      background: linear-gradient(135deg, #8B0000 0%, #330000 50%, #000000 100%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+      z-index: 99;
+      opacity: 0;
+      transform: translateY(-20px);
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .mega-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      display: flex;
+    }
+
+‎    /* أعمدة القائمة */
+    .menu-column {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .menu-column h3 {
+      color: white;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+
+    .menu-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: #8B0000;
+    }
+
+    .menu-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-column ul li {
+      margin-bottom: 15px;
+    }
+
+    .menu-column ul li a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      padding: 5px 0;
+      font-size: 1rem;
+    }
+
+    .menu-column ul li a:hover {
+      color: white;
+      padding-left: 10px;
+    }
+
+‎    /* تأثيرات للشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .mega-menu {
+        padding: 30px 20px;
+        flex-direction: column;
+      }
+
+      .menu-column {
+        margin-bottom: 30px;
+      }
+
+      .menu-column h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .service-header {
+      background-image: url('https://source.unsplash.com/1600x400/?delivery');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .service-header h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+‎    /* --- قسم الخدمات --- */
+    .services {
+      padding: 50px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, #8B0000 40%, #330000 80%, #000000 100%);
+      width: 330px;
+      height: 345px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card img:hover {
       transform: scale(1.1);
     }
 
-    100% {
-      transform: scale(1);
+    .service-card h2 {
+      padding: 10px;
+      font-size: 15px;
+      color: white;
     }
-  }
 
-  .pulse-effect {
-    animation:
-      pulse 1.5s ease infinite,
-      bounce 2s ease infinite;
-    /* إضافة تأثير جديد */
-  }
+    .service-card p {
+      padding: 0 15px 15px;
+      font-size: 16px;
+      color: white;
+    }
 
-  @keyframes bounce {
+    :root {
+      --whatsapp-green: #25D366;
+      --whatsapp-dark: #075E54;
+      --whatsapp-light: #128C7E;
+      --chat-bg: #e6ddd4;
+      --message-bg: #ffffff;
+      --text-dark: #3b4a54;
+      --text-light: #667781;
+    }
 
-    0%,
-    100% {
+    /* CSS */
+    .slider-container {
+      width: 100vw;
+‎      /* عرض السلايدر */
+      height: 150px;
+‎      /* ارتفاع السلايدر */
+      overflow: hidden;
+‎      /* يخفي الأجزاء الزائدة */
+      position: relative;
+      border: 2px solid #0000;
+    }
+
+    .slider-track {
+      display: flex;
+      width: calc(300px * 6);
+‎      /* عدد الصور مضروبًا في عرض كل صورة */
+      animation: moveCar 19s linear infinite;
+‎      /* حركة مستمرة بدون توقف */
+    }
+
+    @keyframes moveCar {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+
+‎      /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
+    }
+
+    .slide {
+      width: 300px;
+      height: 150px;
+      flex-shrink: 0;
+‎      /* يمنع الصور من الانكماش */
+    }
+
+    .container {
+      text-align: absolute;
+‎      /* توسيط النص */
+      padding: 15px;
+    }
+
+    .service-text {
+      font-size: 15px;
+‎      /* حجم الخط */
+      color: #333;
+‎      /* اللون الرمادي الغامق */
+      margin-top: 21px;
+‎      /* المسافة بين العبارات */
+      transition: opacity 0.5s ease-in-out;
+‎      /* تأثير سلس عند العرض */
+    }
+
+    .container {
+      text-align: center;
+‎      /* توسيط النص */
+      padding: 10px;
+    }
+
+    .service-toxt {
+      font-size: 24px;
+‎      /* حجم الخط */
+      color: #333;
+‎      /* اللون الرمادي الغامق */
+      margin-top: 25px;
+‎      /* المسافة بين العبارات */
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .service-toxt h2 {
+      margin-top: 5px;
+    }
+
+‎    /* أضف هذا للـ CSS */
+    /* CSS */
+    .service-text {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+      filter: blur(2px);
+‎      /* إضافة ضبابية خفيفة قبل الظهور */
+    }
+
+    .service-text.show {
+      opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
 
-    50% {
-      transform: translateY(-5px);
+‎    /* تأخيرات متتالية تلقائية */
+    .service-text:nth-child(1) {
+      transition-delay: 0.1s;
     }
-  }
 
-  /* تصميم متجاوب */
-  @media (max-width: 768px) {
-    .whatsapp-float {
-      bottom: 20px;
-      right: 20px;
+    .service-text:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .service-text:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .underline-gradient {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 15px;
+      text-align: center;
+    }
+
+    .underline-gradient::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+‎      /* لتحريك الخط إلى المنتصف (100% - 50%) / 2 = 25% */
+      height: 3px;
+‎      /* سمك الخط */
+      width: 50%;
+‎      /* نصف عرض العنصر */
+      background: linear-gradient(135deg, #8B0000 40%, #330000 80%, red 100%);
+      border-radius: 50px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* WhatsApp Popup Styles */
+    .whatsapp-popup {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 9999;
+      background: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
       gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      text-decoration: none;
     }
 
-    .whatsapp-btn {
-      width: 55px;
-      height: 55px;
+    .whatsapp-popup:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+      background: #128C7E;
+    }
+
+    .whatsapp-popup img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .whatsapp-popup:hover img {
+      transform: rotate(10deg);
+    }
+
+    .whatsapp-popup .whatsapp-text {
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .call-button {
+      position: fixed;
+      bachground-color: green;
+      bottom: 90px;
+      left: 30px;
+      z-index: 9999;
+      transition: all 0.3s ease;
+    }
+
+    .call-button:hover {
+      transform: scale(1.1);
+    }
+
+    .call-button img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    /* WhatsApp Float Button Styles */
+    .whatsapp-float {
+      position: fixed;
+      left: 8px;
+      bottom: 20px;
+      z-index: 1000;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    .whatsapp-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
     }
 
     .whatsapp-message {
-      font-size: 14px;
+      position: absolute;
+      left: 75px;
+      background-color: #e2f7d4;
+      color: #000;
       padding: 10px 15px;
-    }
-  }
-
-  /* للشاشات الكبيرة جداً */
-  @media (min-width: 1600px) {
-    .whatsapp-float {
-      transform: scale(1.1);
-      transform-origin: bottom right;
-    }
-  }
-
-  /* CSS */
-  .slider-container {
-    width: 100vw;
-    /* عرض السلايدر */
-    height: 150px;
-    /* ارتفاع السلايدر */
-    overflow: hidden;
-    /* يخفي الأجزاء الزائدة */
-    position: relative;
-    border: 2px solid #0000;
-  }
-
-  .slider-track {
-    display: flex;
-    width: calc(300px * 6);
-    /* عدد الصور مضروبًا في عرض كل صورة */
-    animation: moveCar 19s linear infinite;
-    /* حركة مستمرة بدون توقف */
-  }
-
-  @keyframes moveCar {
-    from {
-      transform: translateX(0);
+      border-radius: 7.5px;
+      font-family: 'Segoe UI', Helvetica, sans-serif;
+      font-size: 14px;
+      box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
     }
 
-    to {
-      transform: translateX(-50%);
+    .whatsapp-message:after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 6px solid #e2f7d4;
     }
 
-    /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
-  }
+    .message-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .slide {
-    width: 300px;
-    height: 150px;
-    flex-shrink: 0;
-    /* يمنع الصور من الانكماش */
-  }
+    .secondary-text {
+      font-size: 11px;
+      color: #667781;
+      margin-left: 8px;
+      padding-left: 8px;
+      border-left: 1px solid #d1d7db;
+    }
 
-  .container {
-    text-align: absolute;
-    /* توسيط النص */
-    padding: 15px;
-  }
+    .whatsapp-button img {
+      width: 80px;
+      height: 80px;
+      transition: all 0.3s ease;
+    }
 
-  .service-text {
-    font-size: 15px;
-    /* حجم الخط */
-    color: #333;
-    /* اللون الرمادي الغامق */
-    margin-top: 21px;
-    /* المسافة بين العبارات */
-    transition: opacity 0.5s ease-in-out;
-    /* تأثير سلس عند العرض */
-  }
+    .whatsapp-button:hover img {
+      transform: scale(1.1) rotate(5deg);
+    }
 
-  .container {
-    text-align: center;
-    /* توسيط النص */
-    padding: 10px;
-  }
+    .show-message {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
 
-  .service-toxt {
-    font-size: 24px;
-    /* حجم الخط */
-    color: #333;
-    /* اللون الرمادي الغامق */
-    margin-top: 25px;
-    /* المسافة بين العبارات */
-    transition: opacity 0.5s ease-in-out;
-  }
+    @keyframes horizontalPulse {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
 
-  .service-toxt h2 {
-    margin-top: 5px;
-  }
+      50% {
+        transform: translateY(0) translateX(5px);
+      }
 
-  /* أضف هذا للـ CSS */
-  /* CSS */
-  .service-text {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
-    filter: blur(2px);
-    /* إضافة ضبابية خفيفة قبل الظهور */
-  }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
 
-  .service-text.show {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+    .pulse-animation {
+      animation: horizontalPulse 2s infinite;
+    }
 
-  /* تأخيرات متتالية تلقائية */
-  .service-text:nth-child(1) {
-    transition-delay: 0.1s;
-  }
+    /* WhatsApp Chat Widget Styles */
+    .minimal-chat-widget {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 340px;
+      background-color: var(--chat-bg);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      z-index: 1000;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm0 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm-30-20c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm0 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm30-40c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm0 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zM20 20c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z'/%3E%3C/g%3E%3C/svg%3E");
+    }
 
-  .service-text:nth-child(2) {
-    transition-delay: 0.2s;
-  }
+    .minimal-chat-widget.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
-  .service-text:nth-child(3) {
-    transition-delay: 0.3s;
-  }
+    .chat-header {
+      background: linear-gradient(135deg, var(--whatsapp-dark) 0%, var(--whatsapp-light) 100%);
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  .underline-gradient {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 15px;
-    text-align: center;
-  }
+    .agent-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-  .underline-gradient::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 25%;
-    /* لتحريك الخط إلى المنتصف (100% - 50%) / 2 = 25% */
-    height: 3px;
-    /* سمك الخط */
-    width: 50%;
-    /* نصف عرض العنصر */
-    background: linear-gradient(135deg, #8B0000 40%, #330000 80%, red 100%);
-    border-radius: 50px;
-    transition: all 0.3s ease-in-out;
-  }
-  }
-</style>
-<!-- إضافة أيقونات -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    .agent-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .agent-info h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .agent-info p {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #4ade80;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .chat-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-received {
+      align-self: flex-start;
+      max-width: 80%;
+      margin-bottom: 8px;
+    }
+
+    .message-content {
+      background-color: var(--message-bg);
+      padding: 10px 14px;
+      border-radius: 8px 8px 8px 0;
+      font-size: 14px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--message-bg);
+      padding: 10px 14px;
+      border-radius: 8px 8px 8px 0;
+      width: fit-content;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+      margin-top: 8px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-light);
+      border-radius: 50%;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingAnimation {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .chat-footer {
+      padding: 12px 16px;
+      background-color: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .start-chat-btn {
+      background-color: var(--whatsapp-green);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      flex: 1;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .start-chat-btn:hover {
+      background-color: #008f76;
+    }
+
+    .start-chat-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+
+    .close-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- الهيدر -->
+‎  <!-- الهيدر -->
   <header>
     <img src="https://i.postimg.cc/v802j8YD/Logo-of-benjelloun-express-1.jpg" alt="Delivery Marrakech" class="logo">
 
@@ -604,20 +878,19 @@
       </div>
     </button>
   </header>
-  
-  
+
   <div class="hero">
-  <!-- الصورة الأساسية -->
-  <img src="https://i.ibb.co/wZd7KxQP/Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech.webp" fetchpriority="high" loading="eager" alt="delivery service in marrakech / livreur marrakech " class="hero__image">
-  
-  <!-- النص فوق الصورة -->
-  <div class="hero__content"><h1>
-livreur marrakech 24h </h2>
+‎    <!-- الصورة الأساسية -->
+    <img src="https://i.ibb.co/wZd7KxQP/Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech.webp" fetchpriority="high" loading="eager" alt="delivery service in marrakech / livreur marrakech " class="hero__image">
+
+‎    <!-- النص فوق الصورة -->
+    <div class="hero__content">
+      <h1>
+        livreur marrakech 24h </h2>
+    </div>
   </div>
-</div>
-  
-  
-<div class="mega-menu" id="megaMenu">
+
+  <div class="mega-menu" id="megaMenu">
     <div class="menu-column">
       <h3>OUR DELIVERY</h3>
       <ul>
@@ -644,8 +917,7 @@ livreur marrakech 24h </h2>
 
   </div>
 
-
-  <!-- قسم البطل -->
+‎  <!-- قسم البطل -->
 
   <div class="slider-container">
     <div class="slider-track">
@@ -655,7 +927,7 @@ livreur marrakech 24h </h2>
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2575.webp" alt="livreur marrakech / delivery services in marrakech">
 
       <img class="slide" src="https://i.postimg.cc/cJ6m8V8H/Green-Modern-Store-Banner-Banner-zip-1.png" alt="livreur marrakech / delivery services in marrakech">
-      <!-- نكرر الصور لضمان حركة سلسة بدون توقف -->
+‎      <!-- نكرر الصور لضمان حركة سلسة بدون توقف -->
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2576.webp" alt="livreur marrakech / delivery marrakech ">
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2575.webp" alt="livreur marrakech / delivery services in marrakech">
       <img class="slide" src="https://i.postimg.cc/cJ6m8V8H/Green-Modern-Store-Banner-Banner-zip-1.png" alt="livreur marrakech / delivery services in marrakech">
@@ -670,22 +942,22 @@ livreur marrakech 24h </h2>
 
   <div class="container">
     <p class="service-text">
-      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
+      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald's, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
     </p>
 
-    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
+    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald's, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
   </div>
   <div class="container" style="margin-top: 25px;
             margin-bottom :20px;">
     <h2 class="service-toxt underline-gradient">OUR SERVICES ABOUT</h2>
   </div>
 
-  <!-- قسم الخدمات -->
+‎  <!-- قسم الخدمات -->
   <div class="services">
 
     <a href="macdonalds.html">
 
-      <!-- الرابط يغلف البطاقة بالكامل -->
+‎      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
 
         <img src="https://i.postimg.cc/gkPNBS1S/IMG-8940.jpg" alt="livreur fast food marrakech / delivery service marrakech" loading="lazy">
@@ -701,11 +973,11 @@ livreur marrakech 24h </h2>
     <h2 class="service-toxt underline-gradient">LIVRAISON A DOMICINE MARRAKECH 24h</h2>
   </div>
   <div class="container">
-    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
+    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald's, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
   </div>
   <div class="services">
     <a href="Pharmacyen.html">
-      <!-- الرابط يغلف البطاقة بالكامل -->
+‎      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/J03cL8ST/IMG-0098.png" alt="Medicine Delivery marrakech / livreur médicament marrakech " loading="lazy">
         <h2> 💊 Delivery Medicine in marrakech</h2>
@@ -720,13 +992,13 @@ livreur marrakech 24h </h2>
   </div>
   <div class="container">
     <p class="service-text">
-      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
+      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald's, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
     </p>
   </div>
 
   <div class="services">
     <a href="macdonalds.html">
-      <!-- الرابط يغلف البطاقة بالكامل -->
+‎      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/sgsH16cQ/F19-FAA21-DBD5-42-E4-A830-BF4-A8-A3394-E8.jpg" alt="Grocery Delivery / livreur marrakech" loading="lazy">
         <h2>🛒 Delivery Supermarket in marrakech </h2>
@@ -740,11 +1012,11 @@ livreur marrakech 24h </h2>
     <h2 class="service-toxt underline-gradient">DELIVER SUPERMARKET IN MARRAKECH</h2>
   </div>
   <div class="container">
-    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald’s, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
+    <p class="service-text">Notre service de livraison à Marrakech fonctionne 24h/24 et 7j/7, offrant une livraison rapide et fiable depuis vos restaurants préférés tels que McDonald's, KFC, Pizza, Sushi, fruits de mer et toutes sortes de plats délicieux. Nous proposons également une livraison rapide des médicaments en 25 minutes, avec une attention particulière aux cas urgents et critiques. De plus, nous livrons des bouquets de fleurs pour des cadeaux à toutes les occasions, ainsi que des courses et des articles de supermarché. Vous pouvez également compter sur nous pour des produits de boulangerie frais et des douceurs, disponibles à tout moment, 24h/24 7j.</p>
   </div>
   <div class="services">
     <a href="macdonalds.html">
-      <!-- الرابط يغلف البطاقة بالكامل -->
+‎      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/TY9qNRV1/0-F900-DCE-1196-47-CD-9884-DF3227-E1-D9-AC.jpg" alt="Flower Delivery / livraison les fleurs a marrakech " loading="lazy">
         <h2> 💐 Delivery Flowers in marrakech</h2>
@@ -759,13 +1031,13 @@ livreur marrakech 24h </h2>
   </div>
   <div class="container">
     <p class="service-text">
-      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald’s, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
+      Our delivery service in Marrakech operates 24/7, offering fast and reliable delivery from your favorite restaurants including McDonald's, KFC, Pizza, Sushi, seafood, and all kinds of delicious food. We also provide rapid delivery of medicines within 25 minutes, with special attention to urgent and critical cases. Additionally, we deliver beautiful flower bouquets for gifts on all occasions, groceries, and supermarket items. You can also count on us for fresh bakery products and sweets, our service available 24h/24 , seven days a week.
     </p>
   </div>
 
   <div class="services">
     <a href="macdonalds.html">
-      <!-- الرابط يغلف البطاقة بالكامل -->
+‎      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/Pr9CSD0y/IMG-0845.jpg" alt="macdonalds Delivery marrakech/ livraison macdonald´s a marrakech " loading="lazy">
         <h2>🍔 Delivery Mcdonald´s kfc papa johns marrkaech</h2>
@@ -774,13 +1046,54 @@ livreur marrakech 24h </h2>
     </a>
   </div>
 
-  <!-- HTML -->
+  <!-- WhatsApp Float Button -->
   <div class="whatsapp-float">
-    <div class="whatsapp-message" id="whatsappMessage">
-      Send us your order here.
+    <a href="https://wa.me/212642620325?text=Hello%2C%20I%20would%20like%20to%20order%20now%20please" target="_blank" class="whatsapp-button" id="whatsappBtn">
+      <div class="whatsapp-message" id="whatsappMsg">
+        <div class="message-text">
+          <span style="font-weight: 600;">Send your order here</span>
+          <span class="secondary-text">Click to chat</span>
+        </div>
+      </div>
+      <img src="https://i.postimg.cc/3W5Bw2hp/IMG-1812.png" alt="WhatsApp">
+    </a>
+  </div>
+
+  <!-- Minimal WhatsApp Chat Widget -->
+  <div class="minimal-chat-widget" id="chatWidget">
+    <div class="chat-header">
+      <div class="agent-avatar">
+        <img src="https://i.ibb.co/fV4qBQt8/Logo-of-benjelloun-express-1.jpg" alt="logo benjelloun express">
+      </div>
+      <div class="agent-info">
+        <h3>Support Team</h3>
+        <p><span class="online-dot"></span> Online now</p>
+      </div>
     </div>
-    <div class="whatsapp-btn" id="whatsappBtn">
-      <img src="https://static.vecteezy.com/system/resources/previews/024/398/617/non_2x/whatsapp-logo-icon-isolated-on-transparent-background-free-png.png" alt="number if delivery marrakech ">
+
+    <div class="chat-body" id="chatBody">
+      <div class="message-received">
+        <div class="message-content">How can I help you today?</div>
+      </div>
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <button class="start-chat-btn" id="startChatBtn">
+        <svg viewBox="0 0 24 24">
+          <path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path>
+        </svg>
+        Start Chat
+      </button>
+      <button class="close-btn" id="closeBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -833,11 +1146,9 @@ livreur marrakech 24h </h2>
     </div>
   </footer>
 
-  <!-- الأزرار الدائرية -->
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 1. إدارة القائمة المتنقلة
+‎      // 1. إدارة القائمة المتنقلة
       function toggleMenu() {
         const menu = document.getElementById('megaMenu');
         const button = document.getElementById('menuButton');
@@ -852,7 +1163,7 @@ livreur marrakech 24h </h2>
         }
       }
       document.getElementById('menuButton').addEventListener('click', toggleMenu);
-      // 2. تأثير الظهور للنصوص عند التمرير
+‎      // 2. تأثير الظهور للنصوص عند التمرير
       const animateOnScroll = () => {
         const elements = document.querySelectorAll('.service-text');
         const observer = new IntersectionObserver((entries) => {
@@ -871,32 +1182,63 @@ livreur marrakech 24h </h2>
         });
       }
       setTimeout(animateOnScroll, );
-      // 3. زر الواتساب مع الرسالة المنبثقة
-      const whatsappBtn = document.getElementById('whatsappBtn');
-      const whatsappMessage = document.getElementById('whatsappMessage');
-      animateWhatsappMessage(3000);
-
-      function animateWhatsappMessage() {
-        setTimeout(() => {
-          whatsappMessage.classList.add('show');
-          setTimeout(() => {
-            whatsappMessage.classList.remove('show');
-            setTimeout(animateWhatsappMessage, 8000);
-          }, 5000);
-        }, 3000);
-      }
-      whatsappBtn.addEventListener('click', function() {
-        window.open('https://wa.me/212642620325?text=Hello, i would like to order now please', '_blank');
+      // WhatsApp Float Button Script
+      const msg = document.getElementById('whatsappMsg');
+      const btn = document.getElementById('whatsappBtn');
+‎      // تأخير ظهور الرسالة بعد تحميل الصفحة
+      const initialDelay = setTimeout(function() {
+        msg.classList.add('show-message', 'pulse-animation');
+‎        // إخفاء الرسالة بعد فترة (750 ثانية = 12.5 دقيقة)
+        const hideDelay = setTimeout(function() {
+          msg.classList.remove('pulse-animation');
+          setTimeout(() => msg.classList.remove('show-message'), 500);
+        }, 750000);
+‎        // تنظيف المؤقتات عند النقر
+        btn.addEventListener('click', function() {
+          clearTimeout(initialDelay);
+          clearTimeout(hideDelay);
+        });
+      }, 1000);
+‎      // التحكم عند التحويم
+      btn.addEventListener('mouseenter', function() {
+        msg.classList.add('show-message');
       });
+      btn.addEventListener('mouseleave', function() {
+        if (!msg.classList.contains('pulse-animation')) {
+          setTimeout(() => msg.classList.remove('show-message'), 300);
+        }
+      });
+      // WhatsApp Chat Widget Script
+      const chatWidget = document.getElementById('chatWidget');
+      const chatBody = document.getElementById('chatBody');
+      const typingIndicator = document.getElementById('typingIndicator');
+      const startBtn = document.getElementById('startChatBtn');
+      const closeBtn = document.getElementById('closeBtn');
+      // Show widget after 5 seconds
       setTimeout(() => {
-        whatsappBtn.classList.add('pulse-effect');
-      }, 30000);
-      // 4. نافذة الواتساب المنبثقة
-      window.onload = function() {
-        setTimeout(function() {
-          document.getElementById('whatsapp-popup').style.display = 'block';
-        }, 6000);
-      };
+        chatWidget.classList.add('active');
+        // After 3 seconds, remove typing indicator and add new message
+        setTimeout(() => {
+          typingIndicator.remove();
+          const newMessage = document.createElement('div');
+          newMessage.className = 'message-received';
+          newMessage.innerHTML = `
+            <div class="message-content">Click on "Start Chat" and send us your order with your location</div>
+          `;
+          chatBody.appendChild(newMessage);
+        }, 3000);
+      }, 5000);
+      // Start chat button
+      startBtn.addEventListener('click', function() {
+        window.open('https://wa.me/212642620325?text=Hi, i would like to order now please ', '_blank');
+      });
+      // Close chat button
+      closeBtn.addEventListener('click', function() {
+        chatWidget.classList.remove('active');
+        setTimeout(() => {
+          chatWidget.style.display = 'none';
+        }, 400);
+      });
     });
   </script>
 
