@@ -44,8 +44,8 @@
     }
   </script>
 </head>
-<style>
-‎    /* --- عام --- */
+  <style>
+    /* --- عام --- */
     * {
       margin: 0;
       padding: 0;
@@ -62,11 +62,11 @@
       margin-top: absolute;
     }
 
-‎    /* --- الهيدر --- */
+    /* --- الهيدر --- */
     header {
       background-color: #ffffff;
       padding: 20px 30px;
-‎      /* تم تقليل البادينغ العمودي ليكون أكثر تناسقًا */
+      /* تم تقليل البادينغ العمودي ليكون أكثر تناسقًا */
       text-align: center;
       font-size: 14px;
       position: relative;
@@ -76,33 +76,33 @@
       z-index: 100;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
-‎      /* جديد: لترتيب العناصر داخله */
+      /* جديد: لترتيب العناصر داخله */
       justify-content: center;
-‎      /* جديد: لتوسيط العناصر */
+      /* جديد: لتوسيط العناصر */
       align-items: center;
-‎      /* جديد: لتحسين المحاذاة الرأسية */
+      /* جديد: لتحسين المحاذاة الرأسية */
       height: 80px;
-‎      /* ارتفاع ثابت للهيدر (عدل حسب الحاجة) */
+      /* ارتفاع ثابت للهيدر (عدل حسب الحاجة) */
     }
 
-‎    /* --- قسم البطل --- */
+    /* --- قسم البطل --- */
     .hero {
       position: relative;
-‎      /* أساس لوضع النص فوق الصورة */
+      /* أساس لوضع النص فوق الصورة */
       width: 100%;
       height: 70vh;
-‎      /* استخدام vh بدلاً من % للارتفاع */
+      /* استخدام vh بدلاً من % للارتفاع */
       overflow: hidden;
-‎      /* لمنع تجاوز المحتوى للحاوية */
+      /* لمنع تجاوز المحتوى للحاوية */
     }
 
     .hero__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-‎      /* يحل محل background-size: cover */
+      /* يحل محل background-size: cover */
       display: block;
-‎      /* يزيل المسافة تحت الصورة */
+      /* يزيل المسافة تحت الصورة */
     }
 
     .hero__content {
@@ -118,10 +118,10 @@
       font-size: 24px;
       text-align: center;
       z-index: 2;
-‎      /* التأكد من ظهور النص فوق الصورة */
+      /* التأكد من ظهور النص فوق الصورة */
     }
 
-‎    /* طبقة تظليل اختيارية لتحسين قراءة النص */
+    /* طبقة تظليل اختيارية لتحسين قراءة النص */
     .hero__content::before {
       content: '';
       position: absolute;
@@ -130,30 +130,30 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.3);
-‎      /* تظليل خفيف */
+      /* تظليل خفيف */
       z-index: -1;
     }
 
     .logo {
       position: absolute;
       top: 20px;
-‎      /* مسافة من الأعلى */
+      /* مسافة من الأعلى */
       left: 50%;
-‎      /* تبدأ من منتصف الصفحة */
+      /* تبدأ من منتصف الصفحة */
       transform: translateX(-50%);
-‎      /* تحريكها إلى اليسار بنصف عرضها لتصبح في المنتصف تمامًا */
+      /* تحريكها إلى اليسار بنصف عرضها لتصبح في المنتصف تمامًا */
       font-size: 24px;
-‎      /* حجم مناسب (عدل حسب الحاجة) */
+      /* حجم مناسب (عدل حسب الحاجة) */
       font-weight: bold;
       color: #000;
       z-index: 101;
-‎      /* أعلى من الـ header لضمان ظهورها */
+      /* أعلى من الـ header لضمان ظهورها */
       max-width: 200px;
-‎      /* لمنع تجاوز الحجم على الشاشات الصغيرة */
+      /* لمنع تجاوز الحجم على الشاشات الصغيرة */
     }
 
-‎    /* تنسيقات الزر الجديدة */
-‎    /* القائمة المفتوحة - منع التمرير عند ظهور القائمة */
+    /* تنسيقات الزر الجديدة */
+    /* القائمة المفتوحة - منع التمرير عند ظهور القائمة */
     .menu-open {
       overflow: hidden;
       position: fixed;
@@ -161,7 +161,7 @@
       height: 100%;
     }
 
-‎    /* زر القائمة */
+    /* زر القائمة */
     .menu-btn {
       position: fixed;
       top: 25px;
@@ -178,10 +178,10 @@
       justify-content: center;
     }
 
-‎    /* أيقونة القائمة (هامبرغر) */
+    /* أيقونة القائمة (هامبرغر) */
     .hamburger {
       width: 30px;
-‎      /* تغيير العرض */
+      /* تغيير العرض */
       height: 24px;
       position: absolute;
       transition: all 0.3s ease;
@@ -210,7 +210,7 @@
       bottom: 0;
     }
 
-‎    /* حالة الزر عند الفتح */
+    /* حالة الزر عند الفتح */
     .menu-btn.active .line:nth-child(1) {
       transform: translateY(10px) rotate(45deg);
     }
@@ -224,7 +224,7 @@
       transform: translateY(-10px) rotate(-45deg);
     }
 
-‎    /* القائمة الكبيرة */
+    /* القائمة الكبيرة */
     .mega-menu {
       position: fixed;
       top: 80px;
@@ -253,7 +253,7 @@
       display: flex;
     }
 
-‎    /* أعمدة القائمة */
+    /* أعمدة القائمة */
     .menu-column {
       flex: 1;
       min-width: 250px;
@@ -302,7 +302,7 @@
       padding-left: 10px;
     }
 
-‎    /* تأثيرات للشاشات الصغيرة */
+    /* تأثيرات للشاشات الصغيرة */
     @media (max-width: 768px) {
       .mega-menu {
         padding: 30px 20px;
@@ -332,7 +332,7 @@
       margin-bottom: 20px;
     }
 
-‎    /* --- قسم الخدمات --- */
+    /* --- قسم الخدمات --- */
     .services {
       padding: 50px 20px;
       display: grid;
@@ -393,11 +393,11 @@
     /* CSS */
     .slider-container {
       width: 100vw;
-‎      /* عرض السلايدر */
+      /* عرض السلايدر */
       height: 150px;
-‎      /* ارتفاع السلايدر */
+      /* ارتفاع السلايدر */
       overflow: hidden;
-‎      /* يخفي الأجزاء الزائدة */
+      /* يخفي الأجزاء الزائدة */
       position: relative;
       border: 2px solid #0000;
     }
@@ -405,9 +405,9 @@
     .slider-track {
       display: flex;
       width: calc(300px * 6);
-‎      /* عدد الصور مضروبًا في عرض كل صورة */
+      /* عدد الصور مضروبًا في عرض كل صورة */
       animation: moveCar 19s linear infinite;
-‎      /* حركة مستمرة بدون توقف */
+      /* حركة مستمرة بدون توقف */
     }
 
     @keyframes moveCar {
@@ -419,46 +419,46 @@
         transform: translateX(-50%);
       }
 
-‎      /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
+      /* يجعل نصف الصور يخرج ليتم التكرار بسلاسة */
     }
 
     .slide {
       width: 300px;
       height: 150px;
       flex-shrink: 0;
-‎      /* يمنع الصور من الانكماش */
+      /* يمنع الصور من الانكماش */
     }
 
     .container {
       text-align: absolute;
-‎      /* توسيط النص */
+      /* توسيط النص */
       padding: 15px;
     }
 
     .service-text {
       font-size: 15px;
-‎      /* حجم الخط */
+      /* حجم الخط */
       color: #333;
-‎      /* اللون الرمادي الغامق */
+      /* اللون الرمادي الغامق */
       margin-top: 21px;
-‎      /* المسافة بين العبارات */
+      /* المسافة بين العبارات */
       transition: opacity 0.5s ease-in-out;
-‎      /* تأثير سلس عند العرض */
+      /* تأثير سلس عند العرض */
     }
 
     .container {
       text-align: center;
-‎      /* توسيط النص */
+      /* توسيط النص */
       padding: 10px;
     }
 
     .service-toxt {
       font-size: 24px;
-‎      /* حجم الخط */
+      /* حجم الخط */
       color: #333;
-‎      /* اللون الرمادي الغامق */
+      /* اللون الرمادي الغامق */
       margin-top: 25px;
-‎      /* المسافة بين العبارات */
+      /* المسافة بين العبارات */
       transition: opacity 0.5s ease-in-out;
     }
 
@@ -466,14 +466,14 @@
       margin-top: 5px;
     }
 
-‎    /* أضف هذا للـ CSS */
+    /* أضف هذا للـ CSS */
     /* CSS */
     .service-text {
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
       filter: blur(2px);
-‎      /* إضافة ضبابية خفيفة قبل الظهور */
+      /* إضافة ضبابية خفيفة قبل الظهور */
     }
 
     .service-text.show {
@@ -482,7 +482,7 @@
       filter: blur(0);
     }
 
-‎    /* تأخيرات متتالية تلقائية */
+    /* تأخيرات متتالية تلقائية */
     .service-text:nth-child(1) {
       transition-delay: 0.1s;
     }
@@ -507,11 +507,11 @@
       position: absolute;
       bottom: 0;
       left: 25%;
-‎      /* لتحريك الخط إلى المنتصف (100% - 50%) / 2 = 25% */
+      /* لتحريك الخط إلى المنتصف (100% - 50%) / 2 = 25% */
       height: 3px;
-‎      /* سمك الخط */
+      /* سمك الخط */
       width: 50%;
-‎      /* نصف عرض العنصر */
+      /* نصف عرض العنصر */
       background: linear-gradient(135deg, #8B0000 40%, #330000 80%, red 100%);
       border-radius: 50px;
       transition: all 0.3s ease-in-out;
@@ -866,7 +866,7 @@
 
 <body>
 
-‎  <!-- الهيدر -->
+  <!-- الهيدر -->
   <header>
     <img src="https://i.postimg.cc/v802j8YD/Logo-of-benjelloun-express-1.jpg" alt="Delivery Marrakech" class="logo">
 
@@ -880,10 +880,10 @@
   </header>
 
   <div class="hero">
-‎    <!-- الصورة الأساسية -->
+    <!-- الصورة الأساسية -->
     <img src="https://i.ibb.co/wZd7KxQP/Delivery-services-in-marrakech-service-de-livraison-a-domicile-marrakech.webp" fetchpriority="high" loading="eager" alt="delivery service in marrakech / livreur marrakech " class="hero__image">
 
-‎    <!-- النص فوق الصورة -->
+    <!-- النص فوق الصورة -->
     <div class="hero__content">
       <h1>
         livreur marrakech 24h </h2>
@@ -917,7 +917,7 @@
 
   </div>
 
-‎  <!-- قسم البطل -->
+  <!-- قسم البطل -->
 
   <div class="slider-container">
     <div class="slider-track">
@@ -927,7 +927,7 @@
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2575.webp" alt="livreur marrakech / delivery services in marrakech">
 
       <img class="slide" src="https://i.postimg.cc/cJ6m8V8H/Green-Modern-Store-Banner-Banner-zip-1.png" alt="livreur marrakech / delivery services in marrakech">
-‎      <!-- نكرر الصور لضمان حركة سلسة بدون توقف -->
+      <!-- نكرر الصور لضمان حركة سلسة بدون توقف -->
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2576.webp" alt="livreur marrakech / delivery marrakech ">
       <img class="slide" src="https://raw.githubusercontent.com/BenjellounAN/livreurmarrakech/refs/heads/main/IMG_2575.webp" alt="livreur marrakech / delivery services in marrakech">
       <img class="slide" src="https://i.postimg.cc/cJ6m8V8H/Green-Modern-Store-Banner-Banner-zip-1.png" alt="livreur marrakech / delivery services in marrakech">
@@ -952,12 +952,12 @@
     <h2 class="service-toxt underline-gradient">OUR SERVICES ABOUT</h2>
   </div>
 
-‎  <!-- قسم الخدمات -->
+  <!-- قسم الخدمات -->
   <div class="services">
 
     <a href="macdonalds.html">
 
-‎      <!-- الرابط يغلف البطاقة بالكامل -->
+      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
 
         <img src="https://i.postimg.cc/gkPNBS1S/IMG-8940.jpg" alt="livreur fast food marrakech / delivery service marrakech" loading="lazy">
@@ -977,7 +977,7 @@
   </div>
   <div class="services">
     <a href="Pharmacyen.html">
-‎      <!-- الرابط يغلف البطاقة بالكامل -->
+      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/J03cL8ST/IMG-0098.png" alt="Medicine Delivery marrakech / livreur médicament marrakech " loading="lazy">
         <h2> 💊 Delivery Medicine in marrakech</h2>
@@ -998,7 +998,7 @@
 
   <div class="services">
     <a href="macdonalds.html">
-‎      <!-- الرابط يغلف البطاقة بالكامل -->
+      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/sgsH16cQ/F19-FAA21-DBD5-42-E4-A830-BF4-A8-A3394-E8.jpg" alt="Grocery Delivery / livreur marrakech" loading="lazy">
         <h2>🛒 Delivery Supermarket in marrakech </h2>
@@ -1016,7 +1016,7 @@
   </div>
   <div class="services">
     <a href="macdonalds.html">
-‎      <!-- الرابط يغلف البطاقة بالكامل -->
+      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/TY9qNRV1/0-F900-DCE-1196-47-CD-9884-DF3227-E1-D9-AC.jpg" alt="Flower Delivery / livraison les fleurs a marrakech " loading="lazy">
         <h2> 💐 Delivery Flowers in marrakech</h2>
@@ -1037,7 +1037,7 @@
 
   <div class="services">
     <a href="macdonalds.html">
-‎      <!-- الرابط يغلف البطاقة بالكامل -->
+      <!-- الرابط يغلف البطاقة بالكامل -->
       <div class="service-card">
         <img src="https://i.postimg.cc/Pr9CSD0y/IMG-0845.jpg" alt="macdonalds Delivery marrakech/ livraison macdonald´s a marrakech " loading="lazy">
         <h2>🍔 Delivery Mcdonald´s kfc papa johns marrkaech</h2>
@@ -1148,7 +1148,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-‎      // 1. إدارة القائمة المتنقلة
+      // 1. إدارة القائمة المتنقلة
       function toggleMenu() {
         const menu = document.getElementById('megaMenu');
         const button = document.getElementById('menuButton');
@@ -1163,7 +1163,7 @@
         }
       }
       document.getElementById('menuButton').addEventListener('click', toggleMenu);
-‎      // 2. تأثير الظهور للنصوص عند التمرير
+      // 2. تأثير الظهور للنصوص عند التمرير
       const animateOnScroll = () => {
         const elements = document.querySelectorAll('.service-text');
         const observer = new IntersectionObserver((entries) => {
@@ -1185,21 +1185,21 @@
       // WhatsApp Float Button Script
       const msg = document.getElementById('whatsappMsg');
       const btn = document.getElementById('whatsappBtn');
-‎      // تأخير ظهور الرسالة بعد تحميل الصفحة
+      // تأخير ظهور الرسالة بعد تحميل الصفحة
       const initialDelay = setTimeout(function() {
         msg.classList.add('show-message', 'pulse-animation');
-‎        // إخفاء الرسالة بعد فترة (750 ثانية = 12.5 دقيقة)
+        // إخفاء الرسالة بعد فترة (750 ثانية = 12.5 دقيقة)
         const hideDelay = setTimeout(function() {
           msg.classList.remove('pulse-animation');
           setTimeout(() => msg.classList.remove('show-message'), 500);
         }, 750000);
-‎        // تنظيف المؤقتات عند النقر
+        // تنظيف المؤقتات عند النقر
         btn.addEventListener('click', function() {
           clearTimeout(initialDelay);
           clearTimeout(hideDelay);
         });
       }, 1000);
-‎      // التحكم عند التحويم
+      // التحكم عند التحويم
       btn.addEventListener('mouseenter', function() {
         msg.classList.add('show-message');
       });
