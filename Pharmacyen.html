@@ -276,45 +276,7 @@
       }
     }
 
-    .review-box {
-      background: linear-gradient(to right, #e0f7ef, #f9fcfb);
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .review-box h2 {
-      text-align: center;
-      color: #333;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .stars {
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .star {
-      font-size: 30px;
-      cursor: pointer;
-      color: #ccc;
-      transition: color 0.3s;
-    }
-
-    .star.selected {
-      color: #FFD700;
-    }
+ 
 
     button {
       margin-top: 15px;
@@ -328,24 +290,7 @@
       width: 100%;
     }
 
-    .reviews-output {
-      margin-top: 30px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .review {
-      background: #fff;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .review .stars-display {
-      color: #FFD700;
-    }
+   
   </style>
 </head>
 
@@ -403,24 +348,7 @@
     </div>
   </section>
 
-  <div class="review-box">
-    <h2>Leave Your Feedback</h2>
-    <input type="text" id="username" placeholder="Your name" />
-    <textarea id="comment" placeholder="Write your comment here..." rows="4"></textarea>
 
-    <div class="stars" id="stars">
-      <span class="star" data-value="1">&#9733;</span>
-      <span class="star" data-value="2">&#9733;</span>
-      <span class="star" data-value="3">&#9733;</span>
-      <span class="star" data-value="4">&#9733;</span>
-      <span class="star" data-value="5">&#9733;</span>
-    </div>
-
-    <button onclick="submitReview()">Submit</button>
-  </div>
-
-  <div class="reviews-output" id="reviewsOutput">
-    <!-- التعليقات ستظهر هنا -->
   </div>
 
   <footer>
@@ -448,41 +376,9 @@
 
   </div>
   <script>
-    let selectedRating = 0;
-    // التحكم في اختيار النجوم
-    document.querySelectorAll('.star').forEach(star => {
-      star.addEventListener('click', function() {
-        selectedRating = parseInt(this.getAttribute('data-value'));
-        document.querySelectorAll('.star').forEach(s => {
-          s.classList.remove('selected');
-        });
-        for (let i = 0; i < selectedRating; i++) {
-          document.querySelectorAll('.star')[i].classList.add('selected');
-        }
-      });
-    });
-    // عند الضغط على زر الإرسال
-    function submitReview() {
-      const username = document.getElementById('username').value.trim();
-      const comment = document.getElementById('comment').value.trim();
-      if (!username || !comment || selectedRating === 0) {
-        alert("Please fill in all fields and select a rating.");
-        return;
-      }
-      const reviewHTML = `
-      <div class="review">
-        <strong>${username}</strong><br/>
-        <div class="stars-display">${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}</div>
-        <p>${comment}</p>
-      </div>
-    `;
-      document.getElementById('reviewsOutput').innerHTML += reviewHTML;
-      // إعادة تعيين النموذج
-      document.getElementById('username').value = '';
-      document.getElementById('comment').value = '';
-      selectedRating = 0;
-      document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
-    }
+    
+    
+  
   </script>
 </body>
 
