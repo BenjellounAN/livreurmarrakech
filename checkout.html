@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1165,7 +1166,13 @@
 
     // Handle back button click
     function handleBackButton() {
-      window.location.href = 'menukfc.html';
+      // محاولة العودة إلى الصفحة السابقة في التاريخ
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // إذا لم تكن هناك صفحة سابقة، انتقل إلى القائمة
+        window.location.href = 'menukfc.html';
+      }
     }
 
     // Attach event listeners
