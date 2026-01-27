@@ -1316,9 +1316,9 @@
           <button class="btn btn-order" data-action="order">
             <i class="fas fa-bolt"></i> Order Now
           </button>
-          <button class="btn btn-menu" data-action="menu" onclick="window.location.href='menumcdo.html'">
-    <i class="fas fa-book-open"></i> View Menu
-</button>
+          <button class="btn btn-menu" data-action="menu">
+            <i class="fas fa-book-open"></i> View Menu
+          </button>
         </div>
       </div>
     </div>
@@ -1755,12 +1755,21 @@
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         window.open(whatsappUrl, '_blank');
       }
-      // إضافة وظائف للأزرار في البطاقات
+      // إضافة وظائف للأزرار في البطاقات - McDonald's فقط يفتح menumcdo.html
       document.querySelectorAll('.restaurant-card .btn').forEach(button => {
         button.addEventListener('click', function(e) {
           e.stopPropagation(); // منع تنفيذ الحدث على البطاقة
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
           const action = this.dataset.action;
+          
+          // تحقق إذا كان هذا هو زر McDonald's Menu
+          if (action === 'menu' && restaurant === "McDonald's") {
+            // فتح صفحة menumcdo.html لـ McDonald's فقط
+            window.location.href = 'menumcdo.html';
+            return; // الخروج من الدالة
+          }
+          
+          // باقي المطاعم تفتح WhatsApp
           let message = '';
           if (action === 'order') {
             message = `Hello, I would like to order ${restaurant} now, please`;
