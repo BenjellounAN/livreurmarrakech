@@ -1290,7 +1290,7 @@
   <!-- بطاقات المطاعم الجديدة -->
   <div class="restaurant-grid" id="restaurants">
     <!-- McDonald's Card -->
-    <div class="restaurant-card" data-restaurant="McDonald's">
+    <div class="restaurant-card" data-restaurant="McDonald's" id="mcdonalds-card">
       <div class="image-half">
         <img src="https://i.ibb.co/h1f4BWXj/Delivery-marrakech-mcdonald-s.jpg" alt="McDonald's Burger Delivery in Marrakech">
         <div class="image-overlay">
@@ -1316,10 +1316,10 @@
         </div>
 
         <div class="buttons">
-          <button class="btn btn-order" data-action="order">
+          <button class="btn btn-order" id="mcdonalds-order-btn">
             <i class="fas fa-bolt"></i> Order Now
           </button>
-          <button class="btn btn-menu" data-action="menu">
+          <button class="btn btn-menu" id="mcdonalds-menu-btn">
             <i class="fas fa-book-open"></i> View Menu
           </button>
         </div>
@@ -1758,21 +1758,38 @@
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         window.open(whatsappUrl, '_blank');
       }
-      // إضافة وظائف للأزرار في البطاقات - McDonald's فقط يفتح menumcdo.html
-      document.querySelectorAll('.restaurant-card .btn').forEach(button => {
+      
+      // =============================================
+      // التعديلات الخاصة ببطاقة McDonald's فقط
+      // =============================================
+      
+      // زر Order Now الخاص بـ McDonald's
+      document.getElementById('mcdonalds-order-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.location.href = 'menumcdo.html';
+      });
+      
+      // زر View Menu الخاص بـ McDonald's
+      document.getElementById('mcdonalds-menu-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.location.href = 'menumcdo.html';
+      });
+      
+      // النقر على بطاقة McDonald's كاملة
+      document.getElementById('mcdonalds-card').addEventListener('click', function(e) {
+        // التأكد من أن النقر لم يكن على زر
+        if (!e.target.closest('.btn')) {
+          window.location.href = 'menumcdo.html';
+        }
+      });
+      
+      // باقي البطاقات تبقى كما هي
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card) .btn').forEach(button => {
         button.addEventListener('click', function(e) {
-          e.stopPropagation(); // منع تنفيذ الحدث على البطاقة
+          e.stopPropagation();
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
           const action = this.dataset.action;
           
-          // تحقق إذا كان هذا هو زر McDonald's Menu
-          if (action === 'menu' && restaurant === "McDonald's") {
-            // فتح صفحة menumcdo.html لـ McDonald's فقط
-            window.location.href = 'menumcdo.html';
-            return; // الخروج من الدالة
-          }
-          
-          // باقي المطاعم تفتح WhatsApp
           let message = '';
           if (action === 'order') {
             message = `Hello, I would like to order ${restaurant} now, please`;
@@ -1782,10 +1799,10 @@
           openWhatsApp(message);
         });
       });
-      // إضافة وظيفة النقر على البطاقة بأكملها
-      document.querySelectorAll('.restaurant-card').forEach(card => {
+      
+      // النقر على بطاقات المطاعم الأخرى
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card)').forEach(card => {
         card.addEventListener('click', function(e) {
-          // التأكد من أن النقر لم يكن على زر
           if (!e.target.closest('.btn')) {
             const restaurant = this.dataset.restaurant;
             const message = `Hello, I would like to order ${restaurant} now, please`;
@@ -1793,6 +1810,7 @@
           }
         });
       });
+      
       // 5. Header scroll effect
       window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
