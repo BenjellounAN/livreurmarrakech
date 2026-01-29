@@ -1825,7 +1825,22 @@
       });
     });
   </script>
+<div id="loader-placeholder"></div>
 
+<script>
+fetch("loader.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("loader-placeholder").innerHTML = data;
+
+    window.addEventListener("load", function(){
+        const loader = document.getElementById("loading-screen");
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 0.5s ease";
+        setTimeout(() => loader.style.display = "none", 500);
+    });
+});
+</script>
 </body>
 
 </html>
