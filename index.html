@@ -1363,8 +1363,8 @@
       </div>
     </div>
 
-    <!-- Pizza Hut Card -->
-    <div class="restaurant-card" data-restaurant="Pizza Hut">
+    <!-- Pizza Hut Card (مع إضافة ID) -->
+    <div class="restaurant-card" data-restaurant="Pizza Hut" id="pizzahut-card">
       <div class="image-half">
         <img src="https://i.ibb.co/23d9DtjS/Delivery-marrakech-pizza-hut.jpg" alt="Pizza Hut Pizza Delivery in Marrakech">
         <div class="image-overlay">
@@ -1390,10 +1390,11 @@
         </div>
 
         <div class="buttons">
-          <button class="btn btn-order" data-action="order">
+          <!-- إضافة ID للزرين -->
+          <button class="btn btn-order" id="pizzahut-order-btn">
             <i class="fas fa-bolt"></i> Order Now
           </button>
-          <button class="btn btn-menu" data-action="menu">
+          <button class="btn btn-menu" id="pizzahut-menu-btn">
             <i class="fas fa-book-open"></i> View Menu
           </button>
         </div>
@@ -1721,31 +1722,47 @@
       }
       
       // =============================================
-      // التعديلات الخاصة ببطاقة McDonald's فقط
+      // التعديلات الخاصة ببطاقة McDonald's (كما كانت)
       // =============================================
-      
-      // زر Order Now الخاص بـ McDonald's
       document.getElementById('mcdonalds-order-btn').addEventListener('click', function(e) {
         e.stopPropagation();
         window.location.href = 'menumcdo.html';
       });
-      
-      // زر View Menu الخاص بـ McDonald's
       document.getElementById('mcdonalds-menu-btn').addEventListener('click', function(e) {
         e.stopPropagation();
         window.location.href = 'menumcdo.html';
       });
-      
-      // النقر على بطاقة McDonald's كاملة
       document.getElementById('mcdonalds-card').addEventListener('click', function(e) {
-        // التأكد من أن النقر لم يكن على زر
         if (!e.target.closest('.btn')) {
           window.location.href = 'menumcdo.html';
         }
       });
       
-      // باقي البطاقات تبقى كما هي
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card) .btn').forEach(button => {
+      // =============================================
+      // التعديلات الجديدة لبطاقة Pizza Hut
+      // =============================================
+      // زر Order Now الخاص بـ Pizza Hut
+      document.getElementById('pizzahut-order-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.location.href = 'menupizzahut.html';
+      });
+      
+      // زر View Menu الخاص بـ Pizza Hut
+      document.getElementById('pizzahut-menu-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.location.href = 'menupizzahut.html';
+      });
+      
+      // النقر على بطاقة Pizza Hut كاملة
+      document.getElementById('pizzahut-card').addEventListener('click', function(e) {
+        // التأكد من أن النقر لم يكن على زر
+        if (!e.target.closest('.btn')) {
+          window.location.href = 'menupizzahut.html';
+        }
+      });
+      
+      // باقي البطاقات (عدا McDonald's و Pizza Hut) تبقى كما هي (تفتح واتساب)
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#pizzahut-card) .btn').forEach(button => {
         button.addEventListener('click', function(e) {
           e.stopPropagation();
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
@@ -1761,8 +1778,8 @@
         });
       });
       
-      // النقر على بطاقات المطاعم الأخرى
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card)').forEach(card => {
+      // النقر على بطاقات المطاعم الأخرى (عدا McDonald's و Pizza Hut)
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#pizzahut-card)').forEach(card => {
         card.addEventListener('click', function(e) {
           if (!e.target.closest('.btn')) {
             const restaurant = this.dataset.restaurant;
