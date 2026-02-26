@@ -146,7 +146,7 @@
       gap: 12px;
       padding: 15px 0;
       border-bottom: 1px solid var(--border-light);
-      align-items: center;
+      align-items: flex-start;
       transition: all 0.2s ease;
     }
     
@@ -177,9 +177,6 @@
       font-weight: 600;
       font-size: 0.95rem;
       margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     
     .item-desc {
@@ -197,6 +194,7 @@
       color: var(--primary-red);
       font-weight: 600;
       font-size: 0.95rem;
+      margin-bottom: 8px;
     }
     
     .item-controls {
@@ -264,8 +262,8 @@
     .customization-badge {
       background: rgba(139, 0, 0, 0.1);
       color: var(--primary-red);
-      padding: 2px 6px;
-      border-radius: 10px;
+      padding: 2px 8px;
+      border-radius: 12px;
       font-size: 0.7rem;
       font-weight: 500;
       white-space: nowrap;
@@ -277,7 +275,8 @@
       font-size: 0.75rem;
       font-style: italic;
       margin-top: 4px;
-      padding: 3px 8px;
+      margin-bottom: 8px;
+      padding: 4px 8px;
       background: rgba(139, 0, 0, 0.05);
       border-radius: 6px;
       border-left: 2px solid var(--primary-red);
@@ -561,6 +560,35 @@
       color: var(--primary-red);
     }
     
+    /* Extras List */
+    .extras-list {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      padding-left: 8px;
+    }
+    
+    .extra-item {
+      font-size: 0.75rem;
+      color: var(--primary-red-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 0;
+      border-bottom: 1px dashed rgba(139, 0, 0, 0.1);
+    }
+    
+    .extra-item:last-child {
+      border-bottom: none;
+    }
+    
+    .extra-name {
+      font-weight: 500;
+    }
+    
+    .extra-price {
+      font-weight: 600;
+    }
+    
     /* Responsive Design */
     @media (max-width: 1024px) {
       .cart-container {
@@ -661,7 +689,7 @@
         </div>
         
         <div class="summary-total">
-          <span class="total-label">Total Items</span>
+          <span class="total-label">Total</span>
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
@@ -767,13 +795,44 @@
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
+    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض - معدلة للعمل مع بنية Combo Meals
     function formatCustomizationsForDisplay(item) {
       let customizations = [];
       
-      // معالجة جميع أنواع التخصيصات
       if (item.customizations) {
+        // عرض النكهة إذا وجدت
+        if (item.customizations.flavour) {
+          customizations.push(`Flavour: ${item.customizations.flavour}`);
+        }
+        
+        // عرض المشروب إذا وجد
+        if (item.customizations.drink) {
+          customizations.push(`Drink: ${item.customizations.drink}`);
+        }
+        
+        // عرض توزيع القطع (للمنتجات ذات السلايدر)
+        if (item.customizations.leftFlavour && item.customizations.rightFlavour) {
+          customizations.push(`${item.customizations.leftFlavour}: ${item.customizations.leftQty} pcs`);
+          customizations.push(`${item.customizations.rightFlavour}: ${item.customizations.rightQty} pcs`);
+        }
+        
+        // عرض الإضافات (extras) - هذا هو المهم لـ piece with bone
+        if (item.customizations.extras) {
+          Object.keys(item.customizations.extras).forEach(key => {
+            const extra = item.customizations.extras[key];
+            if (extra && extra.quantity > 0) {
+              customizations.push(`+ ${extra.name} x${extra.quantity}`);
+            }
+          });
+        }
+        
+        // معالجة أي خصائص أخرى (للتوافق مع الإصدارات السابقة)
         Object.keys(item.customizations).forEach(key => {
+          // تخطي الخصائص التي تمت معالجتها بالفعل
+          if (['flavour', 'drink', 'leftFlavour', 'rightFlavour', 'leftQty', 'rightQty', 'extras'].includes(key)) {
+            return;
+          }
+          
           const value = item.customizations[key];
           
           // تخطي الحقول الفارغة
@@ -782,40 +841,22 @@
           }
           
           // تحويل المفتاح إلى نص مقروء
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
+          let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           
           // معالجة القيم المختلفة
           if (Array.isArray(value)) {
             if (value.length > 0) {
-              // إذا كانت المصفوفة تحتوي على كائنات
-              if (typeof value[0] === 'object') {
-                const labels = value.map(v => v.label || v.value).filter(v => v);
-                if (labels.length > 0) {
-                  customizations.push(`${displayKey}: ${labels.join(', ')}`);
-                }
-              } else {
-                // إذا كانت المصفوفة تحتوي على قيم نصية مباشرة
-                customizations.push(`${displayKey}: ${value.join(', ')}`);
+              const labels = value.map(v => v.label || v.value || v).filter(v => v);
+              if (labels.length > 0) {
+                customizations.push(`${displayKey}: ${labels.join(', ')}`);
               }
             }
           } else if (typeof value === 'object' && value !== null) {
-            // إذا كانت القيمة كائن
             const label = value.label || value.value;
             if (label) {
               customizations.push(`${displayKey}: ${label}`);
             }
           } else if (value) {
-            // إذا كانت القيمة نصية مباشرة
             customizations.push(`${displayKey}: ${value}`);
           }
         });
@@ -824,12 +865,45 @@
       return customizations;
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
+    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة - معدلة للعمل مع بنية Combo Meals
     function formatCustomizationsForMessage(item) {
       let customizationsText = "";
       
       if (item.customizations) {
+        // عرض النكهة
+        if (item.customizations.flavour) {
+          customizationsText += `   • Flavour: ${item.customizations.flavour}\n`;
+        }
+        
+        // عرض المشروب
+        if (item.customizations.drink) {
+          customizationsText += `   • Drink: ${item.customizations.drink}\n`;
+        }
+        
+        // عرض توزيع القطع (للمنتجات ذات السلايدر)
+        if (item.customizations.leftFlavour && item.customizations.rightFlavour) {
+          customizationsText += `   • ${item.customizations.leftFlavour}: ${item.customizations.leftQty} pcs\n`;
+          customizationsText += `   • ${item.customizations.rightFlavour}: ${item.customizations.rightQty} pcs\n`;
+        }
+        
+        // عرض الإضافات (extras) - هذا هو المهم لـ piece with bone
+        if (item.customizations.extras) {
+          Object.keys(item.customizations.extras).forEach(key => {
+            const extra = item.customizations.extras[key];
+            if (extra && extra.quantity > 0) {
+              const extraTotal = (extra.price * extra.quantity).toFixed(2);
+              customizationsText += `   • + ${extra.name} x${extra.quantity} (${extraTotal} MAD)\n`;
+            }
+          });
+        }
+        
+        // معالجة أي خصائص أخرى (للتوافق مع الإصدارات السابقة)
         Object.keys(item.customizations).forEach(key => {
+          // تخطي الخصائص التي تمت معالجتها بالفعل
+          if (['flavour', 'drink', 'leftFlavour', 'rightFlavour', 'leftQty', 'rightQty', 'extras'].includes(key)) {
+            return;
+          }
+          
           const value = item.customizations[key];
           
           // تخطي الحقول الفارغة
@@ -838,17 +912,7 @@
           }
           
           // تحويل المفتاح إلى نص مقروء
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
+          let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           
           // معالجة القيم المختلفة
           if (Array.isArray(value)) {
@@ -877,10 +941,55 @@
       return customizationsText;
     }
     
+    // دالة لحساب السعر الإجمالي للإضافات
+    function calculateExtrasTotal(item) {
+      let extrasTotal = 0;
+      if (item.customizations && item.customizations.extras) {
+        Object.keys(item.customizations.extras).forEach(key => {
+          const extra = item.customizations.extras[key];
+          if (extra && extra.quantity > 0) {
+            extrasTotal += (extra.price * extra.quantity);
+          }
+        });
+      }
+      return extrasTotal;
+    }
+    
+    // دالة لحساب سعر القطعة الواحدة مع الإضافات
+    function calculateUnitPrice(item) {
+      // إذا كان السعر الأساسي موجوداً، استخدمه
+      if (item.basePrice) {
+        return item.basePrice;
+      }
+      
+      // وإلا، احسب من totalPrice والكمية
+      if (item.totalPrice && item.quantity) {
+        return item.totalPrice / item.quantity;
+      }
+      
+      return 0;
+    }
+    
+    // دالة لحساب السعر الإجمالي للعنصر
+    function calculateItemTotal(item) {
+      const baseTotal = (item.basePrice || 0) * item.quantity;
+      const extrasTotal = calculateExtrasTotal(item);
+      return baseTotal + extrasTotal;
+    }
+    
     // Initialize the cart
     function initCart() {
       cart = getCart();
       console.log("Cart loaded from localStorage:", cart);
+      
+      // تحديث الأسعار إذا لزم الأمر
+      cart.forEach(item => {
+        const calculatedTotal = calculateItemTotal(item);
+        if (item.totalPrice !== calculatedTotal) {
+          item.totalPrice = calculatedTotal;
+        }
+      });
+      
       renderCartItems();
       updateCartDisplay();
       attachEventListeners();
@@ -910,13 +1019,34 @@
         // الحصول على الخيارات المخصصة
         const customizations = formatCustomizationsForDisplay(item);
         
-        // حساب السعر لكل عنصر (السعر الأساسي مخزن في item.price)
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
-        const totalItemPrice = pricePerUnit * item.quantity;
+        // حساب السعر لكل عنصر
+        const pricePerUnit = calculateUnitPrice(item);
+        const extrasTotal = calculateExtrasTotal(item);
+        const baseTotal = pricePerUnit * item.quantity;
+        const totalItemPrice = baseTotal + extrasTotal;
         
         // تأكد من أن السعر الإجمالي محدث
         if (item.totalPrice !== totalItemPrice) {
           item.totalPrice = totalItemPrice;
+        }
+        
+        // إنشاء HTML للإضافات بشكل منفصل
+        let extrasHtml = '';
+        if (item.customizations && item.customizations.extras) {
+          extrasHtml = '<div class="extras-list">';
+          Object.keys(item.customizations.extras).forEach(key => {
+            const extra = item.customizations.extras[key];
+            if (extra && extra.quantity > 0) {
+              const extraTotal = (extra.price * extra.quantity).toFixed(2);
+              extrasHtml += `
+                <div class="extra-item">
+                  <span class="extra-name">+ ${extra.name} x${extra.quantity}</span>
+                  <span class="extra-price">${extraTotal} MAD</span>
+                </div>
+              `;
+            }
+          });
+          extrasHtml += '</div>';
         }
         
         itemElement.innerHTML = `
@@ -934,13 +1064,16 @@
               : ''
             }
             
+            <!-- عرض الإضافات بشكل مفصل -->
+            ${extrasHtml}
+            
             <!-- عرض التعليمات الخاصة إذا كانت موجودة -->
             ${item.specialInstructions ? 
-              `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
+              `<div class="special-instructions">📝 Note: ${item.specialInstructions}</div>` 
               : ''
             }
             
-            <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity} = ${item.totalPrice.toFixed(2)} MAD</div>
+            <div class="item-price">${item.totalPrice.toFixed(2)} MAD</div>
             <div class="item-controls">
               <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
               <span class="item-quantity">${item.quantity}</span>
@@ -960,23 +1093,12 @@
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-        // تأكد من أن السعر الإجمالي صحيح
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
-        const itemTotal = pricePerUnit * item.quantity;
-        
-        // تحديث السعر الإجمالي في الكائن
-        if (item.totalPrice !== itemTotal) {
-          item.totalPrice = itemTotal;
-        }
-        
-        return sum + itemTotal;
+        return sum + (item.totalPrice || 0);
       }, 0);
-      
-      const total = subtotal;
       
       return {
         subtotal: subtotal.toFixed(2),
-        total: total.toFixed(2)
+        total: subtotal.toFixed(2)
       };
     }
 
@@ -1005,8 +1127,7 @@
         }
         
         // حساب السعر الإجمالي الجديد
-        const pricePerUnit = cart[itemIndex].price || (cart[itemIndex].totalPrice / (cart[itemIndex].quantity - change));
-        cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
+        cart[itemIndex].totalPrice = calculateItemTotal(cart[itemIndex]);
         
         // إذا كانت الكمية 0، احذف العنصر
         if (cart[itemIndex].quantity === 0) {
@@ -1130,10 +1251,16 @@
       // إضافة كل العناصر مع خياراتها
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
+        const pricePerUnit = calculateUnitPrice(item);
+        const extrasTotal = calculateExtrasTotal(item);
         
         message += `*${index + 1}. ${item.quantity}x ${item.name}*\n`;
         message += `   Unit Price: ${pricePerUnit.toFixed(2)} MAD\n`;
+        
+        if (extrasTotal > 0) {
+          message += `   Extras Total: +${extrasTotal.toFixed(2)} MAD\n`;
+        }
+        
         message += `   Total: ${item.totalPrice.toFixed(2)} MAD\n`;
         
         if (customizationsText) {
