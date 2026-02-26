@@ -1662,7 +1662,7 @@
 
       <!-- Hero Image -->
       <div class="hero-section">
-            <img src="https://i.ibb.co/yBFYyPF3/IMG-5659.jpg" alt="KFC Storefront" class="hero-image">
+            <img src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=400,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/8ff99d61-2170-4ff4-bbd2-55370c49ba3d.png" alt="KFC Storefront" class="hero-image">
             <div class="hero-overlay">
                   <h1 class="hero-title">KFC Delivery Menu</h1>
                   <p class="hero-subtitle">Order KFC crispy chicken in Marrakech! Enjoy fresh chicken meals, burgers, sides and drinks. Fast delivery to your door.</p>
@@ -3124,26 +3124,29 @@
                   modal.appendChild(content);
                   modal.appendChild(footer);
                   // ربط الأحداث
-                  addButton.addEventListener('click', () => {
-    const cartItem = {
-        name: productData.name,
-        basePrice: productData.basePrice,
-        quantity: mainQuantity,
-        customizations: {
-            leftFlavour: "Spicy",      // تم التبسيط
-            rightFlavour: "Original",   // تم التبسيط
-            leftQty: leftQty,
-            rightQty: rightQty,
-            drink: selectedDrink
-        },
-        totalPrice: productData.basePrice * mainQuantity,
-        img: productData.img,
-        description: productData.description,
-        specialInstructions: specialInput.value.trim()
-    };
-    addItemToCart(cartItem);
-    closeModal();
-});
+                  const closeBtn = modal.querySelector('#closeModalBtn');
+                  closeBtn.addEventListener('click', closeModal);
+                  const sliderEl = modal.querySelector('#flavourSlider');
+                  const leftQtyDisplay = modal.querySelector('#leftQtyDisplay');
+                  const rightQtyDisplay = modal.querySelector('#rightQtyDisplay');
+                  const sliderTrackEl = modal.querySelector('#sliderTrack');
+
+                  function updateSliderTrack(value) {
+                        const percent = (value / totalPieces) * 100;
+                        sliderTrackEl.style.background = `linear-gradient(90deg, #e03131 0%, #e03131 ${percent}%, #fbbf24 ${percent}%, #fbbf24 100%)`;
+                  }
+
+                  function updateFromSlider(val) {
+                        const newLeft = parseInt(val, 10);
+                        const newRight = totalPieces - newLeft;
+                        leftQty = newLeft;
+                        rightQty = newRight;
+                        leftQtyDisplay.textContent = leftQty;
+                        rightQtyDisplay.textContent = rightQty;
+                        updateSliderTrack(newLeft);
+                  }
+                  updateSliderTrack(leftQty);
+                  sliderEl.addEventListener('input', (e) => updateFromSlider(e.target.value));
                   // اختيار المشروب
                   const drinkOptions = modal.querySelectorAll('.drink-option');
                   drinkOptions.forEach(opt => {
