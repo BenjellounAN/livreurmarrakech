@@ -89,7 +89,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 
       <style>
-            /* All original styles are kept exactly as before, plus new modal styles */
+            /* جميع الأنماط الأصلية كما هي دون تغيير */
             * {
                   margin: 0;
                   padding: 0;
@@ -107,7 +107,6 @@
                   position: relative;
             }
 
-            /* Top Navigation Bar */
             .navbar {
                   position: fixed;
                   top: 0;
@@ -161,7 +160,6 @@
                   font-size: 18px;
             }
 
-            /* Hero Image */
             .hero-section {
                   position: relative;
                   height: 220px;
@@ -195,7 +193,6 @@
                   opacity: 0.9;
             }
 
-            /* Restaurant Info */
             .restaurant-info {
                   padding: 20px 16px;
                   background-color: white;
@@ -247,7 +244,6 @@
                   color: #8B0000;
             }
 
-            /* Categories Section */
             .categories-section {
                   padding: 16px;
                   background-color: white;
@@ -336,7 +332,6 @@
                   }
             }
 
-            /* Offers Section */
             .offers-section {
                   padding: 20px 16px;
                   background-color: white;
@@ -435,7 +430,6 @@
                   object-fit: cover;
             }
 
-            /* Products Section */
             .products-section {
                   padding: 20px 16px;
                   background-color: white;
@@ -546,7 +540,6 @@
                   color: #8B0000;
             }
 
-            /* Category Items Section */
             .category-items-section {
                   padding: 20px 16px;
                   background-color: white;
@@ -671,7 +664,6 @@
                   transform: scale(0.9);
             }
 
-            /* Animation for navbar transition */
             @keyframes fadeIn {
                   from {
                         opacity: 0;
@@ -686,7 +678,6 @@
                   animation: fadeIn 0.3s ease;
             }
 
-            /* Observer animation for sections */
             @keyframes slideIn {
                   from {
                         opacity: 0;
@@ -703,7 +694,6 @@
                   animation: slideIn 0.6s ease forwards;
             }
 
-            /* New animations for categories */
             @keyframes slideInFromLeft {
                   from {
                         opacity: 0;
@@ -736,7 +726,6 @@
                   animation: slideInFromRight 0.4s ease forwards;
             }
 
-            /* View Cart Button */
             .view-cart-btn {
                   position: fixed;
                   bottom: 20px;
@@ -776,7 +765,6 @@
                   font-weight: bold;
             }
 
-            /* Stars animation - now white */
             @keyframes starAnimation {
                   0% {
                         opacity: 0;
@@ -804,7 +792,6 @@
                   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
             }
 
-            /* Flying element for add animation */
             .flying-element {
                   position: fixed;
                   width: 30px;
@@ -828,7 +815,6 @@
                   content: '+';
             }
 
-            /* Overlay */
             .overlay {
                   position: fixed;
                   top: 0;
@@ -844,7 +830,6 @@
                   padding: 12px;
             }
 
-            /* Modal */
             .modal {
                   background: #ffffff;
                   width: 100%;
@@ -870,7 +855,6 @@
                   }
             }
 
-            /* Header */
             .modal-header {
                   position: sticky;
                   top: 0;
@@ -909,7 +893,6 @@
                   transform: rotate(90deg);
             }
 
-            /* Scrollable content */
             .modal-content {
                   padding: 24px;
                   overflow-y: auto;
@@ -918,7 +901,6 @@
                   -webkit-overflow-scrolling: touch;
             }
 
-            /* Hero image */
             .modal-image {
                   width: 100%;
                   height: 250px;
@@ -943,7 +925,6 @@
                   margin-bottom: 24px;
             }
 
-            /* Section title */
             .section-title-modal {
                   font-size: 16px;
                   font-weight: 600;
@@ -959,7 +940,6 @@
                   font-size: 18px;
             }
 
-            /* ===== SLIDER FLAVOUR SELECTOR (للمنتجات ذات القطع) ===== */
             .flavour-balance {
                   background: linear-gradient(145deg, #fafafa, #f5f5f5);
                   border-radius: 48px;
@@ -1077,7 +1057,6 @@
                   box-shadow: 0 6px 16px rgba(139, 0, 0, 0.7), 0 0 0 2px white, 0 0 0 4px #8b0000;
             }
 
-            /* ===== أنماط مودال Combo Meals (الإضافات) ===== */
             .flavour-row {
                   display: flex;
                   align-items: center;
@@ -1281,7 +1260,6 @@
                   font-size: 15px;
             }
 
-            /* إصلاح عرض الصور داخل خيارات المشروبات */
             .drink-option img {
                   width: 24px;
                   height: 24px;
@@ -1289,7 +1267,6 @@
                   border-radius: 4px;
             }
 
-            /* نفس الإصلاح للصورة في صف المشروبات (في مودال السلايدر) */
             .drink-image {
                   width: 24px;
                   height: 24px;
@@ -1297,7 +1274,6 @@
                   border-radius: 4px;
             }
 
-            /* صف المشروبات في مودال السلايدر */
             .drinks-row {
                   display: flex;
                   flex-wrap: wrap;
@@ -1353,7 +1329,6 @@
                   margin-top: 6px;
             }
 
-            /* Fixed footer */
             .fixed-footer {
                   background: white;
                   padding: 16px 24px;
@@ -1469,7 +1444,6 @@
                   text-align: center;
             }
 
-            /* Small screen adjustments */
             @media (max-width: 400px) {
                   .modal-content {
                         padding: 18px;
@@ -1490,7 +1464,6 @@
                   }
             }
 
-            /* Existing search modal styles - keep as before */
             .search-modal {
                   background: white;
                   width: 100%;
@@ -1581,7 +1554,6 @@
                   color: #7F8C8D;
             }
 
-            /* Share Modal Styles */
             .share-modal {
                   background: white;
                   width: 100%;
@@ -1689,7 +1661,6 @@
                   <div class="category" data-category="loadedBuckets">LOADED BUCKETS</div>
                   <div class="category" data-category="comboMeals">COMBO MEALS</div>
                   <div class="category" data-category="familyBuckets">FAMILY BUCKETS</div>
-                  <!-- فئتان جديدتان -->
                   <div class="category" data-category="sides">SIDES</div>
                   <div class="category" data-category="drinks">DRINKS</div>
             </div>
@@ -2796,7 +2767,6 @@
                         basePrice: 55.00,
                         img: "https://i.ibb.co/gQrsPjN/IMG-5114.jpg",
                         description: "Spicy Rizo side"
-                        // لا توجد totalPieces ولا customizations → إضافة مباشرة
                   },
                   "Rizo original": {
                         name: "Rizo original",
@@ -2872,8 +2842,10 @@
                         description: "Mineral water"
                   }
             };
-            // ========== باقي الكود (المنطق) مع دمج المودالات ==========
+
+            // ========== منطق السلة والإضافات ==========
             let cart = JSON.parse(localStorage.getItem('kfcCart')) || [];
+
             // عناصر DOM
             const navbar = document.getElementById('navbar');
             const backButton = document.getElementById('backButton');
@@ -2890,7 +2862,7 @@
             const closeShareBtn = document.getElementById('closeShareBtn');
             const whatsappShare = document.getElementById('whatsappShare');
             const copyShare = document.getElementById('copyShare');
-            // دوال مساعدة
+
             function saveCart() {
                   localStorage.setItem('kfcCart', JSON.stringify(cart));
             }
@@ -2908,7 +2880,7 @@
             function initCart() {
                   updateCart();
             }
-            // ================== أنيميشن الإضافة ==================
+
             let lastClickedAddRect = null;
 
             function flyToBasket(startRect) {
@@ -2960,7 +2932,7 @@
                                     opacity: 1
                               },
                               {
-                                    transform: `translate(${endX-startX}px, ${endY-startY}px) scale(0)`,
+                                    transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0)`,
                                     opacity: 0
                               }
                         ], {
@@ -2973,6 +2945,7 @@
             }
 
             function addItemToCart(item) {
+                  // التحقق من وجود عنصر مطابق بنفس التخصيصات
                   const existingIndex = cart.findIndex(cartItem =>
                         cartItem.name === item.name &&
                         JSON.stringify(cartItem.customizations) === JSON.stringify(item.customizations) &&
@@ -2986,6 +2959,8 @@
                   }
                   saveCart();
                   updateCart();
+                  // تسجيل في console للتأكد من وجود التفاصيل
+                  console.log('Item added to cart:', item);
                   if (lastClickedAddRect) {
                         flyToBasket(lastClickedAddRect);
                         lastClickedAddRect = null;
@@ -2993,6 +2968,7 @@
                         createStarsAnimation();
                   }
             }
+
             // دالة بناء مودال السلايدر (للمنتجات ذات القطع)
             function buildSliderModal(productData) {
                   const modal = document.createElement('div');
@@ -3004,55 +2980,62 @@
                   let rightQty = totalPieces - leftQty;
                   let mainQuantity = 1;
                   let selectedDrink = productData.drinks[0].name;
-                  // Header
+
                   const header = document.createElement('div');
                   header.className = 'modal-header';
                   header.innerHTML = `
-        <div class="modal-title">Customize ${productData.name}</div>
-        <div class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></div>
-      `;
-                  // Content
+                        <div class="modal-title">Customize ${productData.name}</div>
+                        <div class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></div>
+                  `;
+
                   const content = document.createElement('div');
                   content.className = 'modal-content';
-                  // Main image
+
                   const mainImg = document.createElement('img');
                   mainImg.className = 'modal-image';
                   mainImg.src = productData.img;
                   mainImg.alt = productData.name;
+
                   const title = document.createElement('h2');
                   title.className = 'modal-item-title';
                   title.textContent = productData.name;
+
                   const desc = document.createElement('p');
                   desc.className = 'modal-desc';
                   desc.textContent = productData.description;
+
                   content.appendChild(mainImg);
                   content.appendChild(title);
                   content.appendChild(desc);
+
                   // Flavour slider section
                   const flavourSection = document.createElement('div');
                   flavourSection.className = 'section-title-modal';
                   flavourSection.innerHTML = '<i class="fas fa-sliders-h"></i> Balance your flavours';
                   content.appendChild(flavourSection);
+
                   const flavourBalance = document.createElement('div');
                   flavourBalance.className = 'flavour-balance';
+
                   const labelsDiv = document.createElement('div');
                   labelsDiv.className = 'flavour-labels';
                   labelsDiv.innerHTML = `
-        <div class="flavour-side">
-          <img src="${leftFlavour.img}" alt="${leftFlavour.name}">
-          <span>${leftFlavour.name}</span>
-          <div class="quantity" id="leftQtyDisplay">${leftQty}</div>
-          <span class="pieces-label spicy">pieces spicy</span>
-        </div>
-        <div class="vs-divider">VS</div>
-        <div class="flavour-side">
-          <img src="${rightFlavour.img}" alt="${rightFlavour.name}">
-          <span>${rightFlavour.name}</span>
-          <div class="quantity" id="rightQtyDisplay">${rightQty}</div>
-          <span class="pieces-label original">pieces original</span>
-        </div>
-      `;
+                        <div class="flavour-side">
+                              <img src="${leftFlavour.img}" alt="${leftFlavour.name}">
+                              <span>${leftFlavour.name}</span>
+                              <div class="quantity" id="leftQtyDisplay">${leftQty}</div>
+                              <span class="pieces-label spicy">pieces spicy</span>
+                        </div>
+                        <div class="vs-divider">VS</div>
+                        <div class="flavour-side">
+                              <img src="${rightFlavour.img}" alt="${rightFlavour.name}">
+                              <span>${rightFlavour.name}</span>
+                              <div class="quantity" id="rightQtyDisplay">${rightQty}</div>
+                              <span class="pieces-label original">pieces original</span>
+                        </div>
+                  `;
                   flavourBalance.appendChild(labelsDiv);
+
                   const sliderContainer = document.createElement('div');
                   sliderContainer.className = 'slider-container';
                   const sliderTrack = document.createElement('div');
@@ -3069,11 +3052,13 @@
                   sliderContainer.appendChild(slider);
                   flavourBalance.appendChild(sliderContainer);
                   content.appendChild(flavourBalance);
+
                   // Drinks section
                   const drinkSectionTitle = document.createElement('div');
                   drinkSectionTitle.className = 'section-title-modal';
                   drinkSectionTitle.innerHTML = '<i class="fas fa-glass-whiskey"></i> Choose drink';
                   content.appendChild(drinkSectionTitle);
+
                   const drinksRow = document.createElement('div');
                   drinksRow.className = 'drinks-row';
                   drinksRow.id = 'drinksRow';
@@ -3082,17 +3067,19 @@
                         drinkDiv.className = `drink-option ${index === 0 ? 'selected' : ''}`;
                         drinkDiv.setAttribute('data-drink', drink.name);
                         drinkDiv.innerHTML = `
-          <img src="${drink.img}" alt="${drink.name}" class="drink-image">
-          <div class="drink-name">${drink.name}</div>
-        `;
+                              <img src="${drink.img}" alt="${drink.name}" class="drink-image">
+                              <div class="drink-name">${drink.name}</div>
+                        `;
                         drinksRow.appendChild(drinkDiv);
                   });
                   content.appendChild(drinksRow);
+
                   // Special instructions
                   const instrTitle = document.createElement('div');
                   instrTitle.className = 'section-title-modal';
                   instrTitle.innerHTML = '<i class="fas fa-pen"></i> Special instructions';
                   content.appendChild(instrTitle);
+
                   const specialTextarea = document.createElement('textarea');
                   specialTextarea.id = 'specialInstructions';
                   specialTextarea.className = 'special-instructions';
@@ -3100,32 +3087,40 @@
                   specialTextarea.rows = 3;
                   specialTextarea.maxLength = 200;
                   content.appendChild(specialTextarea);
+
                   const charCounter = document.createElement('div');
                   charCounter.className = 'char-counter';
                   charCounter.innerHTML = '<span id="charCount">0</span>/200 characters';
                   content.appendChild(charCounter);
+
                   // Footer
                   const footer = document.createElement('div');
                   footer.className = 'fixed-footer';
+
                   const counterDiv = document.createElement('div');
                   counterDiv.className = 'counter';
                   counterDiv.innerHTML = `
-        <button class="counter-btn" id="decrementBtn"><i class="fas fa-minus"></i></button>
-        <span class="counter-value" id="counterValue">${mainQuantity}</span>
-        <button class="counter-btn" id="incrementBtn"><i class="fas fa-plus"></i></button>
-      `;
+                        <button class="counter-btn" id="decrementBtn"><i class="fas fa-minus"></i></button>
+                        <span class="counter-value" id="counterValue">${mainQuantity}</span>
+                        <button class="counter-btn" id="incrementBtn"><i class="fas fa-plus"></i></button>
+                  `;
+
                   const addBtn = document.createElement('button');
                   addBtn.className = 'modal-add-btn';
                   addBtn.id = 'modalAddBtn';
                   addBtn.innerHTML = `<i class="fas fa-shopping-bag"></i> Add · <span class="price" id="totalPrice">${(productData.basePrice * mainQuantity).toFixed(2)} MAD</span>`;
+
                   footer.appendChild(counterDiv);
                   footer.appendChild(addBtn);
+
                   modal.appendChild(header);
                   modal.appendChild(content);
                   modal.appendChild(footer);
+
                   // ربط الأحداث
                   const closeBtn = modal.querySelector('#closeModalBtn');
                   closeBtn.addEventListener('click', closeModal);
+
                   const sliderEl = modal.querySelector('#flavourSlider');
                   const leftQtyDisplay = modal.querySelector('#leftQtyDisplay');
                   const rightQtyDisplay = modal.querySelector('#rightQtyDisplay');
@@ -3145,8 +3140,10 @@
                         rightQtyDisplay.textContent = rightQty;
                         updateSliderTrack(newLeft);
                   }
+
                   updateSliderTrack(leftQty);
                   sliderEl.addEventListener('input', (e) => updateFromSlider(e.target.value));
+
                   // اختيار المشروب
                   const drinkOptions = modal.querySelectorAll('.drink-option');
                   drinkOptions.forEach(opt => {
@@ -3156,12 +3153,14 @@
                               selectedDrink = this.getAttribute('data-drink');
                         });
                   });
+
                   // عداد الأحرف
                   const specialInput = modal.querySelector('#specialInstructions');
                   const charSpan = modal.querySelector('#charCount');
                   specialInput.addEventListener('input', function() {
                         charSpan.textContent = this.value.length;
                   });
+
                   // عداد الكمية الرئيسي
                   const decrementBtn = modal.querySelector('#decrementBtn');
                   const incrementBtn = modal.querySelector('#incrementBtn');
@@ -3179,6 +3178,7 @@
                         counterValue.textContent = mainQuantity;
                         totalPriceSpan.textContent = (productData.basePrice * mainQuantity).toFixed(2) + ' MAD';
                   });
+
                   // زر الإضافة
                   const addButton = modal.querySelector('#modalAddBtn');
                   addButton.addEventListener('click', () => {
@@ -3187,8 +3187,8 @@
                               basePrice: productData.basePrice,
                               quantity: mainQuantity,
                               customizations: {
-                                    leftFlavour: leftFlavour.name,      // تم التعديل هنا: استخدام اسم النكهة الفعلي
-                                    rightFlavour: rightFlavour.name,    // تم التعديل هنا: استخدام اسم النكهة الفعلي
+                                    leftFlavour: leftFlavour.name,
+                                    rightFlavour: rightFlavour.name,
                                     leftQty: leftQty,
                                     rightQty: rightQty,
                                     drink: selectedDrink
@@ -3201,48 +3201,54 @@
                         addItemToCart(cartItem);
                         closeModal();
                   });
+
                   return modal;
             }
+
             // دالة بناء مودال Combo Meals (مع الإضافات)
             function buildComboModal(productData) {
                   const modal = document.createElement('div');
                   modal.className = 'modal';
-                  // بيانات المنتج
+
                   let selectedFlavour = productData.customizations.flavour.default;
                   let selectedDrink = productData.customizations.drinks[0];
                   let quantities = {};
                   let subtotalSpans = {};
                   let globalQty = 1;
-                  // إعداد الكميات للإضافات
+
                   if (productData.customizations.extras) {
                         productData.customizations.extras.forEach(item => {
                               quantities[item.id] = 0;
                         });
                   }
-                  // Header
+
                   const header = document.createElement('div');
                   header.className = 'modal-header';
                   header.innerHTML = `
-        <div class="modal-title">Customize ${productData.name}</div>
-        <div class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></div>
-      `;
-                  // Content
+                        <div class="modal-title">Customize ${productData.name}</div>
+                        <div class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></div>
+                  `;
+
                   const content = document.createElement('div');
                   content.className = 'modal-content';
-                  // Main image
+
                   const mainImg = document.createElement('img');
                   mainImg.className = 'modal-image';
                   mainImg.src = productData.img;
                   mainImg.alt = productData.name;
+
                   const title = document.createElement('h2');
                   title.className = 'modal-item-title';
                   title.textContent = productData.name;
+
                   const desc = document.createElement('p');
                   desc.className = 'modal-desc';
                   desc.textContent = productData.description;
+
                   content.appendChild(mainImg);
                   content.appendChild(title);
                   content.appendChild(desc);
+
                   // Flavour selector
                   if (productData.customizations.flavour) {
                         const flavourDiv = document.createElement('div');
@@ -3268,34 +3274,43 @@
                         });
                         content.appendChild(flavourDiv);
                   }
+
                   // Extras section
                   if (productData.customizations.extras && productData.customizations.extras.length > 0) {
                         const extraHeading = document.createElement('div');
                         extraHeading.className = 'extra-heading';
                         extraHeading.innerHTML = '<i class="fas fa-plus-circle"></i> Add Extra + <span class="optional-text">(optional)</span>';
                         content.appendChild(extraHeading);
+
                         const chickenRow = document.createElement('div');
                         chickenRow.className = 'chicken-row';
+
                         productData.customizations.extras.forEach(item => {
                               const card = document.createElement('div');
                               card.className = 'chicken-card';
+
                               const img = document.createElement('img');
                               img.className = 'chicken-img';
                               img.src = item.img;
                               img.alt = item.name;
+
                               const name = document.createElement('div');
                               name.className = 'chicken-name';
                               name.textContent = item.name;
+
                               const subtotalSpan = document.createElement('div');
                               subtotalSpan.className = 'chicken-subtotal';
                               subtotalSpan.id = `subtotal-${item.id}`;
                               subtotalSpan.textContent = '0.00 MAD';
                               subtotalSpans[item.id] = subtotalSpan;
+
                               const unitHint = document.createElement('div');
                               unitHint.className = 'unit-hint';
                               unitHint.textContent = `@ ${item.price.toFixed(2)} MAD`;
+
                               const counterDiv = document.createElement('div');
                               counterDiv.className = 'item-counter';
+
                               const minusBtn = document.createElement('button');
                               minusBtn.className = 'counter-btn';
                               minusBtn.innerHTML = '<i class="fas fa-minus"></i>';
@@ -3306,10 +3321,12 @@
                                           updateItemDisplay(item.id);
                                     }
                               });
+
                               const qtySpan = document.createElement('span');
                               qtySpan.className = 'item-qty';
                               qtySpan.id = `qty-${item.id}`;
                               qtySpan.textContent = '0';
+
                               const plusBtn = document.createElement('button');
                               plusBtn.className = 'counter-btn';
                               plusBtn.innerHTML = '<i class="fas fa-plus"></i>';
@@ -3318,9 +3335,11 @@
                                     quantities[item.id]++;
                                     updateItemDisplay(item.id);
                               });
+
                               counterDiv.appendChild(minusBtn);
                               counterDiv.appendChild(qtySpan);
                               counterDiv.appendChild(plusBtn);
+
                               card.appendChild(img);
                               card.appendChild(name);
                               card.appendChild(subtotalSpan);
@@ -3330,17 +3349,21 @@
                         });
                         content.appendChild(chickenRow);
                   }
+
                   // Drink selection
                   if (productData.customizations.drinks) {
                         const drinkSection = document.createElement('div');
                         drinkSection.className = 'drink-group';
                         drinkSection.innerHTML = `<div style="font-weight:600; margin-bottom:4px;"><i class="fas fa-glass-cheers"></i> Choose your drink</div>`;
+
                         const drinkOptionsDiv = document.createElement('div');
                         drinkOptionsDiv.className = 'drink-options';
+
                         productData.customizations.drinks.forEach(drink => {
                               const label = document.createElement('label');
                               label.className = 'drink-option';
                               if (drink === selectedDrink) label.classList.add('selected');
+
                               const radio = document.createElement('input');
                               radio.type = 'radio';
                               radio.name = 'drink';
@@ -3352,9 +3375,11 @@
                                     selectedDrink = drink;
                                     updateTotalAndButton();
                               });
+
                               const nameSpan = document.createElement('span');
                               nameSpan.className = 'drink-name';
                               nameSpan.textContent = drink;
+
                               label.appendChild(radio);
                               label.appendChild(nameSpan);
                               drinkOptionsDiv.appendChild(label);
@@ -3362,19 +3387,23 @@
                         drinkSection.appendChild(drinkOptionsDiv);
                         content.appendChild(drinkSection);
                   }
+
                   // Special instructions
                   const instrSection = document.createElement('div');
                   instrSection.innerHTML = `
-        <div style="font-weight:600; margin-bottom:6px;"><i class="fas fa-comment-alt"></i> Special instructions (optional)</div>
-        <textarea id="kfcSpecial" class="special-instructions" placeholder="No Lettuce? No ice? ..." rows="2" maxlength="200"></textarea>
-        <div class="char-counter"><span id="charCount">0</span>/200 characters</div>
-      `;
+                        <div style="font-weight:600; margin-bottom:6px;"><i class="fas fa-comment-alt"></i> Special instructions (optional)</div>
+                        <textarea id="kfcSpecial" class="special-instructions" placeholder="No Lettuce? No ice? ..." rows="2" maxlength="200"></textarea>
+                        <div class="char-counter"><span id="charCount">0</span>/200 characters</div>
+                  `;
                   content.appendChild(instrSection);
+
                   // Footer
                   const footer = document.createElement('div');
                   footer.className = 'fixed-footer';
+
                   const globalCounterDiv = document.createElement('div');
                   globalCounterDiv.className = 'global-counter';
+
                   const globalMinus = document.createElement('button');
                   globalMinus.className = 'counter-btn';
                   globalMinus.innerHTML = '<i class="fas fa-minus"></i>';
@@ -3384,10 +3413,12 @@
                               updateGlobalQty();
                         }
                   });
+
                   const globalQtySpan = document.createElement('span');
                   globalQtySpan.className = 'global-qty';
                   globalQtySpan.id = 'globalQty';
                   globalQtySpan.textContent = globalQty;
+
                   const globalPlus = document.createElement('button');
                   globalPlus.className = 'counter-btn';
                   globalPlus.innerHTML = '<i class="fas fa-plus"></i>';
@@ -3395,18 +3426,23 @@
                         globalQty++;
                         updateGlobalQty();
                   });
+
                   globalCounterDiv.appendChild(globalMinus);
                   globalCounterDiv.appendChild(globalQtySpan);
                   globalCounterDiv.appendChild(globalPlus);
+
                   const addBtn = document.createElement('button');
                   addBtn.className = 'modal-add-btn';
                   addBtn.id = 'modalAddBtn';
                   addBtn.innerHTML = `Add · <span id="totalPriceValue">${productData.basePrice.toFixed(2)}</span> MAD`;
+
                   footer.appendChild(globalCounterDiv);
                   footer.appendChild(addBtn);
+
                   modal.appendChild(header);
                   modal.appendChild(content);
                   modal.appendChild(footer);
+
                   // دوال مساعدة داخل المودال
                   function updateItemDisplay(id) {
                         const qtySpan = modal.querySelector(`#qty-${id}`);
@@ -3439,7 +3475,7 @@
                         if (priceSpan) priceSpan.textContent = total.toFixed(2);
                         addBtn.disabled = (globalQty < 1);
                   }
-                  // عداد الأحرف
+
                   const specialInput = modal.querySelector('#kfcSpecial');
                   const charSpan = modal.querySelector('#charCount');
                   if (specialInput) {
@@ -3447,12 +3483,11 @@
                               charSpan.textContent = this.value.length;
                         });
                   }
-                  // زر الإغلاق
+
                   const closeBtn = modal.querySelector('#closeModalBtn');
                   closeBtn.addEventListener('click', closeModal);
-                  // زر الإضافة
+
                   addBtn.addEventListener('click', function() {
-                        // بناء كائن التخصيصات
                         const customizations = {
                               flavour: selectedFlavour,
                               drink: selectedDrink,
@@ -3483,7 +3518,7 @@
                         addItemToCart(cartItem);
                         closeModal();
                   });
-                  // تحديث أولي
+
                   updateTotalAndButton();
                   return modal;
             }
@@ -3497,7 +3532,6 @@
             function openModal(productName) {
                   let productData = productsData[productName];
                   if (!productData) {
-                        // Fallback: try to find product in DOM
                         const button = document.querySelector(`[data-name="${productName}"]`);
                         if (button) {
                               const img = button.closest('.category-item')?.querySelector('.item-image')?.src || '';
@@ -3520,9 +3554,8 @@
                               return;
                         }
                   }
-                  // التحقق من نوع التخصيصات: إذا كان هناك totalPieces أو customizations معقدة نفتح مودال، وإلا نضيف مباشرة
+
                   if (productData.totalPieces) {
-                        // مودال السلايدر (Chicken Meals, Loaded Buckets, Family Buckets)
                         document.body.style.overflow = 'hidden';
                         const modal = buildSliderModal(productData);
                         modalOverlay.innerHTML = '';
@@ -3538,7 +3571,6 @@
                               productData.customizations.flavour ||
                               productData.customizations.drinks
                         )) {
-                        // مودال Combo Meals (مع الإضافات)
                         document.body.style.overflow = 'hidden';
                         const modal = buildComboModal(productData);
                         modalOverlay.innerHTML = '';
@@ -3550,7 +3582,6 @@
                               }
                         });
                   } else {
-                        // لا تخصيصات → إضافة مباشرة (هذا ينطبق على SIDES و DRINKS ومعظم المنتجات البسيطة)
                         addItemToCart({
                               name: productData.name,
                               basePrice: productData.basePrice,
@@ -3563,7 +3594,8 @@
                         });
                   }
             }
-            // ========== دوال البحث والمشاركة (كما هي) ==========
+
+            // ========== أحداث البحث والمشاركة والتمرير ==========
             searchButton.addEventListener('click', () => {
                   searchOverlay.style.display = 'flex';
                   document.body.style.overflow = 'hidden';
@@ -3615,6 +3647,7 @@
                         searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
                   }
             }
+
             shareButton.addEventListener('click', () => {
                   shareOverlay.style.display = 'flex';
                   document.body.style.overflow = 'hidden';
@@ -3671,15 +3704,18 @@
                         document.body.style.overflow = 'auto';
                   }).catch(() => alert('Failed to copy.'));
             }
-            // ========== أحداث التمرير والفئات ==========
+
             window.addEventListener('scroll', function() {
                   if (window.scrollY > 100) navbar.classList.add('scrolled');
                   else navbar.classList.remove('scrolled');
             });
+
             backButton.addEventListener('click', function() {
                   window.location.href = 'index.html';
             });
+
             viewCartBtn.addEventListener('click', () => window.location.href = 'kcheckout.html');
+
             const categories = document.querySelectorAll('.category');
             const categoriesContainer = document.getElementById('categoriesContainer');
             const categorySections = {
@@ -3688,7 +3724,6 @@
                   loadedBuckets: document.getElementById('loadedBucketsSection'),
                   comboMeals: document.getElementById('comboMealsSection'),
                   familyBuckets: document.getElementById('familyBucketsSection'),
-                  // إضافة القسمين الجديدين
                   sides: document.getElementById('sidesSection'),
                   drinks: document.getElementById('drinksSection')
             };
@@ -3709,6 +3744,7 @@
                         }
                   });
             }
+
             const observer = new IntersectionObserver((entries) => {
                   entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -3723,9 +3759,11 @@
                   rootMargin: '-100px 0px -50% 0px',
                   threshold: 0.1
             });
+
             Object.values(categorySections).forEach(s => {
                   if (s) observer.observe(s);
             });
+
             categories.forEach(c => {
                   c.addEventListener('click', function() {
                         const categoryId = this.getAttribute('data-category');
@@ -3739,7 +3777,6 @@
             function hasCustomizations(productName) {
                   const product = productsData[productName];
                   if (!product) return false;
-                  // إذا كان هناك totalPieces أو customizations معقدة نعتبر أن له تخصيصات
                   return product.totalPieces || (product.customizations && (product.customizations.extras?.length > 0 || product.customizations.flavour || product.customizations.drinks));
             }
 
@@ -3756,6 +3793,7 @@
                         }
                   });
             }
+
             // التهيئة
             document.addEventListener('DOMContentLoaded', function() {
                   initCart();
