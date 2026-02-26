@@ -3124,29 +3124,26 @@
                   modal.appendChild(content);
                   modal.appendChild(footer);
                   // ربط الأحداث
-                  const closeBtn = modal.querySelector('#closeModalBtn');
-                  closeBtn.addEventListener('click', closeModal);
-                  const sliderEl = modal.querySelector('#flavourSlider');
-                  const leftQtyDisplay = modal.querySelector('#leftQtyDisplay');
-                  const rightQtyDisplay = modal.querySelector('#rightQtyDisplay');
-                  const sliderTrackEl = modal.querySelector('#sliderTrack');
-
-                  function updateSliderTrack(value) {
-                        const percent = (value / totalPieces) * 100;
-                        sliderTrackEl.style.background = `linear-gradient(90deg, #e03131 0%, #e03131 ${percent}%, #fbbf24 ${percent}%, #fbbf24 100%)`;
-                  }
-
-                  function updateFromSlider(val) {
-                        const newLeft = parseInt(val, 10);
-                        const newRight = totalPieces - newLeft;
-                        leftQty = newLeft;
-                        rightQty = newRight;
-                        leftQtyDisplay.textContent = leftQty;
-                        rightQtyDisplay.textContent = rightQty;
-                        updateSliderTrack(newLeft);
-                  }
-                  updateSliderTrack(leftQty);
-                  sliderEl.addEventListener('input', (e) => updateFromSlider(e.target.value));
+                  addButton.addEventListener('click', () => {
+    const cartItem = {
+        name: productData.name,
+        basePrice: productData.basePrice,
+        quantity: mainQuantity,
+        customizations: {
+            leftFlavour: "Spicy",      // تم التبسيط
+            rightFlavour: "Original",   // تم التبسيط
+            leftQty: leftQty,
+            rightQty: rightQty,
+            drink: selectedDrink
+        },
+        totalPrice: productData.basePrice * mainQuantity,
+        img: productData.img,
+        description: productData.description,
+        specialInstructions: specialInput.value.trim()
+    };
+    addItemToCart(cartItem);
+    closeModal();
+});
                   // اختيار المشروب
                   const drinkOptions = modal.querySelectorAll('.drink-option');
                   drinkOptions.forEach(opt => {
