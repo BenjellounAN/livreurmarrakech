@@ -1002,12 +1002,13 @@
       
       if (cart.length === 0) {
         cartItemsContainer.innerHTML = `
-          <div class="empty-cart">
+          <div class="empty-cart" style="text-align: center; padding: 20px;">
   <img src="https://i.ibb.co/S7wR9cR7/9-F3043-B2-B0-A6-448-B-AF5-C-F15487-F3741-F.png" 
        alt="Empty cart" 
-       class="cart-image">
-  <p>Your cart is empty</p>
-  <a href="index.html" class="browse-btn">Browse Menu</a>
+       style="width: 60px; height: auto; display: block; margin: 0 auto 15px;">
+  <p style="margin: 0 0 15px 0; font-size: 16px; color: #333;">Your cart is empty</p>
+  <a href="index.html" class="browse-btn" 
+     style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-size: 14px;">Browse Menu</a>
 </div>
         `;
         return;
