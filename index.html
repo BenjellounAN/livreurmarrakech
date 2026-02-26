@@ -1326,8 +1326,8 @@
       </div>
     </div>
 
-    <!-- KFC Card -->
-    <div class="restaurant-card" data-restaurant="KFC">
+    <!-- KFC Card - معدلة لفتح kfcmenu.html -->
+    <div class="restaurant-card" data-restaurant="KFC" id="kfc-card">
       <div class="image-half">
         <img src="https://i.ibb.co/wrLrWv89/Delivery-marrakech-kfc.jpg" alt="KFC chicken Delivery in Marrakech">
         <div class="image-overlay">
@@ -1353,10 +1353,10 @@
         </div>
 
         <div class="buttons">
-          <button class="btn btn-order" data-action="order">
+          <button class="btn btn-order" id="kfc-order-btn">
             <i class="fas fa-bolt"></i> Order Now
           </button>
-          <button class="btn btn-menu" data-action="menu">
+          <button class="btn btn-menu" id="kfc-menu-btn">
             <i class="fas fa-book-open"></i> View Menu
           </button>
         </div>
@@ -1739,6 +1739,44 @@
       });
       
       // =============================================
+      // التعديلات الجديدة لبطاقة KFC (المطلوبة)
+      // =============================================
+      const kfcCard = document.getElementById('kfc-card');
+      const kfcOrderBtn = document.getElementById('kfc-order-btn');
+      const kfcMenuBtn = document.getElementById('kfc-menu-btn');
+
+      // دالة مساعدة لفتح صفحة KFC
+      function openKFCPage() {
+          window.location.href = 'kfcmenu.html';
+      }
+
+      // عند الضغط على زر Order Now
+      if (kfcOrderBtn) {
+          kfcOrderBtn.addEventListener('click', function(e) {
+              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              openKFCPage();
+          });
+      }
+
+      // عند الضغط على زر View Menu
+      if (kfcMenuBtn) {
+          kfcMenuBtn.addEventListener('click', function(e) {
+              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              openKFCPage();
+          });
+      }
+
+      // عند الضغط على بطاقة KFC نفسها
+      if (kfcCard) {
+          kfcCard.addEventListener('click', function(e) {
+              // التأكد من أن النقر لم يكن على أحد الأزرار
+              if (!e.target.closest('.btn')) {
+                  openKFCPage();
+              }
+          });
+      }
+      
+      // =============================================
       // التعديلات الجديدة لبطاقة Pizza Hut
       // =============================================
       // زر Order Now الخاص بـ Pizza Hut
@@ -1761,8 +1799,8 @@
         }
       });
       
-      // باقي البطاقات (عدا McDonald's و Pizza Hut) تبقى كما هي (تفتح واتساب)
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#pizzahut-card) .btn').forEach(button => {
+      // باقي البطاقات (عدا McDonald's و KFC و Pizza Hut) تبقى كما هي (تفتح واتساب)
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card) .btn').forEach(button => {
         button.addEventListener('click', function(e) {
           e.stopPropagation();
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
@@ -1778,8 +1816,8 @@
         });
       });
       
-      // النقر على بطاقات المطاعم الأخرى (عدا McDonald's و Pizza Hut)
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#pizzahut-card)').forEach(card => {
+      // النقر على بطاقات المطاعم الأخرى (عدا McDonald's و KFC و Pizza Hut)
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card)').forEach(card => {
         card.addEventListener('click', function(e) {
           if (!e.target.closest('.btn')) {
             const restaurant = this.dataset.restaurant;
