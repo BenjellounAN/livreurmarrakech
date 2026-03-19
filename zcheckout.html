@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - Zushi</title>
+  <title>Checkout - Zushi LAB</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -629,8 +629,8 @@
     
     <!-- Header -->
     <div class="header">
-      <h1>Sushi Checkout</h1>
-      <p>Review your sushi order and complete your purchase</p>
+      <h1>Zushi LAB Checkout</h1>
+      <p>Review your order and complete your purchase</p>
     </div>
     
     <!-- Cart Layout -->
@@ -685,7 +685,7 @@
             <div class="time-options">
               <div class="time-option selected" data-time="asap">
                 <i class="fas fa-bolt"></i>
-                <span>ASAP (25-35 min)</span>
+                <span>ASAP (35-45 min)</span>
               </div>
               <div class="time-option" data-time="later">
                 <i class="far fa-clock"></i>
@@ -695,7 +695,7 @@
           </div>
         </div>
         
-        <!-- Payment Method (آخر) -->
+        <!-- Payment Method -->
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
           
@@ -720,7 +720,7 @@
   </div>
 
   <script>
-    // Cart data structure - سيتم تحميلها من localStorage (مفتاح خاص بالسوشي)
+    // Cart data structure - سيتم تحميلها من localStorage (مفتاح zushiCart المطابق لصفحة القائمة)
     let cart = [];
 
     // Constants
@@ -768,10 +768,11 @@
       return true;
     }
 
-    // دالة للحصول على محتويات السلة من localStorage (مفتاح خاص بالسوشي)
+    // دالة للحصول على محتويات السلة من localStorage (مفتاح zushiCart - مطابق لصفحة القائمة)
     function getCart() {
       try {
-        const cartData = localStorage.getItem('sushiCart');
+        const cartData = localStorage.getItem('zushiCart');
+        console.log("Raw cart data from localStorage:", cartData); // للتتبع
         return cartData ? JSON.parse(cartData) : [];
       } catch (error) {
         console.error("Error loading cart from localStorage:", error);
@@ -779,9 +780,10 @@
       }
     }
     
-    // دالة لحفظ السلة في localStorage (مفتاح خاص بالسوشي)
+    // دالة لحفظ السلة في localStorage (مفتاح zushiCart - مطابق لصفحة القائمة)
     function saveCart() {
-      localStorage.setItem('sushiCart', JSON.stringify(cart));
+      localStorage.setItem('zushiCart', JSON.stringify(cart));
+      console.log("Cart saved to localStorage:", cart); // للتتبع
     }
     
     // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
@@ -901,7 +903,7 @@
       
       // تحميل السلة
       cart = getCart();
-      console.log("Cart loaded from localStorage:", cart);
+      console.log("Cart loaded in checkout page:", cart);
       
       // التحقق مرة أخرى بعد التحميل (للتأكد)
       if (cart.length > 0) {
@@ -945,21 +947,30 @@
         // الحصول على الخيارات المخصصة
         const customizations = formatCustomizationsForDisplay(item);
         
-        // حساب السعر لكل عنصر (السعر الأساسي مخزن في item.price)
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
-        const totalItemPrice = pricePerUnit * item.quantity;
+        // حساب السعر لكل عنصر - التأكد من وجود totalPrice أو حسابه من basePrice
+        let pricePerUnit = item.basePrice || item.price || 0;
+        let totalItemPrice = item.totalPrice || 0;
         
-        // تأكد من أن السعر الإجمالي محدث
-        if (item.totalPrice !== totalItemPrice) {
+        // إذا لم يكن totalPrice موجوداً، نحسبه
+        if (totalItemPrice === 0 && pricePerUnit > 0 && item.quantity) {
+          totalItemPrice = pricePerUnit * item.quantity;
           item.totalPrice = totalItemPrice;
         }
         
+        // إذا كان pricePerUnit لا يزال 0 ولكن totalPrice موجود، نحسب السعر للوحدة
+        if (pricePerUnit === 0 && totalItemPrice > 0 && item.quantity) {
+          pricePerUnit = totalItemPrice / item.quantity;
+        }
+        
+        // استخدام الصورة الافتراضية إذا لم تكن موجودة
+        const imageUrl = item.img || 'https://via.placeholder.com/70x70/8B0000/ffffff?text=Zushi';
+        
         itemElement.innerHTML = `
           <div class="item-image">
-            <img src="${item.img || 'https://via.placeholder.com/70x70/eee/999?text=Sushi'}" alt="${item.name}">
+            <img src="${imageUrl}" alt="${item.name || 'Zushi item'}" onerror="this.src='https://via.placeholder.com/70x70/8B0000/ffffff?text=Zushi'">
           </div>
           <div class="item-details">
-            <div class="item-name">${item.name}</div>
+            <div class="item-name">${item.name || 'Unknown item'}</div>
             
             <!-- عرض الخيارات المخصصة كـ badges -->
             ${customizations.length > 0 ? 
@@ -975,10 +986,10 @@
               : ''
             }
             
-            <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity} = ${item.totalPrice.toFixed(2)} MAD</div>
+            <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity || 1} = ${totalItemPrice.toFixed(2)} MAD</div>
             <div class="item-controls">
               <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
-              <span class="item-quantity">${item.quantity}</span>
+              <span class="item-quantity">${item.quantity || 1}</span>
               <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
               <button class="remove-item"><i class="fas fa-times"></i> Remove</button>
             </div>
@@ -995,12 +1006,13 @@
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-        // تأكد من أن السعر الإجمالي صحيح
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
-        const itemTotal = pricePerUnit * item.quantity;
+        // التأكد من وجود totalPrice صحيح
+        let itemTotal = item.totalPrice || 0;
         
-        // تحديث السعر الإجمالي في الكائن
-        if (item.totalPrice !== itemTotal) {
+        // إذا لم يكن totalPrice موجوداً، نحسبه
+        if (itemTotal === 0 && (item.basePrice || item.price) && item.quantity) {
+          const pricePerUnit = item.basePrice || item.price;
+          itemTotal = pricePerUnit * item.quantity;
           item.totalPrice = itemTotal;
         }
         
@@ -1024,13 +1036,16 @@
       totalPriceElement.textContent = `${totals.total} MAD`;
       
       // Update cart count
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
       cartCount.textContent = `Order Items (${totalItems})`;
     }
 
     // Update item quantity
     function updateQuantity(itemIndex, change) {
       if (cart[itemIndex]) {
+        // التأكد من وجود quantity
+        if (!cart[itemIndex].quantity) cart[itemIndex].quantity = 1;
+        
         // تغيير الكمية
         cart[itemIndex].quantity += change;
         
@@ -1040,8 +1055,10 @@
         }
         
         // حساب السعر الإجمالي الجديد
-        const pricePerUnit = cart[itemIndex].price || (cart[itemIndex].totalPrice / (cart[itemIndex].quantity - change));
-        cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
+        const pricePerUnit = cart[itemIndex].basePrice || cart[itemIndex].price || 0;
+        if (pricePerUnit > 0) {
+          cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
+        }
         
         // إذا كانت الكمية 0، احذف العنصر
         if (cart[itemIndex].quantity === 0) {
@@ -1102,13 +1119,13 @@
       };
       
       // Save to localStorage for future use
-      localStorage.setItem('sushiCustomerInfo', JSON.stringify(customerInfo));
+      localStorage.setItem('zushiCustomerInfo', JSON.stringify(customerInfo));
     }
 
     // Load customer information
     function loadCustomerInfo() {
       try {
-        const savedInfo = localStorage.getItem('sushiCustomerInfo');
+        const savedInfo = localStorage.getItem('zushiCustomerInfo');
         if (savedInfo) {
           customerInfo = JSON.parse(savedInfo);
           customerNameInput.value = customerInfo.name || "";
@@ -1148,14 +1165,14 @@
 
     // Generate WhatsApp message with ALL customizations
     function generateWhatsAppMessage(totals) {
-      let message = ` 🍣 *NEW ZUSHI ORDER* 🥢\n\n`;
+      let message = ` 🍣 *NEW ZUSHI LAB ORDER* 🥢\n\n`;
       
       // Customer Information (اختيارية - تضاف فقط إذا تم ملؤها)
       if (customerInfo.name || customerInfo.address) {
         message += `*Delivery Details:*\n`;
         if (customerInfo.name) message += `👤 Name: ${customerInfo.name}\n`;
         if (customerInfo.address) message += `📍 Address: ${customerInfo.address}\n`;
-        message += `⏰ Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (25-35 min)' : 'Schedule Later'}\n\n`;
+        message += `⏰ Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (35-45 min)' : 'Schedule Later'}\n\n`;
       }
       
       // Order Details
@@ -1165,9 +1182,9 @@
       // إضافة كل العناصر مع خياراتها
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
+        const pricePerUnit = item.basePrice || item.price || (item.totalPrice / item.quantity);
         
-        message += `*${index + 1}. ${item.quantity}x ${item.name}*\n`;
+        message += `*${index + 1}. ${item.quantity || 1}x ${item.name || 'Item'}*\n`;
         message += `   Unit Price: ${pricePerUnit.toFixed(2)} MAD\n`;
         message += `   Total: ${item.totalPrice.toFixed(2)} MAD\n`;
         
@@ -1197,7 +1214,7 @@
       // Final Message
       message += `====================\n`;
       message += `Please confirm this order and let me know the delivery charges.\n`;
-      message += `Thank you! 🙏`;
+      message += `Thank you for ordering from Zushi LAB! 🙏`;
       
       return message;
     }
@@ -1228,7 +1245,7 @@
         });
       });
       
-      // Payment method selection (نظل مع خيار واحد فقط)
+      // Payment method selection
       document.querySelectorAll('.payment-option').forEach(option => {
         option.addEventListener('click', function() {
           document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -1269,7 +1286,7 @@
     
     // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
     function debugCart() {
-      console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('sushiCart') || '[]'));
+      console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('zushiCart') || '[]'));
     }
   </script>
 </body>
