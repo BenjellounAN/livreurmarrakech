@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - Sushi</title>
+  <title>Checkout - Zushi</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -747,6 +747,27 @@
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
+    // دالة للتحقق من أن المصدر هو menuzushi.html فقط
+    function validateCartSource() {
+      const referrer = document.referrer;
+      
+      // إذا كان هناك مرجع (الصفحة السابقة) وتحقق من أنه ليس menuzushi.html
+      if (referrer && !referrer.includes('menuzushi.html')) {
+        console.warn('Cart data should only come from menuzushi.html. Clearing cart...');
+        // مسح السلة إذا كانت قادمة من مصدر آخر
+        cart = [];
+        saveCart();
+        return false;
+      }
+      
+      // إذا لم يكن هناك مرجع (تم فتح الصفحة مباشرة)، نسمح بذلك ولكن ننبه
+      if (!referrer) {
+        console.log('Page opened directly. Cart will be loaded if exists.');
+      }
+      
+      return true;
+    }
+
     // دالة للحصول على محتويات السلة من localStorage (مفتاح خاص بالسوشي)
     function getCart() {
       try {
@@ -875,8 +896,23 @@
     
     // Initialize the cart
     function initCart() {
+      // التحقق من المصدر أولاً
+      validateCartSource();
+      
+      // تحميل السلة
       cart = getCart();
       console.log("Cart loaded from localStorage:", cart);
+      
+      // التحقق مرة أخرى بعد التحميل (للتأكد)
+      if (cart.length > 0) {
+        const referrer = document.referrer;
+        if (referrer && !referrer.includes('menuzushi.html')) {
+          console.warn('Cart has items but came from wrong source. Clearing cart...');
+          cart = [];
+          saveCart();
+        }
+      }
+      
       renderCartItems();
       updateCartDisplay();
       attachEventListeners();
@@ -894,7 +930,7 @@
                  alt="Empty cart" 
                  style="width: 140px; height: auto; display: block; margin: 0 auto 20px;">
             <p style="margin: 0 0 20px 0; font-size: 18px; color: grey;">Your basket is empty</p>
-            <a href="index.html" class="browse-btn" 
+            <a href="menuzushi.html" class="browse-btn" 
                style="display: inline-block; padding: 12px 25px; background-color: #8B0000; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">Browse Menu</a>
           </div>
         `;
@@ -1112,7 +1148,7 @@
 
     // Generate WhatsApp message with ALL customizations
     function generateWhatsAppMessage(totals) {
-      let message = ` 🍣 *NEW SUSHI ORDER* 🥢\n\n`;
+      let message = ` 🍣 *NEW ZUSHI ORDER* 🥢\n\n`;
       
       // Customer Information (اختيارية - تضاف فقط إذا تم ملؤها)
       if (customerInfo.name || customerInfo.address) {
@@ -1166,15 +1202,10 @@
       return message;
     }
 
-    // Handle back button click
+    // Handle back button click - Modified to go only to menuzushi.html
     function handleBackButton() {
-      // محاولة العودة إلى الصفحة السابقة في التاريخ
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        // إذا لم تكن هناك صفحة سابقة، انتقل إلى قائمة السوشي
-        window.location.href = 'menuzushi.html';
-      }
+      // التوجيه مباشرة إلى صفحة menuzushi.html فقط
+      window.location.href = 'menuzushi.html';
     }
 
     // Attach event listeners
