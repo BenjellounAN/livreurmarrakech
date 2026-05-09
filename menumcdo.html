@@ -2587,6 +2587,241 @@ We provide fast McDonald's delivery in Marrakech within 30km or more. Order the 
     </div>
   </div>
 
+  <section class="faq-section">
+    <div class="faq-container">
+
+      <div class="faq-header">
+        <span>FAQ</span>
+        <h2>Questions Customers Ask Most</h2>
+        <p>Everything you need before placing your order.</p>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Do you deliver McDonald's in Marrakech?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, we offer fast McDonald's delivery service across Marrakech.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How long does delivery usually take?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most orders arrive within 30 to 45 minutes depending on your location.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I place orders late at night?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, late-night orders are available based on restaurant opening hours.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Which payment methods are available?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p> At the moment, we only offer Cash on Delivery as our payment method.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FEEDBACK -->
+      <section class="feedback-section">
+        <div class="feedback-box">
+
+          <h3>Help Us Improve</h3>
+
+          <p>
+            Did you face any difficulty while using our website or placing your order?
+            Let us know how we can improve your experience.
+          </p>
+
+          <a href="mailto:anasbenjelloun61@gmail.com?subject=Feedback about your website&body=Hello,%0A%0AI would like to share feedback about your website:%0A%0A" class="feedback-btn">
+            Send Feedback
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    .faq-section{
+      background:#fff;
+      padding:90px 20px;
+    }
+
+    .faq-container{
+      max-width:850px;
+      margin:auto;
+    }
+
+    /* HEADER */
+    .faq-header{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    /* FAQ BADGE */
+    .faq-header span{
+      background:#7a0000;
+      color:#fff;
+      padding:8px 18px;
+      border-radius:50px;
+      font-size:13px;
+      font-weight:bold;
+      letter-spacing:1px;
+      box-shadow:0 8px 20px rgba(122,0,0,0.25);
+    }
+
+    .faq-header h2{
+      margin-top:20px;
+      font-size:42px;
+      color:#111;
+    }
+
+    .faq-header p{
+      margin-top:12px;
+      color:#777;
+      font-size:17px;
+    }
+
+    /* FAQ */
+    .faq-list{
+      border-top:1px solid #e5e5e5;
+    }
+
+    .faq-item{
+      border-bottom:1px solid #e5e5e5;
+      padding:8px 0;
+    }
+
+    .faq-question{
+      width:100%;
+      background:none;
+      border:none;
+      padding:24px 5px;
+      font-size:20px;
+      font-weight:600;
+      color:#1a1a1a;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+      text-align:left;
+    }
+
+    .faq-question span{
+      font-size:28px;
+      color:#7a0000;
+      transition:0.3s;
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.35s ease;
+    }
+
+    .faq-answer p{
+      padding:0 5px 22px;
+      color:#666;
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    .faq-item.active .faq-answer{
+      max-height:150px;
+    }
+
+    .faq-item.active .faq-question span{
+      transform:rotate(45deg);
+    }
+
+    /* FEEDBACK BOX */
+    .feedback-section{
+      margin-top:70px;
+    }
+
+    .feedback-box{
+      background:#ffffff;
+      border:1.5px solid #7a0000;
+      border-radius:28px;
+      padding:50px 35px;
+      text-align:center;
+      color:#111;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    /* TITLE RED */
+    .feedback-box h3{
+      font-size:34px;
+      margin-bottom:20px;
+      color:#7a0000;
+      font-weight:800;
+    }
+
+    .feedback-box p{
+      font-size:17px;
+      line-height:1.8;
+      max-width:620px;
+      margin:0 auto 30px;
+      color:#555;
+    }
+
+    /* 🔥 BUTTON NOW RED (UPDATED) */
+    .feedback-btn{
+      display:inline-block;
+      background:#7a0000;
+      color:#fff;
+      text-decoration:none;
+      padding:16px 32px;
+      border-radius:50px;
+      font-weight:700;
+      font-size:16px;
+      transition:0.3s ease;
+      box-shadow:0 10px 25px rgba(122,0,0,0.25);
+      border:1px solid #7a0000;
+    }
+
+    .feedback-btn:hover{
+      transform:translateY(-3px);
+      background:#5f0000;
+      box-shadow:0 15px 35px rgba(122,0,0,0.35);
+    }
+  </style>
+
+  <script>
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-question').addEventListener('click',()=>{
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+
   <script>
     // بيانات المنتجات مع محتوى مخصص لكل منتج
     const productsData = {
@@ -5212,7 +5447,7 @@ backButton.addEventListener('click', function() {
       });
       message += `\n*Total Amount:* ${totalAmount.toFixed(2)} MAD\n\n`;
       message += "====================\n";
-      message += "And Let Me know How much The Total With Delivery Charge ! ";
+      message += "And Let me Know How much The Total With Delivery Charge ! ";
       // تشفير الرسالة للرابط
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
