@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Checkout - Fleuriste Marrakech</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+  
+  <style>
+    :root {
+      --primary-red: #8B0000;
+      --primary-red-light: #a52a2a;
+      --primary-red-dark: #660000;
+      --accent-gold: #D4AF37;
+      --text-dark: #2C3E50;
+      --text-light: #7F8C8D;
+      --bg-light: #F9F9F9;
+      --border-light: #ECF0F1;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: var(--text-dark);
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .back-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: var(--primary-red);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover { background: var(--primary-red-dark); transform: translateX(-3px); }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-top: 10px;
+    }
+    
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-red);
+      margin-bottom: 8px;
+    }
+    
+    .header p { color: var(--text-light); font-size: 0.95rem; }
+    
+    .cart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .cart-items-section {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .cart-items {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    
+    .cart-summary {
+      width: 350px;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      align-self: flex-start;
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .cart-header h2 { font-size: 1.3rem; font-weight: 600; }
+    
+    .clear-cart {
+      color: var(--primary-red);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    
+    .clear-cart:hover { background: rgba(139, 0, 0, 0.1); }
+    
+    .item-card {
+      display: flex;
+      gap: 12px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: center;
+    }
+    
+    .item-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .item-image img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .item-details { flex: 1; min-width: 0; }
+    
+    .item-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    
+    .item-price { color: var(--primary-red); font-weight: 600; font-size: 0.95rem; }
+    
+    .item-controls { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    
+    .quantity-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg-light);
+      cursor: pointer;
+    }
+    
+    .quantity-btn:hover { background: var(--primary-red); color: white; }
+    
+    .item-quantity { font-weight: 600; min-width: 26px; text-align: center; }
+    
+    .remove-item {
+      color: #e74c3c;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 0.8rem;
+    }
+    
+    .summary-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 15px 0;
+      border-top: 2px solid var(--primary-red);
+      border-bottom: 2px solid var(--primary-red);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    
+    .total-price { color: var(--primary-red); }
+    
+    .delivery-note {
+      background: rgba(139, 0, 0, 0.05);
+      padding: 12px;
+      border-radius: 10px;
+      margin: 15px 0;
+      font-size: 0.85rem;
+      border-left: 3px solid var(--primary-red);
+    }
+    
+    .customer-info {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    
+    .customer-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--primary-red);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .form-group { margin-bottom: 15px; }
+    
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-red);
+    }
+    
+    .time-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .time-option {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    .time-option.selected {
+      border-color: var(--primary-red);
+      background: rgba(139, 0, 0, 0.05);
+    }
+    
+    .payment-method { margin: 20px 0; }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    
+    .payment-option.selected { border-color: var(--primary-red); background: rgba(139, 0, 0, 0.05); }
+    
+    /* Love Message Card - Original Design */
+    .love-card {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: url('https://thumbs.dreamstime.com/b/ethereal-floral-background-soft-pastel-flowers-spring-designs-greetings-including-roses-daisies-lavender-create-326683096.jpg') no-repeat center/cover;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+    
+    .love-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(2px);
+      border-radius: 20px;
+    }
+    
+    .love-card .right-line {
+      position: absolute;
+      top: 0;
+      right: 8px;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom,#7a001a,#b3002d,#7a001a);
+      z-index: 2;
+    }
+    
+    .love-card .left-line {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom,#7a001a,#b3002d,#7a001a);
+      z-index: 2;
+    }
+    
+    .love-card .content {
+      position: relative;
+      z-index: 2;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .love-card .title {
+      font-size: 24px;
+      font-family: 'Great Vibes', cursive;
+      color: #7a0030;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .love-card textarea {
+      width: 100%;
+      height: 150px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 18px;
+      line-height: 1.6;
+      background: transparent;
+      color: #2b2b2b;
+      font-family: 'Playfair Display', serif;
+      caret-color: #7a001a;
+      letter-spacing: 0.2px;
+    }
+    
+    .love-card textarea::placeholder {
+      color: #666;
+      font-style: italic;
+    }
+    
+    /* Empty Cart Styles with Image */
+    .empty-cart {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    
+    .empty-cart-image {
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .empty-cart p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    
+    .browse-btn {
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .browse-btn:hover {
+      background: var(--primary-red-dark);
+      transform: translateY(-2px);
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .checkout-btn:hover { transform: translateY(-2px); }
+    .checkout-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    
+    .info-text {
+      text-align: center;
+      margin-top: 12px;
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+    
+    .toast-message {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toast-message.show { display: flex; animation: fadeInUp 0.3s ease; }
+    .toast-message.error { background: #c0392b; }
+    .toast-message.success { background: #27ae60; }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+      .cart-container { flex-direction: column; }
+      .cart-summary { width: 100%; }
+      .time-options { flex-direction: column; }
+      .love-card .content { padding: 15px; }
+      .love-card textarea { font-size: 14px; height: 120px; }
+      .empty-cart-image { max-width: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-btn" id="back-button">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    
+    <div class="header">
+      <h1>Fleuriste Marrakech</h1>
+      <p>Review your flower order and complete your purchase</p>
+    </div>
+    
+    <div class="cart-container">
+      <!-- Left Side: Order Items + Love Card -->
+      <div class="cart-items-section">
+        <div class="cart-items">
+          <div class="cart-header">
+            <h2 id="cart-count">Order Items (0)</h2>
+            <button class="clear-cart" id="clear-cart">
+              <i class="fas fa-trash-alt"></i> Clear All
+            </button>
+          </div>
+          <div id="cart-items-container"></div>
+        </div>
+        
+        <!-- Love Message Card - Below Order Items -->
+        <div class="love-card">
+          <div class="left-line"></div>
+          <div class="right-line"></div>
+          <div class="content">
+            <div class="title">Love Message</div>
+            <textarea id="loveMessage" placeholder="Write something beautiful..."></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side: Order Summary -->
+      <div class="cart-summary">
+        <h2 class="summary-title">Order Summary</h2>
+        <div class="summary-item">
+          <span class="summary-label">Subtotal</span>
+          <span class="summary-value" id="subtotal">0.00 MAD</span>
+        </div>
+        <div class="summary-total">
+          <span class="total-label">Total Amount</span>
+          <span class="total-price" id="total-price">0.00 MAD</span>
+        </div>
+        <div class="delivery-note">
+          <i class="fas fa-info-circle"></i>
+          <span>Delivery charges not included. Will be calculated based on location.</span>
+        </div>
+        
+        <div class="customer-info">
+          <h3>Delivery Information</h3>
+          <div class="form-group">
+            <label for="customerName">Full Name</label>
+            <input type="text" id="customerName" placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label for="customerPhone">Phone Number</label>
+            <input type="tel" id="customerPhone" placeholder="Enter your phone number">
+          </div>
+          <div class="form-group">
+            <label for="customerAddress">Delivery Address</label>
+            <textarea id="customerAddress" placeholder="Enter your delivery address"></textarea>
+          </div>
+          <div class="delivery-time">
+            <label style="display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 10px;">Delivery Time</label>
+            <div class="time-options">
+              <div class="time-option selected" data-time="asap">
+                <i class="fas fa-bolt"></i>
+                <span>ASAP (45-60 min)</span>
+              </div>
+              <div class="time-option" data-time="later">
+                <i class="far fa-clock"></i>
+                <span>Schedule Later</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="payment-method">
+          <h3 class="payment-title">Payment Method</h3>
+          <div class="payment-option selected">
+            <input type="radio" id="cash" name="payment" checked>
+            <label for="cash">Cash on Delivery</label>
+            <div class="payment-icon"><i class="fas fa-money-bill-wave"></i></div>
+          </div>
+        </div>
+        
+        <button class="checkout-btn" id="checkout-btn">
+          <i class="fab fa-whatsapp"></i> Complete Order via WhatsApp
+        </button>
+        <p class="info-text">
+          <i class="fas fa-info-circle"></i> Click the button to send order details via WhatsApp
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="toastMessage" class="toast-message">
+    <i class="fas fa-spinner fa-pulse"></i>
+    <span>Saving order...</span>
+  </div>
+
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDQ8GIxHnTz2m1U6aWGyZYPKJeXJbYKSZo",
+      authDomain: "flowers-products.firebaseapp.com",
+      projectId: "flowers-products",
+      storageBucket: "flowers-products.firebasestorage.app",
+      messagingSenderId: "107577839256",
+      appId: "1:107577839256:web:922ffa87578f10d9088aed",
+      measurementId: "G-Z4SHZZ9SHB"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    
+    const CART_KEY = 'fleuristeCart';
+    const WHATSAPP_NUMBER = "212642620325";
+    
+    let cart = [];
+    
+    // DOM elements
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartCount = document.getElementById('cart-count');
+    const subtotalElement = document.getElementById('subtotal');
+    const totalPriceElement = document.getElementById('total-price');
+    const clearCartBtn = document.getElementById('clear-cart');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const backButton = document.getElementById('back-button');
+    const customerNameInput = document.getElementById('customerName');
+    const customerPhoneInput = document.getElementById('customerPhone');
+    const customerAddressInput = document.getElementById('customerAddress');
+    const loveMessageInput = document.getElementById('loveMessage');
+    const timeOptions = document.querySelectorAll('.time-option');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    function showToast(message, type = 'info') {
+      toastMessage.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-spinner fa-pulse'}"></i> <span>${message}</span>`;
+      toastMessage.className = `toast-message show ${type}`;
+      setTimeout(() => {
+        toastMessage.classList.remove('show');
+      }, 3000);
+    }
+    
+    function getCart() {
+      try {
+        const cartData = localStorage.getItem(CART_KEY);
+        return cartData ? JSON.parse(cartData) : [];
+      } catch(e) { return []; }
+    }
+    
+    function saveCart() {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+    
+    function renderCartItems() {
+      cartItemsContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+          <div class="empty-cart">
+            <img src="https://i.ibb.co/ym00vf8w/667-E396-C-3-CF9-4-B4-B-8-B27-45-C4-A7-F02581.png" alt="Empty Flower Basket" class="empty-cart-image">
+            <p>Your flower basket is empty</p>
+            <a href="flowers.html" class="browse-btn">Browse Flowers</a>
+          </div>
+        `;
+        return;
+      }
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item-card';
+        const pricePerUnit = item.basePrice || item.price || 0;
+        const imageUrl = item.img || 'https://via.placeholder.com/70x70/8B0000/ffffff?text=Flower';
+        itemDiv.innerHTML = `
+          <div class="item-image"><img src="${imageUrl}" alt="${item.name}"></div>
+          <div class="item-details">
+            <div class="item-name">${item.name}</div>
+            <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity || 1}</div>
+            <div class="item-controls">
+              <button class="quantity-btn minus-btn" data-index="${index}"><i class="fas fa-minus"></i></button>
+              <span class="item-quantity">${item.quantity || 1}</span>
+              <button class="quantity-btn plus-btn" data-index="${index}"><i class="fas fa-plus"></i></button>
+              <button class="remove-item" data-index="${index}"><i class="fas fa-times"></i> Remove</button>
+            </div>
+          </div>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+      });
+      
+      document.querySelectorAll('.minus-btn').forEach(btn => {
+        btn.addEventListener('click', () => updateQuantity(parseInt(btn.dataset.index), -1));
+      });
+      document.querySelectorAll('.plus-btn').forEach(btn => {
+        btn.addEventListener('click', () => updateQuantity(parseInt(btn.dataset.index), 1));
+      });
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.index)));
+      });
+    }
+    
+    function calculateTotals() {
+      const subtotal = cart.reduce((sum, item) => {
+        const price = item.basePrice || item.price || 0;
+        const qty = item.quantity || 1;
+        return sum + (price * qty);
+      }, 0);
+      return { subtotal: subtotal.toFixed(2), total: subtotal.toFixed(2) };
+    }
+    
+    function updateCartDisplay() {
+      const totals = calculateTotals();
+      subtotalElement.textContent = `${totals.subtotal} MAD`;
+      totalPriceElement.textContent = `${totals.total} MAD`;
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartCount.textContent = `Order Items (${totalItems})`;
+    }
+    
+    function updateQuantity(idx, change) {
+      if (!cart[idx]) return;
+      cart[idx].quantity = (cart[idx].quantity || 1) + change;
+      if (cart[idx].quantity < 1) cart[idx].quantity = 1;
+      saveCart();
+      renderCartItems();
+      updateCartDisplay();
+    }
+    
+    function removeItem(idx) {
+      cart.splice(idx, 1);
+      saveCart();
+      renderCartItems();
+      updateCartDisplay();
+    }
+    
+    function clearCart() {
+      if (cart.length === 0) return;
+      if (confirm("Clear your basket?")) {
+        cart = [];
+        saveCart();
+        renderCartItems();
+        updateCartDisplay();
+        showToast("Basket cleared!", 'success');
+      }
+    }
+    
+    function getDeliveryTime() {
+      const selected = document.querySelector('.time-option.selected');
+      return selected ? selected.getAttribute('data-time') : 'asap';
+    }
+    
+    function getDeliveryTimeText() {
+      const selected = document.querySelector('.time-option.selected');
+      if (!selected) return 'ASAP';
+      return selected.getAttribute('data-time') === 'asap' ? 'ASAP (45-60 min)' : 'Schedule Later';
+    }
+    
+    function getCustomerInfo() {
+      return {
+        name: customerNameInput.value.trim() || "Guest",
+        phone: customerPhoneInput.value.trim() || "Not provided",
+        address: customerAddressInput.value.trim() || "Not provided",
+        loveMessage: loveMessageInput.value.trim() || "No message"
+      };
+    }
+    
+    function generateWhatsAppMessage(totals, orderId) {
+      const customer = getCustomerInfo();
+      
+      let msg = `🌸 *FLEURISTE MARRAKECH - NEW ORDER* 🌸\n\n`;
+      msg += `*Order ID:* ${orderId}\n`;
+      msg += `*Date:* ${new Date().toLocaleString()}\n\n`;
+      msg += `*Customer Information:*\n`;
+      msg += `├ Name: ${customer.name}\n`;
+      msg += `├ Phone: ${customer.phone}\n`;
+      msg += `└ Address: ${customer.address}\n\n`;
+      msg += `*Delivery:* ${getDeliveryTimeText()}\n\n`;
+      
+      if (customer.loveMessage && customer.loveMessage !== "No message") {
+        msg += `*💌 Love Message:*\n`;
+        msg += `"${customer.loveMessage}"\n\n`;
+      }
+      
+      msg += `*Order Details:*\n`;
+      
+      cart.forEach((item, idx) => {
+        const price = item.basePrice || item.price || 0;
+        const qty = item.quantity || 1;
+        const itemTotal = price * qty;
+        msg += `${idx+1}. ${qty} × ${item.name}\n`;
+        msg += `   └ ${price.toFixed(2)} MAD × ${qty} = ${itemTotal.toFixed(2)} MAD\n`;
+      });
+      
+      msg += `\n*Total Amount: ${totals.total} MAD*\n`;
+      msg += `*Payment Method: Cash on Delivery*\n\n`;
+      msg += `_Please confirm this order. Thank you!_ 💐`;
+      
+      return msg;
+    }
+    
+    function saveOrderToFirebaseAsync(orderId, totals) {
+      const customer = getCustomerInfo();
+      
+      const orderData = {
+        orderId: orderId,
+        orderDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+        orderTime: new Date().toLocaleTimeString(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        customerName: customer.name,
+        phone: customer.phone,
+        address: customer.address,
+        loveMessage: customer.loveMessage,
+        deliveryTime: getDeliveryTime(),
+        deliveryTimeText: getDeliveryTimeText(),
+        store: "Fleuriste Marrakech",
+        total: parseFloat(totals.total),
+        orderStatus: "pending",
+        paymentMethod: "Cash on Delivery",
+        items: cart.map(item => ({
+          name: item.name,
+          price: item.basePrice || item.price || 0,
+          quantity: item.quantity || 1,
+          img: item.img || "https://via.placeholder.com/60/8B0000/ffffff?text=Flower"
+        })),
+        totalItems: cart.reduce((sum, item) => sum + (item.quantity || 1), 0)
+      };
+      
+      db.collection('orders').add(orderData)
+        .then((docRef) => {
+          console.log("✅ Order saved to Firebase! ID:", docRef.id);
+        })
+        .catch((error) => {
+          console.error("❌ Firebase save error:", error);
+        });
+    }
+    
+    function processOrder() {
+      if (cart.length === 0) {
+        showToast("Your basket is empty! Please add items to your cart.", 'error');
+        return;
+      }
+      
+      if (!customerPhoneInput.value.trim()) {
+        showToast("Please enter your phone number!", 'error');
+        customerPhoneInput.focus();
+        return;
+      }
+      
+      if (!customerNameInput.value.trim()) {
+        showToast("Please enter your full name!", 'error');
+        customerNameInput.focus();
+        return;
+      }
+      
+      if (!customerAddressInput.value.trim()) {
+        showToast("Please enter your delivery address!", 'error');
+        customerAddressInput.focus();
+        return;
+      }
+      
+      const orderId = `ORD-${Date.now()}`;
+      const totals = calculateTotals();
+      const message = generateWhatsAppMessage(totals, orderId);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      
+      window.open(whatsappUrl, '_blank');
+      saveOrderToFirebaseAsync(orderId, totals);
+      showToast("Order sent via WhatsApp! ✓", 'success');
+      
+      cart = [];
+      saveCart();
+      renderCartItems();
+      updateCartDisplay();
+      loveMessageInput.value = '';
+      
+      console.log("Order completed:", orderId);
+    }
+    
+    clearCartBtn.addEventListener('click', clearCart);
+    checkoutBtn.addEventListener('click', processOrder);
+    backButton.addEventListener('click', () => window.location.href = 'flowers.html');
+    
+    timeOptions.forEach(opt => {
+      opt.addEventListener('click', function() {
+        timeOptions.forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+    
+    document.querySelectorAll('.payment-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        const radio = this.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
+    });
+    
+    function init() {
+      cart = getCart();
+      renderCartItems();
+      updateCartDisplay();
+      console.log("✅ Checkout ready! WhatsApp number:", WHATSAPP_NUMBER);
+    }
+    
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
