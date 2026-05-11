@@ -284,15 +284,41 @@
     .payment-option {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       padding: 12px;
       border: 1px solid var(--border-light);
       border-radius: 10px;
       margin-bottom: 8px;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
     
     .payment-option.selected { border-color: var(--primary-red); background: rgba(139, 0, 0, 0.05); }
+    
+    /* Style for the transfer method description with logo */
+    .transfer-desc {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 28px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      padding: 4px 0 8px 0;
+      border-bottom: 1px dashed var(--border-light);
+    }
+    .transfer-desc img {
+      width: 55px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .app-name {
+      font-weight: 600;
+      color: #1e3a5f;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
     
     /* Love Message Card - Original Design */
     .love-card {
@@ -470,6 +496,7 @@
       .love-card .content { padding: 15px; }
       .love-card textarea { font-size: 14px; height: 120px; }
       .empty-cart-image { max-width: 150px; }
+      .transfer-desc { margin-left: 0; flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -555,10 +582,27 @@
         
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
-          <div class="payment-option selected">
-            <input type="radio" id="cash" name="payment" checked>
+          
+          <!-- Existing Cash on Delivery Option -->
+          <div class="payment-option selected" id="cashOption">
+            <input type="radio" id="cash" name="payment" value="cash" checked>
             <label for="cash">Cash on Delivery</label>
             <div class="payment-icon"><i class="fas fa-money-bill-wave"></i></div>
+          </div>
+          
+          <!-- NEW Transfer Money Option with Tap Tap Send Logo and Description -->
+          <div class="payment-option" id="transferOption">
+            <input type="radio" id="transfer" name="payment" value="transfer">
+            <label for="transfer"><strong>Transfer Money</strong></label>
+            <div class="payment-icon"><i class="fas fa-university"></i></div>
+          </div>
+          <div class="transfer-desc">
+            <i class="fas fa-mobile-alt"></i> Transfer money via 
+            <span class="app-name">
+              Tap Tap Send
+              <img src="https://i.ibb.co/kg7J7Lqp/IMG-7825.jpg" alt="Tap Tap Send Logo" style="width: 20px; height: 20px; border-radius: 4px; margin-left: 3px;">
+            </span>
+            App
           </div>
         </div>
         
@@ -612,6 +656,12 @@
     const loveMessageInput = document.getElementById('loveMessage');
     const timeOptions = document.querySelectorAll('.time-option');
     const toastMessage = document.getElementById('toastMessage');
+    
+    // Payment method radio buttons
+    const cashRadio = document.getElementById('cash');
+    const transferRadio = document.getElementById('transfer');
+    const cashOptionDiv = document.getElementById('cashOption');
+    const transferOptionDiv = document.getElementById('transferOption');
     
     function showToast(message, type = 'info') {
       toastMessage.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-spinner fa-pulse'}"></i> <span>${message}</span>`;
@@ -740,8 +790,14 @@
       };
     }
     
+    function getSelectedPaymentMethod() {
+      if (transferRadio.checked) return "Transfer Money (Tap Tap Send)";
+      return "Cash on Delivery";
+    }
+    
     function generateWhatsAppMessage(totals, orderId) {
       const customer = getCustomerInfo();
+      const paymentMethod = getSelectedPaymentMethod();
       
       let msg = `💐 *BEN FLOWERS MARRAKECH - NEW ORDER* 💐\n\n`;
       msg += `*Order ID:* ${orderId}\n`;
@@ -768,7 +824,15 @@
       });
       
       msg += `\n*Total Amount: ${totals.total} MAD*\n`;
-      msg += `*Payment Method: Cash on Delivery*\n\n`;
+      msg += `*Payment Method: ${paymentMethod}*\n\n`;
+      
+      if (transferRadio.checked) {
+        msg += `🔹 *Payment Instructions (Tap Tap Send):*\n`;
+        msg += `Please transfer the total amount via Tap Tap Send app.\n`;
+        msg += `After completing the transfer, please send us the screenshot for confirmation.\n`;
+        msg += `Thank you for your trust! 💐\n\n`;
+      }
+      
       msg += `_Please confirm this order. Thank you!_ 💐`;
       
       return msg;
@@ -776,6 +840,7 @@
     
     function saveOrderToFirebaseAsync(orderId, totals) {
       const customer = getCustomerInfo();
+      const paymentMethod = getSelectedPaymentMethod();
       
       const orderData = {
         orderId: orderId,
@@ -791,7 +856,7 @@
         store: "Fleuriste Marrakech",
         total: parseFloat(totals.total),
         orderStatus: "pending",
-        paymentMethod: "Cash on Delivery",
+        paymentMethod: paymentMethod,
         items: cart.map(item => ({
           name: item.name,
           price: item.basePrice || item.price || 0,
@@ -852,23 +917,27 @@
       console.log("Order completed:", orderId);
     }
     
+    // Payment option selection handlers
+    cashOptionDiv.addEventListener('click', () => {
+      cashRadio.checked = true;
+      cashOptionDiv.classList.add('selected');
+      transferOptionDiv.classList.remove('selected');
+    });
+    
+    transferOptionDiv.addEventListener('click', () => {
+      transferRadio.checked = true;
+      transferOptionDiv.classList.add('selected');
+      cashOptionDiv.classList.remove('selected');
+    });
+    
     clearCartBtn.addEventListener('click', clearCart);
     checkoutBtn.addEventListener('click', processOrder);
-    backButton.addEventListener('click', () => window.location.href = 'flowers.html');
+    backButton.addEventListener('click', () => window.location.href = 'menuflowers.html');
     
     timeOptions.forEach(opt => {
       opt.addEventListener('click', function() {
         timeOptions.forEach(o => o.classList.remove('selected'));
         this.classList.add('selected');
-      });
-    });
-    
-    document.querySelectorAll('.payment-option').forEach(opt => {
-      opt.addEventListener('click', function() {
-        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
-        this.classList.add('selected');
-        const radio = this.querySelector('input[type="radio"]');
-        if (radio) radio.checked = true;
       });
     });
     
