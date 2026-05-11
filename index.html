@@ -1476,6 +1476,43 @@
       </div>
     </div>
 
+    <!-- BEN FLOWERS Card - NEW (Added below Papa John's and above Supermarket) -->
+    <div class="restaurant-card" data-restaurant="BEN FLOWERS" id="benflowers-card">
+      <div class="image-half">
+        <img src="https://i.ibb.co/VYSX4qJ5/IMG-7465.jpg" alt="BEN FLOWERS - Fresh Flower Delivery in Marrakech">
+        <div class="image-overlay">
+          <div class="offer-badge">NEW</div>
+        </div>
+      </div>
+      <div class="content-half">
+        <div class="card-header">
+          <div class="title-section">
+            <h2 class="title">BEN FLOWERS</h2>
+            <div class="cuisine">Flowers • Gifts • Romance</div>
+          </div>
+          <div class="rating">
+            <i class="fas fa-star"></i> 5.0
+          </div>
+        </div>
+
+        <p class="description">Fresh flowers, romantic bouquets, gift boxes with chocolates and bears. Fast delivery in Marrakech</p>
+
+        <div class="delivery-time">
+          <i class="fas fa-clock"></i>
+          <span>25-35 min</span>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-order" id="benflowers-order-btn">
+            <i class="fas fa-bolt"></i> Order Now
+          </button>
+          <button class="btn btn-menu" id="benflowers-menu-btn">
+            <i class="fas fa-book-open"></i> View Menu
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Supermarket Card -->
     <div class="restaurant-card" data-restaurant="Supermarket">
       <div class="image-half">
@@ -1600,8 +1637,9 @@
         <div class="restaurant-logo">
           <img src="https://i.ibb.co/nMwLd4dC/IMG-3722.png" alt="Papa John's">
         </div>
-       
-        
+        <div class="restaurant-logo">
+          <img src="https://i.ibb.co/LtM2PYFr/IMG-7464.jpg" alt="BEN FLOWERS">
+        </div>
         <div class="restaurant-logo">
           <img src="https://i.ibb.co/vvHst0Jj/IMG-3723.png" alt="Supermarket">
         </div>
@@ -1759,6 +1797,10 @@
         window.open(whatsappUrl, '_blank');
       }
       
+      function openMenuFlowersPage() {
+        window.location.href = 'menuflowers.html';
+      }
+      
       // =============================================
       // التعديلات الخاصة ببطاقة McDonald's (كما كانت)
       // =============================================
@@ -1791,7 +1833,7 @@
       // عند الضغط على زر Order Now
       if (kfcOrderBtn) {
           kfcOrderBtn.addEventListener('click', function(e) {
-              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              e.stopPropagation();
               openKFCPage();
           });
       }
@@ -1799,7 +1841,7 @@
       // عند الضغط على زر View Menu
       if (kfcMenuBtn) {
           kfcMenuBtn.addEventListener('click', function(e) {
-              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              e.stopPropagation();
               openKFCPage();
           });
       }
@@ -1807,7 +1849,6 @@
       // عند الضغط على بطاقة KFC نفسها
       if (kfcCard) {
           kfcCard.addEventListener('click', function(e) {
-              // التأكد من أن النقر لم يكن على أحد الأزرار
               if (!e.target.closest('.btn')) {
                   openKFCPage();
               }
@@ -1817,21 +1858,17 @@
       // =============================================
       // التعديلات الجديدة لبطاقة Pizza Hut
       // =============================================
-      // زر Order Now الخاص بـ Pizza Hut
       document.getElementById('pizzahut-order-btn').addEventListener('click', function(e) {
         e.stopPropagation();
         window.location.href = 'menupizzahut.html';
       });
       
-      // زر View Menu الخاص بـ Pizza Hut
       document.getElementById('pizzahut-menu-btn').addEventListener('click', function(e) {
         e.stopPropagation();
         window.location.href = 'menupizzahut.html';
       });
       
-      // النقر على بطاقة Pizza Hut كاملة
       document.getElementById('pizzahut-card').addEventListener('click', function(e) {
-        // التأكد من أن النقر لم يكن على زر
         if (!e.target.closest('.btn')) {
           window.location.href = 'menupizzahut.html';
         }
@@ -1844,39 +1881,63 @@
       const zushiOrderBtn = document.getElementById('zushi-order-btn');
       const zushiMenuBtn = document.getElementById('zushi-menu-btn');
 
-      // دالة مساعدة لفتح صفحة Zushi LAB
       function openZushiPage() {
           window.location.href = 'menuzushi.html';
       }
 
-      // عند الضغط على زر Order Now
       if (zushiOrderBtn) {
           zushiOrderBtn.addEventListener('click', function(e) {
-              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              e.stopPropagation();
               openZushiPage();
           });
       }
 
-      // عند الضغط على زر View Menu
       if (zushiMenuBtn) {
           zushiMenuBtn.addEventListener('click', function(e) {
-              e.stopPropagation(); // يمنع تفعيل حدث البطاقة
+              e.stopPropagation();
               openZushiPage();
           });
       }
 
-      // عند الضغط على بطاقة Zushi LAB نفسها
       if (zushiCard) {
           zushiCard.addEventListener('click', function(e) {
-              // التأكد من أن النقر لم يكن على أحد الأزرار
               if (!e.target.closest('.btn')) {
                   openZushiPage();
               }
           });
       }
       
-      // باقي البطاقات (عدا McDonald's و KFC و Pizza Hut و Zushi LAB) تبقى كما هي (تفتح واتساب)
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card) .btn').forEach(button => {
+      // =============================================
+      // إضافة وظائف جديدة لبطاقة BEN FLOWERS (تفتح menuflowers.html)
+      // =============================================
+      const benflowersCard = document.getElementById('benflowers-card');
+      const benflowersOrderBtn = document.getElementById('benflowers-order-btn');
+      const benflowersMenuBtn = document.getElementById('benflowers-menu-btn');
+
+      if (benflowersOrderBtn) {
+          benflowersOrderBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openMenuFlowersPage();
+          });
+      }
+
+      if (benflowersMenuBtn) {
+          benflowersMenuBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openMenuFlowersPage();
+          });
+      }
+
+      if (benflowersCard) {
+          benflowersCard.addEventListener('click', function(e) {
+              if (!e.target.closest('.btn')) {
+                  openMenuFlowersPage();
+              }
+          });
+      }
+      
+      // باقي البطاقات (عدا المعالجات الخاصة) تبقى كما هي (تفتح واتساب)
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card) .btn').forEach(button => {
         button.addEventListener('click', function(e) {
           e.stopPropagation();
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
@@ -1892,8 +1953,8 @@
         });
       });
       
-      // النقر على بطاقات المطاعم الأخرى (عدا McDonald's و KFC و Pizza Hut و Zushi LAB)
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card)').forEach(card => {
+      // النقر على بطاقات المطاعم الأخرى
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card)').forEach(card => {
         card.addEventListener('click', function(e) {
           if (!e.target.closest('.btn')) {
             const restaurant = this.dataset.restaurant;
@@ -1950,7 +2011,6 @@
             })
             .catch(error => {
                 console.log('Error loading loader:', error);
-                // إذا فشل التحميل، تأكد من أن المحتوى الرئيسي يظهر
                 document.getElementById('loader-container').style.display = 'none';
             });
       // 7. Language switch functionality
@@ -1959,7 +2019,6 @@
         btn.addEventListener('click', function() {
           languageBtns.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          // Here you would typically implement language change logic
         });
       });
     });
