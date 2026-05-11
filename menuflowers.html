@@ -62,12 +62,23 @@
                         "opens": "09:00",
                         "closes": "23:30"
                   }],
-                  "servesCuisine": ["Flowers", "Gifts"],
-                  "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": "4.8",
-                        "reviewCount": "210"
-                  }
+                  "makesOffer": [
+                        {
+                              "@type": "Offer",
+                              "itemOffered": {
+                                    "@type": "Service",
+                                    "name": "Flowers Delivery"
+                              }
+                        },
+                        {
+                              "@type": "Offer",
+                              "itemOffered": {
+                                    "@type": "Product",
+                                    "name": "Gifts"
+                              }
+                        }
+                  ],
+               
             }
       </script>
 
@@ -79,8 +90,7 @@
       <!-- === Fonts & Icons === -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
       <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-      <style>
+</head>      <style>
             /* جميع الأنماط الأصلية كما هي مع تعديلات طفيفة للسلاسة */
             * {
                   margin: 0;
