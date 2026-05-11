@@ -778,7 +778,7 @@
     function getDeliveryTimeText() {
       const selected = document.querySelector('.time-option.selected');
       if (!selected) return 'ASAP';
-      return selected.getAttribute('data-time') === 'asap' ? 'ASAP (20-30 min)' : 'Schedule Later';
+      return selected.getAttribute('data-time') === 'asap' ? 'ASAP (45-60 min)' : 'Schedule Later';
     }
     
     function getCustomerInfo() {
@@ -791,7 +791,7 @@
     }
     
     function getSelectedPaymentMethod() {
-      if (transferRadio.checked) return "Transfer Money (Tap Tap Send)";
+      if (transferRadio.checked) return "Transfer Money";
       return "Cash on Delivery";
     }
     
@@ -825,10 +825,6 @@
       
       msg += `\n*Total Amount: ${totals.total} MAD*\n`;
       msg += `*Payment Method: ${paymentMethod}*\n\n`;
-      
-      if (transferRadio.checked) {
-       
-        
       
       msg += `_Please confirm this order. Thank you!_ 💐`;
       
