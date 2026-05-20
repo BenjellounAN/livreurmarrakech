@@ -1477,6 +1477,255 @@
     .search-result-item.has-customizations:hover {
       background-color: #F9F9F9;
     }
+    
+
+*{
+
+  margin:0;
+
+  padding:0;
+
+  box-sizing:border-box;
+
+  font-family:Arial,sans-serif;
+
+}
+
+.faq-section{
+
+  background:#fff;
+
+  padding:90px 20px;
+
+}
+
+.faq-container{
+
+  max-width:850px;
+
+  margin:auto;
+
+}
+
+.faq-header{
+
+  text-align:center;
+
+  margin-bottom:60px;
+
+}
+
+.faq-header span{
+
+  background:#7a0000;
+
+  color:#fff;
+
+  padding:8px 18px;
+
+  border-radius:50px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  letter-spacing:1px;
+
+  box-shadow:0 8px 20px rgba(122,0,0,0.25);
+
+}
+
+.faq-header h2{
+
+  margin-top:20px;
+
+  font-size:42px;
+
+  color:#111;
+
+}
+
+.faq-header p{
+
+  margin-top:12px;
+
+  color:#777;
+
+  font-size:17px;
+
+}
+
+.faq-list{
+
+  border-top:1px solid #e5e5e5;
+
+}
+
+.faq-item{
+
+  border-bottom:1px solid #e5e5e5;
+
+  padding:8px 0;
+
+}
+
+.faq-question{
+
+  width:100%;
+
+  background:none;
+
+  border:none;
+
+  padding:24px 5px;
+
+  font-size:20px;
+
+  font-weight:600;
+
+  color:#1a1a1a;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  cursor:pointer;
+
+  text-align:left;
+
+}
+
+.faq-question span{
+
+  font-size:28px;
+
+  color:#7a0000;
+
+  transition:0.3s;
+
+}
+
+.faq-answer{
+
+  max-height:0;
+
+  overflow:hidden;
+
+  transition:max-height 0.35s ease;
+
+}
+
+.faq-answer p{
+
+  padding:0 5px 22px;
+
+  color:#666;
+
+  line-height:1.8;
+
+  font-size:16px;
+
+}
+
+.faq-item.active .faq-answer{
+
+  max-height:150px;
+
+}
+
+.faq-item.active .faq-question span{
+
+  transform:rotate(45deg);
+
+}
+
+.feedback-section{
+
+  margin-top:70px;
+
+}
+
+.feedback-box{
+
+  background:#ffffff;
+
+  border:1.5px solid #7a0000;
+
+  border-radius:28px;
+
+  padding:50px 35px;
+
+  text-align:center;
+
+  color:#111;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+
+}
+
+.feedback-box h3{
+
+  font-size:34px;
+
+  margin-bottom:20px;
+
+  color:#7a0000;
+
+  font-weight:800;
+
+}
+
+.feedback-box p{
+
+  font-size:17px;
+
+  line-height:1.8;
+
+  max-width:620px;
+
+  margin:0 auto 30px;
+
+  color:#555;
+
+}
+
+.feedback-btn{
+
+  display:inline-block;
+
+  background:#7a0000;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  padding:16px 32px;
+
+  border-radius:50px;
+
+  font-weight:700;
+
+  font-size:16px;
+
+  transition:0.3s ease;
+
+  box-shadow:0 10px 25px rgba(122,0,0,0.25);
+
+  border:1px solid #7a0000;
+
+}
+
+.feedback-btn:hover{
+
+  transform:translateY(-3px);
+
+  background:#5f0000;
+
+  box-shadow:0 15px 35px rgba(122,0,0,0.35);
+
+}
   </style>
 </head>
 
@@ -2282,6 +2531,144 @@
     </div>
   </div>
 
+  <!---- faq. -->
+  <section class="faq-section">
+
+  <div class="faq-container">
+
+    <div class="faq-header">
+
+      <span>FAQ</span>
+
+      <h2>Pizza Hut Delivery Marrakech Questions</h2>
+
+      <p>Everything you need to know before ordering with Benjelloun Express.</p>
+
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          Do you offer Pizza Hut delivery in Marrakech?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>Yes, Benjelloun Express provides fast Pizza Hut delivery service across Marrakech.</p>
+
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          What are Pizza Hut delivery hours in Marrakech?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>Pizza Hut delivery hours in Marrakech are from 10:30 AM until 11:30 PM every day.</p>
+
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          How long does Pizza Hut delivery in Marrakech take?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>Most Pizza Hut deliveries arrive within 25 to 30 minutes depending on your location and traffic conditions.</p>
+
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          Can I order Pizza Hut online for home delivery?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>Yes, you can place your Pizza Hut order online and receive it directly at your home anywhere in Marrakech.</p>
+
+        </div>
+
+      </div>
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          Why choose Benjelloun Express for Pizza Hut delivery?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>Benjelloun Express offers fast delivery, reliable service, and convenient online ordering across Marrakech.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FEEDBACK -->
+
+    <section class="feedback-section">
+
+      <div class="feedback-box">
+
+        <h3>Help Us Improve</h3>
+
+        <p>
+
+          Did you face any issue while using our website or placing your Pizza Hut order?
+
+          Share your feedback and help us improve your experience.
+
+        </p>
+
+        <a href="mailto:anasbenjelloun61@gmail.com?subject=Feedback about Benjelloun Express&body=Hello,%0A%0AI would like to share feedback about your website:%0A%0A" class="feedback-btn">
+
+          Send Feedback
+
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</section>
   <script>
     // ================== دمج بيانات المنتجات ==================
     // نبدأ ببيانات المنتجات من الكود الثاني (البيتزات الجديدة للأقسام الخمسة)
@@ -5082,7 +5469,23 @@
         if (e.target === modalOverlay) closeModal();
       });
     });
+    
   </script>
+  
+
+<script>
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+
+  item.querySelector('.faq-question').addEventListener('click',()=>{
+
+    item.classList.toggle('active');
+
+  });
+
+});
+
+</script>
 </body>
 
 </html>
