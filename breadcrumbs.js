@@ -1,33 +1,29 @@
-// breadcrumbs.js - Universal Breadcrumbs for all pages
+// breadcrumbs.js - Universal Breadcrumbs with correct paths
 document.addEventListener('DOMContentLoaded', function() {
     
     console.log('🔄 Loading breadcrumbs...');
-    
-    // Create breadcrumbs container
-    const breadcrumbsDiv = document.createElement('div');
-    breadcrumbsDiv.id = 'breadcrumbs';
-    breadcrumbsDiv.style.cssText = `
-        padding: 12px 16px;
-        font-size: 13px;
-        color: #888;
-        background: #f9f7f8;
-        border-bottom: 1px solid #eee;
-        font-family: 'Ubuntu', sans-serif;
-        max-width: 400px;
-        margin: 0 auto;
-        transition: all 0.3s ease;
-    `;
     
     // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     console.log('📄 Current page:', currentPage);
     
-    // Page names
+    // ===== PAGE CATEGORIES =====
+    const homePages = ['index.html'];
+    const groceryPages = ['benmarket.html'];
+    const mcdonaldsPages = ['mcdonalds.html', 'menumcdo.html'];
+    const kfcPages = ['kfc.html', 'kfcmenu.html'];
+    const pizzaPages = ['pizzas.html', 'menupizzahut.html'];
+    const sushiPages = ['menuzushi.html'];
+    const flowersPages = ['menuflowers.html'];
+    const checkoutPages = ['checkout.html', 'scheckout.html', 'fcheckout.html', 'kcheckout.html', 'pcheckout.html', 'zcheckout.html'];
+    const aboutPages = ['aboutus.html'];
+    const dashboardPages = ['dashboard.html'];
+    
+    // ===== PAGE NAMES =====
     const pageNames = {
         'index.html': '🏠 Home',
         'benmarket.html': '🛒 Grocery Delivery Marrakech',
         'aboutus.html': 'ℹ️ About Us',
-        'loader.html': '⏳ Loading...',
         'mcdonalds.html': '🍔 McDonald\'s Marrakech',
         'menumcdo.html': '🍔 McDonald\'s Menu',
         'kfc.html': '🍗 KFC Marrakech',
@@ -45,22 +41,27 @@ document.addEventListener('DOMContentLoaded', function() {
         'dashboard.html': '📊 Dashboard'
     };
     
-    // Check if it's a checkout page
-    const checkoutPages = ['checkout.html', 'scheckout.html', 'fcheckout.html', 'kcheckout.html', 'pcheckout.html', 'zcheckout.html'];
-    const isCheckout = checkoutPages.includes(currentPage);
     const pageTitle = pageNames[currentPage] || 'Delivery Marrakech';
     
     // ===== BUILD BREADCRUMBS =====
     let html = '';
     
-    // No breadcrumbs on loader page
+    // Special pages (no breadcrumbs)
     if (currentPage === 'loader.html') {
-        console.log('⏳ Loader page - skipping breadcrumbs');
+        console.log('⏳ Loader page - skipping');
         return;
     }
     
-    // About Us & Dashboard (simple breadcrumb)
-    if (currentPage === 'aboutus.html' || currentPage === 'dashboard.html') {
+    // ===== HOME PAGE =====
+    if (homePages.includes(currentPage)) {
+        html = `
+            <span style="color: #555; font-weight: 400;">
+                <i class="fas fa-home"></i> Home
+            </span>
+        `;
+    }
+    // ===== ABOUT US / DASHBOARD =====
+    else if (aboutPages.includes(currentPage) || dashboardPages.includes(currentPage)) {
         html = `
             <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
                 <i class="fas fa-home"></i> Home
@@ -68,46 +69,138 @@ document.addEventListener('DOMContentLoaded', function() {
             <span style="color: #aaa; margin: 0 6px;">›</span>
             <span style="color: #555; font-weight: 400;">${pageTitle}</span>
         `;
-    } 
-    // Checkout pages
-    else if (isCheckout) {
+    }
+    // ===== CHECKOUT PAGES =====
+    else if (checkoutPages.includes(currentPage)) {
+        // Determine which store the checkout belongs to
+        let storeLink = 'benmarket.html';
+        let storeName = '🛒 Supermarket';
+        let storeEmoji = '🛒';
+        
+        if (currentPage === 'kcheckout.html') {
+            storeLink = 'kfc.html';
+            storeName = '🍗 KFC';
+            storeEmoji = '🍗';
+        } else if (currentPage === 'pcheckout.html') {
+            storeLink = 'pizzas.html';
+            storeName = '🍕 Pizza';
+            storeEmoji = '🍕';
+        } else if (currentPage === 'zcheckout.html') {
+            storeLink = 'menuzushi.html';
+            storeName = '🍣 Sushi';
+            storeEmoji = '🍣';
+        } else if (currentPage === 'fcheckout.html') {
+            storeLink = 'menuflowers.html';
+            storeName = '💐 Flowers';
+            storeEmoji = '💐';
+        }
+        
         html = `
             <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
                 <i class="fas fa-home"></i> Home
             </a>
             <span style="color: #aaa; margin: 0 6px;">›</span>
-            <a href="https://delivery-marrakech.com/benmarket.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
-                🛒 Supermarket
+            <a href="https://delivery-marrakech.com/${storeLink}" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                ${storeName}
             </a>
             <span style="color: #aaa; margin: 0 6px;">›</span>
             <span style="color: #B22222; font-weight: 600;">${pageTitle}</span>
         `;
-    } 
-    // Regular pages
+    }
+    // ===== MCDONALD'S =====
+    else if (mcdonaldsPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== KFC =====
+    else if (kfcPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== PIZZA =====
+    else if (pizzaPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== SUSHI =====
+    else if (sushiPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== FLOWERS =====
+    else if (flowersPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== GROCERY =====
+    else if (groceryPages.includes(currentPage)) {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    }
+    // ===== DEFAULT FALLBACK =====
     else {
         html = `
             <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
                 <i class="fas fa-home"></i> Home
             </a>
             <span style="color: #aaa; margin: 0 6px;">›</span>
-            <a href="https://delivery-marrakech.com/benmarket.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
-                🛒 Supermarket
-            </a>
-            <span style="color: #aaa; margin: 0 6px;">›</span>
             <span style="color: #555; font-weight: 400;">${pageTitle}</span>
         `;
     }
     
+    // ===== CREATE AND INSERT BREADCRUMBS =====
+    const breadcrumbsDiv = document.createElement('div');
+    breadcrumbsDiv.id = 'breadcrumbs';
+    breadcrumbsDiv.style.cssText = `
+        padding: 12px 16px;
+        font-size: 13px;
+        color: #888;
+        background: #f9f7f8;
+        border-bottom: 1px solid #eee;
+        font-family: 'Ubuntu', sans-serif;
+        max-width: 400px;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+    `;
+    
     breadcrumbsDiv.innerHTML = html;
     
-    // ===== INSERT BREADCRUMBS =====
-    // Try to insert after the navbar (if exists)
+    // Insert after navbar
     const navbar = document.querySelector('.navbar');
-    if (navbar && navbar.nextSibling) {
+    if (navbar && navbar.parentNode) {
         navbar.parentNode.insertBefore(breadcrumbsDiv, navbar.nextSibling);
         console.log('✅ Breadcrumbs inserted after navbar');
     } else {
-        // If no navbar, insert at the very top of body
         document.body.insertBefore(breadcrumbsDiv, document.body.firstChild);
         console.log('✅ Breadcrumbs inserted at top of body');
     }
@@ -132,4 +225,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Breadcrumbs loaded successfully!');
+    console.log('📊 Breadcrumb path:', html.replace(/<[^>]*>/g, ' ').trim());
 });
