@@ -1,5 +1,7 @@
-// breadcrumbs.js - Loads breadcrumbs on every page
+// breadcrumbs.js - Universal Breadcrumbs for all pages
 document.addEventListener('DOMContentLoaded', function() {
+    
+    console.log('🔄 Loading breadcrumbs...');
     
     // Create breadcrumbs container
     const breadcrumbsDiv = document.createElement('div');
@@ -11,21 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
         background: #f9f7f8;
         border-bottom: 1px solid #eee;
         font-family: 'Ubuntu', sans-serif;
+        max-width: 400px;
+        margin: 0 auto;
+        transition: all 0.3s ease;
     `;
     
-    // Get current page name from URL
-    const currentPath = window.location.pathname;
-    const currentPage = currentPath.split('/').pop() || 'index.html';
+    // Get current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    console.log('📄 Current page:', currentPage);
     
-    // ===== PAGE NAMES MAPPING =====
+    // Page names
     const pageNames = {
-        // Main pages
         'index.html': '🏠 Home',
         'benmarket.html': '🛒 Grocery Delivery Marrakech',
         'aboutus.html': 'ℹ️ About Us',
         'loader.html': '⏳ Loading...',
-        
-        // Food delivery pages
         'mcdonalds.html': '🍔 McDonald\'s Marrakech',
         'menumcdo.html': '🍔 McDonald\'s Menu',
         'kfc.html': '🍗 KFC Marrakech',
@@ -34,39 +36,42 @@ document.addEventListener('DOMContentLoaded', function() {
         'menupizzahut.html': '🍕 Pizza Hut Menu',
         'menuzushi.html': '🍣 Sushi Marrakech',
         'menuflowers.html': '💐 Flowers Marrakech',
-        
-        // Checkout pages
         'checkout.html': '🛍️ Checkout',
         'scheckout.html': '🛍️ Supermarket Checkout',
         'fcheckout.html': '🛍️ Flowers Checkout',
         'kcheckout.html': '🛍️ KFC Checkout',
         'pcheckout.html': '🛍️ Pizza Checkout',
         'zcheckout.html': '🛍️ Sushi Checkout',
-        
-        // Dashboard
         'dashboard.html': '📊 Dashboard'
     };
     
+    // Check if it's a checkout page
+    const checkoutPages = ['checkout.html', 'scheckout.html', 'fcheckout.html', 'kcheckout.html', 'pcheckout.html', 'zcheckout.html'];
+    const isCheckout = checkoutPages.includes(currentPage);
     const pageTitle = pageNames[currentPage] || 'Delivery Marrakech';
     
-    // ===== SPECIAL CHECKOUT PAGES =====
-    const checkoutPages = [
-        'checkout.html', 
-        'scheckout.html', 
-        'fcheckout.html', 
-        'kcheckout.html', 
-        'pcheckout.html', 
-        'zcheckout.html'
-    ];
+    // ===== BUILD BREADCRUMBS =====
+    let html = '';
     
-    const isCheckout = checkoutPages.includes(currentPage);
+    // No breadcrumbs on loader page
+    if (currentPage === 'loader.html') {
+        console.log('⏳ Loader page - skipping breadcrumbs');
+        return;
+    }
     
-    // ===== BUILD BREADCRUMBS HTML =====
-    let breadcrumbsHTML = '';
-    
-    if (isCheckout) {
-        // Checkout breadcrumb - show the path to checkout
-        breadcrumbsHTML = `
+    // About Us & Dashboard (simple breadcrumb)
+    if (currentPage === 'aboutus.html' || currentPage === 'dashboard.html') {
+        html = `
+            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #aaa; margin: 0 6px;">›</span>
+            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
+        `;
+    } 
+    // Checkout pages
+    else if (isCheckout) {
+        html = `
             <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
                 <i class="fas fa-home"></i> Home
             </a>
@@ -77,30 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <span style="color: #aaa; margin: 0 6px;">›</span>
             <span style="color: #B22222; font-weight: 600;">${pageTitle}</span>
         `;
-    } else if (currentPage === 'aboutus.html') {
-        // About Us breadcrumb
-        breadcrumbsHTML = `
-            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <span style="color: #aaa; margin: 0 6px;">›</span>
-            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
-        `;
-    } else if (currentPage === 'dashboard.html') {
-        // Dashboard breadcrumb
-        breadcrumbsHTML = `
-            <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
-                <i class="fas fa-home"></i> Home
-            </a>
-            <span style="color: #aaa; margin: 0 6px;">›</span>
-            <span style="color: #555; font-weight: 400;">${pageTitle}</span>
-        `;
-    } else if (currentPage === 'loader.html') {
-        // Loader page (no breadcrumbs needed)
-        breadcrumbsHTML = '';
-    } else {
-        // Regular page breadcrumb
-        breadcrumbsHTML = `
+    } 
+    // Regular pages
+    else {
+        html = `
             <a href="https://delivery-marrakech.com/index.html" style="color: #B22222; text-decoration: none; font-weight: 500;">
                 <i class="fas fa-home"></i> Home
             </a>
@@ -113,55 +98,38 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
     
-    breadcrumbsDiv.innerHTML = breadcrumbsHTML;
+    breadcrumbsDiv.innerHTML = html;
     
     // ===== INSERT BREADCRUMBS =====
-    // Try to insert after restaurant-info
-    let targetElement = document.querySelector('.restaurant-info');
-    
-    // If no restaurant-info, try to insert after navbar
-    if (!targetElement) {
-        targetElement = document.querySelector('.navbar');
-        if (targetElement) {
-            targetElement = targetElement.nextElementSibling;
-        }
-    }
-    
-    // If still no target, insert after hero section
-    if (!targetElement) {
-        targetElement = document.querySelector('.hero-section');
-        if (targetElement) {
-            targetElement = targetElement.nextElementSibling;
-        }
-    }
-    
-    // If still no target, insert at the top of body
-    if (!targetElement) {
-        targetElement = document.body.firstChild;
-    }
-    
-    // Insert breadcrumbs
-    if (targetElement && breadcrumbsHTML !== '') {
-        targetElement.parentNode.insertBefore(breadcrumbsDiv, targetElement);
-    } else if (breadcrumbsHTML !== '') {
+    // Try to insert after the navbar (if exists)
+    const navbar = document.querySelector('.navbar');
+    if (navbar && navbar.nextSibling) {
+        navbar.parentNode.insertBefore(breadcrumbsDiv, navbar.nextSibling);
+        console.log('✅ Breadcrumbs inserted after navbar');
+    } else {
+        // If no navbar, insert at the very top of body
         document.body.insertBefore(breadcrumbsDiv, document.body.firstChild);
+        console.log('✅ Breadcrumbs inserted at top of body');
     }
     
-    // ===== ADD SCROLL ANIMATION =====
-    let lastScroll = 0;
+    // ===== STICKY SCROLL EFFECT =====
     window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
         const breadcrumb = document.getElementById('breadcrumbs');
         if (breadcrumb) {
-            if (currentScroll > 100) {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll > 50) {
                 breadcrumb.style.position = 'sticky';
                 breadcrumb.style.top = '0';
                 breadcrumb.style.zIndex = '999';
                 breadcrumb.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+                breadcrumb.style.background = '#ffffff';
             } else {
-                breadcrumb.style.position = 'static';
+                breadcrumb.style.position = 'relative';
                 breadcrumb.style.boxShadow = 'none';
+                breadcrumb.style.background = '#f9f7f8';
             }
         }
     });
+    
+    console.log('✅ Breadcrumbs loaded successfully!');
 });
