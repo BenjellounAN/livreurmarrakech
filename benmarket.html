@@ -3112,7 +3112,9 @@
       categoriesSection.classList.remove('hide-on-search');
       productsContainer.classList.remove('hide-on-search');
     }
-    document.getElementById('backButton').onclick = () => window.history.back();
+    document.getElementById('backButton').onclick = () => {
+    window.location.href = 'index.html';
+};
     const shareButtonElem = document.getElementById('shareButton');
     const pageUrl = 'https://delivery-marrakech.com/benmarket';
     const shareText = 'Delivery Supermaker Grocerie Marrakech';
