@@ -862,6 +862,7 @@ let customCategories = [];
 let editingProductId = null;
 let categoryChart = null;
 let priceChart = null;
+let unsubscribeProducts = null; // for real-time listener
 
 const defaultCategories = [
   { key: 'bakery', name: 'Bread & Cakes', imageUrl: 'https://i.ibb.co/8ndR3RCJ/IMG-8200.jpg', icon: '🥖' },
@@ -901,38 +902,34 @@ function getCategoryMap() {
   return map;
 }
 
+// ================================================================
+// 10.1 LOAD PRODUCTS WITH REAL-TIME LISTENER (FIXED)
+// ================================================================
 function loadProducts() {
-  // ✅ تأكد من أن المستخدم مسجل دخوله أولاً
+  // Clean up previous listener if exists
+  if (unsubscribeProducts) {
+    unsubscribeProducts();
+    unsubscribeProducts = null;
+  }
+  
   const user = auth.currentUser;
   
-  if (!user) {
-    console.log("❌ No user logged in");
+  if (!user || user.email !== ALLOWED_ADMIN_EMAIL) {
     document.getElementById('productsGrid').innerHTML = 
       '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Please login first</p></div>';
     return;
   }
   
-  // ✅ تحقق من البريد الإلكتروني
-  if (user.email !== ALLOWED_ADMIN_EMAIL) {
-    console.log("❌ Unauthorized email:", user.email);
-    document.getElementById('productsGrid').innerHTML = 
-      '<div class="empty-state"><i class="fas fa-lock"></i><p>You are not authorized to view products</p></div>';
-    return;
-  }
-  
-  console.log("✅ Authorized admin:", user.email);
-  
-  // ✅ استخدم get() بدلاً من onSnapshot
-  db.collection('products').get()
-    .then((snapshot) => {
+  // ✅ REAL-TIME LISTENER - Auto updates when data changes
+  unsubscribeProducts = db.collection('products')
+    .onSnapshot((snapshot) => {
       allProducts = [];
       snapshot.forEach(doc => {
         allProducts.push({ id: doc.id, ...doc.data() });
       });
-      console.log("✅ Products loaded:", allProducts.length);
+      console.log("✅ Products loaded (real-time):", allProducts.length);
       renderAll();
-    })
-    .catch((error) => {
+    }, (error) => {
       console.error("❌ Error loading products:", error);
       document.getElementById('productsGrid').innerHTML = 
         `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Error: ${error.message}</p></div>`;
@@ -940,13 +937,19 @@ function loadProducts() {
     });
 }
 
+// ================================================================
+// 10.2 CRUD OPERATIONS (FIXED)
+// ================================================================
 async function addProduct(productData) {
   try {
-    await db.collection('products').add(productData);
-    showToast('Product added successfully!', 'success');
+    const docRef = await db.collection('products').add(productData);
+    console.log("✅ Product added with ID:", docRef.id);
+    showToast('✅ Product added successfully!', 'success');
+    // No need to call loadProducts() - real-time listener updates automatically
     return true;
   } catch (e) {
-    showToast('Error: ' + e.message, 'error');
+    console.error("❌ Error adding product:", e);
+    showToast('❌ Error: ' + e.message, 'error');
     return false;
   }
 }
@@ -954,25 +957,34 @@ async function addProduct(productData) {
 async function updateProduct(id, data) {
   try {
     await db.collection('products').doc(id).update(data);
-    showToast('Product updated successfully!', 'success');
+    console.log("✅ Product updated:", id);
+    showToast('✅ Product updated successfully!', 'success');
+    // No need to call loadProducts() - real-time listener updates automatically
     return true;
   } catch (e) {
-    showToast('Error: ' + e.message, 'error');
+    console.error("❌ Error updating product:", e);
+    showToast('❌ Error: ' + e.message, 'error');
     return false;
   }
 }
 
 async function deleteProduct(id) {
-  if (confirm('Delete this product permanently?')) {
-    try {
-      await db.collection('products').doc(id).delete();
-      showToast('Product deleted', 'success');
-    } catch (e) {
-      showToast('Error: ' + e.message, 'error');
-    }
+  if (!confirm('Delete this product permanently?')) return;
+  
+  try {
+    await db.collection('products').doc(id).delete();
+    console.log("✅ Product deleted:", id);
+    showToast('✅ Product deleted successfully', 'success');
+    // No need to call loadProducts() - real-time listener updates automatically
+  } catch (e) {
+    console.error("❌ Error deleting product:", e);
+    showToast('❌ Error: ' + e.message, 'error');
   }
 }
 
+// ================================================================
+// 10.3 RENDER FUNCTIONS
+// ================================================================
 function renderCategorySelect() {
   const select = document.getElementById('productCategory');
   if (!select) return;
@@ -997,7 +1009,7 @@ function updateStats() {
   document.getElementById('totalProducts').textContent = allProducts.length;
   const uniqueCats = new Set(allProducts.map(p => p.category));
   document.getElementById('totalCategories').textContent = uniqueCats.size;
-  const avg = allProducts.reduce((s, p) => s + p.price, 0) / allProducts.length || 0;
+  const avg = allProducts.reduce((s, p) => s + (p.price || 0), 0) / allProducts.length || 0;
   document.getElementById('avgPrice').textContent = `${avg.toFixed(2)} MAD`;
 }
 
@@ -1005,7 +1017,7 @@ function renderProducts() {
   const term = (document.getElementById('searchProducts')?.value || '').toLowerCase();
   const catMap = getCategoryMap();
   const filtered = allProducts.filter(p => 
-    p.name.toLowerCase().includes(term) || 
+    (p.name || '').toLowerCase().includes(term) || 
     (catMap[p.category]?.name || '').toLowerCase().includes(term)
   );
   
@@ -1016,16 +1028,16 @@ function renderProducts() {
   }
   
   container.innerHTML = filtered.map(p => {
-    const catInfo = catMap[p.category] || { name: p.category, icon: '📦' };
+    const catInfo = catMap[p.category] || { name: p.category || 'Uncategorized', icon: '📦' };
     return `
       <div class="product-row">
         <img src="${p.image || 'https://via.placeholder.com/70'}" class="product-image" onerror="this.src='https://via.placeholder.com/70'">
         <div class="product-details">
-          <div class="product-name">${escapeHtml(p.name)}</div>
+          <div class="product-name">${escapeHtml(p.name || 'Unnamed')}</div>
           <div class="product-category">${catInfo.icon} ${catInfo.name}</div>
           ${p.description ? `<div class="product-description">${escapeHtml(p.description.substring(0, 80))}</div>` : ''}
         </div>
-        <div class="product-price">${p.price.toFixed(2)} MAD</div>
+        <div class="product-price">${(p.price || 0).toFixed(2)} MAD</div>
         <div class="product-actions">
           <button class="edit-btn" onclick="openEditModal('${p.id}')"><i class="fas fa-edit"></i> Edit</button>
           <button class="delete-btn" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> Delete</button>
@@ -1087,8 +1099,9 @@ function updateCharts() {
   
   const ranges = { '0-20': 0, '20-40': 0, '40+': 0 };
   allProducts.forEach(p => {
-    if (p.price < 20) ranges['0-20']++;
-    else if (p.price < 40) ranges['20-40']++;
+    const price = p.price || 0;
+    if (price < 20) ranges['0-20']++;
+    else if (price < 40) ranges['20-40']++;
     else ranges['40+']++;
   });
   
@@ -1111,11 +1124,11 @@ function openEditModal(id) {
   if (p) {
     editingProductId = id;
     document.getElementById('modalTitle').textContent = 'Edit Product';
-    document.getElementById('productName').value = p.name;
-    document.getElementById('productPrice').value = p.price;
+    document.getElementById('productName').value = p.name || '';
+    document.getElementById('productPrice').value = p.price || '';
     document.getElementById('productImage').value = p.image || '';
     document.getElementById('productDescription').value = p.description || '';
-    document.getElementById('productCategory').value = p.category;
+    document.getElementById('productCategory').value = p.category || '';
     document.getElementById('productModal').style.display = 'flex';
   }
 }
@@ -1198,11 +1211,20 @@ document.getElementById('productForm').onsubmit = async (e) => {
   }
   
   const data = { name, price, image, description, category };
+  
+  // Disable save button to prevent double submission
+  const saveBtn = document.querySelector('.save-btn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Saving...';
+  
   if (editingProductId) {
     await updateProduct(editingProductId, data);
   } else {
     await addProduct(data);
   }
+  
+  saveBtn.disabled = false;
+  saveBtn.textContent = 'Save Product';
   document.getElementById('productModal').style.display = 'none';
 };
 
@@ -1245,6 +1267,17 @@ document.getElementById('categoryForm').onsubmit = (e) => {
 // ================================================================
 window.openEditModal = openEditModal;
 window.deleteProduct = deleteProduct;
+
+// ================================================================
+// 13. CLEANUP ON PAGE UNLOAD
+// ================================================================
+window.addEventListener('beforeunload', () => {
+  if (unsubscribeProducts) {
+    unsubscribeProducts();
+  }
+});
+
+console.log("✅ Dashboard initialized with real-time updates");
 </script>
 </body>
 </html>
