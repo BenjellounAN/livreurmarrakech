@@ -1523,8 +1523,8 @@
       </div>
     </div>
 
-    <!-- Supermarket Card -->
-    <div class="restaurant-card" data-restaurant="Supermarket">
+    <!-- Supermarket Card - معدلة لفتح benmarket.html -->
+    <div class="restaurant-card" data-restaurant="Supermarket" id="supermarket-card">
       <div class="image-half">
         <img src="https://i.ibb.co/KjGRk7MP/Delivery-marrakech-supermarket.webp" alt="Supermarket Delivery in Marrakech">
         <div class="image-overlay">
@@ -1550,10 +1550,10 @@
         </div>
 
         <div class="buttons">
-          <button class="btn btn-order" data-action="order">
+          <button class="btn btn-order" id="supermarket-order-btn">
             <i class="fas fa-bolt"></i> Order Now
           </button>
-          <button class="btn btn-menu" data-action="menu">
+          <button class="btn btn-menu" id="supermarket-menu-btn">
             <i class="fas fa-book-open"></i> View Products
           </button>
         </div>
@@ -1812,6 +1812,39 @@
       }
       
       // =============================================
+      // التعديلات الخاصة ببطاقة Supermarket (المطلوبة)
+      // =============================================
+      function openSupermarketPage() {
+          window.location.href = 'benmarket.html';
+      }
+
+      const supermarketCard = document.getElementById('supermarket-card');
+      const supermarketOrderBtn = document.getElementById('supermarket-order-btn');
+      const supermarketMenuBtn = document.getElementById('supermarket-menu-btn');
+
+      if (supermarketOrderBtn) {
+          supermarketOrderBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openSupermarketPage();
+          });
+      }
+
+      if (supermarketMenuBtn) {
+          supermarketMenuBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openSupermarketPage();
+          });
+      }
+
+      if (supermarketCard) {
+          supermarketCard.addEventListener('click', function(e) {
+              if (!e.target.closest('.btn')) {
+                  openSupermarketPage();
+              }
+          });
+      }
+
+      // =============================================
       // التعديلات الخاصة ببطاقة McDonald's (كما كانت)
       // =============================================
       document.getElementById('mcdonalds-order-btn').addEventListener('click', function(e) {
@@ -1947,7 +1980,7 @@
       }
       
       // باقي البطاقات (عدا المعالجات الخاصة) تبقى كما هي (تفتح واتساب)
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card) .btn').forEach(button => {
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card):not(#supermarket-card) .btn').forEach(button => {
         button.addEventListener('click', function(e) {
           e.stopPropagation();
           const restaurant = this.closest('.restaurant-card').dataset.restaurant;
@@ -1964,7 +1997,7 @@
       });
       
       // النقر على بطاقات المطاعم الأخرى
-      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card)').forEach(card => {
+      document.querySelectorAll('.restaurant-card:not(#mcdonalds-card):not(#kfc-card):not(#pizzahut-card):not(#zushi-card):not(#benflowers-card):not(#supermarket-card)').forEach(card => {
         card.addEventListener('click', function(e) {
           if (!e.target.closest('.btn')) {
             const restaurant = this.dataset.restaurant;
