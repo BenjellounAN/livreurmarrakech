@@ -557,10 +557,16 @@ tr:hover {
   color: #059669;
 }
 
+.status-delivered {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
 /* ===== ACTION BUTTONS ===== */
 .action-buttons {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .action-buttons button {
@@ -571,6 +577,7 @@ tr:hover {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 0.75rem;
 }
 
 .view-btn {
@@ -589,6 +596,31 @@ tr:hover {
 .delete-btn:hover {
   background: #dc2626;
   color: white;
+}
+
+.deliver-btn {
+  color: #059669;
+  background: #ecfdf5 !important;
+  width: auto !important;
+  padding: 0 12px !important;
+  font-weight: 600;
+}
+
+.deliver-btn:hover {
+  background: #059669 !important;
+  color: white;
+}
+
+.deliver-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
+}
+
+.deliver-btn:disabled:hover {
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
 }
 
 /* ===== DETAILS PANEL - IMPROVED FOR PRODUCTS ===== */
@@ -1455,6 +1487,22 @@ function initDashboard(logoutModal) {
     }
   }
   
+  // Function to mark order as delivered
+  async function markAsDelivered(orderId) {
+    try {
+      await db.collection('orders').doc(orderId).update({
+        orderStatus: 'delivered',
+        status: 'delivered',
+        deliveredAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      showToast('✅ Order marked as delivered!', 'fa-check-circle');
+      await loadOrders(); // Refresh the orders list
+    } catch (error) {
+      console.error('Error marking order as delivered:', error);
+      showToast('❌ Error marking order as delivered', 'fa-exclamation-circle');
+    }
+  }
+  
   async function loadOrders() {
     const tbody = document.getElementById('tableBody');
     if (tbody) tbody.innerHTML = '<tr><td colspan="10" class="loading-state"><i class="fas fa-spinner fa-pulse"></i> Loading...<\/td><\/tr>';
@@ -1508,6 +1556,7 @@ function initDashboard(logoutModal) {
     
     const rev = filtered.reduce((s,o) => s + o.total, 0);
     const pending = filtered.filter(o => o.status === 'pending').length;
+    const delivered = filtered.filter(o => o.status === 'delivered').length;
     const completed = filtered.filter(o => o.status === 'completed').length;
     
     const statsContainer = document.getElementById('statsContainer');
@@ -1516,7 +1565,7 @@ function initDashboard(logoutModal) {
         <div class="stat-card"><div class="stat-info"><h4>Total Orders</h4><div class="stat-number">${filtered.length}</div></div><div class="stat-icon"><i class="fas fa-shopping-cart"></i></div></div>
         <div class="stat-card"><div class="stat-info"><h4>Revenue</h4><div class="stat-number">${rev.toLocaleString()} MAD</div></div><div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div></div>
         <div class="stat-card"><div class="stat-info"><h4>Pending</h4><div class="stat-number">${pending}</div></div><div class="stat-icon"><i class="fas fa-clock"></i></div></div>
-        <div class="stat-card"><div class="stat-info"><h4>Completed</h4><div class="stat-number">${completed}</div></div><div class="stat-icon"><i class="fas fa-check-circle"></i></div></div>
+        <div class="stat-card"><div class="stat-info"><h4>Delivered</h4><div class="stat-number">${delivered}</div></div><div class="stat-icon"><i class="fas fa-check-circle"></i></div></div>
       `;
     }
     
@@ -1528,21 +1577,26 @@ function initDashboard(logoutModal) {
       tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No orders found</td><\/tr>';
       return;
     }
-    tbody.innerHTML = filtered.map(o => `
-      <tr>
-        <td><strong>${escapeHtml(o.orderId)}</strong></td>
-        <td><i class="fas fa-user"></i> ${escapeHtml(o.customer)}</td>
-        <td><i class="fas fa-phone"></i> ${escapeHtml(o.phone)}</td>
-        <td>${o.total.toLocaleString()} MAD</td>
-        <td>${o.date}</td>
-        <td><span class="status-badge status-${o.status}"><i class="fas ${o.status === 'pending' ? 'fa-hourglass-half' : 'fa-check'}"></i> ${o.status}</span></td>
-        <td>${o.items?.length || 0} items</td>
-        <td class="action-buttons">
-          <button class="view-btn" onclick="window.dashboardShowDetails('${o.id}')"><i class="fas fa-eye"></i></button>
-          <button class="delete-btn" onclick="window.dashboardConfirmDelete('${o.id}')"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = filtered.map(o => {
+      const isPending = o.status === 'pending';
+      const isDelivered = o.status === 'delivered' || o.status === 'completed';
+      return `
+        <tr>
+          <td><strong>${escapeHtml(o.orderId)}</strong></td>
+          <td><i class="fas fa-user"></i> ${escapeHtml(o.customer)}</td>
+          <td><i class="fas fa-phone"></i> ${escapeHtml(o.phone)}</td>
+          <td>${o.total.toLocaleString()} MAD</td>
+          <td>${o.date}</td>
+          <td><span class="status-badge status-${o.status}"><i class="fas ${o.status === 'pending' ? 'fa-hourglass-half' : o.status === 'delivered' ? 'fa-truck' : 'fa-check'}"></i> ${o.status}</span></td>
+          <td>${o.items?.length || 0} items</td>
+          <td class="action-buttons">
+            <button class="view-btn" onclick="window.dashboardShowDetails('${o.id}')"><i class="fas fa-eye"></i></button>
+            ${isPending ? `<button class="deliver-btn" onclick="window.dashboardMarkDelivered('${o.id}')"><i class="fas fa-truck"></i> Deliver</button>` : ''}
+            <button class="delete-btn" onclick="window.dashboardConfirmDelete('${o.id}')"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
   
   function renderCustomers() {
@@ -1612,15 +1666,15 @@ function initDashboard(logoutModal) {
     let filtered = allOrders.filter(o => filterByDate(o));
     const rev = filtered.reduce((s,o) => s + o.total, 0);
     const avg = filtered.length ? Math.round(rev / filtered.length) : 0;
-    const completed = filtered.filter(o => o.status === 'completed').length;
-    const rate = filtered.length ? Math.round((completed / filtered.length) * 100) : 0;
+    const delivered = filtered.filter(o => o.status === 'delivered' || o.status === 'completed').length;
+    const rate = filtered.length ? Math.round((delivered / filtered.length) * 100) : 0;
     
     const statsContainer = document.getElementById('statsContainer');
     if (statsContainer) {
       statsContainer.innerHTML = `
         <div class="stat-card"><div class="stat-info"><h4>Total Revenue</h4><div class="stat-number">${rev.toLocaleString()} MAD</div></div><div class="stat-icon"><i class="fas fa-chart-line"></i></div></div>
         <div class="stat-card"><div class="stat-info"><h4>Average Order</h4><div class="stat-number">${avg.toLocaleString()} MAD</div></div><div class="stat-icon"><i class="fas fa-chart-simple"></i></div></div>
-        <div class="stat-card"><div class="stat-info"><h4>Completion Rate</h4><div class="stat-number">${rate}%</div></div><div class="stat-icon"><i class="fas fa-percent"></i></div></div>
+        <div class="stat-card"><div class="stat-info"><h4>Delivery Rate</h4><div class="stat-number">${rate}%</div></div><div class="stat-icon"><i class="fas fa-percent"></i></div></div>
         <div class="stat-card"><div class="stat-info"><h4>Total Orders</h4><div class="stat-number">${filtered.length}</div></div><div class="stat-icon"><i class="fas fa-chart-pie"></i></div></div>
       `;
     }
@@ -1632,7 +1686,7 @@ function initDashboard(logoutModal) {
       tbody.innerHTML = `
         <tr><td>Total Revenue</td>\n<td><strong>${rev.toLocaleString()} MAD</strong></td>\n<td>Sales in period</td>\n</tr>
         <tr><td>Total Orders</td>\n<td><strong>${filtered.length}</strong></td>\n<td>Orders placed</td>\n</tr>
-        <tr><td>Completed Orders</td>\n<td><strong>${completed}</strong></td>\n<td>Delivered</td>\n</tr>
+        <tr><td>Delivered Orders</td>\n<td><strong>${delivered}</strong></td>\n<td>Completed deliveries</td>\n</tr>
         <tr><td>Average Order</td>\n<td><strong>${avg.toLocaleString()} MAD</strong></td>\n<td>Per transaction</td>\n</tr>
       `;
     }
@@ -1642,9 +1696,9 @@ function initDashboard(logoutModal) {
     const totalOrders = orders.length;
     const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
     const avgOrder = totalOrders > 0 ? Math.round(totalRevenue / totalOrders) : 0;
-    const completedOrders = orders.filter(o => o.status === 'completed').length;
+    const deliveredOrders = orders.filter(o => o.status === 'delivered' || o.status === 'completed').length;
     const pendingOrders = orders.filter(o => o.status === 'pending').length;
-    const completionRate = totalOrders > 0 ? Math.round((completedOrders / totalOrders) * 100) : 0;
+    const completionRate = totalOrders > 0 ? Math.round((deliveredOrders / totalOrders) * 100) : 0;
     
     const totalOrdersEl = document.getElementById('statTotalOrders');
     const totalRevenueEl = document.getElementById('statTotalRevenue');
@@ -1659,9 +1713,9 @@ function initDashboard(logoutModal) {
     if (totalRevenueEl) totalRevenueEl.innerText = totalRevenue.toLocaleString() + ' MAD';
     if (avgOrderEl) avgOrderEl.innerText = avgOrder.toLocaleString() + ' MAD';
     if (completionRateEl) completionRateEl.innerText = completionRate + '%';
-    if (completedCountEl) completedCountEl.innerText = completedOrders;
+    if (completedCountEl) completedCountEl.innerText = deliveredOrders;
     if (pendingCountEl) pendingCountEl.innerText = pendingOrders;
-    if (completedPercentEl) completedPercentEl.innerText = totalOrders > 0 ? Math.round((completedOrders / totalOrders) * 100) + '%' : '0%';
+    if (completedPercentEl) completedPercentEl.innerText = totalOrders > 0 ? Math.round((deliveredOrders / totalOrders) * 100) + '%' : '0%';
     if (pendingPercentEl) pendingPercentEl.innerText = totalOrders > 0 ? Math.round((pendingOrders / totalOrders) * 100) + '%' : '0%';
   }
   
@@ -1706,6 +1760,11 @@ function initDashboard(logoutModal) {
     
     const detailsPanel = document.getElementById('detailsPanel');
     if (detailsPanel) detailsPanel.classList.add('open');
+  };
+  
+  // Function to mark as delivered from the button
+  window.dashboardMarkDelivered = function(id) {
+    markAsDelivered(id);
   };
   
   window.dashboardConfirmDelete = function(id) {
