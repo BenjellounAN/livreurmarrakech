@@ -557,6 +557,78 @@ tr:hover {
   color: #059669;
 }
 
+/* ===== AVAILABILITY TOGGLE ===== */
+.availability-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 12px 4px 4px;
+  border-radius: 40px;
+  background: #f1f5f9;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.availability-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.toggle-track {
+  width: 40px;
+  height: 22px;
+  background: #cbd5e1;
+  border-radius: 40px;
+  position: relative;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle-track.available {
+  background: #22c55e;
+}
+
+.toggle-track.unavailable {
+  background: #ef4444;
+}
+
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-track.available .toggle-thumb {
+  left: 20px;
+}
+
+.toggle-track.unavailable .toggle-thumb {
+  left: 2px;
+}
+
+.toggle-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: center;
+  color: #475569;
+}
+
+.toggle-label.available-text {
+  color: #22c55e;
+}
+
+.toggle-label.unavailable-text {
+  color: #ef4444;
+}
+
 /* ===== ACTION BUTTONS ===== */
 .action-buttons {
   display: flex;
@@ -1260,6 +1332,10 @@ function loadFullDashboard() {
             <i class="fas fa-shopping-cart"></i>
             <span>Orders</span>
           </div>
+          <div class="nav-item" data-page="products">
+            <i class="fas fa-box"></i>
+            <span>Products</span>
+          </div>
           <div class="nav-item" data-page="customers">
             <i class="fas fa-users"></i>
             <span>Customers</span>
@@ -1403,6 +1479,7 @@ function setupBottomNavigation() {
 
 function initDashboard(logoutModal) {
   let allOrders = [];
+  let allProducts = [];
   let currentPage = 'orders';
   let currentSearch = '';
   let currentFilter = 'all';
@@ -1474,6 +1551,7 @@ function initDashboard(logoutModal) {
   function updatePageTitle() {
     const titles = {
       orders: 'Orders Dashboard',
+      products: 'Products Management',
       customers: 'Customers Management',
       stores: 'Stores Overview',
       analytics: 'Analytics & Insights'
@@ -1500,7 +1578,7 @@ function initDashboard(logoutModal) {
   
   async function loadOrders() {
     const tbody = document.getElementById('tableBody');
-    if (tbody) tbody.innerHTML = '<tr><td colspan="10" class="loading-state"><i class="fas fa-spinner fa-pulse"></i> Loading...<\/td><\/tr>';
+    if (tbody && currentPage === 'orders') tbody.innerHTML = '<tr><td colspan="10" class="loading-state"><i class="fas fa-spinner fa-pulse"></i> Loading...<\/td><\/tr>';
     try {
       const snapshot = await db.collection('orders').orderBy('createdAt', 'desc').get();
       allOrders = [];
@@ -1525,7 +1603,57 @@ function initDashboard(logoutModal) {
         updateStatisticsPage(allOrders);
       }
     } catch(e) {
-      if (tbody) tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Error: ${e.message}<\/td><\/tr>`;
+      if (tbody && currentPage === 'orders') tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Error: ${e.message}<\/td><\/tr>`;
+    }
+  }
+  
+  async function loadProducts() {
+    const tbody = document.getElementById('tableBody');
+    if (tbody && currentPage === 'products') tbody.innerHTML = '<tr><td colspan="10" class="loading-state"><i class="fas fa-spinner fa-pulse"></i> Loading products...<\/td><\/tr>';
+    try {
+      const snapshot = await db.collection('products').orderBy('createdAt', 'desc').get();
+      allProducts = [];
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        allProducts.push({
+          id: doc.id,
+          name: data.name || 'Unnamed Product',
+          price: data.price || 0,
+          category: data.category || 'Uncategorized',
+          img: data.img || 'https://picsum.photos/id/145/55/55',
+          available: data.available !== undefined ? data.available : true,
+          createdAt: data.createdAt
+        });
+      });
+      renderCurrentPage();
+    } catch(e) {
+      if (tbody && currentPage === 'products') tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Error: ${e.message}<\/td><\/tr>`;
+    }
+  }
+  
+  async function toggleProductAvailability(productId, currentStatus) {
+    try {
+      const newStatus = !currentStatus;
+      await db.collection('products').doc(productId).update({
+        available: newStatus
+      });
+      
+      // Update local data
+      const product = allProducts.find(p => p.id === productId);
+      if (product) {
+        product.available = newStatus;
+      }
+      
+      // Show toast message
+      showToast(
+        `Product is now ${newStatus ? 'available' : 'unavailable'}`,
+        newStatus ? 'fa-check-circle' : 'fa-ban'
+      );
+      
+      // Re-render the current page
+      renderCurrentPage();
+    } catch(e) {
+      showToast(`Error: ${e.message}`, 'fa-exclamation-triangle');
     }
   }
   
@@ -1538,9 +1666,72 @@ function initDashboard(logoutModal) {
   
   function renderCurrentPage() {
     if (currentPage === 'orders') renderOrders();
+    else if (currentPage === 'products') renderProducts();
     else if (currentPage === 'customers') renderCustomers();
     else if (currentPage === 'stores') renderStores();
     else if (currentPage === 'analytics') renderAnalytics();
+  }
+  
+  function renderProducts() {
+    let filtered = allProducts;
+    
+    if (currentSearch) {
+      const s = currentSearch.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(s) || 
+        p.category.toLowerCase().includes(s)
+      );
+    }
+    
+    const totalProducts = allProducts.length;
+    const availableCount = allProducts.filter(p => p.available).length;
+    const unavailableCount = allProducts.filter(p => !p.available).length;
+    const avgPrice = allProducts.length ? Math.round(allProducts.reduce((s, p) => s + p.price, 0) / allProducts.length) : 0;
+    
+    const statsContainer = document.getElementById('statsContainer');
+    if (statsContainer) {
+      statsContainer.innerHTML = `
+        <div class="stat-card"><div class="stat-info"><h4>Total Products</h4><div class="stat-number">${totalProducts}</div></div><div class="stat-icon"><i class="fas fa-box"></i></div></div>
+        <div class="stat-card"><div class="stat-info"><h4>Available</h4><div class="stat-number" style="color:#22c55e">${availableCount}</div></div><div class="stat-icon"><i class="fas fa-check-circle" style="color:#22c55e"></i></div></div>
+        <div class="stat-card"><div class="stat-info"><h4>Unavailable</h4><div class="stat-number" style="color:#ef4444">${unavailableCount}</div></div><div class="stat-icon"><i class="fas fa-ban" style="color:#ef4444"></i></div></div>
+        <div class="stat-card"><div class="stat-info"><h4>Avg Price</h4><div class="stat-number">${avgPrice.toLocaleString()} MAD</div></div><div class="stat-icon"><i class="fas fa-tag"></i></div></div>
+      `;
+    }
+    
+    const tableHeader = document.getElementById('tableHeader');
+    if (tableHeader) tableHeader.innerHTML = `<tr><th>PRODUCT</th><th>CATEGORY</th><th>PRICE</th><th>AVAILABILITY</th><th>ACTIONS</th></tr>`;
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+    if (!filtered.length) {
+      tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No products found</td></tr>';
+      return;
+    }
+    tbody.innerHTML = filtered.map(p => `
+      <tr>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <img src="${p.img}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;" onerror="this.src='https://picsum.photos/id/145/40/40'">
+            <strong>${p.name}</strong>
+          </div>
+        </td>
+        <td><span style="background:#f1f5f9;padding:4px 12px;border-radius:20px;font-size:0.75rem;">${p.category}</span></td>
+        <td>${p.price.toLocaleString()} MAD</td>
+        <td>
+          <div class="availability-toggle" onclick="window.toggleProductAvailability('${p.id}', ${p.available})">
+            <div class="toggle-track ${p.available ? 'available' : 'unavailable'}">
+              <div class="toggle-thumb"></div>
+            </div>
+            <span class="toggle-label ${p.available ? 'available-text' : 'unavailable-text'}">
+              ${p.available ? 'Available' : 'Unavailable'}
+            </span>
+          </div>
+        </td>
+        <td class="action-buttons">
+          <button class="view-btn" onclick="showToast('View product: ${p.name}', 'fa-info-circle')"><i class="fas fa-eye"></i></button>
+          <button class="delete-btn" onclick="showToast('Delete product: ${p.name}', 'fa-trash')"><i class="fas fa-trash-alt"></i></button>
+        </td>
+      </tr>
+    `).join('');
   }
   
   function renderOrders() {
@@ -1565,7 +1756,7 @@ function initDashboard(logoutModal) {
     }
     
     const tableHeader = document.getElementById('tableHeader');
-    if (tableHeader) tableHeader.innerHTML = `<tr><th>ORDER ID</th><th>CUSTOMER</th><th>PHONE</th><th>TOTAL</th><th>DATE</th><th>STATUS</th><th>ITEMS</th><th>ACTIONS</th></td>`;
+    if (tableHeader) tableHeader.innerHTML = `<tr><th>ORDER ID</th><th>CUSTOMER</th><th>PHONE</th><th>TOTAL</th><th>DATE</th><th>STATUS</th><th>ITEMS</th><th>ACTIONS</th></tr>`;
     const tbody = document.getElementById('tableBody');
     if (!tbody) return;
     if (!filtered.length) {
@@ -1585,7 +1776,7 @@ function initDashboard(logoutModal) {
           <button class="view-btn" onclick="window.dashboardShowDetails('${o.id}')"><i class="fas fa-eye"></i></button>
           <button class="delete-btn" onclick="window.dashboardConfirmDelete('${o.id}')"><i class="fas fa-trash-alt"></i></button>
         </td>
-      </td>
+      </tr>
     `).join('');
   }
   
@@ -1636,7 +1827,7 @@ function initDashboard(logoutModal) {
     }
     
     const tableHeader = document.getElementById('tableHeader');
-    if (tableHeader) tableHeader.innerHTML = `</table><th>STORE NAME</th><th>TOTAL ORDERS</th><th>TOTAL REVENUE</th></tr>`;
+    if (tableHeader) tableHeader.innerHTML = `<tr><th>STORE NAME</th><th>TOTAL ORDERS</th><th>TOTAL REVENUE</th></tr>`;
     const tbody = document.getElementById('tableBody');
     if (tbody) {
       tbody.innerHTML = `<tr><td><i class="fas fa-store"></i> ${store.name}</td><td>${store.orders}</td><td>${store.revenue.toLocaleString()} MAD</td></tr>`;
@@ -1699,6 +1890,9 @@ function initDashboard(logoutModal) {
     if (deleteModal) deleteModal.classList.add('active');
   };
   
+  // Make toggle function globally accessible
+  window.toggleProductAvailability = toggleProductAvailability;
+  
   function closeModal() {
     const deleteModal = document.getElementById('deleteModal');
     if (deleteModal) deleteModal.classList.remove('active');
@@ -1715,7 +1909,10 @@ function initDashboard(logoutModal) {
   if (searchInput) searchInput.addEventListener('input', (e) => { currentSearch = e.target.value; renderCurrentPage(); });
   
   const refreshBtn = document.getElementById('refreshBtn');
-  if (refreshBtn) refreshBtn.addEventListener('click', loadOrders);
+  if (refreshBtn) refreshBtn.addEventListener('click', () => {
+    loadOrders();
+    loadProducts();
+  });
   
   const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
   if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', closeModal);
@@ -1726,8 +1923,12 @@ function initDashboard(logoutModal) {
   const deleteModal = document.getElementById('deleteModal');
   if (deleteModal) deleteModal.addEventListener('click', (e) => { if (e.target === deleteModal) closeModal(); });
   
+  // Listen to real-time updates for both collections
   db.collection('orders').onSnapshot(() => loadOrders());
+  db.collection('products').onSnapshot(() => loadProducts());
+  
   loadOrders();
+  loadProducts();
   updatePageTitle();
   
   // Check notification status for settings page
