@@ -508,6 +508,95 @@
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
+
+    /* ====== Availability toggle (beautiful) ====== */
+    .availability-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f0f0;
+      padding: 5px 12px 5px 6px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .availability-toggle:hover {
+      background: #e8e8e8;
+      border-color: #ccc;
+    }
+    .availability-toggle .toggle-track {
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 30px;
+      position: relative;
+      transition: background 0.25s ease;
+      flex-shrink: 0;
+    }
+    .availability-toggle .toggle-track .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .availability-toggle.active .toggle-track {
+      background: #28a745;
+    }
+    .availability-toggle.active .toggle-track .toggle-thumb {
+      transform: translateX(18px);
+      background: white;
+    }
+    .availability-toggle .status-label {
+      min-width: 60px;
+      text-align: left;
+      font-weight: 600;
+      color: #555;
+    }
+    .availability-toggle.active .status-label {
+      color: #1e7e34;
+    }
+    .availability-toggle .status-label .fa {
+      margin-right: 4px;
+    }
+    .availability-toggle:active .toggle-track .toggle-thumb {
+      transform: scale(0.9);
+    }
+    .availability-toggle.active:active .toggle-track .toggle-thumb {
+      transform: translateX(18px) scale(0.9);
+    }
+    .product-actions .availability-toggle {
+      background: #f8f9fa;
+      padding: 4px 10px 4px 4px;
+      border-radius: 40px;
+      font-size: 12px;
+    }
+    .product-actions .availability-toggle .toggle-track {
+      width: 34px;
+      height: 20px;
+    }
+    .product-actions .availability-toggle .toggle-track .toggle-thumb {
+      width: 16px;
+      height: 16px;
+      top: 2px;
+      left: 2px;
+    }
+    .product-actions .availability-toggle.active .toggle-track .toggle-thumb {
+      transform: translateX(14px);
+    }
+    .product-actions .availability-toggle .status-label {
+      min-width: 50px;
+      font-size: 11px;
+    }
   </style>
 </head>
 <body>
@@ -720,29 +809,20 @@ const logoutBtn = document.getElementById('logoutBtn');
 // ================================================================
 auth.onAuthStateChanged(async (user) => {
   if (user) {
-    // Check if email matches the allowed admin email
     if (user.email === ALLOWED_ADMIN_EMAIL) {
-      // ✅ AUTHORIZED - Show dashboard
       loginScreen.classList.add('hidden');
       dashboardContent.classList.add('visible');
       adminEmailDisplay.textContent = user.email;
-      
-      // Load data
       loadProducts();
       renderCategorySelect();
-      
-      // Update UI
       renderAll();
-      
     } else {
-      // ❌ WRONG EMAIL - Sign out and show error
       await auth.signOut();
       loginScreen.classList.remove('hidden');
       dashboardContent.classList.remove('visible');
       showLoginError('❌ This email is not authorized to access this dashboard');
     }
   } else {
-    // ❌ NOT LOGGED IN - Show login screen
     loginScreen.classList.remove('hidden');
     dashboardContent.classList.remove('visible');
   }
@@ -753,56 +833,33 @@ auth.onAuthStateChanged(async (user) => {
 // ================================================================
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
   
-  // Check if email is the allowed one
   if (email !== ALLOWED_ADMIN_EMAIL) {
     showLoginError('❌ This email is not authorized. Only the admin can access.');
     emailInput.classList.add('error');
     return;
   }
   
-  // Show loading state
   loginBtn.disabled = true;
   loginText.innerHTML = '<span class="spinner"></span> Signing in...';
   hideLoginError();
   
   try {
-    const userCredential = await auth.signInWithEmailAndPassword(email, password);
-    const user = userCredential.user;
-    
-    if (user.email === ALLOWED_ADMIN_EMAIL) {
-      // Success - the auth observer will handle the UI change
-      loginText.textContent = '✅ Success!';
-      // Small delay before redirect
-      setTimeout(() => {
-        // The auth observer will trigger automatically
-      }, 300);
-    }
-    
+    await auth.signInWithEmailAndPassword(email, password);
+    loginText.textContent = '✅ Success!';
   } catch (error) {
     let message = '❌ ';
     switch (error.code) {
-      case 'auth/user-not-found':
-        message += 'User not found';
-        break;
-      case 'auth/wrong-password':
-        message += 'Incorrect password';
-        break;
-      case 'auth/invalid-email':
-        message += 'Invalid email format';
-        break;
-      case 'auth/too-many-requests':
-        message += 'Too many attempts. Please try again later.';
-        break;
-      default:
-        message += 'Login failed. Please try again.';
+      case 'auth/user-not-found': message += 'User not found'; break;
+      case 'auth/wrong-password': message += 'Incorrect password'; break;
+      case 'auth/invalid-email': message += 'Invalid email format'; break;
+      case 'auth/too-many-requests': message += 'Too many attempts. Please try again later.'; break;
+      default: message += 'Login failed. Please try again.';
     }
     showLoginError(message);
     passwordInput.classList.add('error');
-    
   } finally {
     loginBtn.disabled = false;
     loginText.textContent = '🚀 Sign In';
@@ -815,7 +872,6 @@ loginForm.addEventListener('submit', async (e) => {
 logoutBtn.addEventListener('click', async () => {
   if (confirm('Are you sure you want to logout?')) {
     await auth.signOut();
-    // The auth observer will handle hiding the dashboard
   }
 });
 
@@ -826,17 +882,13 @@ function showLoginError(message) {
   errorText.textContent = message;
   loginError.classList.add('show');
 }
-
 function hideLoginError() {
   loginError.classList.remove('show');
 }
-
-// Clear errors on input
 emailInput.addEventListener('input', () => {
   emailInput.classList.remove('error');
   hideLoginError();
 });
-
 passwordInput.addEventListener('input', () => {
   passwordInput.classList.remove('error');
   hideLoginError();
@@ -862,7 +914,7 @@ let customCategories = [];
 let editingProductId = null;
 let categoryChart = null;
 let priceChart = null;
-let unsubscribeProducts = null; // for real-time listener
+let unsubscribeProducts = null;
 
 const defaultCategories = [
   { key: 'bakery', name: 'Bread & Cakes', imageUrl: 'https://i.ibb.co/8ndR3RCJ/IMG-8200.jpg', icon: '🥖' },
@@ -883,18 +935,13 @@ const defaultCategories = [
 
 function loadCategories() {
   const stored = localStorage.getItem('benex_custom_categories');
-  if (stored) {
-    customCategories = JSON.parse(stored);
-  } else {
-    customCategories = [];
-  }
+  if (stored) customCategories = JSON.parse(stored);
+  else customCategories = [];
   return [...defaultCategories, ...customCategories];
 }
-
 function saveCustomCategories() {
   localStorage.setItem('benex_custom_categories', JSON.stringify(customCategories));
 }
-
 function getCategoryMap() {
   const all = [...defaultCategories, ...customCategories];
   const map = {};
@@ -903,31 +950,28 @@ function getCategoryMap() {
 }
 
 // ================================================================
-// 10.1 LOAD PRODUCTS WITH REAL-TIME LISTENER (FIXED)
+// 10.1 LOAD PRODUCTS WITH REAL-TIME LISTENER
 // ================================================================
 function loadProducts() {
-  // Clean up previous listener if exists
   if (unsubscribeProducts) {
     unsubscribeProducts();
     unsubscribeProducts = null;
   }
   
   const user = auth.currentUser;
-  
   if (!user || user.email !== ALLOWED_ADMIN_EMAIL) {
     document.getElementById('productsGrid').innerHTML = 
       '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Please login first</p></div>';
     return;
   }
   
-  // ✅ REAL-TIME LISTENER - Auto updates when data changes
   unsubscribeProducts = db.collection('products')
     .onSnapshot((snapshot) => {
       allProducts = [];
       snapshot.forEach(doc => {
-        allProducts.push({ id: doc.id, ...doc.data() });
+        const data = doc.data();
+        allProducts.push({ id: doc.id, ...data });
       });
-      console.log("✅ Products loaded (real-time):", allProducts.length);
       renderAll();
     }, (error) => {
       console.error("❌ Error loading products:", error);
@@ -938,14 +982,12 @@ function loadProducts() {
 }
 
 // ================================================================
-// 10.2 CRUD OPERATIONS (FIXED)
+// 10.2 CRUD OPERATIONS
 // ================================================================
 async function addProduct(productData) {
   try {
-    const docRef = await db.collection('products').add(productData);
-    console.log("✅ Product added with ID:", docRef.id);
+    await db.collection('products').add(productData);
     showToast('✅ Product added successfully!', 'success');
-    // No need to call loadProducts() - real-time listener updates automatically
     return true;
   } catch (e) {
     console.error("❌ Error adding product:", e);
@@ -957,9 +999,7 @@ async function addProduct(productData) {
 async function updateProduct(id, data) {
   try {
     await db.collection('products').doc(id).update(data);
-    console.log("✅ Product updated:", id);
     showToast('✅ Product updated successfully!', 'success');
-    // No need to call loadProducts() - real-time listener updates automatically
     return true;
   } catch (e) {
     console.error("❌ Error updating product:", e);
@@ -970,12 +1010,9 @@ async function updateProduct(id, data) {
 
 async function deleteProduct(id) {
   if (!confirm('Delete this product permanently?')) return;
-  
   try {
     await db.collection('products').doc(id).delete();
-    console.log("✅ Product deleted:", id);
     showToast('✅ Product deleted successfully', 'success');
-    // No need to call loadProducts() - real-time listener updates automatically
   } catch (e) {
     console.error("❌ Error deleting product:", e);
     showToast('❌ Error: ' + e.message, 'error');
@@ -983,7 +1020,21 @@ async function deleteProduct(id) {
 }
 
 // ================================================================
-// 10.3 RENDER FUNCTIONS
+// 10.3 AVAILABILITY TOGGLE
+// ================================================================
+async function toggleAvailability(productId, currentStatus) {
+  const newStatus = !currentStatus;
+  try {
+    await db.collection('products').doc(productId).update({ available: newStatus });
+    showToast(`Product ${newStatus ? 'available' : 'unavailable'}`, 'info');
+  } catch (e) {
+    console.error("❌ Error toggling availability:", e);
+    showToast('❌ Error updating availability: ' + e.message, 'error');
+  }
+}
+
+// ================================================================
+// 10.4 RENDER FUNCTIONS
 // ================================================================
 function renderCategorySelect() {
   const select = document.getElementById('productCategory');
@@ -1029,6 +1080,7 @@ function renderProducts() {
   
   container.innerHTML = filtered.map(p => {
     const catInfo = catMap[p.category] || { name: p.category || 'Uncategorized', icon: '📦' };
+    const isAvailable = p.available !== undefined ? p.available : true;
     return `
       <div class="product-row">
         <img src="${p.image || 'https://via.placeholder.com/70'}" class="product-image" onerror="this.src='https://via.placeholder.com/70'">
@@ -1041,6 +1093,10 @@ function renderProducts() {
         <div class="product-actions">
           <button class="edit-btn" onclick="openEditModal('${p.id}')"><i class="fas fa-edit"></i> Edit</button>
           <button class="delete-btn" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> Delete</button>
+          <div class="availability-toggle ${isAvailable ? 'active' : ''}" onclick="toggleAvailability('${p.id}', ${isAvailable})">
+            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+            <span class="status-label"><i class="fas ${isAvailable ? 'fa-check-circle' : 'fa-times-circle'}"></i> ${isAvailable ? 'Available' : 'Unavailable'}</span>
+          </div>
         </div>
       </div>
     `;
@@ -1148,36 +1204,13 @@ function escapeHtml(str) {
 // ================================================================
 // 11. EVENT LISTENERS
 // ================================================================
-
-// Mobile menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
+menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
 
-menuToggle.addEventListener('click', () => {
-  sidebar.classList.toggle('open');
-});
-
-// Close sidebar on nav click (mobile)
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
-    if (window.innerWidth <= 768) {
-      sidebar.classList.remove('open');
-    }
-  });
-});
-
-// Close sidebar when clicking outside (mobile)
-document.addEventListener('click', (e) => {
-  if (window.innerWidth <= 768) {
-    if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('open')) {
-      sidebar.classList.remove('open');
-    }
-  }
-});
-
-// Navigation tabs
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
+    if (window.innerWidth <= 768) sidebar.classList.remove('open');
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     item.classList.add('active');
     const tab = item.getAttribute('data-tab');
@@ -1189,14 +1222,10 @@ document.querySelectorAll('.nav-item').forEach(item => {
   });
 });
 
-// Add product button
 document.getElementById('addProductBtn').onclick = openAddModal;
-
-// Cancel modal buttons
 document.getElementById('cancelModalBtn').onclick = () => document.getElementById('productModal').style.display = 'none';
 document.getElementById('cancelCatModalBtn').onclick = () => document.getElementById('categoryModal').style.display = 'none';
 
-// Product form submit
 document.getElementById('productForm').onsubmit = async (e) => {
   e.preventDefault();
   const name = document.getElementById('productName').value.trim();
@@ -1210,9 +1239,8 @@ document.getElementById('productForm').onsubmit = async (e) => {
     return;
   }
   
-  const data = { name, price, image, description, category };
+  const data = { name, price, image, description, category, available: true };
   
-  // Disable save button to prevent double submission
   const saveBtn = document.querySelector('.save-btn');
   saveBtn.disabled = true;
   saveBtn.textContent = 'Saving...';
@@ -1228,10 +1256,8 @@ document.getElementById('productForm').onsubmit = async (e) => {
   document.getElementById('productModal').style.display = 'none';
 };
 
-// Search
 document.getElementById('searchProducts')?.addEventListener('input', renderProducts);
 
-// Category modal
 document.getElementById('openAddCategoryBtn').onclick = () => {
   document.getElementById('categoryModal').style.display = 'flex';
 };
@@ -1267,17 +1293,16 @@ document.getElementById('categoryForm').onsubmit = (e) => {
 // ================================================================
 window.openEditModal = openEditModal;
 window.deleteProduct = deleteProduct;
+window.toggleAvailability = toggleAvailability;
 
 // ================================================================
 // 13. CLEANUP ON PAGE UNLOAD
 // ================================================================
 window.addEventListener('beforeunload', () => {
-  if (unsubscribeProducts) {
-    unsubscribeProducts();
-  }
+  if (unsubscribeProducts) unsubscribeProducts();
 });
 
-console.log("✅ Dashboard initialized with real-time updates");
+console.log("✅ Dashboard initialized with real-time updates + availability toggle");
 </script>
 </body>
 </html>
