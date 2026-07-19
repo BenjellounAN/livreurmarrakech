@@ -2620,23 +2620,35 @@
       const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
       return text.replace(regex, '<mark class="search-highlight">$1</mark>');
     }
+
+    // ✅ التعديل الرئيسي: إخفاء المنتجات غير المتوفرة
     db.collection('products').onSnapshot((snapshot) => {
       allProducts = [];
       allProductsPerCategory = {};
       expressiveCategoryList.forEach(cat => {
         allProductsPerCategory[cat.key] = [];
       });
+
       snapshot.forEach(doc => {
         let product = {
           id: doc.id,
           ...doc.data()
         };
+
+        // ✅ إخفاء المنتجات غير المتوفرة
+        if (product.available === false) {
+          return; // تخطي هذا المنتج ولا تضفه للقائمة
+        }
+
         product.mappedCategory = mapLegacyCategoryToExpressive(product.category);
         allProducts.push(product);
-        if (allProductsPerCategory[product.mappedCategory]) allProductsPerCategory[product.mappedCategory].push(
-          product);
-        else allProductsPerCategory[product.mappedCategory] = [product];
+        if (allProductsPerCategory[product.mappedCategory]) {
+          allProductsPerCategory[product.mappedCategory].push(product);
+        } else {
+          allProductsPerCategory[product.mappedCategory] = [product];
+        }
       });
+
       expressiveCategoryList.forEach(cat => {
         loadedCounts[cat.key] = 6;
       });
@@ -3113,8 +3125,8 @@
       productsContainer.classList.remove('hide-on-search');
     }
     document.getElementById('backButton').onclick = () => {
-    window.location.href = 'index.html';
-};
+      window.location.href = 'index.html';
+    };
     const shareButtonElem = document.getElementById('shareButton');
     const pageUrl = 'https://delivery-marrakech.com/benmarket';
     const shareText = 'Delivery Supermaker Grocerie Marrakech';
