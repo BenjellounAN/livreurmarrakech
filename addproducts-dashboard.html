@@ -403,7 +403,7 @@
     .product-category { font-size: 12px; color: #B22222; font-weight: 600; margin-bottom: 4px; }
     .product-description { font-size: 12px; color: #666; }
     .product-price { font-size: 18px; font-weight: 800; color: #B22222; }
-    .product-actions { display: flex; gap: 10px; }
+    .product-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
     .edit-btn, .delete-btn { padding: 10px 16px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
     .edit-btn { background: #ffc107; color: #333; }
     .delete-btn { background: #dc3545; color: white; }
@@ -489,6 +489,7 @@
     .save-btn { background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); color: white; }
     .cancel-btn { background: #6c757d; color: white; }
     .delete-cat-btn { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 30px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; transition: 0.2s; }
+    .delete-cat-btn:hover { background: #c82333; transform: scale(1.05); }
     .charts-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; margin-bottom: 30px; }
     .chart-card { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     .chart-card h3 { font-size: 18px; margin-bottom: 20px; color: #333; }
@@ -813,6 +814,8 @@ auth.onAuthStateChanged(async (user) => {
       loginScreen.classList.add('hidden');
       dashboardContent.classList.add('visible');
       adminEmailDisplay.textContent = user.email;
+      // Load data only after authentication
+      await loadCategoriesFromFirebase();
       loadProducts();
       renderCategorySelect();
       renderAll();
@@ -910,12 +913,14 @@ function showToast(message, type = 'success') {
 // 10. DATA MANAGEMENT
 // ================================================================
 let allProducts = [];
-let customCategories = [];
+let allCategories = [];
 let editingProductId = null;
 let categoryChart = null;
 let priceChart = null;
 let unsubscribeProducts = null;
+let unsubscribeCategories = null;
 
+// Default categories (fallback)
 const defaultCategories = [
   { key: 'bakery', name: 'Bread & Cakes', imageUrl: 'https://i.ibb.co/8ndR3RCJ/IMG-8200.jpg', icon: '🥖' },
   { key: 'meatfish', name: 'Meat & Fish', imageUrl: 'https://i.ibb.co/tTn0sPzf/IMG-8199.jpg', icon: '🍖' },
@@ -933,24 +938,52 @@ const defaultCategories = [
   { key: 'petsupply', name: 'Pet Supply', imageUrl: 'https://i.ibb.co/DPY9Rn5m/IMG-8197.png', icon: '🐾' }
 ];
 
-function loadCategories() {
-  const stored = localStorage.getItem('benex_custom_categories');
-  if (stored) customCategories = JSON.parse(stored);
-  else customCategories = [];
-  return [...defaultCategories, ...customCategories];
-}
-function saveCustomCategories() {
-  localStorage.setItem('benex_custom_categories', JSON.stringify(customCategories));
-}
-function getCategoryMap() {
-  const all = [...defaultCategories, ...customCategories];
-  const map = {};
-  all.forEach(cat => { map[cat.key] = { name: cat.name, icon: cat.icon || '📦', imageUrl: cat.imageUrl }; });
-  return map;
+// ================================================================
+// 10.1 LOAD CATEGORIES FROM FIREBASE (REAL-TIME)
+// ================================================================
+function loadCategoriesFromFirebase() {
+  return new Promise((resolve) => {
+    if (unsubscribeCategories) {
+      unsubscribeCategories();
+      unsubscribeCategories = null;
+    }
+
+    unsubscribeCategories = db.collection('categories')
+      .orderBy('name')
+      .onSnapshot((snapshot) => {
+        allCategories = [];
+        if (snapshot.empty) {
+          // Use default categories if collection is empty
+          allCategories = defaultCategories.map(cat => ({ ...cat, id: cat.key, isCustom: false }));
+        } else {
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            allCategories.push({
+              id: doc.id,
+              key: data.key,
+              name: data.name,
+              imageUrl: data.imageUrl || 'https://i.ibb.co/Kz8n7dLf/9-A3-F562-D-211-C-45-F2-98-D0-8230-A14-A91-B1.png',
+              icon: data.icon || '📦',
+              isCustom: data.isCustom || false
+            });
+          });
+        }
+        
+        renderAll();
+        renderCategorySelect();
+        resolve();
+      }, (error) => {
+        console.error("❌ Error loading categories:", error);
+        allCategories = defaultCategories.map(cat => ({ ...cat, id: cat.key, isCustom: false }));
+        renderAll();
+        renderCategorySelect();
+        resolve();
+      });
+  });
 }
 
 // ================================================================
-// 10.1 LOAD PRODUCTS WITH REAL-TIME LISTENER
+// 10.2 LOAD PRODUCTS WITH REAL-TIME LISTENER
 // ================================================================
 function loadProducts() {
   if (unsubscribeProducts) {
@@ -982,7 +1015,7 @@ function loadProducts() {
 }
 
 // ================================================================
-// 10.2 CRUD OPERATIONS
+// 10.3 CRUD OPERATIONS - PRODUCTS
 // ================================================================
 async function addProduct(productData) {
   try {
@@ -1020,7 +1053,41 @@ async function deleteProduct(id) {
 }
 
 // ================================================================
-// 10.3 AVAILABILITY TOGGLE
+// 10.4 CRUD OPERATIONS - CATEGORIES (Firebase)
+// ================================================================
+async function addCategoryToFirebase(categoryData) {
+  try {
+    await db.collection('categories').add({
+      key: categoryData.key,
+      name: categoryData.name,
+      imageUrl: categoryData.imageUrl,
+      icon: categoryData.icon || '📦',
+      isCustom: true,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    showToast(`✅ Category "${categoryData.name}" added successfully!`, 'success');
+    return true;
+  } catch (e) {
+    console.error("❌ Error adding category:", e);
+    showToast('❌ Error: ' + e.message, 'error');
+    return false;
+  }
+}
+
+async function deleteCategoryFromFirebase(categoryId) {
+  if (!confirm('Delete this category permanently? This will not delete products.')) return;
+  
+  try {
+    await db.collection('categories').doc(categoryId).delete();
+    showToast('✅ Category deleted successfully!', 'success');
+  } catch (e) {
+    console.error("❌ Error deleting category:", e);
+    showToast('❌ Error: ' + e.message, 'error');
+  }
+}
+
+// ================================================================
+// 10.5 AVAILABILITY TOGGLE
 // ================================================================
 async function toggleAvailability(productId, currentStatus) {
   const newStatus = !currentStatus;
@@ -1034,14 +1101,21 @@ async function toggleAvailability(productId, currentStatus) {
 }
 
 // ================================================================
-// 10.4 RENDER FUNCTIONS
+// 10.6 RENDER FUNCTIONS
 // ================================================================
+function getCategoryMap() {
+  const map = {};
+  allCategories.forEach(cat => {
+    map[cat.key] = { name: cat.name, icon: cat.icon || '📦', imageUrl: cat.imageUrl };
+  });
+  return map;
+}
+
 function renderCategorySelect() {
   const select = document.getElementById('productCategory');
   if (!select) return;
-  const allCats = loadCategories();
   select.innerHTML = '';
-  allCats.forEach(cat => {
+  allCategories.forEach(cat => {
     const option = document.createElement('option');
     option.value = cat.key;
     option.textContent = `${cat.icon || '📦'} ${cat.name}`;
@@ -1059,7 +1133,7 @@ function renderAll() {
 function updateStats() {
   document.getElementById('totalProducts').textContent = allProducts.length;
   const uniqueCats = new Set(allProducts.map(p => p.category));
-  document.getElementById('totalCategories').textContent = uniqueCats.size;
+  document.getElementById('totalCategories').textContent = allCategories.length;
   const avg = allProducts.reduce((s, p) => s + (p.price || 0), 0) / allProducts.length || 0;
   document.getElementById('avgPrice').textContent = `${avg.toFixed(2)} MAD`;
 }
@@ -1106,33 +1180,22 @@ function renderProducts() {
 function renderCategoriesGrid() {
   const container = document.getElementById('categoriesGrid');
   if (!container) return;
-  const allCats = loadCategories();
+  
   const productCounts = {};
   allProducts.forEach(p => { productCounts[p.category] = (productCounts[p.category] || 0) + 1; });
   
-  container.innerHTML = allCats.map(cat => `
+  container.innerHTML = allCategories.map(cat => `
     <div class="category-card">
       <img src="${cat.imageUrl}" class="category-card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046784.png'">
       <div class="category-card-name">${cat.icon || '🏷️'} ${cat.name}</div>
       <div class="category-card-count">${productCounts[cat.key] || 0} products</div>
-      ${!defaultCategories.some(d => d.key === cat.key) ? 
-        `<button class="delete-cat-btn" data-key="${cat.key}"><i class="fas fa-trash-alt"></i> Delete</button>` : ''}
+      ${cat.isCustom ? 
+        `<button class="delete-cat-btn" onclick="deleteCategoryFromFirebase('${cat.id}')">
+          <i class="fas fa-trash-alt"></i> Delete
+        </button>` : 
+        '<span style="font-size:11px;color:#999;margin-top:6px;">Default</span>'}
     </div>
   `).join('');
-  
-  document.querySelectorAll('.delete-cat-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const key = btn.getAttribute('data-key');
-      if (confirm(`Delete category "${key}"?`)) {
-        customCategories = customCategories.filter(c => c.key !== key);
-        saveCustomCategories();
-        renderCategoriesGrid();
-        renderCategorySelect();
-        showToast('Category deleted', 'info');
-      }
-    });
-  });
 }
 
 function updateCharts() {
@@ -1226,6 +1289,9 @@ document.getElementById('addProductBtn').onclick = openAddModal;
 document.getElementById('cancelModalBtn').onclick = () => document.getElementById('productModal').style.display = 'none';
 document.getElementById('cancelCatModalBtn').onclick = () => document.getElementById('categoryModal').style.display = 'none';
 
+// ================================================================
+// 11.1 PRODUCT FORM SUBMIT
+// ================================================================
 document.getElementById('productForm').onsubmit = async (e) => {
   e.preventDefault();
   const name = document.getElementById('productName').value.trim();
@@ -1258,11 +1324,14 @@ document.getElementById('productForm').onsubmit = async (e) => {
 
 document.getElementById('searchProducts')?.addEventListener('input', renderProducts);
 
+// ================================================================
+// 11.2 CATEGORY FORM SUBMIT (Save to Firebase)
+// ================================================================
 document.getElementById('openAddCategoryBtn').onclick = () => {
   document.getElementById('categoryModal').style.display = 'flex';
 };
 
-document.getElementById('categoryForm').onsubmit = (e) => {
+document.getElementById('categoryForm').onsubmit = async (e) => {
   e.preventDefault();
   const name = document.getElementById('newCatName').value.trim();
   const key = document.getElementById('newCatKey').value.trim().toLowerCase().replace(/\s/g, '');
@@ -1274,18 +1343,27 @@ document.getElementById('categoryForm').onsubmit = (e) => {
     return;
   }
   
-  if ([...defaultCategories, ...customCategories].some(c => c.key === key)) {
+  // Check if category already exists
+  if (allCategories.some(c => c.key === key)) {
     alert('Category key already exists!');
     return;
   }
   
-  customCategories.push({ key, name, imageUrl, icon });
-  saveCustomCategories();
-  renderCategoriesGrid();
-  renderCategorySelect();
-  document.getElementById('categoryModal').style.display = 'none';
-  document.getElementById('categoryForm').reset();
-  showToast(`Category "${name}" added!`, 'success');
+  const saveBtn = document.querySelector('#categoryForm .save-btn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Creating...';
+  
+  try {
+    await addCategoryToFirebase({ key, name, imageUrl, icon });
+    document.getElementById('categoryModal').style.display = 'none';
+    document.getElementById('categoryForm').reset();
+  } catch (error) {
+    console.error('Error creating category:', error);
+    showToast('Error creating category: ' + error.message, 'error');
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Create Category';
+  }
 };
 
 // ================================================================
@@ -1294,15 +1372,17 @@ document.getElementById('categoryForm').onsubmit = (e) => {
 window.openEditModal = openEditModal;
 window.deleteProduct = deleteProduct;
 window.toggleAvailability = toggleAvailability;
+window.deleteCategoryFromFirebase = deleteCategoryFromFirebase;
 
 // ================================================================
 // 13. CLEANUP ON PAGE UNLOAD
 // ================================================================
 window.addEventListener('beforeunload', () => {
   if (unsubscribeProducts) unsubscribeProducts();
+  if (unsubscribeCategories) unsubscribeCategories();
 });
 
-console.log("✅ Dashboard initialized with real-time updates + availability toggle");
+console.log("✅ Dashboard initialized with Firebase real-time sync for categories");
 </script>
 </body>
 </html>
