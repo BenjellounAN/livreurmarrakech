@@ -2188,7 +2188,7 @@
     let currentSearchQuery = '';
     let searchDebounceTimer = null;
     let currentModalProduct = null;
-    let currentModalQuantity = 1;
+    let currentModalQuantity = 1; // القيمة الافتراضية 1 بدلاً من 0
 
     // ================================================================
     // 4. DEFAULT CATEGORIES (Fallback إذا لم توجد بيانات في Firebase)
@@ -3005,7 +3005,7 @@
     }
 
     // ================================================================
-    // 20. PRODUCT MODAL FUNCTIONS
+    // 20. PRODUCT MODAL FUNCTIONS - الكمية مضبوطة على 1 افتراضيًا
     // ================================================================
     const productModal = document.getElementById('productModal');
     const closeModalBtnModal = document.getElementById('closeModalBtnModal');
@@ -3022,7 +3022,9 @@
 
     function openProductModal(product) {
       currentModalProduct = product;
-      currentModalQuantity = getQuantity(product.id);
+      // تعيين الكمية الافتراضية إلى 1 إذا لم تكن موجودة في السلة
+      const existingQty = getQuantity(product.id);
+      currentModalQuantity = existingQty > 0 ? existingQty : 1; // المفتاح: الكمية الافتراضية 1
 
       const productImage = product.image || 'https://i.ibb.co/Kz8n7dLf/9-A3-F562-D-211-C-45-F2-98-D0-8230-A14-A91-B1.png';
       modalProductImage.src = productImage;
@@ -3061,6 +3063,11 @@
 
     function addToCartFromModal() {
       if (!currentModalProduct) return;
+      // إذا كانت الكمية 0، لا نضيف شيئًا
+      if (currentModalQuantity === 0) {
+        // يمكن إظهار رسالة أو تجاهل
+        return;
+      }
       setQuantity(currentModalProduct.id, currentModalQuantity, currentModalProduct);
       modalAddToCartBtnElem.classList.add('success');
       setTimeout(() => modalAddToCartBtnElem.classList.remove('success'), 500);
