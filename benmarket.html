@@ -2213,6 +2213,96 @@
     }
 
     // ================================================================
+    // 4.5 CATEGORY DESCRIPTIONS (أوصاف مخصصة لكل فئة)
+    // ================================================================
+    const categoryDescriptions = {
+      'fruits': {
+        h1: 'Delivery Fruits &amp; Vegetables in Marrakech',
+        h2: 'Fresh, organic fruits and vegetables sourced daily',
+        h3: 'Enjoy the best seasonal produce for a healthy lifestyle',
+        desc: 'Fresh, organic fruits and vegetables sourced daily and delivered to your home in Marrakech. Enjoy the best seasonal produce for a healthy lifestyle.'
+      },
+      'bakery': {
+        h1: 'Delivery Bakery in Marrakech',
+        h2: 'Freshly baked bread, cakes, and pastries',
+        h3: 'Artisan bread, delightful cakes, and sweet treats',
+        desc: 'Freshly baked bread, cakes, and pastries delivered to your door in Marrakech. Enjoy artisan bread, delightful cakes, and sweet treats, perfect for breakfast or any occasion.'
+      },
+      'meatfish': {
+        h1: 'Delivery Meat &amp; Fish in Marrakech',
+        h2: 'Premium quality meat and fresh fish',
+        h3: 'Variety of cuts, poultry, and seafood',
+        desc: 'Premium quality meat and fresh fish delivered straight to your kitchen in Marrakech. Choose from a variety of cuts, poultry, and seafood for your daily meals.'
+      },
+      'specialties': {
+        h1: 'Delivery Specialties &amp; Deli in Marrakech',
+        h2: 'Gourmet specialties and deli items',
+        h3: 'Fine cheeses, cured meats, olives, and sauces',
+        desc: 'Discover gourmet specialties and deli items in Marrakech. From fine cheeses and cured meats to premium olives and sauces, elevate your meals with our curated selection.'
+      },
+      'snacks': {
+        h1: 'Delivery Snacks in Marrakech',
+        h2: 'Delightful selection of snacks and ice cream',
+        h3: 'Crispy chips, savory biscuits, sweet chocolates, refreshing ice cream',
+        desc: 'Enjoy a delightful selection of snacks in Marrakech. From crispy chips and savory biscuits to sweet chocolates and refreshing ice cream. We deliver all your favorite treats, perfect for any craving or gathering, straight to your doorstep.'
+      },
+      'dairy': {
+        h1: 'Delivery Dairy &amp; Eggs in Marrakech',
+        h2: 'Farm-fresh dairy products and eggs',
+        h3: 'Milk, yogurt, cheese, and eggs from trusted sources',
+        desc: 'Farm-fresh dairy products and eggs delivered to your home in Marrakech. Enjoy milk, yogurt, cheese, and eggs from trusted sources for your daily nutrition.'
+      },
+      'readytomeal': {
+        h1: 'Delivery Ready-to-Eat in Marrakech',
+        h2: 'Quick and delicious ready-to-eat meals',
+        h3: 'Freshly prepared dishes with no cooking required',
+        desc: 'Quick and delicious ready-to-eat meals delivered in Marrakech. Perfect for busy days, enjoy a variety of freshly prepared dishes with no cooking required.'
+      },
+      'pantry': {
+        h1: 'Delivery Pantry Essentials in Marrakech',
+        h2: 'Essential groceries for your pantry',
+        h3: 'Rice, pasta, canned goods, spices, cooking oil, breakfast cereals',
+        desc: 'Stock your pantry with essential groceries delivered in Marrakech. From rice, pasta, and canned goods to spices, cooking oil, and breakfast cereals.'
+      },
+      'frozen': {
+        h1: 'Delivery Frozen Foods in Marrakech',
+        h2: 'Convenient frozen foods',
+        h3: 'Frozen meals, vegetables, and desserts',
+        desc: 'Convenient frozen foods delivered to your doorstep in Marrakech. Choose from a variety of frozen meals, vegetables, and desserts for any occasion.'
+      },
+      'drinks': {
+        h1: 'Delivery Drinks in Marrakech',
+        h2: 'Refreshing drinks and beverages',
+        h3: 'Water, juices, sodas, energy drinks, teas',
+        desc: 'Refreshing drinks and beverages delivered to your home in Marrakech. From water, juices, and sodas to energy drinks and teas, stay hydrated with ease.'
+      },
+      'household': {
+        h1: 'Delivery Home &amp; Household in Marrakech',
+        h2: 'Essential household items',
+        h3: 'Cleaning products, paper goods, kitchen supplies',
+        desc: 'Essential household items delivered to your home in Marrakech. From cleaning products and paper goods to kitchen supplies and home care.'
+      },
+      'healthbeauty': {
+        h1: 'Delivery Health &amp; Beauty in Marrakech',
+        h2: 'Health and beauty products',
+        h3: 'Vitamins, supplements, skincare, personal care',
+        desc: 'Health and beauty products delivered to your doorstep in Marrakech. From vitamins and supplements to skincare and personal care items.'
+      },
+      'baby': {
+        h1: 'Delivery Baby Products in Marrakech',
+        h2: 'Baby essentials',
+        h3: 'Diapers, wipes, baby food, care products',
+        desc: 'Baby essentials delivered to your home in Marrakech. From diapers and wipes to baby food and care products for your little one.'
+      },
+      'petsupply': {
+        h1: 'Delivery Pet Supplies in Marrakech',
+        h2: 'Pet food and supplies',
+        h3: 'Pet food, accessories, care products',
+        desc: 'Pet food and supplies delivered to your door in Marrakech. Choose from a range of pet food, accessories, and care products for your furry friends.'
+      }
+    };
+
+    // ================================================================
     // 5. LOAD CATEGORIES FROM FIREBASE (REAL-TIME)
     // ================================================================
     function loadCategoriesFromFirebase() {
@@ -2341,7 +2431,7 @@
     }
 
     // ================================================================
-    // 9. RENDER PRODUCTS SECTIONS (DYNAMIC)
+    // 9. RENDER PRODUCTS SECTIONS (DYNAMIC) - مع الأوصاف المخصصة
     // ================================================================
     function renderProductsSections() {
       const container = document.getElementById('products-container');
@@ -2357,6 +2447,14 @@
       }
 
       expressiveCategoryList.forEach(cat => {
+        // الحصول على الوصف المخصص للفئة أو استخدام وصف عام
+        const desc = categoryDescriptions[cat.key] || {
+          h1: `Delivery ${cat.name} in Marrakech`,
+          h2: `Fresh ${cat.name.toLowerCase()} delivered daily`,
+          h3: `Quality ${cat.name.toLowerCase()} for your needs`,
+          desc: `Order ${cat.name.toLowerCase()} online and get them delivered to your doorstep in Marrakech.`
+        };
+
         const catDiv = document.createElement('div');
         catDiv.className = 'category-container';
         catDiv.id = `cat-${cat.key}-container`;
@@ -2368,10 +2466,10 @@
             ${cat.name}
           </h2>
           <div class="category-description-block">
-            <h1>Delivery ${cat.name} in Marrakech</h1>
-            <h2>Fresh ${cat.name.toLowerCase()} delivered daily</h2>
-            <h3>Quality ${cat.name.toLowerCase()} for your needs</h3>
-            <div class="desc-text">Order ${cat.name.toLowerCase()} online and get them delivered to your doorstep in Marrakech.</div>
+            <h1>${desc.h1}</h1>
+            <h2>${desc.h2}</h2>
+            <h3>${desc.h3}</h3>
+            <div class="desc-text">${desc.desc}</div>
             <div class="delivery-bar"><i class="fas fa-truck"></i> Delivery Same Day</div>
           </div>
           <div class="products" id="products-${cat.key}"></div>
