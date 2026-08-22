@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Code - Delivery Marrakech</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .qr-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        #qrcode {
+            width: 260px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #qrcode img,
+        #qrcode canvas {
+            width: 260px !important;
+            height: 260px !important;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="qr-wrapper">
+        <div id="qrcode"></div>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://delivery-marrakech.com/",
+            width: 260,
+            height: 260,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+
+</body>
+</html>
