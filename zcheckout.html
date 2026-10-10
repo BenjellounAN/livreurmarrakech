@@ -619,6 +619,14 @@
       }
     }
   </style>
+  <!-- Google Ads tag for WhatsApp order-start tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18159181033"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18159181033');
+  </script>
 </head>
 <body>
   <div class="container">
@@ -645,7 +653,7 @@
         </div>
         
         <div id="cart-items-container">
-          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
+          <!-- Ø³ÙØªÙ Ø¥Ø¶Ø§ÙØ© Ø§ÙØ¹ÙØ§ØµØ± Ø¯ÙÙØ§ÙÙÙÙØ§Ù Ø¨ÙØ§Ø³Ø·Ø© JavaScript -->
         </div>
       </div>
       
@@ -663,13 +671,13 @@
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
-        <!-- رسالة توضيحية -->
+        <!-- Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ© -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
         </div>
         
-        <!-- Customer Information (اختيارية) -->
+        <!-- Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©) -->
         <div class="customer-info" style="margin-bottom: 20px;">
           <h3>Delivery Information <span class="optional-note">(Optional)</span></h3>
           <div class="form-group">
@@ -720,13 +728,13 @@
   </div>
 
   <script>
-    // Cart data structure - سيتم تحميلها من localStorage (مفتاح zushiCart المطابق لصفحة القائمة)
+    // Cart data structure - Ø³ÙØªÙ ØªØ­ÙÙÙÙØ§ ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart Ø§ÙÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
     let cart = [];
 
     // Constants
     const WHATSAPP_NUMBER = "212642620325";
 
-    // Customer Information (اختيارية)
+    // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
     let customerInfo = {
       name: "",
       address: "",
@@ -742,25 +750,25 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     const backButton = document.getElementById('back-button');
 
-    // Customer Information Elements (اختيارية)
+    // Customer Information Elements (Ø§Ø®ØªÙØ§Ø±ÙØ©)
     const customerNameInput = document.getElementById('customerName');
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
-    // دالة للتحقق من أن المصدر هو menuzushi.html فقط
+    // Ø¯Ø§ÙØ© ÙÙØªØ­ÙÙ ÙÙ Ø£Ù Ø§ÙÙØµØ¯Ø± ÙÙ menuzushi.html ÙÙØ·
     function validateCartSource() {
       const referrer = document.referrer;
       
-      // إذا كان هناك مرجع (الصفحة السابقة) وتحقق من أنه ليس menuzushi.html
+      // Ø¥Ø°Ø§ ÙØ§Ù ÙÙØ§Ù ÙØ±Ø¬Ø¹ (Ø§ÙØµÙØ­Ø© Ø§ÙØ³Ø§Ø¨ÙØ©) ÙØªØ­ÙÙ ÙÙ Ø£ÙÙ ÙÙØ³ menuzushi.html
       if (referrer && !referrer.includes('menuzushi.html')) {
         console.warn('Cart data should only come from menuzushi.html. Clearing cart...');
-        // مسح السلة إذا كانت قادمة من مصدر آخر
+        // ÙØ³Ø­ Ø§ÙØ³ÙØ© Ø¥Ø°Ø§ ÙØ§ÙØª ÙØ§Ø¯ÙØ© ÙÙ ÙØµØ¯Ø± Ø¢Ø®Ø±
         cart = [];
         saveCart();
         return false;
       }
       
-      // إذا لم يكن هناك مرجع (تم فتح الصفحة مباشرة)، نسمح بذلك ولكن ننبه
+      // Ø¥Ø°Ø§ ÙÙ ÙÙÙ ÙÙØ§Ù ÙØ±Ø¬Ø¹ (ØªÙ ÙØªØ­ Ø§ÙØµÙØ­Ø© ÙØ¨Ø§Ø´Ø±Ø©)Ø ÙØ³ÙØ­ Ø¨Ø°ÙÙ ÙÙÙÙ ÙÙØ¨Ù
       if (!referrer) {
         console.log('Page opened directly. Cart will be loaded if exists.');
       }
@@ -768,11 +776,11 @@
       return true;
     }
 
-    // دالة للحصول على محتويات السلة من localStorage (مفتاح zushiCart - مطابق لصفحة القائمة)
+    // Ø¯Ø§ÙØ© ÙÙØ­ØµÙÙ Ø¹ÙÙ ÙØ­ØªÙÙØ§Øª Ø§ÙØ³ÙØ© ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart - ÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
     function getCart() {
       try {
         const cartData = localStorage.getItem('zushiCart');
-        console.log("Raw cart data from localStorage:", cartData); // للتتبع
+        console.log("Raw cart data from localStorage:", cartData); // ÙÙØªØªØ¨Ø¹
         return cartData ? JSON.parse(cartData) : [];
       } catch (error) {
         console.error("Error loading cart from localStorage:", error);
@@ -780,27 +788,27 @@
       }
     }
     
-    // دالة لحفظ السلة في localStorage (مفتاح zushiCart - مطابق لصفحة القائمة)
+    // Ø¯Ø§ÙØ© ÙØ­ÙØ¸ Ø§ÙØ³ÙØ© ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart - ÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
     function saveCart() {
       localStorage.setItem('zushiCart', JSON.stringify(cart));
-      console.log("Cart saved to localStorage:", cart); // للتتبع
+      console.log("Cart saved to localStorage:", cart); // ÙÙØªØªØ¨Ø¹
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
+    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙØ§Ø¨Ù ÙÙØ¹Ø±Ø¶
     function formatCustomizationsForDisplay(item) {
       let customizations = [];
       
-      // معالجة جميع أنواع التخصيصات
+      // ÙØ¹Ø§ÙØ¬Ø© Ø¬ÙÙØ¹ Ø£ÙÙØ§Ø¹ Ø§ÙØªØ®ØµÙØµØ§Øª
       if (item.customizations) {
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-          // تخطي الحقول الفارغة
+          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-          // تحويل المفتاح إلى نص مقروء
+          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -813,28 +821,28 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-          // معالجة القيم المختلفة
+          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
           if (Array.isArray(value)) {
             if (value.length > 0) {
-              // إذا كانت المصفوفة تحتوي على كائنات
+              // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙØ§Ø¦ÙØ§Øª
               if (typeof value[0] === 'object') {
                 const labels = value.map(v => v.label || v.value).filter(v => v);
                 if (labels.length > 0) {
                   customizations.push(`${displayKey}: ${labels.join(', ')}`);
                 }
               } else {
-                // إذا كانت المصفوفة تحتوي على قيم نصية مباشرة
+                // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙÙÙ ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
                 customizations.push(`${displayKey}: ${value.join(', ')}`);
               }
             }
           } else if (typeof value === 'object' && value !== null) {
-            // إذا كانت القيمة كائن
+            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØ§Ø¦Ù
             const label = value.label || value.value;
             if (label) {
               customizations.push(`${displayKey}: ${label}`);
             }
           } else if (value) {
-            // إذا كانت القيمة نصية مباشرة
+            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
             customizations.push(`${displayKey}: ${value}`);
           }
         });
@@ -843,7 +851,7 @@
       return customizations;
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
+    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙÙØ±Ø³Ø§ÙØ©
     function formatCustomizationsForMessage(item) {
       let customizationsText = "";
       
@@ -851,12 +859,12 @@
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-          // تخطي الحقول الفارغة
+          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-          // تحويل المفتاح إلى نص مقروء
+          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -869,7 +877,7 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-          // معالجة القيم المختلفة
+          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
           if (Array.isArray(value)) {
             if (value.length > 0) {
               let itemsList = [];
@@ -880,15 +888,15 @@
                   itemsList.push(v);
                 }
               });
-              customizationsText += `   • ${displayKey}: ${itemsList.join(', ')}\n`;
+              customizationsText += `   â¢ ${displayKey}: ${itemsList.join(', ')}\n`;
             }
           } else if (typeof value === 'object' && value !== null) {
             const label = value.label || value.value;
             if (label) {
-              customizationsText += `   • ${displayKey}: ${label}\n`;
+              customizationsText += `   â¢ ${displayKey}: ${label}\n`;
             }
           } else if (value) {
-            customizationsText += `   • ${displayKey}: ${value}\n`;
+            customizationsText += `   â¢ ${displayKey}: ${value}\n`;
           }
         });
       }
@@ -898,14 +906,14 @@
     
     // Initialize the cart
     function initCart() {
-      // التحقق من المصدر أولاً
+      // Ø§ÙØªØ­ÙÙ ÙÙ Ø§ÙÙØµØ¯Ø± Ø£ÙÙØ§Ù
       validateCartSource();
       
-      // تحميل السلة
+      // ØªØ­ÙÙÙ Ø§ÙØ³ÙØ©
       cart = getCart();
       console.log("Cart loaded in checkout page:", cart);
       
-      // التحقق مرة أخرى بعد التحميل (للتأكد)
+      // Ø§ÙØªØ­ÙÙ ÙØ±Ø© Ø£Ø®Ø±Ù Ø¨Ø¹Ø¯ Ø§ÙØªØ­ÙÙÙ (ÙÙØªØ£ÙØ¯)
       if (cart.length > 0) {
         const referrer = document.referrer;
         if (referrer && !referrer.includes('menuzushi.html')) {
@@ -944,25 +952,25 @@
         itemElement.className = 'item-card';
         itemElement.setAttribute('data-id', index);
         
-        // الحصول على الخيارات المخصصة
+        // Ø§ÙØ­ØµÙÙ Ø¹ÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ©
         const customizations = formatCustomizationsForDisplay(item);
         
-        // حساب السعر لكل عنصر - التأكد من وجود totalPrice أو حسابه من basePrice
+        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± ÙÙÙ Ø¹ÙØµØ± - Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ totalPrice Ø£Ù Ø­Ø³Ø§Ø¨Ù ÙÙ basePrice
         let pricePerUnit = item.basePrice || item.price || 0;
         let totalItemPrice = item.totalPrice || 0;
         
-        // إذا لم يكن totalPrice موجوداً، نحسبه
+        // Ø¥Ø°Ø§ ÙÙ ÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø§ÙØ ÙØ­Ø³Ø¨Ù
         if (totalItemPrice === 0 && pricePerUnit > 0 && item.quantity) {
           totalItemPrice = pricePerUnit * item.quantity;
           item.totalPrice = totalItemPrice;
         }
         
-        // إذا كان pricePerUnit لا يزال 0 ولكن totalPrice موجود، نحسب السعر للوحدة
+        // Ø¥Ø°Ø§ ÙØ§Ù pricePerUnit ÙØ§ ÙØ²Ø§Ù 0 ÙÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø ÙØ­Ø³Ø¨ Ø§ÙØ³Ø¹Ø± ÙÙÙØ­Ø¯Ø©
         if (pricePerUnit === 0 && totalItemPrice > 0 && item.quantity) {
           pricePerUnit = totalItemPrice / item.quantity;
         }
         
-        // استخدام الصورة الافتراضية إذا لم تكن موجودة
+        // Ø§Ø³ØªØ®Ø¯Ø§Ù Ø§ÙØµÙØ±Ø© Ø§ÙØ§ÙØªØ±Ø§Ø¶ÙØ© Ø¥Ø°Ø§ ÙÙ ØªÙÙ ÙÙØ¬ÙØ¯Ø©
         const imageUrl = item.img || 'https://via.placeholder.com/70x70/8B0000/ffffff?text=Zushi';
         
         itemElement.innerHTML = `
@@ -972,7 +980,7 @@
           <div class="item-details">
             <div class="item-name">${item.name || 'Unknown item'}</div>
             
-            <!-- عرض الخيارات المخصصة كـ badges -->
+            <!-- Ø¹Ø±Ø¶ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© ÙÙ badges -->
             ${customizations.length > 0 ? 
               `<div class="customization-badges">
                 ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
@@ -980,7 +988,7 @@
               : ''
             }
             
-            <!-- عرض التعليمات الخاصة إذا كانت موجودة -->
+            <!-- Ø¹Ø±Ø¶ Ø§ÙØªØ¹ÙÙÙØ§Øª Ø§ÙØ®Ø§ØµØ© Ø¥Ø°Ø§ ÙØ§ÙØª ÙÙØ¬ÙØ¯Ø© -->
             ${item.specialInstructions ? 
               `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
               : ''
@@ -999,17 +1007,17 @@
         cartItemsContainer.appendChild(itemElement);
       });
       
-      // حفظ السلة بعد التحديث
+      // Ø­ÙØ¸ Ø§ÙØ³ÙØ© Ø¨Ø¹Ø¯ Ø§ÙØªØ­Ø¯ÙØ«
       saveCart();
     }
 
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-        // التأكد من وجود totalPrice صحيح
+        // Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ totalPrice ØµØ­ÙØ­
         let itemTotal = item.totalPrice || 0;
         
-        // إذا لم يكن totalPrice موجوداً، نحسبه
+        // Ø¥Ø°Ø§ ÙÙ ÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø§ÙØ ÙØ­Ø³Ø¨Ù
         if (itemTotal === 0 && (item.basePrice || item.price) && item.quantity) {
           const pricePerUnit = item.basePrice || item.price;
           itemTotal = pricePerUnit * item.quantity;
@@ -1043,24 +1051,24 @@
     // Update item quantity
     function updateQuantity(itemIndex, change) {
       if (cart[itemIndex]) {
-        // التأكد من وجود quantity
+        // Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ quantity
         if (!cart[itemIndex].quantity) cart[itemIndex].quantity = 1;
         
-        // تغيير الكمية
+        // ØªØºÙÙØ± Ø§ÙÙÙÙØ©
         cart[itemIndex].quantity += change;
         
-        // التأكد من أن الكمية لا تقل عن 1
+        // Ø§ÙØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙÙÙÙØ© ÙØ§ ØªÙÙ Ø¹Ù 1
         if (cart[itemIndex].quantity < 1) {
           cart[itemIndex].quantity = 1;
         }
         
-        // حساب السعر الإجمالي الجديد
+        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ Ø§ÙØ¬Ø¯ÙØ¯
         const pricePerUnit = cart[itemIndex].basePrice || cart[itemIndex].price || 0;
         if (pricePerUnit > 0) {
           cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
         }
         
-        // إذا كانت الكمية 0، احذف العنصر
+        // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© 0Ø Ø§Ø­Ø°Ù Ø§ÙØ¹ÙØµØ±
         if (cart[itemIndex].quantity === 0) {
           cart.splice(itemIndex, 1);
         }
@@ -1091,7 +1099,7 @@
         renderCartItems();
         updateCartDisplay();
         
-        // إظهار رسالة تأكيد
+        // Ø¥Ø¸ÙØ§Ø± Ø±Ø³Ø§ÙØ© ØªØ£ÙÙØ¯
         alert("Your cart has been cleared successfully.");
       }
     }
@@ -1103,14 +1111,14 @@
         return;
       }
       
-      // Save customer info (اختياري - لن يتم التحقق من الحقول)
+      // Save customer info (Ø§Ø®ØªÙØ§Ø±Ù - ÙÙ ÙØªÙ Ø§ÙØªØ­ÙÙ ÙÙ Ø§ÙØ­ÙÙÙ)
       saveCustomerInfo();
       
       // Generate and send WhatsApp message
       sendWhatsAppOrder();
     }
 
-    // Save customer information (اختيارية)
+    // Save customer information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
     function saveCustomerInfo() {
       customerInfo = {
         name: customerNameInput.value.trim(),
@@ -1151,7 +1159,15 @@
       
       // Open WhatsApp with the order message
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+              // Tracks the checkout action that opens WhatsApp; it cannot confirm the message was sent.
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion', {
+                'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
+                'value': 1.0,
+                'currency': 'MAD'
+            });
+        }
+        window.open(whatsappUrl, '_blank');
       
       // Clear cart after sending
       setTimeout(() => {
@@ -1165,21 +1181,21 @@
 
     // Generate WhatsApp message with ALL customizations
     function generateWhatsAppMessage(totals) {
-      let message = ` 🍣 *NEW ZUSHI LAB ORDER* 🥢\n\n`;
+      let message = ` ð£ *NEW ZUSHI LAB ORDER* ð¥¢\n\n`;
       
-      // Customer Information (اختيارية - تضاف فقط إذا تم ملؤها)
+      // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ© - ØªØ¶Ø§Ù ÙÙØ· Ø¥Ø°Ø§ ØªÙ ÙÙØ¤ÙØ§)
       if (customerInfo.name || customerInfo.address) {
         message += `*Delivery Details:*\n`;
-        if (customerInfo.name) message += `👤 Name: ${customerInfo.name}\n`;
-        if (customerInfo.address) message += `📍 Address: ${customerInfo.address}\n`;
-        message += `⏰ Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (35-45 min)' : 'Schedule Later'}\n\n`;
+        if (customerInfo.name) message += `ð¤ Name: ${customerInfo.name}\n`;
+        if (customerInfo.address) message += `ð Address: ${customerInfo.address}\n`;
+        message += `â° Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (35-45 min)' : 'Schedule Later'}\n\n`;
       }
       
       // Order Details
       message += `*Order Details:*\n`;
       message += `====================\n\n`;
       
-      // إضافة كل العناصر مع خياراتها
+      // Ø¥Ø¶Ø§ÙØ© ÙÙ Ø§ÙØ¹ÙØ§ØµØ± ÙØ¹ Ø®ÙØ§Ø±Ø§ØªÙØ§
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
         const pricePerUnit = item.basePrice || item.price || (item.totalPrice / item.quantity);
@@ -1193,7 +1209,7 @@
         }
         
         if (item.specialInstructions && item.specialInstructions.trim() !== '') {
-          message += `   📝 Note: ${item.specialInstructions}\n`;
+          message += `   ð Note: ${item.specialInstructions}\n`;
         }
         
         message += `\n`;
@@ -1204,24 +1220,24 @@
       message += `====================\n`;
       message += `Items Total: ${totals.total} MAD\n\n`;
       
-      // رسالة توضيحية
+      // Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ©
       message += `*Note:* This total does not include delivery charges.\n`;
       message += `Delivery fee will be calculated based on your location.\n\n`;
       
-      // Payment Method (الدفع عند الاستلام فقط)
+      // Payment Method (Ø§ÙØ¯ÙØ¹ Ø¹ÙØ¯ Ø§ÙØ§Ø³ØªÙØ§Ù ÙÙØ·)
       message += `*Payment Method:* Cash on Delivery\n\n`;
       
       // Final Message
       message += `====================\n`;
       message += `Please confirm this order and let me know the delivery charges.\n`;
-      message += `Thank you for ordering from Zushi LAB! 🙏`;
+      message += `Thank you for ordering from Zushi LAB! ð`;
       
       return message;
     }
 
     // Handle back button click - Modified to go only to menuzushi.html
     function handleBackButton() {
-      // التوجيه مباشرة إلى صفحة menuzushi.html فقط
+      // Ø§ÙØªÙØ¬ÙÙ ÙØ¨Ø§Ø´Ø±Ø© Ø¥ÙÙ ØµÙØ­Ø© menuzushi.html ÙÙØ·
       window.location.href = 'menuzushi.html';
     }
 
@@ -1273,7 +1289,7 @@
         }
       });
       
-      // Save customer info on input change (اختيارية)
+      // Save customer info on input change (Ø§Ø®ØªÙØ§Ø±ÙØ©)
       [customerNameInput, customerAddressInput].forEach(input => {
         input.addEventListener('input', function() {
           saveCustomerInfo();
@@ -1284,7 +1300,7 @@
     // Initialize the cart when the page loads
     document.addEventListener('DOMContentLoaded', initCart);
     
-    // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
+    // Ø¯Ø§ÙØ© ÙØ³Ø§Ø¹Ø¯Ø© ÙØ¹Ø±Ø¶ Ø§ÙØ¨ÙØ§ÙØ§Øª Ø§ÙÙØ®Ø²ÙØ© ÙÙ localStorage (ÙØªØµØ­ÙØ­ Ø§ÙØ£Ø®Ø·Ø§Ø¡)
     function debugCart() {
       console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('zushiCart') || '[]'));
     }
