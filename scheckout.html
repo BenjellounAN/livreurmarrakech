@@ -394,6 +394,14 @@
       .empty-cart-image { max-width: 150px; }
     }
   </style>
+  <!-- Google Ads tag for WhatsApp order-start tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18159181033"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18159181033');
+  </script>
 </head>
 <body>
   <div class="container">
@@ -684,18 +692,18 @@
       const customer = getCustomerInfo();
       const paymentMethod = getSelectedPaymentMethod();
       
-      let msg = `🛒 *BENMARKET SUPERMARKET - NEW ORDER* 🛒\n\n`;
+      let msg = `ð *BENMARKET SUPERMARKET - NEW ORDER* ð\n\n`;
       msg += `*Order ID:* ${orderId}\n`;
       msg += `*Date:* ${new Date().toLocaleString()}\n\n`;
       msg += `*Customer Information:*\n`;
-      msg += `├ Name: ${customer.name}\n`;
-      msg += `├ Phone: ${customer.phone}\n`;
-      msg += `└ Address: ${customer.address}\n\n`;
+      msg += `â Name: ${customer.name}\n`;
+      msg += `â Phone: ${customer.phone}\n`;
+      msg += `â Address: ${customer.address}\n\n`;
       msg += `*Delivery:* ${getDeliveryTimeText()}\n`;
       msg += `*Payment Method: ${paymentMethod}*\n\n`;
       msg += `*Total Amount: ${totals.total} MAD*\n\n`;
-      msg += `📱 *Please confirm this order and let me know the Total with delivery charges.*\n\n`;
-      msg += `_Thank you!_ 🙏🏼`;
+      msg += `ð± *Please confirm this order and let me know the Total with delivery charges.*\n\n`;
+      msg += `_Thank you!_ ðð¼`;
       
       return msg;
     }
@@ -729,15 +737,15 @@
         totalItems: cart.reduce((sum, item) => sum + (item.quantity || 1), 0)
       };
       
-      console.log("📦 Saving order to Firebase with items:", orderData.items);
+      console.log("ð¦ Saving order to Firebase with items:", orderData.items);
       
       db.collection('orders').add(orderData)
         .then((docRef) => {
-          console.log("✅ Order saved to Firebase! Order ID:", docRef.id);
-          console.log("✅ Items saved with images:", orderData.items);
+          console.log("â Order saved to Firebase! Order ID:", docRef.id);
+          console.log("â Items saved with images:", orderData.items);
         })
         .catch((error) => {
-          console.error("❌ Firebase save error:", error);
+          console.error("â Firebase save error:", error);
         });
     }
     
@@ -775,13 +783,21 @@
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
       
       // Open WhatsApp
-      window.open(whatsappUrl, '_blank');
+              // Tracks the checkout action that opens WhatsApp; it cannot confirm the message was sent.
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion', {
+                'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
+                'value': 1.0,
+                'currency': 'MAD'
+            });
+        }
+        window.open(whatsappUrl, '_blank');
       
       // Save order to Firebase with ALL product details including images
       saveOrderToFirebaseAsync(orderId, totals);
       
       // Show success message
-      showToast(`Order #${orderId} sent via WhatsApp! ✓`, 'success');
+      showToast(`Order #${orderId} sent via WhatsApp! â`, 'success');
       
       // Clear cart after successful order
       cart = [];
@@ -790,7 +806,7 @@
       renderCartItems();
       updateCartDisplay();
       
-      console.log("✅ Order completed:", orderId);
+      console.log("â Order completed:", orderId);
     }
     
     backButton.addEventListener('click', () => {
@@ -811,8 +827,8 @@
       cart = getCart();
       renderCartItems();
       updateCartDisplay();
-      console.log("✅ Checkout ready! Cart items loaded:", cart.length);
-      console.log("📸 Cart items with images:", cart.map(item => ({ name: item.name, imageUrl: item.imageUrl })));
+      console.log("â Checkout ready! Cart items loaded:", cart.length);
+      console.log("ð¸ Cart items with images:", cart.map(item => ({ name: item.name, imageUrl: item.imageUrl })));
     }
     
     document.addEventListener('DOMContentLoaded', init);
