@@ -1130,14 +1130,14 @@
 
     // Generate WhatsApp message with ALL customizations
     function generateWhatsAppMessage(totals) {
-      let message = ` ð*NEW PIZZA HUT ORDER* ð\n\n`;
+      let message = ` 🍕 *NEW PIZZA Hut ORDER* 🍕\n\n`;
       
       // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ© - ØªØ¶Ø§Ù ÙÙØ· Ø¥Ø°Ø§ ØªÙ ÙÙØ¤ÙØ§)
       if (customerInfo.name || customerInfo.address) {
         message += `*Delivery Details:*\n`;
-        if (customerInfo.name) message += `ð¤ Name: ${customerInfo.name}\n`;
-        if (customerInfo.address) message += `ð Address: ${customerInfo.address}\n`;
-        message += `â° Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (25-35 min)' : 'Schedule Later'}\n\n`;
+        if (customerInfo.name) message += `👤 Name: ${customerInfo.name}\n`;
+        if (customerInfo.address) message += `📍 Address: ${customerInfo.address}\n`;
+        message += `⏰ Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (25-35 min)' : 'Schedule Later'}\n\n`;
       }
       
       // Order Details
@@ -1147,10 +1147,16 @@
       // Ø¥Ø¶Ø§ÙØ© ÙÙ Ø§ÙØ¹ÙØ§ØµØ± ÙØ¹ Ø®ÙØ§Ø±Ø§ØªÙØ§
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
+        const pricePerUnit = calculateUnitPrice(item);
+        const extrasTotal = calculateExtrasTotal(item);
         
         message += `*${index + 1}. ${item.quantity}x ${item.name}*\n`;
         message += `   Unit Price: ${pricePerUnit.toFixed(2)} MAD\n`;
+        
+        if (extrasTotal > 0) {
+          message += `   Extras Total: +${extrasTotal.toFixed(2)} MAD\n`;
+        }
+        
         message += `   Total: ${item.totalPrice.toFixed(2)} MAD\n`;
         
         if (customizationsText) {
@@ -1158,7 +1164,7 @@
         }
         
         if (item.specialInstructions && item.specialInstructions.trim() !== '') {
-          message += `   ð Note: ${item.specialInstructions}\n`;
+          message += `📝 Note: ${item.specialInstructions}\n`;
         }
         
         message += `\n`;
@@ -1179,11 +1185,10 @@
       // Final Message
       message += `====================\n`;
       message += `Please confirm this order and let me know the delivery charges.\n`;
-      message += `Thank you! ð`;
+      message += `Thank you! 🙏`;
       
       return message;
     }
-
     // Handle back button click
     function handleBackButton() {
       // ÙØ­Ø§ÙÙØ© Ø§ÙØ¹ÙØ¯Ø© Ø¥ÙÙ Ø§ÙØµÙØ­Ø© Ø§ÙØ³Ø§Ø¨ÙØ© ÙÙ Ø§ÙØªØ§Ø±ÙØ®
