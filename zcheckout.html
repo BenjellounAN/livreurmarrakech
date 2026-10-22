@@ -18,13 +18,13 @@
       --border-light: #ECF0F1;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
@@ -32,12 +32,12 @@
       padding: 20px;
       color: var(--text-dark);
     }
-    
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
     }
-    
+
     /* Fixed Back Button */
     .back-btn {
       position: fixed;
@@ -56,31 +56,31 @@
       z-index: 100;
       transition: all 0.3s ease;
     }
-    
+
     .back-btn:hover {
       background: var(--primary-red-dark);
       transform: translateX(-3px);
     }
-    
+
     /* Header */
     .header {
       text-align: center;
       margin-bottom: 25px;
       padding-top: 10px;
     }
-    
+
     .header h1 {
       font-size: 2rem;
       font-weight: 700;
       color: var(--primary-red);
       margin-bottom: 8px;
     }
-    
+
     .header p {
       color: var(--text-light);
       font-size: 0.95rem;
     }
-    
+
     /* Cart Layout */
     .cart-container {
       display: flex;
@@ -88,7 +88,7 @@
       gap: 20px;
       margin-bottom: 40px;
     }
-    
+
     .cart-items {
       flex: 1;
       min-width: 300px;
@@ -97,7 +97,7 @@
       padding: 20px;
       box-shadow: var(--shadow);
     }
-    
+
     .cart-summary {
       width: 320px;
       background: white;
@@ -106,7 +106,7 @@
       box-shadow: var(--shadow);
       align-self: flex-start;
     }
-    
+
     /* Cart Items */
     .cart-header {
       display: flex;
@@ -116,12 +116,12 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border-light);
     }
-    
+
     .cart-header h2 {
       font-size: 1.3rem;
       font-weight: 600;
     }
-    
+
     .clear-cart {
       color: var(--primary-red);
       background: none;
@@ -135,11 +135,11 @@
       border-radius: 8px;
       transition: all 0.2s ease;
     }
-    
+
     .clear-cart:hover {
       background: rgba(139, 0, 0, 0.1);
     }
-    
+
     /* Item Card - Compact Design */
     .item-card {
       display: flex;
@@ -149,11 +149,11 @@
       align-items: center;
       transition: all 0.2s ease;
     }
-    
+
     .item-card:hover {
       background: rgba(139, 0, 0, 0.02);
     }
-    
+
     .item-image {
       width: 70px;
       height: 70px;
@@ -161,18 +161,18 @@
       overflow: hidden;
       flex-shrink: 0;
     }
-    
+
     .item-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     .item-details {
       flex: 1;
       min-width: 0;
     }
-    
+
     .item-name {
       font-weight: 600;
       font-size: 0.95rem;
@@ -181,7 +181,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .item-desc {
       color: var(--text-light);
       font-size: 0.8rem;
@@ -192,20 +192,20 @@
       overflow: hidden;
       line-height: 1.3;
     }
-    
+
     .item-price {
       color: var(--primary-red);
       font-weight: 600;
       font-size: 0.95rem;
     }
-    
+
     .item-controls {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-top: 6px;
     }
-    
+
     .quantity-btn {
       width: 26px;
       height: 26px;
@@ -220,19 +220,19 @@
       transition: all 0.2s ease;
       font-size: 0.8rem;
     }
-    
+
     .quantity-btn:hover {
       background: var(--primary-red);
       color: white;
     }
-    
+
     .item-quantity {
       font-weight: 600;
       min-width: 26px;
       text-align: center;
       font-size: 0.9rem;
     }
-    
+
     .remove-item {
       color: #e74c3c;
       background: none;
@@ -247,11 +247,11 @@
       border-radius: 6px;
       transition: all 0.2s ease;
     }
-    
+
     .remove-item:hover {
       background: rgba(231, 76, 60, 0.1);
     }
-    
+
     /* Customization Badges */
     .customization-badges {
       display: flex;
@@ -260,7 +260,7 @@
       margin-top: 4px;
       margin-bottom: 6px;
     }
-    
+
     .customization-badge {
       background: rgba(139, 0, 0, 0.1);
       color: var(--primary-red);
@@ -270,7 +270,7 @@
       font-weight: 500;
       white-space: nowrap;
     }
-    
+
     /* Special Instructions */
     .special-instructions {
       color: var(--text-light);
@@ -282,7 +282,7 @@
       border-radius: 6px;
       border-left: 2px solid var(--primary-red);
     }
-    
+
     /* Cart Summary */
     .summary-title {
       font-size: 1.3rem;
@@ -291,22 +291,22 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border-light);
     }
-    
+
     .summary-item {
       display: flex;
       justify-content: space-between;
       margin-bottom: 12px;
       font-size: 0.9rem;
     }
-    
+
     .summary-label {
       color: var(--text-light);
     }
-    
+
     .summary-value {
       font-weight: 500;
     }
-    
+
     .summary-total {
       display: flex;
       justify-content: space-between;
@@ -317,15 +317,15 @@
       font-size: 1.2rem;
       font-weight: 700;
     }
-    
+
     .total-label {
       color: var(--text-dark);
     }
-    
+
     .total-price {
       color: var(--primary-red);
     }
-    
+
     .delivery-note {
       background: rgba(139, 0, 0, 0.05);
       padding: 12px;
@@ -335,23 +335,23 @@
       color: var(--text-dark);
       border-left: 3px solid var(--primary-red);
     }
-    
+
     .delivery-note i {
       color: var(--primary-red);
       margin-right: 8px;
     }
-    
+
     /* Payment Method */
     .payment-method {
       margin: 20px 0;
     }
-    
+
     .payment-title {
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 12px;
     }
-    
+
     .payment-option {
       display: flex;
       align-items: center;
@@ -364,27 +364,27 @@
       transition: all 0.2s ease;
       font-size: 0.9rem;
     }
-    
+
     .payment-option.selected {
       border-color: var(--primary-red);
       background: rgba(139, 0, 0, 0.05);
     }
-    
+
     .payment-option input {
       accent-color: var(--primary-red);
       transform: scale(0.9);
     }
-    
+
     .payment-option label {
       flex: 1;
       cursor: pointer;
     }
-    
+
     .payment-icon {
       color: var(--primary-red);
       font-size: 1rem;
     }
-    
+
     /* Checkout Button */
     .checkout-btn {
       width: 100%;
@@ -404,34 +404,34 @@
       transition: all 0.3s ease;
       margin-top: 15px;
     }
-    
+
     .checkout-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(139, 0, 0, 0.35);
     }
-    
+
     .checkout-btn:active {
       transform: translateY(0);
     }
-    
+
     /* Empty Cart */
     .empty-cart {
       text-align: center;
       padding: 30px 0;
     }
-    
+
     .empty-cart i {
       font-size: 4rem;
       color: var(--border-light);
       margin-bottom: 15px;
     }
-    
+
     .empty-cart p {
       color: var(--text-light);
       font-size: 1rem;
       margin-bottom: 20px;
     }
-    
+
     .browse-btn {
       background: var(--primary-red);
       color: white;
@@ -443,11 +443,11 @@
       transition: all 0.3s ease;
       font-size: 0.9rem;
     }
-    
+
     .browse-btn:hover {
       background: var(--primary-red-dark);
     }
-    
+
     /* Info Text */
     .info-text {
       text-align: center;
@@ -456,11 +456,11 @@
       font-size: 0.8rem;
       line-height: 1.4;
     }
-    
+
     .info-text i {
       margin-right: 4px;
     }
-    
+
     /* Customer Information Form */
     .customer-info {
       background: white;
@@ -469,7 +469,7 @@
       box-shadow: var(--shadow);
       margin-bottom: 20px;
     }
-    
+
     .customer-info h3 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -478,11 +478,11 @@
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border-light);
     }
-    
+
     .form-group {
       margin-bottom: 15px;
     }
-    
+
     .form-group label {
       display: block;
       font-size: 0.85rem;
@@ -490,7 +490,7 @@
       margin-bottom: 5px;
       color: var(--text-dark);
     }
-    
+
     .form-group input,
     .form-group textarea {
       width: 100%;
@@ -502,7 +502,7 @@
       transition: all 0.3s ease;
       background-color: #F9F9F9;
     }
-    
+
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
@@ -510,12 +510,12 @@
       background-color: white;
       box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
     }
-    
+
     .form-group textarea {
       resize: vertical;
       min-height: 80px;
     }
-    
+
     .optional-note {
       font-size: 0.75rem;
       color: var(--text-light);
@@ -523,18 +523,18 @@
       margin-left: 5px;
       font-weight: normal;
     }
-    
+
     /* Delivery Time Selection */
     .delivery-time {
       margin-bottom: 15px;
     }
-    
+
     .time-options {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
-    
+
     .time-option {
       flex: 1;
       min-width: 120px;
@@ -546,74 +546,74 @@
       transition: all 0.2s ease;
       font-size: 0.85rem;
     }
-    
+
     .time-option.selected {
       border-color: var(--primary-red);
       background: rgba(139, 0, 0, 0.05);
       font-weight: 500;
     }
-    
+
     .time-option i {
       display: block;
       margin-bottom: 5px;
       color: var(--primary-red);
     }
-    
+
     /* Responsive Design */
     @media (max-width: 1024px) {
       .cart-container {
         flex-direction: column;
       }
-      
+
       .cart-summary {
         width: 100%;
       }
     }
-    
+
     @media (max-width: 768px) {
       .header h1 {
         font-size: 1.8rem;
       }
-      
+
       .header p {
         font-size: 0.9rem;
       }
-      
+
       .cart-items, .cart-summary {
         padding: 18px;
         border-radius: 14px;
       }
-      
+
       .item-card {
         flex-direction: row;
         text-align: left;
         gap: 10px;
       }
-      
+
       .item-image {
         width: 60px;
         height: 60px;
       }
-      
+
       .item-controls {
         justify-content: flex-start;
       }
-      
+
       .remove-item {
         margin-left: 0;
         margin-top: 0;
         width: auto;
         justify-content: flex-start;
       }
-      
+
       .payment-option {
         padding: 10px;
       }
-      
+
       .time-options {
         flex-direction: column;
       }
-      
+
       .time-option {
         min-width: 100%;
       }
@@ -634,13 +634,13 @@
     <div class="back-btn" id="back-button">
       <i class="fas fa-arrow-left"></i>
     </div>
-    
+
     <!-- Header -->
     <div class="header">
       <h1>Zushi LAB Checkout</h1>
       <p>Review your order and complete your purchase</p>
     </div>
-    
+
     <!-- Cart Layout -->
     <div class="cart-container">
       <!-- Cart Items -->
@@ -651,33 +651,31 @@
             <i class="fas fa-trash-alt"></i> Clear All
           </button>
         </div>
-        
-        <div id="cart-items-container">
-          <!-- Ø³ÙØªÙ Ø¥Ø¶Ø§ÙØ© Ø§ÙØ¹ÙØ§ØµØ± Ø¯ÙÙØ§ÙÙÙÙØ§Ù Ø¨ÙØ§Ø³Ø·Ø© JavaScript -->
-        </div>
+
+        <div id="cart-items-container"></div>
       </div>
-      
+
       <!-- Cart Summary -->
       <div class="cart-summary">
         <h2 class="summary-title">Order Summary</h2>
-        
+
         <div class="summary-item">
           <span class="summary-label">Subtotal</span>
           <span class="summary-value" id="subtotal">0.00 MAD</span>
         </div>
-        
+
         <div class="summary-total">
           <span class="total-label">Total Items</span>
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
-        
-        <!-- Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ© -->
+
+        <!-- Delivery note -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
         </div>
-        
-        <!-- Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©) -->
+
+        <!-- Customer Information (optional) -->
         <div class="customer-info" style="margin-bottom: 20px;">
           <h3>Delivery Information <span class="optional-note">(Optional)</span></h3>
           <div class="form-group">
@@ -702,11 +700,11 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Payment Method -->
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
-          
+
           <div class="payment-option selected">
             <input type="radio" id="cash" name="payment" checked>
             <label for="cash">Cash on Delivery</label>
@@ -715,11 +713,11 @@
             </div>
           </div>
         </div>
-        
+
         <button class="checkout-btn" id="checkout-btn">
           <i class="fab fa-whatsapp"></i> Complete Order via WhatsApp
         </button>
-        
+
         <p class="info-text">
           <i class="fas fa-info-circle"></i> We'll contact you via WhatsApp to confirm your order details and delivery charges.
         </p>
@@ -728,13 +726,14 @@
   </div>
 
   <script>
-    // Cart data structure - Ø³ÙØªÙ ØªØ­ÙÙÙÙØ§ ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart Ø§ÙÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
-    let cart = [];
-
-    // Constants
+    // Cart is stored in localStorage under the key "zushiCart" (same key used by menuzushi.html).
+    // localStorage is the single source of truth: this page never clears the cart based on the referrer.
+    const CART_STORAGE_KEY = 'zushiCart';
+    const CUSTOMER_STORAGE_KEY = 'zushiCustomerInfo';
     const WHATSAPP_NUMBER = "212642620325";
 
-    // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+    let cart = [];
+
     let customerInfo = {
       name: "",
       address: "",
@@ -749,537 +748,378 @@
     const clearCartBtn = document.getElementById('clear-cart');
     const checkoutBtn = document.getElementById('checkout-btn');
     const backButton = document.getElementById('back-button');
-
-    // Customer Information Elements (Ø§Ø®ØªÙØ§Ø±ÙØ©)
     const customerNameInput = document.getElementById('customerName');
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
-    // Ø¯Ø§ÙØ© ÙÙØªØ­ÙÙ ÙÙ Ø£Ù Ø§ÙÙØµØ¯Ø± ÙÙ menuzushi.html ÙÙØ·
-    function validateCartSource() {
-      const referrer = document.referrer;
-      
-      // Ø¥Ø°Ø§ ÙØ§Ù ÙÙØ§Ù ÙØ±Ø¬Ø¹ (Ø§ÙØµÙØ­Ø© Ø§ÙØ³Ø§Ø¨ÙØ©) ÙØªØ­ÙÙ ÙÙ Ø£ÙÙ ÙÙØ³ menuzushi.html
-      if (referrer && !referrer.includes('menuzushi.html')) {
-        console.warn('Cart data should only come from menuzushi.html. Clearing cart...');
-        // ÙØ³Ø­ Ø§ÙØ³ÙØ© Ø¥Ø°Ø§ ÙØ§ÙØª ÙØ§Ø¯ÙØ© ÙÙ ÙØµØ¯Ø± Ø¢Ø®Ø±
-        cart = [];
-        saveCart();
-        return false;
-      }
-      
-      // Ø¥Ø°Ø§ ÙÙ ÙÙÙ ÙÙØ§Ù ÙØ±Ø¬Ø¹ (ØªÙ ÙØªØ­ Ø§ÙØµÙØ­Ø© ÙØ¨Ø§Ø´Ø±Ø©)Ø ÙØ³ÙØ­ Ø¨Ø°ÙÙ ÙÙÙÙ ÙÙØ¨Ù
-      if (!referrer) {
-        console.log('Page opened directly. Cart will be loaded if exists.');
-      }
-      
-      return true;
-    }
+    // ---------- Storage helpers ----------
 
-    // Ø¯Ø§ÙØ© ÙÙØ­ØµÙÙ Ø¹ÙÙ ÙØ­ØªÙÙØ§Øª Ø§ÙØ³ÙØ© ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart - ÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
     function getCart() {
       try {
-        const cartData = localStorage.getItem('zushiCart');
-        console.log("Raw cart data from localStorage:", cartData); // ÙÙØªØªØ¨Ø¹
-        return cartData ? JSON.parse(cartData) : [];
+        const raw = localStorage.getItem(CART_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
       } catch (error) {
         console.error("Error loading cart from localStorage:", error);
         return [];
       }
     }
-    
-    // Ø¯Ø§ÙØ© ÙØ­ÙØ¸ Ø§ÙØ³ÙØ© ÙÙ localStorage (ÙÙØªØ§Ø­ zushiCart - ÙØ·Ø§Ø¨Ù ÙØµÙØ­Ø© Ø§ÙÙØ§Ø¦ÙØ©)
+
     function saveCart() {
-      localStorage.setItem('zushiCart', JSON.stringify(cart));
-      console.log("Cart saved to localStorage:", cart); // ÙÙØªØªØ¨Ø¹
-    }
-    
-    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙØ§Ø¨Ù ÙÙØ¹Ø±Ø¶
-    function formatCustomizationsForDisplay(item) {
-      let customizations = [];
-      
-      // ÙØ¹Ø§ÙØ¬Ø© Ø¬ÙÙØ¹ Ø£ÙÙØ§Ø¹ Ø§ÙØªØ®ØµÙØµØ§Øª
-      if (item.customizations) {
-        Object.keys(item.customizations).forEach(key => {
-          const value = item.customizations[key];
-          
-          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
-          if (!value || (Array.isArray(value) && value.length === 0)) {
-            return;
-          }
-          
-          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
-          
-          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
-          if (Array.isArray(value)) {
-            if (value.length > 0) {
-              // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙØ§Ø¦ÙØ§Øª
-              if (typeof value[0] === 'object') {
-                const labels = value.map(v => v.label || v.value).filter(v => v);
-                if (labels.length > 0) {
-                  customizations.push(`${displayKey}: ${labels.join(', ')}`);
-                }
-              } else {
-                // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙÙÙ ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
-                customizations.push(`${displayKey}: ${value.join(', ')}`);
-              }
-            }
-          } else if (typeof value === 'object' && value !== null) {
-            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØ§Ø¦Ù
-            const label = value.label || value.value;
-            if (label) {
-              customizations.push(`${displayKey}: ${label}`);
-            }
-          } else if (value) {
-            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
-            customizations.push(`${displayKey}: ${value}`);
-          }
-        });
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      } catch (error) {
+        console.error("Error saving cart to localStorage:", error);
       }
-      
-      return customizations;
     }
-    
-    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙÙØ±Ø³Ø§ÙØ©
-    function formatCustomizationsForMessage(item) {
-      let customizationsText = "";
-      
-      if (item.customizations) {
-        Object.keys(item.customizations).forEach(key => {
-          const value = item.customizations[key];
-          
-          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
-          if (!value || (Array.isArray(value) && value.length === 0)) {
-            return;
-          }
-          
-          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
-          
-          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
-          if (Array.isArray(value)) {
-            if (value.length > 0) {
-              let itemsList = [];
-              value.forEach(v => {
-                if (typeof v === 'object') {
-                  itemsList.push(v.label || v.value);
-                } else {
-                  itemsList.push(v);
-                }
-              });
-              customizationsText += `   â¢ ${displayKey}: ${itemsList.join(', ')}\n`;
-            }
-          } else if (typeof value === 'object' && value !== null) {
-            const label = value.label || value.value;
-            if (label) {
-              customizationsText += `   â¢ ${displayKey}: ${label}\n`;
-            }
-          } else if (value) {
-            customizationsText += `   â¢ ${displayKey}: ${value}\n`;
-          }
-        });
+
+    // ---------- Price helpers ----------
+
+    // Returns a safe numeric price per unit.
+    function getUnitPrice(item) {
+      return Number(item.basePrice || item.price || 0);
+    }
+
+    // Returns a safe numeric total for one line item, and fixes it on the item if missing.
+    function getItemTotal(item) {
+      const quantity = Number(item.quantity) || 1;
+      let total = Number(item.totalPrice);
+      if (!total || Number.isNaN(total)) {
+        total = getUnitPrice(item) * quantity;
+        item.totalPrice = total;
       }
-      
-      return customizationsText;
+      return total;
     }
-    
-    // Initialize the cart
-    function initCart() {
-      // Ø§ÙØªØ­ÙÙ ÙÙ Ø§ÙÙØµØ¯Ø± Ø£ÙÙØ§Ù
-      validateCartSource();
-      
-      // ØªØ­ÙÙÙ Ø§ÙØ³ÙØ©
-      cart = getCart();
-      console.log("Cart loaded in checkout page:", cart);
-      
-      // Ø§ÙØªØ­ÙÙ ÙØ±Ø© Ø£Ø®Ø±Ù Ø¨Ø¹Ø¯ Ø§ÙØªØ­ÙÙÙ (ÙÙØªØ£ÙØ¯)
-      if (cart.length > 0) {
-        const referrer = document.referrer;
-        if (referrer && !referrer.includes('menuzushi.html')) {
-          console.warn('Cart has items but came from wrong source. Clearing cart...');
-          cart = [];
-          saveCart();
+
+    // ---------- Customizations formatting ----------
+
+    const KEY_LABELS = {
+      drink: 'Drink',
+      size: 'Size',
+      remove: 'Remove',
+      extras: 'Extras',
+      sauces: 'Sauces',
+      dressing: 'Dressing',
+      salt: 'Salt Level'
+    };
+
+    function getDisplayKey(key) {
+      return KEY_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
+    }
+
+    // Returns an array of strings such as "Size: Large".
+    function getCustomizationLines(item) {
+      const lines = [];
+      if (!item.customizations) return lines;
+
+      Object.keys(item.customizations).forEach(key => {
+        const value = item.customizations[key];
+        if (!value || (Array.isArray(value) && value.length === 0)) return;
+
+        const displayKey = getDisplayKey(key);
+
+        if (Array.isArray(value)) {
+          const labels = value
+            .map(v => (typeof v === 'object' && v !== null ? (v.label || v.value) : v))
+            .filter(Boolean);
+          if (labels.length > 0) lines.push(`${displayKey}: ${labels.join(', ')}`);
+        } else if (typeof value === 'object') {
+          const label = value.label || value.value;
+          if (label) lines.push(`${displayKey}: ${label}`);
+        } else {
+          lines.push(`${displayKey}: ${value}`);
         }
-      }
-      
-      renderCartItems();
-      updateCartDisplay();
-      attachEventListeners();
-      loadCustomerInfo();
+      });
+
+      return lines;
     }
-    
-    // Render cart items in the UI
+
+    // ---------- Rendering ----------
+
     function renderCartItems() {
       cartItemsContainer.innerHTML = '';
-      
+
       if (cart.length === 0) {
         cartItemsContainer.innerHTML = `
           <div class="empty-cart" style="text-align: center; padding: 20px;">
-            <img src="https://imagedelivery.net/dTw6tREJjMhOk7srEzkj3w/291c162f-e0c2-481b-e0be-2b0d8b222100/public" 
-                 alt="Empty cart" 
+            <img src="https://imagedelivery.net/dTw6tREJjMhOk7srEzkj3w/291c162f-e0c2-481b-e0be-2b0d8b222100/public"
+                 alt="Empty cart"
                  style="width: 140px; height: auto; display: block; margin: 0 auto 20px;">
             <p style="margin: 0 0 20px 0; font-size: 18px; color: grey;">Your basket is empty</p>
-            <a href="menuzushi.html" class="browse-btn" 
+            <a href="menuzushi.html" class="browse-btn"
                style="display: inline-block; padding: 12px 25px; background-color: #8B0000; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">Browse Menu</a>
           </div>
         `;
         return;
       }
-      
+
       cart.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.className = 'item-card';
         itemElement.setAttribute('data-id', index);
-        
-        // Ø§ÙØ­ØµÙÙ Ø¹ÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ©
-        const customizations = formatCustomizationsForDisplay(item);
-        
-        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± ÙÙÙ Ø¹ÙØµØ± - Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ totalPrice Ø£Ù Ø­Ø³Ø§Ø¨Ù ÙÙ basePrice
-        let pricePerUnit = item.basePrice || item.price || 0;
-        let totalItemPrice = item.totalPrice || 0;
-        
-        // Ø¥Ø°Ø§ ÙÙ ÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø§ÙØ ÙØ­Ø³Ø¨Ù
-        if (totalItemPrice === 0 && pricePerUnit > 0 && item.quantity) {
-          totalItemPrice = pricePerUnit * item.quantity;
-          item.totalPrice = totalItemPrice;
-        }
-        
-        // Ø¥Ø°Ø§ ÙØ§Ù pricePerUnit ÙØ§ ÙØ²Ø§Ù 0 ÙÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø ÙØ­Ø³Ø¨ Ø§ÙØ³Ø¹Ø± ÙÙÙØ­Ø¯Ø©
-        if (pricePerUnit === 0 && totalItemPrice > 0 && item.quantity) {
-          pricePerUnit = totalItemPrice / item.quantity;
-        }
-        
-        // Ø§Ø³ØªØ®Ø¯Ø§Ù Ø§ÙØµÙØ±Ø© Ø§ÙØ§ÙØªØ±Ø§Ø¶ÙØ© Ø¥Ø°Ø§ ÙÙ ØªÙÙ ÙÙØ¬ÙØ¯Ø©
+
+        const customizations = getCustomizationLines(item);
+        const quantity = Number(item.quantity) || 1;
+        const unitPrice = getUnitPrice(item);
+        const itemTotal = getItemTotal(item);
         const imageUrl = item.img || 'https://via.placeholder.com/70x70/8B0000/ffffff?text=Zushi';
-        
+
         itemElement.innerHTML = `
           <div class="item-image">
             <img src="${imageUrl}" alt="${item.name || 'Zushi item'}" onerror="this.src='https://via.placeholder.com/70x70/8B0000/ffffff?text=Zushi'">
           </div>
           <div class="item-details">
             <div class="item-name">${item.name || 'Unknown item'}</div>
-            
-            <!-- Ø¹Ø±Ø¶ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© ÙÙ badges -->
-            ${customizations.length > 0 ? 
-              `<div class="customization-badges">
-                ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
-              </div>` 
-              : ''
-            }
-            
-            <!-- Ø¹Ø±Ø¶ Ø§ÙØªØ¹ÙÙÙØ§Øª Ø§ÙØ®Ø§ØµØ© Ø¥Ø°Ø§ ÙØ§ÙØª ÙÙØ¬ÙØ¯Ø© -->
-            ${item.specialInstructions ? 
-              `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
-              : ''
-            }
-            
-            <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity || 1} = ${totalItemPrice.toFixed(2)} MAD</div>
+
+            ${customizations.length > 0
+              ? `<div class="customization-badges">
+                   ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
+                 </div>`
+              : ''}
+
+            ${item.specialInstructions
+              ? `<div class="special-instructions">Note: ${item.specialInstructions}</div>`
+              : ''}
+
+            <div class="item-price">${unitPrice.toFixed(2)} MAD x ${quantity} = ${itemTotal.toFixed(2)} MAD</div>
             <div class="item-controls">
               <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
-              <span class="item-quantity">${item.quantity || 1}</span>
+              <span class="item-quantity">${quantity}</span>
               <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
               <button class="remove-item"><i class="fas fa-times"></i> Remove</button>
             </div>
           </div>
         `;
-        
+
         cartItemsContainer.appendChild(itemElement);
       });
-      
-      // Ø­ÙØ¸ Ø§ÙØ³ÙØ© Ø¨Ø¹Ø¯ Ø§ÙØªØ­Ø¯ÙØ«
-      saveCart();
     }
 
-    // Calculate cart totals
     function calculateTotals() {
-      const subtotal = cart.reduce((sum, item) => {
-        // Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ totalPrice ØµØ­ÙØ­
-        let itemTotal = item.totalPrice || 0;
-        
-        // Ø¥Ø°Ø§ ÙÙ ÙÙÙ totalPrice ÙÙØ¬ÙØ¯Ø§ÙØ ÙØ­Ø³Ø¨Ù
-        if (itemTotal === 0 && (item.basePrice || item.price) && item.quantity) {
-          const pricePerUnit = item.basePrice || item.price;
-          itemTotal = pricePerUnit * item.quantity;
-          item.totalPrice = itemTotal;
-        }
-        
-        return sum + itemTotal;
-      }, 0);
-      
-      const total = subtotal;
-      
+      const subtotal = cart.reduce((sum, item) => sum + getItemTotal(item), 0);
       return {
         subtotal: subtotal.toFixed(2),
-        total: total.toFixed(2)
+        total: subtotal.toFixed(2)
       };
     }
 
-    // Update cart display
     function updateCartDisplay() {
       const totals = calculateTotals();
-      
-      // Update summary
       subtotalElement.textContent = `${totals.subtotal} MAD`;
       totalPriceElement.textContent = `${totals.total} MAD`;
-      
-      // Update cart count
-      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+      const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
       cartCount.textContent = `Order Items (${totalItems})`;
     }
 
-    // Update item quantity
-    function updateQuantity(itemIndex, change) {
-      if (cart[itemIndex]) {
-        // Ø§ÙØªØ£ÙØ¯ ÙÙ ÙØ¬ÙØ¯ quantity
-        if (!cart[itemIndex].quantity) cart[itemIndex].quantity = 1;
-        
-        // ØªØºÙÙØ± Ø§ÙÙÙÙØ©
-        cart[itemIndex].quantity += change;
-        
-        // Ø§ÙØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙÙÙÙØ© ÙØ§ ØªÙÙ Ø¹Ù 1
-        if (cart[itemIndex].quantity < 1) {
-          cart[itemIndex].quantity = 1;
-        }
-        
-        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ Ø§ÙØ¬Ø¯ÙØ¯
-        const pricePerUnit = cart[itemIndex].basePrice || cart[itemIndex].price || 0;
-        if (pricePerUnit > 0) {
-          cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
-        }
-        
-        // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© 0Ø Ø§Ø­Ø°Ù Ø§ÙØ¹ÙØµØ±
-        if (cart[itemIndex].quantity === 0) {
-          cart.splice(itemIndex, 1);
-        }
-        
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
-      }
+    // Re-renders the list, saves, and updates totals in one place.
+    function refreshCart() {
+      saveCart();
+      renderCartItems();
+      updateCartDisplay();
     }
 
-    // Remove item from cart
+    // ---------- Cart actions ----------
+
+    function updateQuantity(itemIndex, change) {
+      const item = cart[itemIndex];
+      if (!item) return;
+
+      const newQuantity = (Number(item.quantity) || 1) + change;
+
+      if (newQuantity < 1) {
+        // Quantity can't go below 1; use the Remove button to delete an item.
+        return;
+      }
+
+      item.quantity = newQuantity;
+      item.totalPrice = getUnitPrice(item) * newQuantity;
+      refreshCart();
+    }
+
     function removeItem(itemIndex) {
       if (itemIndex >= 0 && itemIndex < cart.length) {
         cart.splice(itemIndex, 1);
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
+        refreshCart();
       }
     }
 
-    // Clear entire cart
     function clearCart() {
       if (cart.length === 0) return;
-      
+
       if (confirm("Are you sure you want to clear your cart?")) {
         cart = [];
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
-        
-        // Ø¥Ø¸ÙØ§Ø± Ø±Ø³Ø§ÙØ© ØªØ£ÙÙØ¯
+        refreshCart();
         alert("Your cart has been cleared successfully.");
       }
     }
 
-    // Handle checkout
-    function handleCheckout() {
-      if (cart.length === 0) {
-        alert("Your cart is empty. Please add items before checking out.");
-        return;
-      }
-      
-      // Save customer info (Ø§Ø®ØªÙØ§Ø±Ù - ÙÙ ÙØªÙ Ø§ÙØªØ­ÙÙ ÙÙ Ø§ÙØ­ÙÙÙ)
-      saveCustomerInfo();
-      
-      // Generate and send WhatsApp message
-      sendWhatsAppOrder();
-    }
+    // ---------- Customer info ----------
 
-    // Save customer information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
     function saveCustomerInfo() {
+      const selectedTime = document.querySelector('.time-option.selected');
       customerInfo = {
         name: customerNameInput.value.trim(),
         address: customerAddressInput.value.trim(),
-        deliveryTime: document.querySelector('.time-option.selected').getAttribute('data-time')
+        deliveryTime: selectedTime ? selectedTime.getAttribute('data-time') : 'asap'
       };
-      
-      // Save to localStorage for future use
-      localStorage.setItem('zushiCustomerInfo', JSON.stringify(customerInfo));
+
+      try {
+        localStorage.setItem(CUSTOMER_STORAGE_KEY, JSON.stringify(customerInfo));
+      } catch (error) {
+        console.error("Error saving customer info:", error);
+      }
     }
 
-    // Load customer information
     function loadCustomerInfo() {
       try {
-        const savedInfo = localStorage.getItem('zushiCustomerInfo');
-        if (savedInfo) {
-          customerInfo = JSON.parse(savedInfo);
-          customerNameInput.value = customerInfo.name || "";
-          customerAddressInput.value = customerInfo.address || "";
-          
-          // Set delivery time
-          document.querySelectorAll('.time-option').forEach(option => {
-            option.classList.remove('selected');
-            if (option.getAttribute('data-time') === customerInfo.deliveryTime) {
-              option.classList.add('selected');
-            }
-          });
-        }
+        const savedInfo = localStorage.getItem(CUSTOMER_STORAGE_KEY);
+        if (!savedInfo) return;
+
+        customerInfo = JSON.parse(savedInfo);
+        customerNameInput.value = customerInfo.name || "";
+        customerAddressInput.value = customerInfo.address || "";
+
+        timeOptions.forEach(option => {
+          option.classList.toggle('selected', option.getAttribute('data-time') === customerInfo.deliveryTime);
+        });
       } catch (error) {
         console.error("Error loading customer info:", error);
       }
     }
 
-    // Send order via WhatsApp
+    // ---------- WhatsApp order ----------
+
+    function generateWhatsAppMessage(totals) {
+      let message = `🍣 *NEW ZUSHI LAB ORDER* 🥢\n\n`;
+
+      if (customerInfo.name || customerInfo.address) {
+        message += `*Delivery Details:*\n`;
+        if (customerInfo.name) message += `👤 Name: ${customerInfo.name}\n`;
+        if (customerInfo.address) message += `📍 Address: ${customerInfo.address}\n`;
+        message += `⏰ Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (35-45 min)' : 'Schedule Later'}\n\n`;
+      }
+
+      message += `*Order Details:*\n`;
+      message += `====================\n\n`;
+
+      cart.forEach((item, index) => {
+        const quantity = Number(item.quantity) || 1;
+        const unitPrice = getUnitPrice(item);
+        const itemTotal = getItemTotal(item);
+        const customizationLines = getCustomizationLines(item);
+
+        message += `*${index + 1}. ${quantity}x ${item.name || 'Item'}*\n`;
+        message += `   Unit Price: ${unitPrice.toFixed(2)} MAD\n`;
+        message += `   Total: ${itemTotal.toFixed(2)} MAD\n`;
+
+        if (customizationLines.length > 0) {
+          message += `   Customizations:\n`;
+          customizationLines.forEach(line => {
+            message += `   • ${line}\n`;
+          });
+        }
+
+        if (item.specialInstructions && item.specialInstructions.trim() !== '') {
+          message += `   📝 Note: ${item.specialInstructions.trim()}\n`;
+        }
+
+        message += `\n`;
+      });
+
+      message += `*Order Summary:*\n`;
+      message += `====================\n`;
+      message += `Items Total: ${totals.total} MAD\n\n`;
+
+      message += `*Note:* This total does not include delivery charges.\n`;
+      message += `Delivery fee will be calculated based on your location.\n\n`;
+
+      message += `*Payment Method:* Cash on Delivery\n\n`;
+
+      message += `====================\n`;
+      message += `Please confirm this order and let me know the delivery charges.\n`;
+      message += `Thank you for ordering from Zushi LAB! 😊`;
+
+      return message;
+    }
+
     function sendWhatsAppOrder() {
       const totals = calculateTotals();
       const message = generateWhatsAppMessage(totals);
-      
-      // Open WhatsApp with the order message
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-              // Tracks the checkout action that opens WhatsApp; it cannot confirm the message was sent.
-        if (typeof window.gtag === 'function') {
-            window.gtag('event', 'conversion', {
-                'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
-                'value': 1.0,
-                'currency': 'MAD'
-            });
-        }
-        window.open(whatsappUrl, '_blank');
-      
-      // Clear cart after sending
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
+          'value': 1.0,
+          'currency': 'MAD'
+        });
+      }
+
+      // Open WhatsApp. If the browser blocks the popup (common on mobile),
+      // fall back to navigating in the same tab so the order is not lost.
+      const opened = window.open(whatsappUrl, '_blank');
+      if (!opened) {
+        window.location.href = whatsappUrl;
+        return; // Cart is kept, because the order was not actually opened.
+      }
+
+      // WhatsApp opened: clear the cart after the order has been handed off.
       setTimeout(() => {
         cart = [];
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
+        refreshCart();
         alert("Order sent successfully! Your cart has been cleared.");
       }, 1000);
     }
 
-    // Generate WhatsApp message with ALL customizations
-    function generateWhatsAppMessage(totals) {
-      let message = ` ð£ *NEW ZUSHI LAB ORDER* ð¥¢\n\n`;
-      
-      // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ© - ØªØ¶Ø§Ù ÙÙØ· Ø¥Ø°Ø§ ØªÙ ÙÙØ¤ÙØ§)
-      if (customerInfo.name || customerInfo.address) {
-        message += `*Delivery Details:*\n`;
-        if (customerInfo.name) message += `ð¤ Name: ${customerInfo.name}\n`;
-        if (customerInfo.address) message += `ð Address: ${customerInfo.address}\n`;
-        message += `â° Delivery: ${customerInfo.deliveryTime === 'asap' ? 'ASAP (35-45 min)' : 'Schedule Later'}\n\n`;
+    function handleCheckout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty. Please add items before checking out.");
+        return;
       }
-      
-      // Order Details
-      message += `*Order Details:*\n`;
-      message += `====================\n\n`;
-      
-      // Ø¥Ø¶Ø§ÙØ© ÙÙ Ø§ÙØ¹ÙØ§ØµØ± ÙØ¹ Ø®ÙØ§Ø±Ø§ØªÙØ§
-      cart.forEach((item, index) => {
-        const customizationsText = formatCustomizationsForMessage(item);
-        const pricePerUnit = item.basePrice || item.price || (item.totalPrice / item.quantity);
-        
-        message += `*${index + 1}. ${item.quantity || 1}x ${item.name || 'Item'}*\n`;
-        message += `   Unit Price: ${pricePerUnit.toFixed(2)} MAD\n`;
-        message += `   Total: ${item.totalPrice.toFixed(2)} MAD\n`;
-        
-        if (customizationsText) {
-          message += `   Customizations:\n${customizationsText}`;
-        }
-        
-        if (item.specialInstructions && item.specialInstructions.trim() !== '') {
-          message += `   ð Note: ${item.specialInstructions}\n`;
-        }
-        
-        message += `\n`;
-      });
-      
-      // Order Summary
-      message += `*Order Summary:*\n`;
-      message += `====================\n`;
-      message += `Items Total: ${totals.total} MAD\n\n`;
-      
-      // Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ©
-      message += `*Note:* This total does not include delivery charges.\n`;
-      message += `Delivery fee will be calculated based on your location.\n\n`;
-      
-      // Payment Method (Ø§ÙØ¯ÙØ¹ Ø¹ÙØ¯ Ø§ÙØ§Ø³ØªÙØ§Ù ÙÙØ·)
-      message += `*Payment Method:* Cash on Delivery\n\n`;
-      
-      // Final Message
-      message += `====================\n`;
-      message += `Please confirm this order and let me know the delivery charges.\n`;
-      message += `Thank you for ordering from Zushi LAB! ð`;
-      
-      return message;
+
+      saveCustomerInfo();
+      sendWhatsAppOrder();
     }
 
-    // Handle back button click - Modified to go only to menuzushi.html
+    // ---------- Navigation ----------
+
     function handleBackButton() {
-      // Ø§ÙØªÙØ¬ÙÙ ÙØ¨Ø§Ø´Ø±Ø© Ø¥ÙÙ ØµÙØ­Ø© menuzushi.html ÙÙØ·
       window.location.href = 'menuzushi.html';
     }
 
-    // Attach event listeners
+    // ---------- Event listeners ----------
+
     function attachEventListeners() {
-      // Clear cart button
       clearCartBtn.addEventListener('click', clearCart);
-      
-      // Checkout button
       checkoutBtn.addEventListener('click', handleCheckout);
-      
-      // Back button
       backButton.addEventListener('click', handleBackButton);
-      
-      // Delivery time options
+
       timeOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
           timeOptions.forEach(opt => opt.classList.remove('selected'));
           this.classList.add('selected');
           customerInfo.deliveryTime = this.getAttribute('data-time');
+          saveCustomerInfo();
         });
       });
-      
-      // Payment method selection
+
       document.querySelectorAll('.payment-option').forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
           document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
           this.classList.add('selected');
           const radioInput = this.querySelector('input[type="radio"]');
-          if (radioInput) {
-            radioInput.checked = true;
-          }
+          if (radioInput) radioInput.checked = true;
         });
       });
-      
-      // Use event delegation for dynamic elements
-      cartItemsContainer.addEventListener('click', function(e) {
+
+      // Event delegation for quantity and remove buttons
+      cartItemsContainer.addEventListener('click', function (e) {
         const itemCard = e.target.closest('.item-card');
         if (!itemCard) return;
-        
-        const itemIndex = parseInt(itemCard.getAttribute('data-id'));
-        
+
+        const itemIndex = parseInt(itemCard.getAttribute('data-id'), 10);
+
         if (e.target.closest('.plus-btn')) {
           updateQuantity(itemIndex, 1);
         } else if (e.target.closest('.minus-btn')) {
@@ -1288,22 +1128,23 @@
           removeItem(itemIndex);
         }
       });
-      
-      // Save customer info on input change (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+
       [customerNameInput, customerAddressInput].forEach(input => {
-        input.addEventListener('input', function() {
-          saveCustomerInfo();
-        });
+        input.addEventListener('input', saveCustomerInfo);
       });
     }
 
-    // Initialize the cart when the page loads
-    document.addEventListener('DOMContentLoaded', initCart);
-    
-    // Ø¯Ø§ÙØ© ÙØ³Ø§Ø¹Ø¯Ø© ÙØ¹Ø±Ø¶ Ø§ÙØ¨ÙØ§ÙØ§Øª Ø§ÙÙØ®Ø²ÙØ© ÙÙ localStorage (ÙØªØµØ­ÙØ­ Ø§ÙØ£Ø®Ø·Ø§Ø¡)
-    function debugCart() {
-      console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('zushiCart') || '[]'));
+    // ---------- Init ----------
+
+    function initCart() {
+      cart = getCart();
+      renderCartItems();
+      updateCartDisplay();
+      attachEventListeners();
+      loadCustomerInfo();
     }
+
+    document.addEventListener('DOMContentLoaded', initCart);
   </script>
 </body>
 </html>
