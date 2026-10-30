@@ -655,7 +655,7 @@
         </div>
         
         <div id="cart-items-container">
-          <!-- Ø³ÙØªÙ Ø¥Ø¶Ø§ÙØ© Ø§ÙØ¹ÙØ§ØµØ± Ø¯ÙÙØ§ÙÙÙÙØ§Ù Ø¨ÙØ§Ø³Ø·Ø© JavaScript -->
+‎          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
         </div>
       </div>
       
@@ -673,13 +673,13 @@
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
-        <!-- Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ© -->
+‎        <!-- رسالة توضيحية -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
         </div>
         
-        <!-- Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©) -->
+        <!-- Customer Information (اختيارية) -->
         <div class="customer-info" style="margin-bottom: 20px;">
           <h3>Delivery Information <span class="optional-note">(Optional)</span></h3>
           <div class="form-group">
@@ -705,7 +705,7 @@
           </div>
         </div>
         
-        <!-- Payment Method (Ø¢Ø®Ø±) -->
+        <!-- Payment Method (آخر) -->
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
           
@@ -730,13 +730,13 @@
   </div>
 
   <script>
-    // Cart data structure - Ø³ÙØªÙ ØªØ­ÙÙÙÙØ§ ÙÙ localStorage
+    // Cart data structure - سيتم تحميلها من localStorage
     let cart = [];
 
     // Constants
     const WHATSAPP_NUMBER = "212642620325";
 
-    // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+    // Customer Information (اختيارية)
     let customerInfo = {
       name: "",
       address: "",
@@ -752,12 +752,12 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     const backButton = document.getElementById('back-button');
 
-    // Customer Information Elements (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+    // Customer Information Elements (اختيارية)
     const customerNameInput = document.getElementById('customerName');
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
-    // Ø¯Ø§ÙØ© ÙÙØ­ØµÙÙ Ø¹ÙÙ ÙØ­ØªÙÙØ§Øª Ø§ÙØ³ÙØ© ÙÙ localStorage
+‎    // دالة للحصول على محتويات السلة من localStorage
     function getCart() {
       try {
         const cartData = localStorage.getItem('pizzahutCart');
@@ -768,26 +768,26 @@
       }
     }
     
-    // Ø¯Ø§ÙØ© ÙØ­ÙØ¸ Ø§ÙØ³ÙØ© ÙÙ localStorage
+‎    // دالة لحفظ السلة في localStorage
     function saveCart() {
       localStorage.setItem('pizzahutCart', JSON.stringify(cart));
     }
     
-    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙØ§Ø¨Ù ÙÙØ¹Ø±Ø¶
+‎    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
     function formatCustomizationsForDisplay(item) {
       let customizations = [];
       
-      // ÙØ¹Ø§ÙØ¬Ø© Ø¬ÙÙØ¹ Ø£ÙÙØ§Ø¹ Ø§ÙØªØ®ØµÙØµØ§Øª
+‎      // معالجة جميع أنواع التخصيصات
       if (item.customizations) {
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
+‎          // تخطي الحقول الفارغة
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
+‎          // تحويل المفتاح إلى نص مقروء
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -800,28 +800,28 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
+‎          // معالجة القيم المختلفة
           if (Array.isArray(value)) {
             if (value.length > 0) {
-              // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙØ§Ø¦ÙØ§Øª
+‎              // إذا كانت المصفوفة تحتوي على كائنات
               if (typeof value[0] === 'object') {
                 const labels = value.map(v => v.label || v.value).filter(v => v);
                 if (labels.length > 0) {
                   customizations.push(`${displayKey}: ${labels.join(', ')}`);
                 }
               } else {
-                // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙØµÙÙÙØ© ØªØ­ØªÙÙ Ø¹ÙÙ ÙÙÙ ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
+‎                // إذا كانت المصفوفة تحتوي على قيم نصية مباشرة
                 customizations.push(`${displayKey}: ${value.join(', ')}`);
               }
             }
           } else if (typeof value === 'object' && value !== null) {
-            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØ§Ø¦Ù
+‎            // إذا كانت القيمة كائن
             const label = value.label || value.value;
             if (label) {
               customizations.push(`${displayKey}: ${label}`);
             }
           } else if (value) {
-            // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© ÙØµÙØ© ÙØ¨Ø§Ø´Ø±Ø©
+‎            // إذا كانت القيمة نصية مباشرة
             customizations.push(`${displayKey}: ${value}`);
           }
         });
@@ -830,7 +830,7 @@
       return customizations;
     }
     
-    // Ø¯Ø§ÙØ© ÙØªØ­ÙÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© Ø¥ÙÙ ÙØµ ÙÙØ±Ø³Ø§ÙØ©
+‎    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
     function formatCustomizationsForMessage(item) {
       let customizationsText = "";
       
@@ -838,12 +838,12 @@
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-          // ØªØ®Ø·Ù Ø§ÙØ­ÙÙÙ Ø§ÙÙØ§Ø±ØºØ©
+‎          // تخطي الحقول الفارغة
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-          // ØªØ­ÙÙÙ Ø§ÙÙÙØªØ§Ø­ Ø¥ÙÙ ÙØµ ÙÙØ±ÙØ¡
+‎          // تحويل المفتاح إلى نص مقروء
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -856,7 +856,7 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-          // ÙØ¹Ø§ÙØ¬Ø© Ø§ÙÙÙÙ Ø§ÙÙØ®ØªÙÙØ©
+‎          // معالجة القيم المختلفة
           if (Array.isArray(value)) {
             if (value.length > 0) {
               let itemsList = [];
@@ -867,15 +867,15 @@
                   itemsList.push(v);
                 }
               });
-              customizationsText += `   â¢ ${displayKey}: ${itemsList.join(', ')}\n`;
+              customizationsText += `   • ${displayKey}: ${itemsList.join(', ')}\n`;
             }
           } else if (typeof value === 'object' && value !== null) {
             const label = value.label || value.value;
             if (label) {
-              customizationsText += `   â¢ ${displayKey}: ${label}\n`;
+              customizationsText += `   • ${displayKey}: ${label}\n`;
             }
           } else if (value) {
-            customizationsText += `   â¢ ${displayKey}: ${value}\n`;
+            customizationsText += `   • ${displayKey}: ${value}\n`;
           }
         });
       }
@@ -916,14 +916,14 @@
         itemElement.className = 'item-card';
         itemElement.setAttribute('data-id', index);
         
-        // Ø§ÙØ­ØµÙÙ Ø¹ÙÙ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ©
+‎        // الحصول على الخيارات المخصصة
         const customizations = formatCustomizationsForDisplay(item);
         
-        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± ÙÙÙ Ø¹ÙØµØ± (Ø§ÙØ³Ø¹Ø± Ø§ÙØ£Ø³Ø§Ø³Ù ÙØ®Ø²Ù ÙÙ item.price)
+‎        // حساب السعر لكل عنصر (السعر الأساسي مخزن في item.price)
         const pricePerUnit = item.price || (item.totalPrice / item.quantity);
         const totalItemPrice = pricePerUnit * item.quantity;
         
-        // ØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ ÙØ­Ø¯Ø«
+‎        // تأكد من أن السعر الإجمالي محدث
         if (item.totalPrice !== totalItemPrice) {
           item.totalPrice = totalItemPrice;
         }
@@ -935,7 +935,7 @@
           <div class="item-details">
             <div class="item-name">${item.name}</div>
             
-            <!-- Ø¹Ø±Ø¶ Ø§ÙØ®ÙØ§Ø±Ø§Øª Ø§ÙÙØ®ØµØµØ© ÙÙ badges -->
+‎            <!-- عرض الخيارات المخصصة كـ badges -->
             ${customizations.length > 0 ? 
               `<div class="customization-badges">
                 ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
@@ -943,7 +943,7 @@
               : ''
             }
             
-            <!-- Ø¹Ø±Ø¶ Ø§ÙØªØ¹ÙÙÙØ§Øª Ø§ÙØ®Ø§ØµØ© Ø¥Ø°Ø§ ÙØ§ÙØª ÙÙØ¬ÙØ¯Ø© -->
+‎            <!-- عرض التعليمات الخاصة إذا كانت موجودة -->
             ${item.specialInstructions ? 
               `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
               : ''
@@ -962,18 +962,18 @@
         cartItemsContainer.appendChild(itemElement);
       });
       
-      // Ø­ÙØ¸ Ø§ÙØ³ÙØ© Ø¨Ø¹Ø¯ Ø§ÙØªØ­Ø¯ÙØ«
+‎      // حفظ السلة بعد التحديث
       saveCart();
     }
 
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-        // ØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ ØµØ­ÙØ­
+‎        // تأكد من أن السعر الإجمالي صحيح
         const pricePerUnit = item.price || (item.totalPrice / item.quantity);
         const itemTotal = pricePerUnit * item.quantity;
         
-        // ØªØ­Ø¯ÙØ« Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ ÙÙ Ø§ÙÙØ§Ø¦Ù
+‎        // تحديث السعر الإجمالي في الكائن
         if (item.totalPrice !== itemTotal) {
           item.totalPrice = itemTotal;
         }
@@ -1005,19 +1005,19 @@
     // Update item quantity
     function updateQuantity(itemIndex, change) {
       if (cart[itemIndex]) {
-        // ØªØºÙÙØ± Ø§ÙÙÙÙØ©
+‎        // تغيير الكمية
         cart[itemIndex].quantity += change;
         
-        // Ø§ÙØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙÙÙÙØ© ÙØ§ ØªÙÙ Ø¹Ù 1
+‎        // التأكد من أن الكمية لا تقل عن 1
         if (cart[itemIndex].quantity < 1) {
           cart[itemIndex].quantity = 1;
         }
         
-        // Ø­Ø³Ø§Ø¨ Ø§ÙØ³Ø¹Ø± Ø§ÙØ¥Ø¬ÙØ§ÙÙ Ø§ÙØ¬Ø¯ÙØ¯
+‎        // حساب السعر الإجمالي الجديد
         const pricePerUnit = cart[itemIndex].price || (cart[itemIndex].totalPrice / (cart[itemIndex].quantity - change));
         cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
         
-        // Ø¥Ø°Ø§ ÙØ§ÙØª Ø§ÙÙÙÙØ© 0Ø Ø§Ø­Ø°Ù Ø§ÙØ¹ÙØµØ±
+‎        // إذا كانت الكمية 0، احذف العنصر
         if (cart[itemIndex].quantity === 0) {
           cart.splice(itemIndex, 1);
         }
@@ -1048,7 +1048,7 @@
         renderCartItems();
         updateCartDisplay();
         
-        // Ø¥Ø¸ÙØ§Ø± Ø±Ø³Ø§ÙØ© ØªØ£ÙÙØ¯
+‎        // إظهار رسالة تأكيد
         alert("Your cart has been cleared successfully.");
       }
     }
@@ -1060,19 +1060,19 @@
         return;
       }
       
-      // Save customer info (Ø§Ø®ØªÙØ§Ø±Ù - ÙÙ ÙØªÙ Ø§ÙØªØ­ÙÙ ÙÙ Ø§ÙØ­ÙÙÙ)
+      // Save customer info (اختياري - لن يتم التحقق من الحقول)
       saveCustomerInfo();
       
       // Generate and send WhatsApp message
       sendWhatsAppOrder();
     }
 
-    // Save customer information (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+    // Save customer information (اختيارية)
     function saveCustomerInfo() {
       customerInfo = {
         name: customerNameInput.value.trim(),
         address: customerAddressInput.value.trim(),
-        deliveryTime: document.querySelector('.time-option.selected').getAttribute('data-time')
+        deliveryTime: (document.querySelector('.time-option.selected')?.getAttribute('data-time')) || 'asap'
       };
       
       // Save to localStorage for future use
@@ -1101,30 +1101,49 @@
       }
     }
 
+    // Unit price of a single item
+    function calculateUnitPrice(item) {
+      return item.price || (item.totalPrice / item.quantity);
+    }
+
+    // Total extras price per unit (adjust if your extras data structure differs)
+    function calculateExtrasTotal(item) {
+      const extras = item.customizations && item.customizations.extras;
+      if (!Array.isArray(extras)) return 0;
+      return extras.reduce((sum, e) => sum + (Number(e && e.price) || 0), 0);
+    }
+
     // Send order via WhatsApp
     function sendWhatsAppOrder() {
       const totals = calculateTotals();
       const message = generateWhatsAppMessage(totals);
-      
+
       // Open WhatsApp with the order message
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-              // Tracks the checkout action that opens WhatsApp; it cannot confirm the message was sent.
-        if (typeof window.gtag === 'function') {
-            window.gtag('event', 'conversion', {
-                'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
-                'value': 1.0,
-                'currency': 'MAD'
-            });
-        }
-        window.open(whatsappUrl, '_blank');
-      
-      // Clear cart after sending
+
+      // Tracks the checkout action that opens WhatsApp; it cannot confirm the message was sent.
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-18159181033/IzOJCJiI4JcdEOm5_NJD',
+          'value': 1.0,
+          'currency': 'MAD'
+        });
+      }
+
+      const opened = window.open(whatsappUrl, '_blank');
+
+      // If the popup was blocked, keep the cart so the user can try again
+      if (!opened) {
+        alert("Could not open WhatsApp. Please allow pop-ups for this site and try again.");
+        return;
+      }
+
+      // Clear cart only after WhatsApp was opened
       setTimeout(() => {
         cart = [];
         saveCart();
         renderCartItems();
         updateCartDisplay();
-        alert("Order sent successfully! Your cart has been cleared.");
       }, 1000);
     }
 
@@ -1132,7 +1151,7 @@
     function generateWhatsAppMessage(totals) {
       let message = ` 🍕 *NEW PIZZA Hut ORDER* 🍕\n\n`;
       
-      // Customer Information (Ø§Ø®ØªÙØ§Ø±ÙØ© - ØªØ¶Ø§Ù ÙÙØ· Ø¥Ø°Ø§ ØªÙ ÙÙØ¤ÙØ§)
+      // Customer Information (اختيارية - تضاف فقط إذا تم ملؤها)
       if (customerInfo.name || customerInfo.address) {
         message += `*Delivery Details:*\n`;
         if (customerInfo.name) message += `👤 Name: ${customerInfo.name}\n`;
@@ -1144,7 +1163,7 @@
       message += `*Order Details:*\n`;
       message += `====================\n\n`;
       
-      // Ø¥Ø¶Ø§ÙØ© ÙÙ Ø§ÙØ¹ÙØ§ØµØ± ÙØ¹ Ø®ÙØ§Ø±Ø§ØªÙØ§
+‎      // إضافة كل العناصر مع خياراتها
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
         const pricePerUnit = calculateUnitPrice(item);
@@ -1175,11 +1194,11 @@
       message += `====================\n`;
       message += `Items Total: ${totals.total} MAD\n\n`;
       
-      // Ø±Ø³Ø§ÙØ© ØªÙØ¶ÙØ­ÙØ©
+‎      // رسالة توضيحية
       message += `*Note:* This total does not include delivery charges.\n`;
       message += `Delivery fee will be calculated based on your location.\n\n`;
       
-      // Payment Method (Ø§ÙØ¯ÙØ¹ Ø¹ÙØ¯ Ø§ÙØ§Ø³ØªÙØ§Ù ÙÙØ·)
+      // Payment Method (الدفع عند الاستلام فقط)
       message += `*Payment Method:* Cash on Delivery\n\n`;
       
       // Final Message
@@ -1191,11 +1210,11 @@
     }
     // Handle back button click
     function handleBackButton() {
-      // ÙØ­Ø§ÙÙØ© Ø§ÙØ¹ÙØ¯Ø© Ø¥ÙÙ Ø§ÙØµÙØ­Ø© Ø§ÙØ³Ø§Ø¨ÙØ© ÙÙ Ø§ÙØªØ§Ø±ÙØ®
+‎      // محاولة العودة إلى الصفحة السابقة في التاريخ
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        // Ø¥Ø°Ø§ ÙÙ ØªÙÙ ÙÙØ§Ù ØµÙØ­Ø© Ø³Ø§Ø¨ÙØ©Ø Ø§ÙØªÙÙ Ø¥ÙÙ ÙØ§Ø¦ÙØ© Ø¨ÙØªØ²Ø§ ÙØª
+‎        // إذا لم تكن هناك صفحة سابقة، انتقل إلى قائمة بيتزا هت
         window.location.href = 'menupizzahut.html';
       }
     }
@@ -1220,7 +1239,7 @@
         });
       });
       
-      // Payment method selection (ÙØ¸Ù ÙØ¹ Ø®ÙØ§Ø± ÙØ§Ø­Ø¯ ÙÙØ·)
+      // Payment method selection (نظل مع خيار واحد فقط)
       document.querySelectorAll('.payment-option').forEach(option => {
         option.addEventListener('click', function() {
           document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -1248,7 +1267,7 @@
         }
       });
       
-      // Save customer info on input change (Ø§Ø®ØªÙØ§Ø±ÙØ©)
+      // Save customer info on input change (اختيارية)
       [customerNameInput, customerAddressInput].forEach(input => {
         input.addEventListener('input', function() {
           saveCustomerInfo();
@@ -1259,7 +1278,7 @@
     // Initialize the cart when the page loads
     document.addEventListener('DOMContentLoaded', initCart);
     
-    // Ø¯Ø§ÙØ© ÙØ³Ø§Ø¹Ø¯Ø© ÙØ¹Ø±Ø¶ Ø§ÙØ¨ÙØ§ÙØ§Øª Ø§ÙÙØ®Ø²ÙØ© ÙÙ localStorage (ÙØªØµØ­ÙØ­ Ø§ÙØ£Ø®Ø·Ø§Ø¡)
+‎    // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
     function debugCart() {
       console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('pizzahutCart') || '[]'));
     }
