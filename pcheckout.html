@@ -655,7 +655,7 @@
         </div>
         
         <div id="cart-items-container">
-‎          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
+          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
         </div>
       </div>
       
@@ -673,7 +673,7 @@
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
-‎        <!-- رسالة توضيحية -->
+        <!-- رسالة توضيحية -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
@@ -757,7 +757,7 @@
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
-‎    // دالة للحصول على محتويات السلة من localStorage
+    // دالة للحصول على محتويات السلة من localStorage
     function getCart() {
       try {
         const cartData = localStorage.getItem('pizzahutCart');
@@ -768,26 +768,26 @@
       }
     }
     
-‎    // دالة لحفظ السلة في localStorage
+    // دالة لحفظ السلة في localStorage
     function saveCart() {
       localStorage.setItem('pizzahutCart', JSON.stringify(cart));
     }
     
-‎    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
+    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
     function formatCustomizationsForDisplay(item) {
       let customizations = [];
       
-‎      // معالجة جميع أنواع التخصيصات
+      // معالجة جميع أنواع التخصيصات
       if (item.customizations) {
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-‎          // تخطي الحقول الفارغة
+          // تخطي الحقول الفارغة
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-‎          // تحويل المفتاح إلى نص مقروء
+          // تحويل المفتاح إلى نص مقروء
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -800,28 +800,28 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-‎          // معالجة القيم المختلفة
+          // معالجة القيم المختلفة
           if (Array.isArray(value)) {
             if (value.length > 0) {
-‎              // إذا كانت المصفوفة تحتوي على كائنات
+              // إذا كانت المصفوفة تحتوي على كائنات
               if (typeof value[0] === 'object') {
                 const labels = value.map(v => v.label || v.value).filter(v => v);
                 if (labels.length > 0) {
                   customizations.push(`${displayKey}: ${labels.join(', ')}`);
                 }
               } else {
-‎                // إذا كانت المصفوفة تحتوي على قيم نصية مباشرة
+                // إذا كانت المصفوفة تحتوي على قيم نصية مباشرة
                 customizations.push(`${displayKey}: ${value.join(', ')}`);
               }
             }
           } else if (typeof value === 'object' && value !== null) {
-‎            // إذا كانت القيمة كائن
+            // إذا كانت القيمة كائن
             const label = value.label || value.value;
             if (label) {
               customizations.push(`${displayKey}: ${label}`);
             }
           } else if (value) {
-‎            // إذا كانت القيمة نصية مباشرة
+            // إذا كانت القيمة نصية مباشرة
             customizations.push(`${displayKey}: ${value}`);
           }
         });
@@ -830,7 +830,7 @@
       return customizations;
     }
     
-‎    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
+    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
     function formatCustomizationsForMessage(item) {
       let customizationsText = "";
       
@@ -838,12 +838,12 @@
         Object.keys(item.customizations).forEach(key => {
           const value = item.customizations[key];
           
-‎          // تخطي الحقول الفارغة
+          // تخطي الحقول الفارغة
           if (!value || (Array.isArray(value) && value.length === 0)) {
             return;
           }
           
-‎          // تحويل المفتاح إلى نص مقروء
+          // تحويل المفتاح إلى نص مقروء
           let displayKey = key;
           switch(key) {
             case 'drink': displayKey = 'Drink'; break;
@@ -856,7 +856,7 @@
             default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
           }
           
-‎          // معالجة القيم المختلفة
+          // معالجة القيم المختلفة
           if (Array.isArray(value)) {
             if (value.length > 0) {
               let itemsList = [];
@@ -904,7 +904,7 @@
        alt="Empty cart" 
        style="width: 140px; height: auto; display: block; margin: 0 auto 20px;">
   <p style="margin: 0 0 20px 0; font-size: 18px; color: #333;">Your cart is empty</p>
-  <a href="index.html" class="browse-btn" 
+  <a href="menupizzahut.html" class="browse-btn" 
      style="display: inline-block; padding: 12px 25px; background-color: #8B0000; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">Browse Menu</a>
 </div>
         `;
@@ -916,14 +916,14 @@
         itemElement.className = 'item-card';
         itemElement.setAttribute('data-id', index);
         
-‎        // الحصول على الخيارات المخصصة
+        // الحصول على الخيارات المخصصة
         const customizations = formatCustomizationsForDisplay(item);
         
-‎        // حساب السعر لكل عنصر (السعر الأساسي مخزن في item.price)
+        // حساب السعر لكل عنصر (السعر الأساسي مخزن في item.price)
         const pricePerUnit = item.price || (item.totalPrice / item.quantity);
         const totalItemPrice = pricePerUnit * item.quantity;
         
-‎        // تأكد من أن السعر الإجمالي محدث
+        // تأكد من أن السعر الإجمالي محدث
         if (item.totalPrice !== totalItemPrice) {
           item.totalPrice = totalItemPrice;
         }
@@ -935,7 +935,7 @@
           <div class="item-details">
             <div class="item-name">${item.name}</div>
             
-‎            <!-- عرض الخيارات المخصصة كـ badges -->
+            <!-- عرض الخيارات المخصصة كـ badges -->
             ${customizations.length > 0 ? 
               `<div class="customization-badges">
                 ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
@@ -943,7 +943,7 @@
               : ''
             }
             
-‎            <!-- عرض التعليمات الخاصة إذا كانت موجودة -->
+            <!-- عرض التعليمات الخاصة إذا كانت موجودة -->
             ${item.specialInstructions ? 
               `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
               : ''
@@ -962,18 +962,18 @@
         cartItemsContainer.appendChild(itemElement);
       });
       
-‎      // حفظ السلة بعد التحديث
+      // حفظ السلة بعد التحديث
       saveCart();
     }
 
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-‎        // تأكد من أن السعر الإجمالي صحيح
+        // تأكد من أن السعر الإجمالي صحيح
         const pricePerUnit = item.price || (item.totalPrice / item.quantity);
         const itemTotal = pricePerUnit * item.quantity;
         
-‎        // تحديث السعر الإجمالي في الكائن
+        // تحديث السعر الإجمالي في الكائن
         if (item.totalPrice !== itemTotal) {
           item.totalPrice = itemTotal;
         }
@@ -1005,19 +1005,19 @@
     // Update item quantity
     function updateQuantity(itemIndex, change) {
       if (cart[itemIndex]) {
-‎        // تغيير الكمية
+        // تغيير الكمية
         cart[itemIndex].quantity += change;
         
-‎        // التأكد من أن الكمية لا تقل عن 1
+        // التأكد من أن الكمية لا تقل عن 1
         if (cart[itemIndex].quantity < 1) {
           cart[itemIndex].quantity = 1;
         }
         
-‎        // حساب السعر الإجمالي الجديد
+        // حساب السعر الإجمالي الجديد
         const pricePerUnit = cart[itemIndex].price || (cart[itemIndex].totalPrice / (cart[itemIndex].quantity - change));
         cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
         
-‎        // إذا كانت الكمية 0، احذف العنصر
+        // إذا كانت الكمية 0، احذف العنصر
         if (cart[itemIndex].quantity === 0) {
           cart.splice(itemIndex, 1);
         }
@@ -1048,7 +1048,7 @@
         renderCartItems();
         updateCartDisplay();
         
-‎        // إظهار رسالة تأكيد
+        // إظهار رسالة تأكيد
         alert("Your cart has been cleared successfully.");
       }
     }
@@ -1134,7 +1134,8 @@
 
       // If the popup was blocked, keep the cart so the user can try again
       if (!opened) {
-        alert("Could not open WhatsApp. Please allow pop-ups for this site and try again.");
+        // Popup blocked (common on mobile): navigate in the same tab so the order is not lost
+        window.location.href = whatsappUrl;
         return;
       }
 
@@ -1163,7 +1164,7 @@
       message += `*Order Details:*\n`;
       message += `====================\n\n`;
       
-‎      // إضافة كل العناصر مع خياراتها
+      // إضافة كل العناصر مع خياراتها
       cart.forEach((item, index) => {
         const customizationsText = formatCustomizationsForMessage(item);
         const pricePerUnit = calculateUnitPrice(item);
@@ -1194,7 +1195,7 @@
       message += `====================\n`;
       message += `Items Total: ${totals.total} MAD\n\n`;
       
-‎      // رسالة توضيحية
+      // رسالة توضيحية
       message += `*Note:* This total does not include delivery charges.\n`;
       message += `Delivery fee will be calculated based on your location.\n\n`;
       
@@ -1210,11 +1211,11 @@
     }
     // Handle back button click
     function handleBackButton() {
-‎      // محاولة العودة إلى الصفحة السابقة في التاريخ
+      // محاولة العودة إلى الصفحة السابقة في التاريخ
       if (window.history.length > 1) {
         window.history.back();
       } else {
-‎        // إذا لم تكن هناك صفحة سابقة، انتقل إلى قائمة بيتزا هت
+        // إذا لم تكن هناك صفحة سابقة، انتقل إلى قائمة بيتزا هت
         window.location.href = 'menupizzahut.html';
       }
     }
@@ -1278,7 +1279,7 @@
     // Initialize the cart when the page loads
     document.addEventListener('DOMContentLoaded', initCart);
     
-‎    // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
+    // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
     function debugCart() {
       console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('pizzahutCart') || '[]'));
     }
