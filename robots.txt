@@ -1,0 +1,15 @@
+# Public pages: allowed
+# Private pages (dashboards and checkout flows): not for search engines
+User-agent: *
+Allow: /
+Disallow: /addproducts-dashboard.html
+Disallow: /dashboard.html
+Disallow: /sdashboard.html
+Disallow: /checkout.html
+Disallow: /fcheckout.html
+Disallow: /kcheckout.html
+Disallow: /pcheckout.html
+Disallow: /scheckout.html
+Disallow: /zcheckout.html
+
+Sitemap: https://delivery-marrakech.com/sitemap.xml
