@@ -584,7 +584,7 @@
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 16px;
-      scroll-margin-top: 120px;
+      scroll-margin-top: 128px;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
@@ -1518,11 +1518,6 @@
     </div>
   </nav>
 
-  <nav class="seo-breadcrumb" aria-label="Breadcrumb">
-    <a href="https://delivery-marrakech.com/">Delivery Marrakech</a>
-    <span aria-hidden="true"> / </span>
-    <span>McDonald's Delivery Marrakech</span>
-  </nav>
 
   <!-- Hero Image -->
   <div class="hero-section has-breadcrumb">
@@ -1534,16 +1529,70 @@
       </p>
     </div>
 
-    <!-- Restaurant Info -->
-    <div class="restaurant-info">
-      <div class="restaurant-name">McDonald's</div>
+  </div>
 
-    </div>
+  <!-- Restaurant Info -->
+  <div class="restaurant-info">
+    <div class="restaurant-name">McDonald's</div>
     <div class="delivery-time">
       <i class="fas fa-motorcycle delivery-icon"></i>
       <span>25-35 min</span>
     </div>
   </div>
+
+  <!-- Hanging OPEN / CLOSE sign, worn on the restaurant card -->
+  <div id="hangSign" class="hang-slot">
+    <div class="hanging-container">
+
+    <!-- HANGING WIRES -->
+    <div class="strings">
+        <div class="string"></div>
+        <div class="string"></div>
+    </div>
+
+    <!-- SIGN -->
+    <div class="flip-stage">
+
+        <div class="open-sign" id="openSign">
+
+            <!-- OPEN SIDE -->
+            <div class="sign-face front">
+
+                <span class="screw tl"></span>
+                <span class="screw tr"></span>
+                <span class="screw bl"></span>
+                <span class="screw br"></span>
+
+                <span>OPEN</span>
+
+                <small>Open until 1:00 AM</small>
+
+            </div>
+
+            <!-- CLOSE SIDE -->
+            <div class="sign-face back">
+
+                <span class="screw tl"></span>
+                <span class="screw tr"></span>
+                <span class="screw bl"></span>
+                <span class="screw br"></span>
+
+                <strong>CLOSE</strong>
+
+                <small>
+                    We will start at 11:00 AM
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SHADOW -->
+    <div class="shadow"></div>
+
+</div>
   </div>
 
   <p class="independent-note">
@@ -1553,6 +1602,7 @@
   <!-- Categories Section - Redesigned -->
   <div class="categories-section" id="categoriesSection">
     <div class="categories" id="categoriesContainer">
+      <span class="cat-indicator" id="categoryIndicator" aria-hidden="true"></span>
       <div class="category active" data-category="popular">Popular</div>
       <div class="category" data-category="new">New</div>
       <div class="category" data-category="meals">Meals</div>
@@ -2650,6 +2700,15 @@
     <!-- Item 4 McFlavor Fries Chedar Sauce Unavailable from 28/07/2026 -->
 
     <!-- Item 5 McFlavor Fries Algerien sauce Unavailable From 28/07/2026 -->
+  </div>
+
+  <!-- Basket total bubble (same as BenMarket) -->
+  <div class="cart-total-bubble" id="cartTotalBubble" aria-hidden="true">
+    <img class="cart-total-icon" src="https://res.cloudinary.com/du2naqx3i/image/upload/v1794389387/5C03FE04-1464-42FF-975B-3425B276DEC0_nik06y.png" alt="">
+    <div class="cart-total-text">
+      <small>Basket total</small>
+      <span id="cartTotalValue">0.00 MAD</span>
+    </div>
   </div>
 
   <!-- View Cart Button -->
@@ -6626,66 +6685,114 @@
       'sauces': document.getElementById('saucesSection'),
       'fries': document.getElementById('friesSection')
     };
-    // Function to update active category with animation
-    function updateActiveCategory(categoryId) {
-      categories.forEach(c => {
-        c.classList.remove('active');
-        if (c.getAttribute('data-category') === categoryId) {
-          c.classList.add('active');
-          c.classList.add('category-switch-animation');
-          // Remove animation class after animation completes
-          setTimeout(() => {
-            c.classList.remove('category-switch-animation');
-          }, 600);
-          // Center the active category in the container
-          const containerWidth = categoriesContainer.offsetWidth;
-          const categoryLeft = c.offsetLeft;
-          const categoryWidth = c.offsetWidth;
-          categoriesContainer.scrollTo({
-            left: categoryLeft - (containerWidth / 2) + (categoryWidth / 2),
-            behavior: 'smooth'
-          });
-        }
+    // Active category: a single pill slides to the chosen category and the bar centres it
+    const categoryIndicator = document.getElementById('categoryIndicator');
+    function moveCategoryIndicator(el, animate) {
+      if (!el || !categoryIndicator) return;
+      categoryIndicator.style.transition = animate ? '' : 'none';
+      categoryIndicator.style.width = el.offsetWidth + 'px';
+      categoryIndicator.style.transform = `translate3d(${el.offsetLeft}px, 0, 0)`;
+      categoryIndicator.classList.add('ready');
+      if (!animate) {
+        void categoryIndicator.offsetWidth;
+        categoryIndicator.style.transition = '';
+      }
+      const bar = categoriesContainer;
+      const maxScroll = bar.scrollWidth - bar.clientWidth;
+      const target = el.offsetLeft - (bar.clientWidth - el.offsetWidth) / 2;
+      bar.scrollTo({
+        left: Math.max(0, Math.min(target, maxScroll)),
+        behavior: animate ? 'smooth' : 'auto'
       });
     }
-    // Intersection Observer to detect which section is in view
-    const observerOptions = {
-      root: null,
-      rootMargin: '-100px 0px -50% 0px',
-      threshold: 0.1
-    };
-    const observer = new IntersectionObserver((entries) => {
+    function updateActiveCategory(categoryId) {
+      let activeEl = null;
+      categories.forEach(c => {
+        const on = c.getAttribute('data-category') === categoryId;
+        c.classList.toggle('active', on);
+        if (on) activeEl = c;
+      });
+      moveCategoryIndicator(activeEl, true);
+    }
+    window.addEventListener('load', () => {
+      moveCategoryIndicator(document.querySelector('.category.active'), false);
+      syncActiveWithScroll();
+    });
+    window.addEventListener('resize', () => {
+      moveCategoryIndicator(document.querySelector('.category.active'), false);
+    });
+    // Section reveal (fade/slide in) only; the active pill no longer depends on this
+    const sectionRevealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
-          const categoryId = sectionId.replace('Section', '');
-          // Update active category in the navigation with animation
-          updateActiveCategory(categoryId);
-          // Add visible class for animation
-          entry.target.classList.add('visible');
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    Object.values(categorySections).forEach(section => {
+      if (section) sectionRevealObserver.observe(section);
+    });
+
+    // Active category = the section sitting under the sticky bar (scroll position, not intersections)
+    let programmaticScroll = false;
+    let programmaticTimer = null;
+    let scrollRaf = null;
+
+    function activeCategoryFromScroll() {
+      // A section becomes active once its heading reaches the upper part of the screen
+      const line = window.innerHeight * 0.4;
+      const atPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      let chosen = null;
+      categories.forEach(c => {
+        const key = c.getAttribute('data-category');
+        const sec = categorySections[key];
+        if (!sec) return;
+        const top = sec.getBoundingClientRect().top;
+        if (atPageBottom) {
+          if (top < window.innerHeight) chosen = key;
+        } else if (top <= line) {
+          chosen = key;
         }
       });
-    }, observerOptions);
-    // Observe all category sections
-    Object.values(categorySections).forEach(section => {
-      if (section) {
-        observer.observe(section);
-      }
-    });
-    // Manual category selection with animation
+      return chosen;
+    }
+
+    function syncActiveWithScroll() {
+      scrollRaf = null;
+      if (programmaticScroll) return;
+      const key = activeCategoryFromScroll();
+      if (!key) return;
+      const current = document.querySelector('.category.active');
+      if (current && current.getAttribute('data-category') === key) return;
+      updateActiveCategory(key);
+    }
+
+    window.addEventListener('scroll', () => {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(syncActiveWithScroll);
+    }, { passive: true });
+
+    function endProgrammaticScroll() {
+      programmaticScroll = false;
+      clearTimeout(programmaticTimer);
+      window.removeEventListener('scrollend', endProgrammaticScroll);
+      syncActiveWithScroll();
+    }
+
+    // Manual category selection: move the pill, then scroll to its section
     categories.forEach(category => {
       category.addEventListener('click', function() {
         const categoryId = this.getAttribute('data-category');
-        // Update active category with animation
         updateActiveCategory(categoryId);
-        // Scroll to the category section
-        if (categorySections[categoryId]) {
-          categorySections[categoryId].scrollIntoView({
-            behavior: 'smooth'
-          });
+        const sec = categorySections[categoryId];
+        if (sec) {
+          programmaticScroll = true;
+          clearTimeout(programmaticTimer);
+          window.addEventListener('scrollend', endProgrammaticScroll);
+          programmaticTimer = setTimeout(endProgrammaticScroll, 1200);
+          sec.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
+
     // Animate sections on load
     document.addEventListener('DOMContentLoaded', function() {
       const sections = document.querySelectorAll('.animate-section');
@@ -7225,6 +7332,7 @@
       saveCart();
       // تحديث واجهة السلة
       updateCart();
+      showCartTotalBubble();
       // عرض رسالة النجاح
       const modalAddBtn = document.getElementById('modalAddBtn');
       if (modalAddBtn) {
@@ -7259,6 +7367,21 @@
     function calculateCartTotal() {
       return cart.reduce((total, item) => total + item.totalPrice, 0);
     }
+    // ================================================================
+    // CART TOTAL BUBBLE (shown after every add, same as BenMarket)
+    // ================================================================
+    function showCartTotalBubble() {
+      const bubble = document.getElementById('cartTotalBubble');
+      const valueEl = document.getElementById('cartTotalValue');
+      if (!bubble || !valueEl) return;
+
+      valueEl.textContent = calculateCartTotal().toFixed(2) + ' MAD';
+
+      // restart the animation on every change
+      bubble.classList.remove('show');
+      void bubble.offsetWidth;
+      bubble.classList.add('show');
+    }
     // Create stars animation
     function createStarsAnimation(element) {
       for (let i = 0; i < 5; i++) {
@@ -7285,6 +7408,1120 @@
     }
   </script>
   <script src="breadcrumbs.js"></script>
+
+  <style>
+    /* =====================================================================
+       iOS 27 THEME (McDonald's page): same tokens as the BenMarket page
+       ===================================================================== */
+    :root {
+      --ios-bg: #F2F2F7;
+      --ios-card: #FFFFFF;
+      --ios-label: #000000;
+      --ios-label-2: #3C3C43;
+      --ios-secondary: #8E8E93;
+      --ios-separator: rgba(60, 60, 67, .14);
+      --ios-tint: #B22222;
+      --ios-tint-soft: rgba(178, 34, 34, .10);
+      --ios-glass: rgba(255, 255, 255, .66);
+      --ios-glass-strong: rgba(255, 255, 255, .82);
+      --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Ubuntu, sans-serif;
+      --ios-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .06);
+    }
+
+    html {
+      -webkit-tap-highlight-color: transparent;
+      background: rgba(255, 244, 180, .30);
+    }
+    body, body * { font-family: var(--ios-font); }
+    body {
+      background: transparent;
+      color: var(--ios-label);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- navigation: glass capsules ---------- */
+    .navbar { padding: 12px 16px; }
+    .navbar.scrolled {
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 0 0.5px 0 var(--ios-separator);
+    }
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(16px) saturate(180%);
+      color: var(--ios-tint);
+      border: .5px solid rgba(255, 255, 255, .8);
+      box-shadow: var(--ios-shadow);
+    }
+    .nav-btn:active { transform: scale(.92); }
+    .nav-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-label);
+      letter-spacing: -.2px;
+    }
+
+    .seo-breadcrumb {
+      background: transparent;
+      color: var(--ios-secondary);
+      font-size: 12px;
+      padding: 8px 20px 0;
+      margin-top: 0;
+    }
+    .seo-breadcrumb a { color: var(--ios-tint); font-weight: 500; }
+
+    /* ---------- hero + restaurant card ---------- */
+    .hero-section {
+      height: 300px;
+      border-radius: 0 0 32px 32px;
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .hero-overlay {
+      padding: 56px 20px 40px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .78), rgba(0, 0, 0, 0));
+    }
+    .hero-title {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.6px;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .hero-subtitle {
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: .92;
+    }
+
+    .restaurant-info {
+      position: relative;
+      z-index: 2;
+      margin: -28px 16px 0;
+      padding: 18px 20px;
+      text-align: center;
+      background: var(--ios-card);
+      border-radius: 26px;
+      box-shadow: var(--ios-shadow);
+    }
+    .restaurant-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: var(--ios-label);
+      margin-bottom: 10px;
+    }
+    .delivery-time {
+      display: inline-flex;
+      padding: 6px 12px;
+      background: var(--ios-tint-soft);
+      color: var(--ios-tint);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .delivery-icon { color: var(--ios-tint); margin-right: 6px; }
+
+    .independent-note {
+      margin: 12px 16px 0;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, .72);
+      border: .5px solid var(--ios-separator);
+      border-radius: 18px;
+      color: var(--ios-secondary);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .independent-note strong { color: var(--ios-label-2); }
+
+    /* ---------- category pills: sticky glass bar ---------- */
+    .categories-section {
+      position: sticky;
+      top: 64px;
+      z-index: 900;
+      padding: 10px 0 8px;
+      margin: 12px 0 0;
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 0 0.5px 0 var(--ios-separator);
+    }
+    .categories {
+      position: relative;
+      gap: 8px;
+      padding: 4px 16px 6px;
+    }
+    .category {
+      position: relative;
+      z-index: 1;
+      background: var(--ios-card);
+      color: var(--ios-label-2);
+      border: none;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 15px;
+      font-weight: 500;
+      box-shadow: var(--ios-shadow);
+      transition: color .35s ease, background-color .35s ease, box-shadow .35s ease;
+    }
+    .category::before { display: none; }
+    .category.active {
+      background: transparent;
+      color: #fff;
+      border-color: transparent;
+      box-shadow: none;
+    }
+    .cat-indicator {
+      position: absolute;
+      top: 4px;
+      bottom: 6px;
+      left: 0;
+      width: 0;
+      z-index: 0;
+      border-radius: 999px;
+      background: var(--ios-tint);
+      box-shadow: 0 6px 16px rgba(178, 34, 34, .28);
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform, width;
+      transition: transform .45s cubic-bezier(.32, .72, 0, 1), width .45s cubic-bezier(.32, .72, 0, 1), opacity .3s ease;
+    }
+    .cat-indicator.ready { opacity: 1; }
+
+    /* ---------- grouped cards for every section ---------- */
+    .products-section,
+    .category-items-section {
+      scroll-margin-top: 128px;
+      margin: 0 16px 16px;
+      padding: 20px 16px 8px;
+      background: var(--ios-card);
+      border-radius: 26px;
+      box-shadow: var(--ios-shadow);
+    }
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      color: var(--ios-label);
+      margin-bottom: 14px;
+    }
+    .section-title::after { display: none; }
+
+    .product-cards { gap: 12px; padding: 2px 0 12px; }
+    .product-card {
+      min-width: 160px;
+      background: var(--ios-card);
+      border-radius: 20px;
+      border: .5px solid var(--ios-separator);
+      box-shadow: var(--ios-shadow);
+    }
+    .product-card:active { transform: scale(.97); }
+    .product-image-container {
+      height: 130px;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      background: #fff;
+    }
+    .add-btn {
+      bottom: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      background: var(--ios-tint);
+      box-shadow: 0 6px 14px rgba(178, 34, 34, .35), inset 0 1px 0 rgba(255, 255, 255, .25);
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .product-info { padding: 12px 12px 14px; }
+    .product-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ios-label);
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .product-calories { font-size: 12px; color: var(--ios-secondary); margin-bottom: 6px; }
+    .product-price { font-size: 15px; font-weight: 600; color: var(--ios-label); }
+
+    /* ---------- item rows ---------- */
+    .category-item {
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: .5px solid var(--ios-separator);
+    }
+    .category-item:hover { transform: none; }
+    .category-item:last-child { border-bottom: none; }
+    .item-image {
+      width: 84px;
+      height: 84px;
+      border-radius: 16px;
+      margin-right: 14px;
+      background: #fff;
+      box-shadow: 0 0 0 .5px var(--ios-separator);
+    }
+    .category-item:hover .item-image { transform: none; }
+    .item-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-label);
+      letter-spacing: -.2px;
+      margin-bottom: 3px;
+    }
+    .item-description {
+      font-size: 13px;
+      color: var(--ios-secondary);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .item-price { font-size: 15px; font-weight: 600; color: var(--ios-label); }
+    .item-add-btn {
+      width: 34px;
+      height: 34px;
+      background: var(--ios-tint);
+      box-shadow: 0 6px 14px rgba(178, 34, 34, .3), inset 0 1px 0 rgba(255, 255, 255, .25);
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .item-add-btn:active { transform: scale(.9); }
+
+    /* ---------- basket capsule (matches BenMarket) ---------- */
+    .view-cart-btn {
+      background: rgba(178, 34, 34, .94);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
+      padding: 13px 22px 13px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 12px 28px rgba(178, 34, 34, .35), inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+    .view-cart-btn:hover { background-color: #8B1A1A; }
+    .cart-item-count {
+      background: #fff;
+      color: var(--ios-tint);
+      min-width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ---------- sheets (customise, search, share) ---------- */
+    .overlay {
+      padding: 0;
+      align-items: flex-end;
+      background: rgba(0, 0, 0, .4);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .modal,
+    .search-modal,
+    .share-modal {
+      max-width: 500px;
+      max-height: 92vh;
+      border-radius: 30px 30px 0 0;
+      background: var(--ios-bg);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, .18);
+    }
+    .search-modal, .share-modal { max-height: 80vh; }
+    .modal-header,
+    .search-header {
+      padding: 14px 16px;
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: .5px solid var(--ios-separator);
+      box-shadow: none;
+    }
+    .modal-title { font-size: 17px; font-weight: 600; color: var(--ios-label); }
+    .close-btn {
+      width: 30px;
+      height: 30px;
+      background: rgba(120, 120, 128, .16);
+      color: var(--ios-secondary);
+      font-size: 13px;
+    }
+    .close-btn:hover {
+      background: rgba(120, 120, 128, .28);
+      color: var(--ios-label);
+      transform: none;
+    }
+    .modal-content { padding: 16px 16px 8px; background: var(--ios-bg); }
+    .modal-image {
+      height: 220px;
+      border-radius: 22px;
+      background: #fff;
+      margin-bottom: 16px;
+      box-shadow: var(--ios-shadow);
+    }
+    .modal-item-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      color: var(--ios-label);
+      margin-bottom: 4px;
+    }
+    .modal-calories {
+      justify-content: flex-start;
+      color: var(--ios-tint);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .modal-desc { color: var(--ios-secondary); font-size: 15px; line-height: 1.4; margin-bottom: 4px; }
+    .section-title-modal {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ios-secondary);
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      margin: 18px 4px 8px;
+    }
+    .section-title-modal::after { display: none; }
+    .options-group {
+      background: var(--ios-card);
+      border: none;
+      border-radius: 22px;
+      box-shadow: var(--ios-shadow);
+      margin-bottom: 8px;
+    }
+    .group-header {
+      background: transparent;
+      padding: 14px 16px 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ios-secondary);
+    }
+    .group-header i { color: var(--ios-secondary); }
+    .group-content { padding: 0 16px; }
+    .option {
+      padding: 13px 0;
+      border-bottom: .5px solid var(--ios-separator);
+    }
+    .option:last-child { border-bottom: none; }
+    .option-title { font-size: 16px; font-weight: 500; color: var(--ios-label); margin-bottom: 2px; }
+    .option-desc { font-size: 13px; color: var(--ios-secondary); }
+    .option-price { font-size: 15px; font-weight: 500; color: var(--ios-secondary); margin: 0 12px; }
+    .option input[type="checkbox"],
+    .option input[type="radio"] {
+      accent-color: var(--ios-tint);
+      width: 22px;
+      height: 22px;
+    }
+    .special-instructions {
+      background: var(--ios-card);
+      border: none;
+      border-radius: 16px;
+      font-family: var(--ios-font);
+      font-size: 15px;
+      color: var(--ios-label);
+    }
+    .special-instructions:focus {
+      background: #fff;
+      border: none;
+      box-shadow: 0 0 0 3px var(--ios-tint-soft);
+    }
+    .char-counter { font-size: 12px; color: var(--ios-secondary); }
+    .char-counter #charCount { color: var(--ios-secondary); }
+
+    .fixed-footer {
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-top: .5px solid var(--ios-separator);
+      box-shadow: none;
+      gap: 12px;
+    }
+    .counter { gap: 12px; }
+    .counter-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(120, 120, 128, .14);
+      color: var(--ios-label);
+      font-size: 15px;
+    }
+    .counter-btn:hover {
+      background: rgba(120, 120, 128, .24);
+      color: var(--ios-label);
+      transform: none;
+    }
+    .counter-value {
+      font-size: 17px;
+      font-weight: 600;
+      min-width: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+    .modal-add-btn {
+      flex: 1;
+      justify-content: center;
+      background: var(--ios-tint);
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(178, 34, 34, .3);
+    }
+    .modal-add-btn:hover { transform: none; box-shadow: 0 8px 20px rgba(178, 34, 34, .3); }
+    .modal-add-btn:active { transform: scale(.97); }
+    .price { font-size: 15px; font-weight: 600; }
+
+    .search-input-container {
+      background: rgba(118, 118, 128, .12);
+      border-radius: 12px;
+      padding: 9px 12px;
+      margin-right: 0;
+    }
+    .search-input { font-size: 17px; background: transparent; }
+    .search-results { padding: 8px 16px; background: var(--ios-bg); }
+    .search-result-item {
+      padding: 12px 0;
+      border-bottom: .5px solid var(--ios-separator);
+    }
+    .search-result-item:hover { background-color: transparent; }
+    .search-result-image { border-radius: 12px; }
+    .search-result-name { font-size: 16px; font-weight: 600; color: var(--ios-label); }
+    .search-result-price { color: var(--ios-label-2); font-weight: 500; }
+
+    .share-options { padding: 16px; gap: 10px; background: var(--ios-bg); }
+    .share-option {
+      padding: 14px;
+      background: var(--ios-card);
+      border-radius: 18px;
+      box-shadow: var(--ios-shadow);
+      color: var(--ios-label);
+    }
+    .share-option:hover {
+      background: var(--ios-card);
+      color: var(--ios-label);
+      transform: none;
+    }
+    .share-option:hover .share-icon { background: #25D366; color: #fff; }
+    #copyShare:hover .share-icon { background: #007AFF; }
+    .share-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      margin-right: 14px;
+      background: #25D366;
+      color: #fff;
+      font-size: 18px;
+    }
+    #copyShare .share-icon { background: #007AFF; }
+    .share-text { font-size: 17px; font-weight: 500; color: var(--ios-label); }
+
+    /* ---------- FAQ + feedback ---------- */
+    .faq-section { background: transparent; padding: 28px 16px 40px; }
+    .faq-header { text-align: left; margin-bottom: 18px; }
+    .faq-header span {
+      background: var(--ios-tint-soft);
+      color: var(--ios-tint);
+      box-shadow: none;
+      font-size: 12px;
+      letter-spacing: .6px;
+      padding: 6px 12px;
+    }
+    .faq-header h2 {
+      margin-top: 12px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.6px;
+      color: var(--ios-label);
+    }
+    .faq-header p { margin-top: 6px; color: var(--ios-secondary); font-size: 15px; }
+    .faq-list {
+      background: var(--ios-card);
+      border-radius: 26px;
+      border-top: none;
+      padding: 0 16px;
+      box-shadow: var(--ios-shadow);
+      overflow: hidden;
+    }
+    .faq-item { border-bottom: .5px solid var(--ios-separator); padding: 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      padding: 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ios-label);
+      line-height: 1.35;
+    }
+    .faq-question span {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--ios-tint);
+    }
+    .faq-answer p {
+      padding: 0 0 16px;
+      font-size: 15px;
+      color: var(--ios-secondary);
+      line-height: 1.45;
+    }
+    .faq-item.active .faq-answer { max-height: 220px; }
+
+    .feedback-section { margin-top: 24px; }
+    .feedback-box {
+      background: var(--ios-card);
+      border: none;
+      border-radius: 26px;
+      padding: 26px 22px;
+      box-shadow: var(--ios-shadow);
+      color: var(--ios-label);
+    }
+    .feedback-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      color: var(--ios-label);
+      margin-bottom: 8px;
+    }
+    .feedback-box p {
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--ios-secondary);
+      margin: 0 auto 18px;
+    }
+    .feedback-btn {
+      background: var(--ios-tint);
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 10px 22px rgba(178, 34, 34, .28);
+    }
+    .feedback-btn:hover {
+      transform: none;
+      background: #8B1A1A;
+      box-shadow: 0 10px 22px rgba(178, 34, 34, .28);
+    }
+
+    /* ---------- SEO content card ---------- */
+    .seo-content-section { background: transparent; padding: 16px 16px 8px; }
+    .seo-content-card {
+      background: var(--ios-card);
+      border: none;
+      border-radius: 26px;
+      padding: 22px 20px;
+      box-shadow: var(--ios-shadow);
+    }
+    .seo-content-card .seo-kicker {
+      color: var(--ios-tint);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-bottom: 6px;
+    }
+    .seo-content-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: var(--ios-label);
+    }
+    .seo-content-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-label);
+    }
+    .seo-content-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ios-secondary);
+    }
+    .seo-content-card a { color: var(--ios-tint); text-decoration: none; }
+    .seo-benefits li {
+      background: var(--ios-bg);
+      border-radius: 14px;
+      color: var(--ios-label-2);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .seo-benefits i { color: var(--ios-tint); }
+
+    /* ---------- motion + detail ---------- */
+    @supports (corner-shape: squircle) {
+      .restaurant-info, .products-section, .category-items-section,
+      .options-group, .faq-list, .feedback-box, .seo-content-card {
+        corner-shape: squircle;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* cart total bubble: iOS-style frosted notification that rises from behind the basket button */
+    .cart-total-bubble {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      z-index: 999;
+      transform: translate(-50%, 0) scale(.6);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 210px;
+      padding: 10px 18px 10px 10px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .72);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, .85);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .16), inset 0 1px 0 rgba(255, 255, 255, .9);
+      white-space: nowrap;
+    }
+
+    .cart-total-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      background: transparent;
+      mix-blend-mode: multiply;
+    }
+
+    .cart-total-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .cart-total-text small {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .cart-total-text span {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1f2328;
+      letter-spacing: -.2px;
+    }
+
+    .cart-total-bubble.show {
+      animation: cartTotalPop 3s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    @keyframes cartTotalPop {
+      0% {
+        transform: translate(-50%, 0) scale(.6);
+        opacity: 0;
+      }
+      15% {
+        transform: translate(-50%, -66px) scale(1.06);
+        opacity: 1;
+      }
+      20% {
+        transform: translate(-50%, -58px) scale(1);
+        opacity: 1;
+      }
+      87% {
+        transform: translate(-50%, -58px) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, 0) scale(.6);
+        opacity: 0;
+      }
+    }
+
+  </style>
+  <style>
+    /* ---------- hanging OPEN / CLOSE sign on the restaurant card ---------- */
+    #hangSign {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 4px;
+      overflow: visible;
+    }
+    #hangSign .hanging-container {
+      zoom: .65;
+    }
+    #hangSign .front small,
+    #hangSign .back small {
+      font-size: 14px;
+      font-weight: 700;
+      color: #686868;
+      margin-top: 5px;
+      letter-spacing: .35px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+#hangSign .hanging-container {
+    position: relative;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: top center;
+    animation: hangSignSwing 5s ease-in-out infinite;
+}
+#hangSign .strings {
+    width: 158px;
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+#hangSign .string {
+    width: 2px;
+    height: 85px;
+    background: linear-gradient(
+        90deg,
+        #777,
+        #f5f5f5,
+        #888,
+        #444
+    );
+    box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+    position: relative;
+}
+#hangSign .string::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 25%,
+        #fff,
+        #999 55%,
+        #444
+    );
+    border: 1px solid #777;
+}
+#hangSign .flip-stage {
+    width: 260px;
+    height: 122px;
+    perspective: 1000px;
+    position: relative;
+}
+#hangSign .open-sign {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+
+    transition:
+        transform 1.15s cubic-bezier(.68,-0.15,.27,1.15);
+}
+#hangSign .open-sign.closed {
+    transform: rotateY(180deg);
+}
+#hangSign .sign-face {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #f8f7f3 45%,
+        #e6e4df 100%
+    );
+
+    border: 8px solid transparent;
+    border-radius: 7px;
+
+    
+    background-image:
+        linear-gradient(145deg, #fff, #f8f7f3 45%, #e6e4df),
+        linear-gradient(
+            135deg,
+            #555,
+            #171717 25%,
+            #444 50%,
+            #111 75%,
+            #555
+        );
+
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+
+    box-shadow:
+        0 2px 0 #111,
+        0 5px 0 #777,
+        0 8px 0 #222,
+        0 14px 24px rgba(0,0,0,.23),
+        inset 0 2px 5px rgba(255,255,255,.9);
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+#hangSign .sign-face::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(0,0,0,.09);
+    border-radius: 2px;
+    pointer-events: none;
+}
+#hangSign .screw {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle at 30% 25%,
+        #fff,
+        #aaa 35%,
+        #555 75%,
+        #222
+    );
+
+    border: 1px solid #888;
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    z-index: 5;
+}
+#hangSign .screw.tl {
+    top: 7px;
+    left: 7px;
+}
+#hangSign .screw.tr {
+    top: 7px;
+    right: 7px;
+}
+#hangSign .screw.bl {
+    bottom: 7px;
+    left: 7px;
+}
+#hangSign .screw.br {
+    bottom: 7px;
+    right: 7px;
+}
+#hangSign .front {
+    transform: rotateY(0deg);
+}
+#hangSign .front span {
+    font-size: 61px;
+    font-weight: 900;
+    letter-spacing: 4px;
+
+    color: #C47B22;
+
+    text-shadow:
+        0 1px 0 #fff,
+        0 2px 1px rgba(0,0,0,.13);
+
+    position: relative;
+    z-index: 2;
+}
+#hangSign .back {
+    transform: rotateY(180deg);
+}
+#hangSign .back strong {
+    font-size: 46px;
+    font-weight: 900;
+    letter-spacing: 3px;
+
+    color: #C62828;
+
+    text-shadow:
+        0 1px 0 #fff,
+        0 2px 1px rgba(0,0,0,.13);
+
+    position: relative;
+    z-index: 2;
+}
+#hangSign .back small {
+    font-size: 9px;
+    font-weight: 700;
+    color: #686868;
+    margin-top: 5px;
+    letter-spacing: .35px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+#hangSign .shadow {
+    width: 205px;
+    height: 15px;
+    margin-top: 22px;
+
+    border-radius: 50%;
+    background: rgba(0,0,0,.19);
+
+    filter: blur(10px);
+
+    animation: hangSignShadow 5s ease-in-out infinite;
+}
+@keyframes hangSignSwing {
+    0%, 100% {
+        rotate: -1deg;
+    }
+
+    50% {
+        rotate: 1deg;
+    }
+}
+@keyframes hangSignShadow {
+    0%, 100% {
+        transform: scaleX(1);
+        opacity: .8;
+    }
+
+    50% {
+        transform: scaleX(.94);
+        opacity: .55;
+    }
+}
+@media (max-width: 400px) {
+#hangSign .hanging-container {
+        scale: .9;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+#hangSign .hanging-container, #hangSign .shadow {
+        animation: none;
+    }
+#hangSign .open-sign {
+        transition: transform 1.15s ease;
+    }
+}
+  </style>
+  <script>
+(function () {
+  const sign = document.getElementById("openSign");
+  const TZ = "Africa/Casablanca";
+  const OPEN_FROM = 11 * 60; // 11:00 AM
+  const OPEN_UNTIL = 1 * 60; // 1:00 AM
+
+  // Current minutes since midnight in Morocco time (DST-safe)
+  function minutesInMorocco() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: TZ,
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23"
+    }).formatToParts(new Date());
+    const h = Number(parts.find(p => p.type === "hour").value);
+    const m = Number(parts.find(p => p.type === "minute").value);
+    return h * 60 + m;
+  }
+
+  // Open from 11:00 AM until 1:00 AM (wraps past midnight)
+  function isOpenNow() {
+    const t = minutesInMorocco();
+    return t >= OPEN_FROM || t < OPEN_UNTIL;
+  }
+
+  let currentOpen = null;
+  function applySign(animate) {
+    const open = isOpenNow();
+    if (open === currentOpen) return;
+    if (!animate) sign.style.transition = "none";
+    sign.classList.toggle("closed", !open);
+    if (!animate) {
+      void sign.offsetWidth;
+      sign.style.transition = "";
+    }
+    currentOpen = open;
+  }
+
+  applySign(false);
+  setInterval(() => applySign(true), 15000);
+})();
+  </script>
+  <style>
+    /* ---------- exact-centre plus buttons (drawn with bars, no font metrics) ---------- */
+    .item-add-btn,
+    .add-btn {
+      position: relative;
+      padding: 0;
+      font-size: 0;
+      line-height: 0;
+      color: transparent;
+    }
+    .item-add-btn::before,
+    .item-add-btn::after,
+    .add-btn::before,
+    .add-btn::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: #fff;
+      border-radius: 2px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .item-add-btn::before,
+    .add-btn::before {
+      width: 12px;
+      height: 2.2px;
+    }
+    .item-add-btn::after,
+    .add-btn::after {
+      width: 2.2px;
+      height: 12px;
+    }
+    .item-add-btn,
+    .add-btn {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+  <script>
+    // Tapping a product image in the lists opens the same product sheet as its + button
+    document.querySelectorAll('.category-item').forEach(row => {
+      const img = row.querySelector('.item-image');
+      const btn = row.querySelector('.item-add-btn');
+      if (!img || !btn) return;
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        openModal(btn.getAttribute('data-name'));
+      });
+    });
+  </script>
+  <style>
+    /* ---------- product sheet: full image + page-yellow background ---------- */
+    .modal,
+    .search-modal,
+    .share-modal,
+    .modal-content,
+    .search-results,
+    .share-options {
+      background: #FFFCE9;
+    }
+    .modal-header,
+    .search-header,
+    .fixed-footer {
+      background: rgba(255, 252, 233, .92);
+    }
+    .modal-image {
+      height: auto;
+      max-height: 320px;
+      min-height: 200px;
+      width: 100%;
+      object-fit: contain;
+      padding: 8px;
+      box-sizing: border-box;
+      background: #fff;
+    }
+  </style>
 </body>
 
 </html>
