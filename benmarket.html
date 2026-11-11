@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO Title -->
-  <title>Delivery Grocery & Supermarket in Marrakech | Fast Grocery Delivery</title>
+  <title>BenMarket | Grocery &amp; Supermarket Delivery in Marrakech</title>
 
   <!-- Meta Description -->
-  <meta name="description" content="Fast grocery and supermarket delivery in Marrakech. Order fresh fruits, vegetables, drinks, snacks, dairy products and household essentials with same-day and express delivery across Marrakech and surrounding areas.">
+  <meta name="description" content="BenMarket by Benjelloun Express: groceries from nearby Marrakech supermarkets, delivered to your door. Same-day and express delivery, cash on delivery available.">
 
   <!-- Keywords -->
-  <meta name="keywords" content="grocery delivery Marrakech, supermarket delivery Marrakech, grocery delivery service Marrakech, online grocery Marrakech, express delivery Marrakech, food delivery Marrakech, fruits delivery Marrakech, vegetables delivery Marrakech, supermarket delivery Morocco, livraison courses Marrakech">
+  
 
   <meta name="author" content="Delivery Grocery & Supermarket in Marrakech">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -33,44 +33,77 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Delivery Grocery & Supermarket in Marrakech">
-  <meta property="og:title" content="Delivery Grocery & Supermarket in Marrakech">
-  <meta property="og:description" content="Fast supermarket and grocery delivery service in Marrakech with same-day and express delivery.">
+  <meta property="og:site_name" content="BenMarket by Benjelloun Express">
+  <meta property="og:title" content="BenMarket | Grocery &amp; Supermarket Delivery in Marrakech">
+  <meta property="og:description" content="BenMarket by Benjelloun Express: groceries from nearby Marrakech supermarkets, delivered to your door. Same-day and express delivery, cash on delivery available.">
   <meta property="og:url" content="https://delivery-marrakech.com/benmarket.html">
   <meta property="og:image" content="https://i.ibb.co/HprpBRwp/IMG-5742.png">
+  <meta property="og:image:alt" content="BenMarket grocery delivery in Marrakech by Benjelloun Express">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Delivery Grocery & Supermarket in Marrakech">
-  <meta name="twitter:description" content="Fast grocery and supermarket delivery service in Marrakech.">
+  <meta name="twitter:title" content="BenMarket | Grocery &amp; Supermarket Delivery in Marrakech">
+  <meta name="twitter:description" content="BenMarket by Benjelloun Express: groceries from nearby Marrakech supermarkets, delivered to your door. Same-day and express delivery, cash on delivery available.">
   <meta name="twitter:image" content="https://i.ibb.co/HprpBRwp/IMG-5742.png">
 
   <!-- Theme -->
   <meta name="theme-color" content="#0A7D32">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Preconnect to third-party origins used by the page -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com">
+  <link rel="preconnect" href="https://i.ibb.co">
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonts & icons: loaded without blocking the first paint -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js">
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js">
-  </script>
 
   <!-- ===== STRUCTURED DATA: DeliveryService ===== -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "DeliveryService",
-      "name": "Delivery Grocery & Supermarket in Marrakech",
+      "name": "BenMarket - Grocery & Supermarket Delivery in Marrakech",
       "url": "https://delivery-marrakech.com/benmarket.html",
       "image": "https://i.ibb.co/HprpBRwp/IMG-5742.png",
-      "description": "Fast grocery and supermarket delivery service in Marrakech with same-day and express delivery.",
-      "areaServed": "Marrakech",
+      "description": "BenMarket by Benjelloun Express: groceries from nearby Marrakech supermarkets, delivered to your door. Same-day and express delivery, cash on delivery available.",
       "serviceType": "Grocery Delivery",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Marrakech"
+        },
+        {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 31.6295,
+            "longitude": -7.9811
+          },
+          "geoRadius": "35000"
+        }
+      ],
+      "provider": {
+        "@type": "Organization",
+        "name": "Benjelloun Express",
+        "url": "https://delivery-marrakech.com/",
+        "telephone": "+212642620325",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Marrakech",
+          "addressCountry": "MA"
+        }
+      },
+      "paymentAccepted": "Cash",
       "priceRange": "$$"
     }
   </script>
@@ -193,107 +226,129 @@
     }
 
     .category-title {
-      font-size: 20px;
-      font-weight: 700;
-      padding: 16px 16px 8px 16px;
-      color: #212529;
+      font-family: 'Fredoka', 'Ubuntu', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #1f2328;
+      letter-spacing: -0.2px;
+      padding: 20px 16px 6px 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .category-title::before {
+      content: '';
+      flex: 0 0 4px;
+      height: 26px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #8B1A1A, rgba(139, 26, 26, .35));
     }
 
     .category-title-img {
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       object-fit: cover;
       border-radius: 50%;
-      border: 2px solid #B22222;
+      background: #fff;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #FDEFEF, 0 6px 16px rgba(178, 34, 34, .18);
     }
 
-    /* --- NEW: category description with H1, H2, H3 and colored bar --- */
     .category-description-block {
-      padding: 0 16px 16px 16px;
-      border-bottom: 1px solid #f0f0f0;
-      margin-bottom: 6px;
+      padding: 2px 16px 16px 16px;
+      border-bottom: 1px dashed #e6e6e8;
+      margin-bottom: 4px;
     }
 
-    .category-description-block h1,
-    .category-description-block h2,
-    .category-description-block h3 {
-      margin: 0 0 4px 0;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .category-description-block h1 {
-      font-size: 20px;
+    .cat-h1 {
+      font-family: 'Fredoka', 'Ubuntu', sans-serif;
+      font-size: 19px;
+      font-weight: 600;
       color: #B22222;
+      line-height: 1.25;
+      margin: 0 0 4px 0;
     }
 
     .category-description-block h2 {
-      font-size: 17px;
-      color: #222;
+      font-family: 'Fredoka', 'Ubuntu', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1f2328;
+      line-height: 1.35;
+      margin: 0 0 4px 0;
     }
 
     .category-description-block h3 {
-      font-size: 15px;
-      color: #444;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6b7280;
+      line-height: 1.4;
+      margin: 0 0 6px 0;
     }
 
     .category-description-block .desc-text {
-      font-size: 14px;
-      color: #444;
+      font-size: 13px;
+      color: #6b7280;
       line-height: 1.6;
       margin-top: 4px;
     }
 
     .category-description-block .desc-text strong {
       color: #B22222;
-      font-weight: 700;
+      font-weight: 600;
     }
 
-    /* Colored bar like a button but not clickable */
+    /* fresh-green delivery pill */
     .delivery-bar {
-      display: inline-block;
-      background: #FDEFEF;
-      border-left: 4px solid #B22222;
-      padding: 4px 14px 4px 12px;
-      border-radius: 30px;
-      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      background: #E9F7EE;
+      color: #0A7D32;
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 12px;
       font-weight: 600;
-      color: #B22222;
-      margin-top: 6px;
-      letter-spacing: 0.3px;
-      box-shadow: 0 2px 6px rgba(178, 34, 34, 0.08);
+      margin-top: 10px;
+      letter-spacing: 0.2px;
     }
 
     .delivery-bar i {
       margin-right: 6px;
-      color: #B22222;
+      color: #0A7D32;
     }
 
     /* products grid */
     .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding: 8px 12px 12px 12px;
+      gap: 14px;
+      padding: 10px 14px 16px 14px;
     }
 
     .product-card-new {
+      --img-h: 160px;
       width: 100%;
+      display: flex;
+      flex-direction: column;
       background: #fff;
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-      border: 1px solid #ececec;
-      transition: transform 0.2s ease, box-shadow 0.2s;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 14px rgba(16, 24, 40, .06);
+      border: 1px solid #f0f0f2;
+      transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
       cursor: pointer;
     }
 
+    @media (hover: hover) {
+      .product-card-new:hover {
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 12px 26px rgba(16, 24, 40, .10);
+      }
+    }
+
     .product-card-new:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     .product-card-new.highlight-product {
@@ -326,31 +381,30 @@
 
     .cart-area-new {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: calc(var(--img-h) - 46px);
+      right: 10px;
       z-index: 50;
     }
 
     .cart-control-new {
       height: 38px;
       width: 38px;
-      background: #FCE8E8;
-      border-radius: 0 0 0 28px;
+      background: #fff;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: width 0.3s cubic-bezier(0.2, 0.85, 0.4, 1), border-radius 0.3s, background 0.3s;
+      box-shadow: 0 4px 12px rgba(16, 24, 40, .14);
+      transition: width 0.3s cubic-bezier(0.2, 0.85, 0.4, 1), background 0.3s, box-shadow 0.3s;
     }
 
     .cart-control-new.active {
-      width: 130px;
+      width: 116px;
       height: 38px;
       border-radius: 30px;
-      background: #FDEFEF;
-      margin-top: 6px;
-      margin-right: 6px;
-      box-shadow: 0 4px 12px rgba(139, 26, 26, 0.1);
+      background: #B22222;
+      box-shadow: 0 6px 14px rgba(178, 34, 34, .30);
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -362,33 +416,38 @@
       width: 30px;
       height: 30px;
       border: none;
-      background: white;
+      background: transparent;
       border-radius: 50%;
       cursor: pointer;
       font-size: 12px;
-      color: #8B1A1A;
+      color: #B22222;
       flex-shrink: 0;
       transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
     .btn-new:hover {
       transform: scale(1.02);
-      background: #fff5f5;
+      background: transparent;
+    }
+
+    .cart-control-new.active .btn-new {
+      color: #fff;
     }
 
     .minus-new {
       opacity: 1;
       transform: translateX(0);
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity 0.2s, transform 0.2s, width 0.3s;
     }
 
     .cart-control-new:not(.active) .minus-new {
       opacity: 0;
       transform: translateX(20px);
+      width: 0;
+      padding: 0;
       pointer-events: none;
     }
 
@@ -399,118 +458,114 @@
     }
 
     .minus-new.trash-mode {
-      background: #fff0f0;
-      color: #8B1A1A;
+      background: transparent;
+      color: #fff;
     }
 
     .quantity-new {
-      width: 50px;
+      width: auto;
+      min-width: 0;
       opacity: 1;
       text-align: center;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 700;
-      color: #8B1A1A;
+      color: #fff;
       letter-spacing: 0px;
       background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: none;
+      transition: opacity 0.2s;
     }
 
     .cart-control-new.active .quantity-new {
-      width: 50px;
+      width: auto;
+      min-width: 26px;
       opacity: 1;
     }
 
     .plus-new {
       background: transparent;
       box-shadow: none;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 400;
-      color: #6B1010;
-      width: 100%;
-      height: 100%;
+      color: #B22222;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .plus-new i {
-      position: relative;
-      left: -12px;
-      right: 2px;
-      top: 1px;
+      position: static;
     }
 
     .cart-control-new.active .plus-new i {
-      transform: rotate(90deg);
+      transform: none;
     }
 
     @media (max-width: 480px) {
       .cart-control-new.active {
-        width: 118px;
-        height: 34px;
+        width: 108px;
       }
 
       .quantity-new {
-        font-size: 16px;
-        width: 44px;
-      }
-
-      .cart-control-new.active .quantity-new {
-        width: 44px;
-      }
-
-      .btn-new {
-        width: 28px;
-        height: 28px;
-        font-size: 11px;
-      }
-
-      .plus-new i {
         font-size: 14px;
       }
     }
 
     .image-new {
-      height: 180px;
+      height: var(--img-h);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 16px;
-      background: white;
+      padding: 14px;
+      background: #ffffff;
     }
 
     .image-new img {
       max-width: 100%;
-      max-height: 150px;
+      max-height: 100%;
       object-fit: contain;
-      transition: transform 0.2s ease;
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    @media (hover: hover) {
+      .product-card-new:hover .image-new img {
+        transform: scale(1.05);
+      }
     }
 
     .info-new {
-      padding: 0 14px 18px;
-    }
-
-    .price-new {
-      font-size: 22px;
-      font-weight: 700;
-      color: #8B1A1A;
-      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 12px 14px 14px;
     }
 
     .title-new {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-      line-height: 1.3;
-      margin-bottom: 8px;
-      min-height: 40px;
+      order: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2328;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      min-height: 38px;
+    }
+
+    .price-new {
+      order: 2;
+      font-size: 17px;
+      font-weight: 800;
+      color: #B22222;
+      letter-spacing: -0.2px;
+      margin-bottom: 4px;
     }
 
     .desc-new {
-      color: #999;
+      order: 3;
+      color: #8a8f98;
       line-height: 1.4;
       font-size: 11px;
       display: -webkit-box;
@@ -777,7 +832,7 @@
       flex-direction: column;
       gap: 10px;
       transform: translateY(20px);
-      animation: fadeUp 0.s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      animation: fadeUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) both;
     }
 
     @keyframes fadeUp {
@@ -951,7 +1006,6 @@
       padding: 10px 5px 2px 5px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x proximity;
       scrollbar-width: thin;
     }
 
@@ -979,7 +1033,6 @@
       transition: transform 0.25s ease, opacity 0.2s;
       flex-shrink: 0;
       gap: 8px;
-      scroll-snap-align: start;
     }
 
     .category:active {
@@ -1049,21 +1102,12 @@
         gap: 12px;
       }
 
-      .image-new {
-        height: 150px;
-      }
-
       .image-new img {
-        max-height: 200px;
-      }
-
-      .title-new {
-        font-size: 14px;
-        min-height: 38px;
+        max-height: 100%;
       }
 
       .price-new {
-        font-size: 20px;
+        font-size: 17px;
       }
     }
 
@@ -1241,7 +1285,7 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
-      z-index: 3000;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1329,17 +1373,19 @@
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
       width: 100%;
       max-width: 400px;
-      right: 0;
       margin: 0 auto;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
+      background-color: rgba(17, 24, 39, .45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       visibility: hidden;
       opacity: 0;
       transition: visibility 0.3s ease, opacity 0.3s ease;
@@ -1351,124 +1397,156 @@
     }
 
     .product-modal-content {
-      background: white;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 32px;
       position: relative;
-      animation: fadeInScale 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      max-height: 85vh;
+      background: #fff;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      height: 100dvh;
       overflow-y: auto;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      overscroll-behavior: contain;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .3s ease;
     }
 
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .product-modal.active .product-modal-content {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .modal-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
-      background: white;
+      position: sticky;
+      top: 14px;
+      margin: 14px 14px -52px auto;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, .96);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 10;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+      transition: transform .2s ease, background .2s ease, color .2s ease;
       border: none;
-      color: #B22222;
-      font-size: 20px;
+      color: #1f2328;
+      font-size: 16px;
     }
 
     .modal-close-btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.06);
       background: #B22222;
-      color: white;
+      color: #fff;
+    }
+
+    .modal-close-btn:active {
+      transform: scale(0.94);
     }
 
     .modal-product-image {
+      flex: 0 0 auto;
       width: 100%;
-      height: 280px;
-      background: white;
+      height: 44vh;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 32px 32px 0 0;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .zoom-hint-btn {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .modal-product-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 20px;
-      transition: transform 0.3s ease;
+      padding: 28px;
+      transition: transform .4s cubic-bezier(.2, .8, .2, 1);
     }
 
     .modal-product-info {
-      padding: 24px 20px 20px;
+      padding: 20px 20px 24px;
+    }
+
+    .modal-product-category {
+      display: inline-block;
+      background: #FDEFEF;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #B22222;
+      margin-bottom: 10px;
     }
 
     .modal-product-title {
-      font-size: 24px;
-      font-weight: 800;
-      color: #1a1a1a;
-      margin-bottom: 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1f2328;
+      margin-bottom: 8px;
       line-height: 1.3;
     }
 
     .modal-product-price {
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 800;
       color: #B22222;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: baseline;
-      gap: 4px;
+      gap: 6px;
     }
 
     .modal-product-price small {
-      font-size: 16px;
-      font-weight: 500;
-      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+      color: #8a8f98;
     }
 
     .modal-product-description {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
-      color: #555;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #f0f0f0;
+      color: #6b7280;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f0f0f2;
     }
 
     .modal-quantity-section {
-      background: #f9f9f9;
-      border-radius: 24px;
-      padding: 16px;
-      margin-bottom: 20px;
+      background: #faf7f8;
+      border: 1px solid #f0f0f2;
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
     }
 
     .modal-quantity-label {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      color: #333;
-      margin-bottom: 12px;
+      color: #444;
+      margin-bottom: 10px;
       display: block;
     }
 
@@ -1476,29 +1554,29 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 12px;
     }
 
     .modal-quantity-buttons {
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: white;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid #ececec;
       border-radius: 50px;
       padding: 4px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .modal-qty-btn {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: none;
-      background: transparent;
+      background: #FDEFEF;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 16px;
       color: #B22222;
-      transition: all 0.2s ease;
+      transition: background .2s ease, color .2s ease, transform .15s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1506,71 +1584,57 @@
 
     .modal-qty-btn:hover {
       background: #B22222;
-      color: white;
-      transform: scale(1.05);
+      color: #fff;
     }
 
     .modal-qty-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
     }
 
     .modal-quantity {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
-      color: #B22222;
-      min-width: 50px;
+      color: #1f2328;
+      min-width: 36px;
       text-align: center;
     }
 
     .modal-total-price {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: #B22222;
-      background: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      text-align: right;
+      white-space: nowrap;
     }
 
     .modal-add-to-cart {
       width: 100%;
       background: #B22222;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 50px;
-      padding: 18px;
-      font-size: 18px;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 16px;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 8px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+      margin-top: 4px;
+      position: sticky;
+      bottom: 0;
+      box-shadow: 0 8px 20px rgba(178, 34, 34, .25);
     }
 
     .modal-add-to-cart:hover {
       background: #8B1A1A;
-      transform: scale(1.02);
-      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+      box-shadow: 0 10px 24px rgba(178, 34, 34, .35);
     }
 
     .modal-add-to-cart:active {
       transform: scale(0.98);
-    }
-
-    .modal-product-category {
-      display: inline-block;
-      background: #f0f0f0;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #B22222;
-      margin-bottom: 12px;
     }
 
     .product-modal-content::-webkit-scrollbar {
@@ -1587,31 +1651,13 @@
     }
 
     @media (max-width: 600px) {
-      .modal-product-image {
-        height: 240px;
-      }
 
       .modal-product-title {
-        font-size: 22px;
+        font-size: 20px;
       }
 
       .modal-product-price {
-        font-size: 28px;
-      }
-
-      .modal-add-to-cart {
-        padding: 16px;
-        font-size: 16px;
-      }
-
-      .modal-qty-btn {
-        width: 40px;
-        height: 40px;
-      }
-
-      .product-modal-content {
-        width: 92%;
-        max-height: 80vh;
+        font-size: 24px;
       }
     }
 
@@ -1635,12 +1681,6 @@
       animation: modalAddSuccess 0.5s ease;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
 
     .faq-section {
       background: #fff;
@@ -1786,20 +1826,945 @@
       background: #5f0000;
       box-shadow: 0 15px 35px rgba(122, 0, 0, 0.35);
     }
+    .brand-notice {
+      position: relative;
+      margin: 14px 16px 0;
+      padding: 16px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .55);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, .7);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .08), inset 0 1px 0 rgba(255, 255, 255, .8);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* soft colored light behind the glass so the blur reads */
+    .brand-notice::before,
+    .brand-notice::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .brand-notice::before {
+      width: 140px;
+      height: 120px;
+      top: -50px;
+      right: -30px;
+      background: rgba(178, 34, 34, .28);
+    }
+
+    .brand-notice::after {
+      width: 120px;
+      height: 110px;
+      bottom: -55px;
+      left: -20px;
+      background: rgba(255, 140, 140, .35);
+    }
+
+    .brand-notice p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3a3f47;
+      margin: 0;
+    }
+
+    .brand-notice strong {
+      color: #B22222;
+      font-weight: 700;
+    }
+
+    .brand-notice .store-name {
+      display: inline-block;
+      margin: 2px 1px;
+      padding: 0 9px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .6);
+      border: 1px solid rgba(255, 255, 255, .85);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+      color: #1f2328;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    /* cart total bubble: iOS-style frosted notification that rises from behind the basket button */
+    .cart-total-bubble {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      z-index: 999;
+      transform: translate(-50%, 0) scale(.6);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 210px;
+      padding: 10px 18px 10px 10px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .72);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, .85);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .16), inset 0 1px 0 rgba(255, 255, 255, .9);
+      white-space: nowrap;
+    }
+
+    .cart-total-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      background: transparent;
+      mix-blend-mode: multiply;
+    }
+
+    .cart-total-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .cart-total-text small {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .cart-total-text span {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1f2328;
+      letter-spacing: -.2px;
+    }
+
+    .cart-total-bubble.show {
+      animation: cartTotalPop 3s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    @keyframes cartTotalPop {
+      0% {
+        transform: translate(-50%, 0) scale(.6);
+        opacity: 0;
+      }
+      15% {
+        transform: translate(-50%, -66px) scale(1.06);
+        opacity: 1;
+      }
+      20% {
+        transform: translate(-50%, -58px) scale(1);
+        opacity: 1;
+      }
+      87% {
+        transform: translate(-50%, -58px) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, 0) scale(.6);
+        opacity: 0;
+      }
+    }
+
+    /* =====================================================================
+       iOS 27 THEME: frosted "Liquid Glass" surfaces, grouped lists,
+       system typography, tinted capsules, continuous corners.
+       Everything below overrides the earlier rules by cascade order.
+       ===================================================================== */
+    :root {
+      --ios-bg: #F2F2F7;
+      --ios-card: #FFFFFF;
+      --ios-label: #000000;
+      --ios-label-2: #3C3C43;
+      --ios-secondary: #8E8E93;
+      --ios-separator: rgba(60, 60, 67, .14);
+      --ios-tint: #B22222;
+      --ios-tint-soft: rgba(178, 34, 34, .10);
+      --ios-green: #248A3D;
+      --ios-green-soft: rgba(52, 199, 89, .16);
+      --ios-glass: rgba(255, 255, 255, .66);
+      --ios-glass-strong: rgba(255, 255, 255, .82);
+      --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Ubuntu, sans-serif;
+      --ios-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .06);
+      --ios-radius-lg: 26px;
+      --ios-radius-md: 18px;
+    }
+
+    html {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--ios-bg);
+      color: var(--ios-label);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body *:not(i) {
+      font-family: var(--ios-font);
+    }
+
+    /* ---------- glass navigation ---------- */
+    .navbar {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    .navbar.scrolled {
+      background: var(--ios-glass);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 0.5px 0 rgba(0, 0, 0, .12);
+    }
+
+    .nav-btn-left,
+    .nav-btn-share {
+      width: 40px;
+      height: 40px;
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(255, 255, 255, .9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+      color: var(--ios-tint);
+      font-size: 16px;
+    }
+
+    .search-input-nav {
+      padding: 10px 16px 10px 40px;
+      border-radius: 999px;
+      background-color: var(--ios-glass-strong);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2.6' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 14px center;
+      background-size: 16px 16px;
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+      border: 0.5px solid rgba(255, 255, 255, .9);
+    }
+
+    .search-input-nav:focus {
+      box-shadow: 0 0 0 3px rgba(178, 34, 34, .18), 0 2px 10px rgba(0, 0, 0, .06);
+    }
+
+    .navbar.scrolled .search-input-nav {
+      background-color: var(--ios-glass-strong);
+    }
+
+    /* ---------- hero: keep the original layout; only remove the black backdrop ---------- */
+    .hero-section {
+      background: transparent;
+    }
+
+    /* ---------- category rail ---------- */
+    .categories-section {
+      background: rgba(255, 255, 255, .84);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 0.5px 0 var(--ios-separator);
+      padding: 10px 0 6px;
+      margin-bottom: 0;
+    }
+
+    .categories {
+      gap: 14px;
+      padding: 6px 16px 6px 16px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      min-width: 72px;
+      gap: 6px;
+    }
+
+    .category-img {
+      width: 62px;
+      height: 62px;
+      padding: 2px;
+      border: none;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease;
+    }
+
+    .category.active .category-img {
+      border-color: transparent;
+      transform: scale(1.04);
+      box-shadow: 0 0 0 2.5px var(--ios-tint), 0 6px 14px rgba(178, 34, 34, .22);
+    }
+
+    .category span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ios-label-2);
+      line-height: 1.25;
+      max-width: 76px;
+      white-space: normal;
+    }
+
+    .category.active span {
+      color: var(--ios-tint);
+      font-weight: 600;
+    }
+
+    .category::after {
+      height: 4px;
+      width: 0;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .category.active::after {
+      width: 4px;
+    }
+
+    /* ---------- category cards (grouped inset) ---------- */
+    .products-container-wrapper {
+      padding-top: 6px;
+    }
+
+    .category-container {
+      background: var(--ios-card);
+      margin: 0 12px 16px 12px;
+      border-radius: var(--ios-radius-lg);
+      box-shadow: var(--ios-shadow);
+      border: none;
+      padding-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .category-container:last-child {
+      margin-bottom: 16px;
+    }
+
+    .category-title {
+      font-family: var(--ios-font);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--ios-label);
+      padding: 18px 16px 6px 16px;
+      gap: 10px;
+    }
+
+    .category-title::before {
+      flex: 0 0 4px;
+      height: 24px;
+      border-radius: 4px;
+    }
+
+    .category-title-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .10), 0 0 0 0.5px rgba(0, 0, 0, .08);
+    }
+
+    .category-description-block {
+      padding: 0 16px 14px 16px;
+      border-bottom: 0.5px solid var(--ios-separator);
+      margin-bottom: 0;
+    }
+
+    .category-description-block .cat-h1 {
+      font-family: var(--ios-font);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-tint);
+      letter-spacing: -0.2px;
+      margin: 0 0 2px 0;
+    }
+
+    .category-description-block h2 {
+      font-family: var(--ios-font);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ios-label);
+      margin: 0 0 2px 0;
+    }
+
+    .category-description-block h3 {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ios-secondary);
+      margin: 0 0 6px 0;
+    }
+
+    .category-description-block .desc-text {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ios-secondary);
+      margin-top: 2px;
+    }
+
+    .delivery-bar {
+      background: var(--ios-green-soft);
+      color: var(--ios-green);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      letter-spacing: 0;
+    }
+
+    .delivery-bar i {
+      color: var(--ios-green);
+    }
+
+    /* ---------- product grid & cards ---------- */
+    .products {
+      gap: 12px;
+      padding: 12px 12px 6px 12px;
+    }
+
+    .product-card-new {
+      border-radius: var(--ios-radius-md);
+      border: 0.5px solid rgba(60, 60, 67, .10);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .05);
+      background: var(--ios-card);
+    }
+
+    @supports (corner-shape: squircle) {
+      .product-card-new,
+      .category-container,
+      .hero-info-card,
+      .category-img {
+        corner-shape: squircle;
+      }
+    }
+
+    .image-new {
+      padding: 14px;
+    }
+
+    .info-new {
+      padding: 10px 12px 12px;
+    }
+
+    .title-new {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ios-label);
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      min-height: 36px;
+    }
+
+    .price-new {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ios-tint);
+      letter-spacing: -0.2px;
+      margin-bottom: 2px;
+    }
+
+    .desc-new {
+      color: var(--ios-secondary);
+      font-size: 11.5px;
+    }
+
+    .cart-control-new {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .14);
+    }
+
+    .cart-control-new.active {
+      box-shadow: 0 6px 14px rgba(178, 34, 34, .28);
+    }
+
+    /* ---------- view more ---------- */
+    .view-all-wrapper {
+      padding: 2px 16px 14px 16px;
+    }
+
+    .view-all-btn {
+      background: var(--ios-tint-soft);
+      border: none;
+      color: var(--ios-tint);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 999px;
+    }
+
+    .view-all-btn:hover {
+      background: var(--ios-tint);
+      color: #fff;
+    }
+
+    /* ---------- search results ---------- */
+    .search-results-section {
+      background: var(--ios-bg);
+      padding: 14px 14px 20px;
+    }
+
+    .search-results-header {
+      border-bottom: none;
+      margin-bottom: 12px;
+      padding-bottom: 0;
+    }
+
+    .search-results-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--ios-label);
+    }
+
+    .search-results-header .results-count {
+      background: rgba(118, 118, 128, .12);
+      color: var(--ios-label-2);
+      font-weight: 500;
+    }
+
+    .clear-search-btn {
+      color: var(--ios-tint);
+      font-weight: 600;
+      background: var(--ios-tint-soft);
+      border-radius: 999px;
+    }
+
+    .clear-search-btn:hover {
+      background: rgba(178, 34, 34, .18);
+    }
+
+    .search-results-grid {
+      gap: 12px;
+    }
+
+    .search-highlight {
+      background: rgba(255, 204, 0, .45);
+      color: var(--ios-label);
+    }
+
+    /* ---------- view basket capsule ---------- */
+    .view-cart-btn {
+      background: rgba(178, 34, 34, .94);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
+      padding: 13px 22px 13px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 12px 28px rgba(178, 34, 34, .35), inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+
+    .view-cart-btn:hover {
+      background-color: #8B1A1A;
+    }
+
+    .cart-item-count {
+      border-radius: 999px;
+      min-width: 24px;
+      padding: 0 6px;
+      width: auto;
+      font-size: 13px;
+    }
+
+    /* ---------- product sheet (full screen) ---------- */
+    .product-modal-content {
+      background: var(--ios-bg);
+    }
+
+    .modal-close-btn {
+      background: var(--ios-glass-strong);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(255, 255, 255, .9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .10);
+      color: var(--ios-label);
+      width: 36px;
+      height: 36px;
+      font-size: 15px;
+      margin: 14px 14px -50px auto;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--ios-glass-strong);
+      color: var(--ios-tint);
+    }
+
+    .modal-product-image {
+      background: #fff;
+    }
+
+    .zoom-hint-btn {
+      background: rgba(0, 0, 0, .55);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+    }
+
+    .modal-product-info {
+      padding: 16px 16px 26px;
+    }
+
+    .modal-product-category {
+      background: var(--ios-tint-soft);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 11px;
+    }
+
+    .modal-product-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      color: var(--ios-label);
+      margin-bottom: 6px;
+    }
+
+    .modal-product-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ios-tint);
+      margin-bottom: 14px;
+    }
+
+    .modal-product-price small {
+      font-size: 14px;
+      color: var(--ios-secondary);
+    }
+
+    .modal-product-description {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ios-label-2);
+      margin-bottom: 14px;
+      border-bottom: none;
+      padding-bottom: 14px;
+    }
+
+    .modal-quantity-section {
+      background: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .modal-quantity-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ios-label);
+      margin-bottom: 0;
+    }
+
+    .modal-quantity-buttons {
+      background: #E9E9EF;
+      border: none;
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .modal-qty-btn {
+      background: #fff;
+      color: var(--ios-tint);
+      width: 36px;
+      height: 36px;
+      font-size: 15px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+    }
+
+    .modal-qty-btn:hover {
+      background: #fff;
+      color: var(--ios-tint);
+    }
+
+    .modal-quantity {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ios-label);
+      min-width: 32px;
+    }
+
+    .modal-total-price {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-label);
+      text-align: right;
+    }
+
+    .modal-add-to-cart {
+      background: var(--ios-tint);
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(178, 34, 34, .30);
+    }
+
+    .modal-add-to-cart:hover {
+      background: #8B1A1A;
+    }
+
+    /* ---------- FAQ as grouped list ---------- */
+    .faq-section {
+      background: var(--ios-bg);
+      padding: 36px 16px 20px;
+    }
+
+    .faq-header {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .faq-header span {
+      background: var(--ios-tint-soft);
+      color: var(--ios-tint);
+      box-shadow: none;
+      font-size: 12px;
+      letter-spacing: .4px;
+      padding: 5px 11px;
+    }
+
+    .faq-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--ios-label);
+      margin-top: 12px;
+    }
+
+    .faq-header p {
+      font-size: 15px;
+      color: var(--ios-secondary);
+      margin-top: 6px;
+    }
+
+    .faq-list {
+      background: #fff;
+      border-radius: var(--ios-radius-lg);
+      border-top: none;
+      padding: 0 16px;
+      box-shadow: var(--ios-shadow);
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 0.5px solid var(--ios-separator);
+      padding: 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ios-label);
+      padding: 16px 0;
+      line-height: 1.35;
+      gap: 12px;
+    }
+
+    .faq-question span {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--ios-tint);
+      flex-shrink: 0;
+    }
+
+    .faq-answer p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--ios-secondary);
+      padding: 0 0 16px 0;
+    }
+
+    /* ---------- feedback ---------- */
+    .feedback-section {
+      margin-top: 28px;
+    }
+
+    .feedback-box {
+      background: #fff;
+      border: none;
+      border-radius: var(--ios-radius-lg);
+      padding: 28px 22px;
+      box-shadow: var(--ios-shadow);
+      color: var(--ios-label);
+    }
+
+    .feedback-box h3 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--ios-label);
+      margin-bottom: 10px;
+    }
+
+    .feedback-box p {
+      font-size: 15px;
+      color: var(--ios-secondary);
+      margin: 0 auto 20px;
+    }
+
+    .feedback-btn {
+      background: var(--ios-tint);
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(178, 34, 34, .30);
+    }
+
+    .feedback-btn:hover {
+      background: #8B1A1A;
+      box-shadow: 0 10px 24px rgba(178, 34, 34, .38);
+    }
+
+    /* ---------- disclosure + basket bubble (already glass) ---------- */
+    .brand-notice {
+      margin: 12px 12px 0 12px;
+    }
+
+    .cart-total-bubble {
+      border-radius: 22px;
+    }
+
+    /* ---------- footer: grouped tiles ---------- */
+    footer {
+      background: var(--ios-bg) !important;
+      border-top: none !important;
+    }
+
+    footer [style*="#f7f7f7"] {
+      background: #fff !important;
+      border-color: transparent !important;
+      border-radius: 16px !important;
+      box-shadow: var(--ios-shadow) !important;
+    }
+
+    footer [style*="#eee"] {
+      border-color: transparent !important;
+    }
+
+    footer img[alt="Delivery Grocery Marrakech"] {
+      box-shadow: var(--ios-shadow) !important;
+    }
+
+    /* ---------- motion preferences ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    /* ---------- delivery zone map ---------- */
+    .zone-section {
+      margin-top: 28px;
+    }
+
+    .zone-header {
+      margin-bottom: 14px;
+    }
+
+    .zone-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: #1c1c1e;
+    }
+
+    .zone-map-wrap {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #e9ecef;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      isolation: isolate;
+    }
+
+    #deliveryZoneMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Delivery message (same as the working map) */
+    .zone-message {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: max-content;
+      max-width: calc(100% - 30px);
+      padding: 14px 24px;
+      background: rgba(25, 25, 25, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 12px;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-align: center;
+      line-height: 1.5;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+    }
+
+    .zone-message span {
+      color: #ff7777;
+    }
+
+    @media (max-width: 480px) {
+      .zone-message {
+        top: 15px;
+        padding: 11px 16px;
+        font-size: 12px;
+        border-radius: 10px;
+      }
+    }
+
+    .zone-note {
+      font-size: 13px;
+      color: #8e8e93;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 
 <body>
   <nav class="navbar" id="navbar">
-    <button class="nav-btn-left" id="backButton"><i class="fas fa-arrow-left"></i></button>
+    <button class="nav-btn-left" id="backButton" aria-label="Back"><i class="fas fa-arrow-left"></i></button>
     <div class="search-bar-container">
-      <input type="text" class="search-input-nav" id="navSearchInput" placeholder="Search for products..." autocomplete="off">
+      <input type="text" class="search-input-nav" id="navSearchInput" placeholder="Search for products..." aria-label="Search for products" autocomplete="off">
     </div>
-    <button class="nav-btn-share" id="shareButton"><i class="fas fa-share-alt"></i></button>
+    <button class="nav-btn-share" id="shareButton" aria-label="Share"><i class="fas fa-share-alt"></i></button>
   </nav>
 
   <div class="hero-section">
-    <img src="https://res.cloudinary.com/du2naqx3i/image/upload/v1785693782/Delivery_Grocery_in_marrakech_supermarket_delivery_axz5q2.png" alt="delivery Supermarket marrakech" class="hero-image">
+    <img src="https://res.cloudinary.com/du2naqx3i/image/upload/v1785693782/Delivery_Grocery_in_marrakech_supermarket_delivery_axz5q2.png" alt="Grocery and supermarket delivery in Marrakech" class="hero-image" fetchpriority="high" decoding="async">
     <div class="hero-overlay">
       <div class="hero-info-card">
         <h1 class="hero-store-name"><span>Delivery Grocery & Supermarket in Marrakech</span></h1>
@@ -1807,12 +2772,16 @@
           Fast supermarket delivery in Marrakech. Order groceries, fresh fruits, vegetables, drinks, snacks, dairy products, and household essentials. Same-day delivery and express delivery available across Marrakech and surrounding areas, covering over 30 km with reliable doorstep service.
         </div>
         <div class="hero-delivery-badge">
-          <img src="https://i.ibb.co/wh5BTBg2/A9-D99595-FFF3-4983-8-B9-A-160-B925-A285-F.png" alt="delivery logo" class="new-delivery-logo">
+          <img src="https://i.ibb.co/wh5BTBg2/A9-D99595-FFF3-4983-8-B9-A-160-B925-A285-F.png" alt="Benjelloun Express fast delivery icon" class="new-delivery-logo">
           <span class="delivery-highlight">25-45 Min</span>
         </div>
       </div>
     </div>
   </div>
+
+  <section class="brand-notice">
+    <p><strong>BenMarket</strong> is a delivery service operated by Benjelloun Express. We do not sell the products shown on this page. We collect your order from nearby supermarkets such as <span class="store-name">Marjane</span>, <span class="store-name">Carrefour</span>, <span class="store-name">BIM</span> and <span class="store-name">Supermarket City</span>, and deliver it to you.</p>
+  </section>
 
   <div class="restaurant-info" style="display: none;"></div>
 
@@ -1824,6 +2793,29 @@
     <div class="search-results-grid" id="searchResultsGrid"></div>
   </div>
 
+  <noscript>
+    <section>
+      <h2>Grocery and supermarket categories</h2>
+      <ul>
+        <li>Fruit &amp; Vegetables</li>
+        <li>Bread &amp; Cakes</li>
+        <li>Meat &amp; Fish</li>
+        <li>Specialties &amp; Deli</li>
+        <li>Snacks &amp; Ice Cream</li>
+        <li>Dairy &amp; Eggs</li>
+        <li>Ready to Eat</li>
+        <li>Pantry</li>
+        <li>Frozen</li>
+        <li>Drinks</li>
+        <li>Home &amp; Household</li>
+        <li>Health &amp; Beauty</li>
+        <li>Baby</li>
+        <li>Pet Supply</li>
+      </ul>
+      <p>Enable JavaScript to browse products and place an order.</p>
+    </section>
+  </noscript>
+
   <div class="categories-section" id="categoriesSection">
     <div class="categories" id="categoriesContainer">
       <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
@@ -1832,6 +2824,14 @@
 
   <div id="products-container" class="products-container-wrapper">
     <!-- سيتم إنشاء أقسام الفئات ديناميكياً عبر JavaScript -->
+  </div>
+
+  <div class="cart-total-bubble" id="cartTotalBubble" aria-hidden="true">
+    <img class="cart-total-icon" src="https://res.cloudinary.com/du2naqx3i/image/upload/v1794389387/5C03FE04-1464-42FF-975B-3425B276DEC0_nik06y.png" alt="">
+    <div class="cart-total-text">
+      <small>Basket total</small>
+      <span id="cartTotalValue">0.00 MAD</span>
+    </div>
   </div>
 
   <button class="view-cart-btn" id="viewCartBtn">
@@ -1959,6 +2959,18 @@
         </div>
       </section>
 
+      <!-- DELIVERY ZONE MAP -->
+      <section class="zone-section">
+        <div class="zone-header">
+          <h2>Our Delivery Zone</h2>
+        </div>
+        <div class="zone-map-wrap">
+          <div class="zone-message">We Deliver Across a <span>35 KM Radius</span> Around Marrakech.</div>
+          <div id="deliveryZoneMap" role="img" aria-label="Map of Marrakech showing the 35 km delivery zone"></div>
+        </div>
+        <p class="zone-note">Delivery availability depends on your exact location. Send us your location on WhatsApp to confirm.</p>
+      </section>
+
     </div>
   </section>
 
@@ -1976,7 +2988,7 @@
 
       <div style="text-align: center; margin-bottom: 35px;">
         <img src="https://i.ibb.co/HprpBRwp/IMG-5742.png" alt="Delivery Grocery Marrakech" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
-        <h3 style="color: #B22222; font-size: 22px; margin-bottom: 8px;">Delivery Marrakech</h3>
+        <h3 style="color: #B22222; font-size: 22px; margin-bottom: 8px;">BenMarket</h3>
         <p style="color: #555555; font-size: 14px; line-height: 1.7; max-width: 350px; margin: 0 auto;">
           Fast delivery services in Marrakech. Order groceries, fast food, sushi, flowers and more. Same-day delivery across Marrakech and surrounding areas.
         </p>
@@ -2104,7 +3116,7 @@
 
       <div style="text-align: center; border-top: 1px solid #e5e5e5; padding-top: 20px; font-size: 12px; color: #666666;">
         <p style="margin-bottom: 5px; color: #444444;">
-          &copy; 2025 <span style="color: #B22222; font-weight: 700;">BENJELLOUN EXPRESS </span> – All Rights Reserved
+          &copy; 2026 <span style="color: #B22222; font-weight: 700;">BENJELLOUN EXPRESS </span> – All Rights Reserved
         </p>
         <p style="color: #666666; font-size: 11px; line-height: 1.8;">
           Fast & reliable delivery in Marrakech. From food and groceries and flowers — we bring it all to your doorstep 24/7.
@@ -2122,14 +3134,14 @@
   <div id="imageModal" class="image-modal-overlay">
     <div class="modal-image-container">
       <img id="modalFullImage" class="modal-full-image" src="" alt="Product enlarged">
-      <div class="close-modal-btn" id="closeModalBtn"><i class="fas fa-times"></i></div>
+      <div class="close-modal-btn" id="closeModalBtn" role="button" aria-label="Close image"><i class="fas fa-times"></i></div>
     </div>
   </div>
 
   <div id="productModal" class="product-modal">
     <div class="product-modal-content">
-      <button class="modal-close-btn" id="closeModalBtnModal"><i class="fas fa-times"></i></button>
-      <div class="modal-product-image"><img id="modalProductImage" src="" alt="Product image"></div>
+      <button class="modal-close-btn" id="closeModalBtnModal" aria-label="Close"><i class="fas fa-times"></i></button>
+      <div class="modal-product-image"><img id="modalProductImage" src="" alt="Product image"><button type="button" class="zoom-hint-btn" id="zoomHintBtn"><i class="fas fa-search-plus"></i> Tap to zoom</button></div>
       <div class="modal-product-info">
         <span class="modal-product-category" id="modalProductCategory">Loading...</span>
         <h2 class="modal-product-title" id="modalProductTitle">Product Name</h2>
@@ -2139,9 +3151,9 @@
           <span class="modal-quantity-label">Quantity</span>
           <div class="modal-quantity-controls">
             <div class="modal-quantity-buttons">
-              <button class="modal-qty-btn" id="modalMinusBtn"><i class="fas fa-minus"></i></button>
+              <button class="modal-qty-btn" id="modalMinusBtn" aria-label="Decrease quantity"><i class="fas fa-minus"></i></button>
               <span class="modal-quantity" id="modalQuantity">1</span>
-              <button class="modal-qty-btn" id="modalPlusBtn"><i class="fas fa-plus"></i></button>
+              <button class="modal-qty-btn" id="modalPlusBtn" aria-label="Increase quantity"><i class="fas fa-plus"></i></button>
             </div>
             <div class="modal-total-price">Total: <span id="modalTotalPrice">0.00</span> MAD</div>
           </div>
@@ -2153,6 +3165,9 @@
     </div>
   </div>
 
+  <!-- Firebase (loaded at the end of body so it never blocks rendering) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script>
     // ================================================================
     // 1. FIREBASE CONFIGURATION
@@ -2172,6 +3187,9 @@
     // ================================================================
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    // Offline cache in IndexedDB: repeat visits read recent data from disk first
+    db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
 
     // ================================================================
     // 3. GLOBAL VARIABLES
@@ -2340,6 +3358,7 @@
             });
           }
 
+          saveCache();
           // إعادة بناء الصفحة
           rebuildPage();
 
@@ -2376,11 +3395,77 @@
           });
 
           // إعادة توزيع المنتجات
+          saveCache();
           redistributeProducts();
+          updateProductSchema();
 
         }, (error) => {
           console.error('Error loading products:', error);
         });
+    }
+
+    // ================================================================
+    // 6b. LOCAL CACHE + PRODUCT STRUCTURED DATA
+    // ================================================================
+    const CACHE_KEY = 'bm_cache_v1';
+
+    // Show the last known catalogue immediately; Firestore then refreshes it in real time
+    function restoreCachedData() {
+      try {
+        const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+        if (!cached || !Array.isArray(cached.categories) || !cached.categories.length) return;
+        expressiveCategoryList = cached.categories;
+        allProducts = Array.isArray(cached.products) ? cached.products : [];
+        rebuildPage();
+      } catch (e) {
+        // corrupted cache: ignore and wait for Firestore
+      }
+    }
+
+    function saveCache() {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          categories: expressiveCategoryList,
+          products: allProducts
+        }));
+      } catch (e) {
+        // storage full or disabled: the page still works without cache
+      }
+    }
+
+    // Product data for search engines (first 100 listed products)
+    function updateProductSchema() {
+      const items = allProducts.slice(0, 100).map((p, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          image: p.image || undefined,
+          description: p.description || undefined,
+          offers: {
+            '@type': 'Offer',
+            price: Number(p.price).toFixed(2),
+            priceCurrency: 'MAD',
+            availability: 'https://schema.org/InStock',
+            seller: { '@type': 'Organization', name: 'Benjelloun Express' }
+          }
+        }
+      }));
+
+      let el = document.getElementById('product-schema');
+      if (!el) {
+        el = document.createElement('script');
+        el.type = 'application/ld+json';
+        el.id = 'product-schema';
+        document.head.appendChild(el);
+      }
+      el.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'BenMarket grocery products in Marrakech',
+        itemListElement: items
+      });
     }
 
     // ================================================================
@@ -2406,6 +3491,7 @@
     function renderCategoriesSlider() {
       const container = document.getElementById('categoriesContainer');
       if (!container) return;
+      const previousScroll = container.scrollLeft;
 
       container.innerHTML = '';
       
@@ -2419,22 +3505,22 @@
         catDiv.className = 'category';
         catDiv.setAttribute('data-category-key', cat.key);
         catDiv.innerHTML = `
-          <img src="${cat.imageUrl}" class="category-img" onerror="this.src='https://i.ibb.co/Kz8n7dLf/9-A3-F562-D-211-C-45-F2-98-D0-8230-A14-A91-B1.png'">
+          <img src="${cat.imageUrl}" alt="${cat.name}" class="category-img" onerror="this.src='https://i.ibb.co/Kz8n7dLf/9-A3-F562-D-211-C-45-F2-98-D0-8230-A14-A91-B1.png'">
           <span>${cat.name}</span>
         `;
         catDiv.onclick = () => scrollToCategory(cat.key);
         container.appendChild(catDiv);
       });
 
-      // تفعيل أول فئة
-      if (container.firstChild) {
-        const firstKey = container.firstChild.getAttribute('data-category-key');
-        setTimeout(() => {
-          currentCategoryKey = firstKey;
-          const firstCat = document.querySelector(`.category[data-category-key="${firstKey}"]`);
-          if (firstCat) firstCat.classList.add('active');
-        }, 100);
-      }
+      // تفعيل الفئة الحالية (أو الأولى إن لم تكن موجودة)
+      const activeKey = expressiveCategoryList.some(cat => cat.key === currentCategoryKey)
+        ? currentCategoryKey
+        : expressiveCategoryList[0].key;
+      currentCategoryKey = activeKey;
+      container.querySelectorAll('.category').forEach(cat => {
+        cat.classList.toggle('active', cat.getAttribute('data-category-key') === activeKey);
+      });
+      container.scrollTo({ left: previousScroll, behavior: 'instant' });
     }
 
     // ================================================================
@@ -2473,7 +3559,7 @@
             ${cat.name}
           </h2>
           <div class="category-description-block">
-            <h1>${desc.h1}</h1>
+            <p class="cat-h1">${desc.h1}</p>
             <h2>${desc.h2}</h2>
             <h3>${desc.h3}</h3>
             <div class="desc-text">${desc.desc}</div>
@@ -2601,6 +3687,11 @@
     // ================================================================
     // 13. SCROLL TO CATEGORY
     // ================================================================
+    let programmaticScroll = false;
+    let programmaticScrollTimer = null;
+    let scrollFrameRequested = false;
+    let scrollSpyReady = false;
+
     function scrollToCategory(categoryKey) {
       const targetContainer = document.getElementById(`cat-${categoryKey}-container`);
       if (!targetContainer) return;
@@ -2609,81 +3700,97 @@
       const categoriesHeight = document.getElementById('categoriesSection').offsetHeight;
       const totalOffset = navbarHeight + categoriesHeight + 10;
       const elementPosition = targetContainer.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - totalOffset;
+
+      // نحدد الفئة مباشرة ونوقف تحديثها أثناء التمرير البرمجي حتى لا تتبدل أثناء الحركة
+      setActiveCategory(categoryKey);
+      programmaticScroll = true;
+      clearTimeout(programmaticScrollTimer);
+      programmaticScrollTimer = setTimeout(endProgrammaticScroll, 1200);
 
       window.scrollTo({
-        top: offsetPosition,
+        top: elementPosition - totalOffset,
         behavior: 'smooth'
       });
+    }
 
-      // تحديث الفئة النشطة
-      updateNavbarWithAnimation(categoryKey);
+    function endProgrammaticScroll() {
+      clearTimeout(programmaticScrollTimer);
+      programmaticScroll = false;
+      syncActiveCategoryWithScroll();
     }
 
     // ================================================================
-    // 14. UPDATE NAVBAR WITH ANIMATION
+    // 14. SET ACTIVE CATEGORY
     // ================================================================
-    function updateNavbarWithAnimation(categoryKey) {
-      if (categoryKey === currentCategoryKey || isAnimating) return;
-      
-      const category = expressiveCategoryList.find(c => c.key === categoryKey);
-      if (!category) return;
+    function setActiveCategory(categoryKey) {
+      if (!categoryKey || categoryKey === currentCategoryKey) return;
+      if (!expressiveCategoryList.some(cat => cat.key === categoryKey)) return;
 
-      smoothScrollSliderToCategory(categoryKey);
       currentCategoryKey = categoryKey;
-
       document.querySelectorAll('.category').forEach(cat => {
-        if (cat.getAttribute('data-category-key') === categoryKey) {
-          cat.classList.add('active');
-        } else {
-          cat.classList.remove('active');
-        }
+        cat.classList.toggle('active', cat.getAttribute('data-category-key') === categoryKey);
       });
+      centerCategoryInSlider(categoryKey);
     }
 
     // ================================================================
-    // 15. SMOOTH SCROLL SLIDER TO CATEGORY
+    // 15. CENTER CATEGORY IN SLIDER (تمرير مطلق واحد، بدون قفل زمني)
     // ================================================================
-    function smoothScrollSliderToCategory(categoryKey) {
-      if (isSliderScrolling) return;
-      
+    function centerCategoryInSlider(categoryKey) {
       const slider = document.getElementById('categoriesContainer');
       const catElement = document.querySelector(`.category[data-category-key="${categoryKey}"]`);
       if (!slider || !catElement) return;
 
-      isSliderScrolling = true;
       const sliderRect = slider.getBoundingClientRect();
       const catRect = catElement.getBoundingClientRect();
-      const offset = catRect.left - sliderRect.left - (sliderRect.width / 2) + (catRect.width / 2);
+      const catCenter = catRect.left - sliderRect.left + slider.scrollLeft + catRect.width / 2;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      const target = Math.max(0, Math.min(maxScroll, catCenter - slider.clientWidth / 2));
 
-      slider.scrollBy({
-        left: offset,
-        behavior: 'smooth'
-      });
-
-      setTimeout(() => {
-        isSliderScrolling = false;
-      }, 500);
+      if (Math.abs(target - slider.scrollLeft) < 2) return;
+      slider.scrollTo({ left: target, behavior: 'smooth' });
     }
 
     // ================================================================
-    // 16. SETUP SCROLL OBSERVER
+    // 16. SCROLL SPY (يحدد القسم الظاهر حسب الموضع، في الاتجاهين)
     // ================================================================
-    function setupScrollObserver() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const catKey = entry.target.getAttribute('data-category-key');
-            if (catKey) updateNavbarWithAnimation(catKey);
-          }
-        });
-      }, {
-        threshold: 0.4,
-        rootMargin: '-80px 0px -40% 0px'
-      });
+    function syncActiveCategoryWithScroll() {
+      const productsContainer = document.getElementById('products-container');
+      if (!productsContainer || productsContainer.classList.contains('hide-on-search')) return;
 
-      document.querySelectorAll('.category-container').forEach(container => {
-        observer.observe(container);
+      const containers = document.querySelectorAll('.category-container');
+      if (!containers.length) return;
+
+      const referenceLine = document.getElementById('categoriesSection').getBoundingClientRect().bottom + 24;
+      const atPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+      let current = containers[0];
+      if (atPageBottom) {
+        current = containers[containers.length - 1];
+      } else {
+        for (const container of containers) {
+          if (container.getBoundingClientRect().top <= referenceLine) current = container;
+          else break;
+        }
+      }
+      setActiveCategory(current.getAttribute('data-category-key'));
+    }
+
+    function setupScrollObserver() {
+      if (scrollSpyReady) return;
+      scrollSpyReady = true;
+
+      window.addEventListener('scroll', () => {
+        if (programmaticScroll || scrollFrameRequested) return;
+        scrollFrameRequested = true;
+        requestAnimationFrame(() => {
+          scrollFrameRequested = false;
+          syncActiveCategoryWithScroll();
+        });
+      }, { passive: true });
+
+      window.addEventListener('scrollend', () => {
+        if (programmaticScroll) endProgrammaticScroll();
       });
     }
 
@@ -2723,6 +3830,7 @@
       const minusIcon = document.createElement('i');
       minusIcon.className = quantity === 1 ? 'fas fa-trash-alt' : 'fas fa-minus';
       minusBtn.appendChild(minusIcon);
+      minusBtn.setAttribute('aria-label', 'Decrease quantity');
       if (quantity === 1) minusBtn.classList.add('trash-mode');
 
       // Quantity
@@ -2736,6 +3844,7 @@
       const plusIcon = document.createElement('i');
       plusIcon.className = 'fas fa-plus';
       plusBtn.appendChild(plusIcon);
+      plusBtn.setAttribute('aria-label', 'Increase quantity');
 
       cartControl.appendChild(minusBtn);
       cartControl.appendChild(quantityDiv);
@@ -2748,6 +3857,8 @@
       const img = document.createElement('img');
       img.src = imgUrl;
       img.alt = productName;
+      img.loading = 'lazy';
+      img.decoding = 'async';
       img.onerror = () => {
         img.src = 'https://i.ibb.co/Kz8n7dLf/9-A3-F562-D-211-C-45-F2-98-D0-8230-A14-A91-B1.png';
       };
@@ -2836,6 +3947,7 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
       refreshAllInterfaces(productId, newQuantity);
       updateCartUI();
+      showCartTotalBubble();
     }
 
     function increaseQuantity(productId, productData = null) {
@@ -2852,6 +3964,24 @@
         setQuantity(productId, newQty, productData);
         vibratePhone(20);
       }
+    }
+
+    // ================================================================
+    // 18b. CART TOTAL BUBBLE (shown only after add / remove)
+    // ================================================================
+    function showCartTotalBubble() {
+      const bubble = document.getElementById('cartTotalBubble');
+      const valueEl = document.getElementById('cartTotalValue');
+      if (!bubble || !valueEl) return;
+
+      const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const total = cart.reduce((sum, item) => sum + item.quantity * item.basePrice, 0);
+      valueEl.textContent = total.toFixed(2) + ' MAD';
+
+      // restart the animation on every change
+      bubble.classList.remove('show');
+      void bubble.offsetWidth;
+      bubble.classList.add('show');
     }
 
     function refreshAllInterfaces(productId, newQuantity) {
@@ -3101,28 +4231,28 @@
 
     // Share Button
     const shareButtonElem = document.getElementById('shareButton');
-    const pageUrl = 'https://delivery-marrakech.com/benmarket';
-    const shareText = 'Delivery Supermaker Grocerie Marrakech';
+    const pageUrl = 'https://delivery-marrakech.com/benmarket.html';
+    const shareText = 'Grocery & Supermarket Delivery in Marrakech';
 
     shareButtonElem.onclick = async () => {
       try {
         if (navigator.share) {
           await navigator.share({
-            title: 'BenEx Market',
+            title: 'BenMarket',
             text: shareText,
             url: pageUrl
           });
         } else {
           await navigator.clipboard.writeText(`${pageUrl}\n${shareText}`);
-          alert('تم نسخ رابط الصفحة والوصف! يمكنك الآن لصقه ومشاركته مع أصدقائك.');
+          alert('Link and description copied! You can now paste and share it with your friends.');
         }
       } catch (error) {
-        console.error('فشلت عملية المشاركة:', error);
+        console.error('Sharing failed:', error);
         try {
           await navigator.clipboard.writeText(`${pageUrl}\n${shareText}`);
-          alert('تم نسخ الرابط والوصف إلى الحافظة بدلاً من ذلك.');
+          alert('Sharing is not available here. The link and description were copied to your clipboard instead.');
         } catch (clipboardError) {
-          alert('عذراً، تعذرت مشاركة الرابط. يرجى المحاولة مرة أخرى.');
+          alert('Sorry, we could not share the link. Please try again.');
         }
       }
     };
@@ -3195,6 +4325,10 @@
 
     if (modalAddToCartBtnElem) modalAddToCartBtnElem.addEventListener('click', addToCartFromModal);
 
+    // Zoom: tap the product image inside the modal to enlarge it
+    const modalImageWrap = document.querySelector('.modal-product-image');
+    if (modalImageWrap) modalImageWrap.addEventListener('click', () => openImageModal(modalProductImage.src));
+
     // Image Modal Events
     const imageModal = document.getElementById('imageModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -3225,9 +4359,74 @@
     });
 
     // ================================================================
+    // 25. DELIVERY ZONE MAP (Leaflet + OpenStreetMap, loaded when visible)
+    // ================================================================
+    const MARRAKECH_CENTER = [31.6295, -7.9811];
+    const DELIVERY_RADIUS_M = 35000;
+
+    function initDeliveryZoneMap() {
+      const el = document.getElementById('deliveryZoneMap');
+      if (!el || !window.L || el.dataset.ready) return;
+      el.dataset.ready = '1';
+
+      const map = L.map(el, { zoomControl: true, scrollWheelZoom: true });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      const zone = L.circle(MARRAKECH_CENTER, {
+        radius: DELIVERY_RADIUS_M,
+        color: '#800000',
+        weight: 2,
+        opacity: 1,
+        fillColor: '#8B0000',
+        fillOpacity: 0.35
+      }).addTo(map);
+
+      map.setView(MARRAKECH_CENTER, 10);
+      map.fitBounds(zone.getBounds(), { padding: [20, 20] });
+
+      // Re-measure once layout has settled so tiles and the circle line up.
+      requestAnimationFrame(() => map.invalidateSize());
+      setTimeout(() => map.invalidateSize(), 400);
+    }
+
+    function loadLeafletAndInitMap() {
+      if (window.L) return initDeliveryZoneMap();
+
+      // Load Leaflet CSS first, then JS, so the map is never built unstyled.
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      css.onload = () => {
+        const js = document.createElement('script');
+        js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        js.onload = initDeliveryZoneMap;
+        document.body.appendChild(js);
+      };
+      document.head.appendChild(css);
+    }
+
+    const zoneMapEl = document.getElementById('deliveryZoneMap');
+    if (zoneMapEl && 'IntersectionObserver' in window) {
+      const zoneObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          zoneObserver.disconnect();
+          loadLeafletAndInitMap();
+        }
+      }, { rootMargin: '200px' });
+      zoneObserver.observe(zoneMapEl);
+    } else if (zoneMapEl) {
+      loadLeafletAndInitMap();
+    }
+
+    // ================================================================
     // 24. INITIALIZE APP
     // ================================================================
-    // تحميل الفئات والمنتجات من Firebase
+    // Show cached catalogue instantly, then sync with Firestore in real time
+    restoreCachedData();
     loadCategoriesFromFirebase();
     loadProductsFromFirebase();
 
