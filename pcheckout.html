@@ -1086,5 +1086,347 @@
       console.log("Cart from localStorage:", JSON.parse(localStorage.getItem('pizzahutCart') || '[]'));
     }
   </script>
+
+  <style>
+    /* =====================================================================
+       iOS 27 THEME (Pizza Hut checkout): same tokens as the other pages
+       ===================================================================== */
+    :root {
+      --ios-bg: #F2F2F7;
+      --ios-card: #FFFFFF;
+      --ios-label: #000000;
+      --ios-label-2: #3C3C43;
+      --ios-secondary: #8E8E93;
+      --ios-separator: rgba(60, 60, 67, .14);
+      --ios-fill: rgba(120, 120, 128, .12);
+      --ios-tint: #8B0000;
+      --ios-tint-soft: rgba(139, 0, 0, .10);
+      --ios-destructive: #FF3B30;
+      --ios-glass: rgba(255, 255, 255, .82);
+      --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Poppins, sans-serif;
+      --ios-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .06);
+    }
+
+    html { -webkit-tap-highlight-color: transparent; background: var(--ios-bg); }
+    body, body * { font-family: var(--ios-font); }
+    body {
+      background: var(--ios-bg);
+      color: var(--ios-label);
+      padding: 0 16px 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- back: glass capsule ---------- */
+    .back-btn {
+      top: 12px;
+      left: 16px;
+      width: 40px;
+      height: 40px;
+      background: var(--ios-glass);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(16px) saturate(180%);
+      color: var(--ios-tint);
+      border: .5px solid rgba(255, 255, 255, .8);
+      box-shadow: var(--ios-shadow);
+    }
+    .back-btn:hover { background: var(--ios-glass); transform: none; }
+    .back-btn:active { transform: scale(.92); }
+
+    /* ---------- large title ---------- */
+    .header { margin: 64px 0 16px; padding: 0 4px; text-align: left; }
+    .header h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -.6px;
+      line-height: 1.1;
+      color: var(--ios-label);
+    }
+    .header p { color: var(--ios-secondary); font-size: 15px; margin-top: 4px; }
+
+    /* ---------- receipt panels: keep the paper edge from the original page ---------- */
+    .cart-items { padding: 18px 18px 8px; }
+    .cart-summary { padding: 20px 18px; }
+    .cart-container { gap: 16px; }
+
+    .cart-header {
+      border-bottom: .5px solid var(--ios-separator);
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+    .cart-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: var(--ios-label);
+    }
+    .clear-cart {
+      color: var(--ios-tint);
+      background: var(--ios-tint-soft);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 999px;
+      padding: 7px 12px;
+    }
+    .clear-cart:hover { background: rgba(139, 0, 0, .18); }
+
+    /* ---------- item rows ---------- */
+    .item-card {
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: .5px solid var(--ios-separator);
+    }
+    .item-card:last-child { border-bottom: none; }
+    .item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 0 0 .5px var(--ios-separator);
+    }
+    .item-image img { object-fit: cover; }
+    .item-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ios-label);
+      letter-spacing: -.2px;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .item-price {
+      color: var(--ios-label);
+      font-size: 14px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .item-controls { gap: 10px; margin-top: 8px; }
+
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--ios-fill);
+      color: var(--ios-tint);
+      font-size: 13px;
+    }
+    .quantity-btn:hover { background: var(--ios-tint-soft); color: var(--ios-tint); }
+    .quantity-btn:active { transform: scale(.9); }
+    .item-quantity {
+      font-size: 17px;
+      font-weight: 600;
+      min-width: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+    .remove-item {
+      color: var(--ios-destructive);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 8px;
+      margin-left: 4px;
+    }
+    .remove-item:hover { background: rgba(255, 59, 48, .10); }
+
+    .customization-badge {
+      background: var(--ios-fill);
+      color: var(--ios-label-2);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 9px;
+    }
+    .special-instructions {
+      background: var(--ios-bg);
+      color: var(--ios-secondary);
+      font-size: 13px;
+      font-style: normal;
+      border-radius: 12px;
+      padding: 6px 10px;
+    }
+
+    /* ---------- summary ---------- */
+    .summary-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: var(--ios-label);
+      margin-bottom: 12px;
+    }
+    .summary-item { font-size: 15px; margin-bottom: 8px; }
+    .summary-label { color: var(--ios-secondary); }
+    .summary-value { color: var(--ios-label); font-weight: 500; font-variant-numeric: tabular-nums; }
+    .summary-total {
+      border-top: .5px solid var(--ios-separator);
+      border-style: solid;
+      border-width: .5px 0 0 0;
+      margin: 12px 0 14px;
+      padding: 14px 0 0;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .total-label { color: var(--ios-label); }
+    .total-price {
+      color: var(--ios-tint);
+      font-size: 20px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .delivery-note {
+      background: none;
+      border-radius: 0;
+      padding: 4px 2px;
+      margin: 10px 0 18px;
+      font-size: 13px;
+      color: var(--ios-secondary);
+    }
+    .delivery-note i { color: var(--ios-tint); margin-right: 8px; }
+
+    /* ---------- section headers (iOS grouped style) ---------- */
+    .customer-info h3,
+    .payment-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      color: var(--ios-secondary);
+      margin-bottom: 8px;
+      padding-bottom: 0;
+      border: none;
+    }
+    .optional-note {
+      font-size: 12px;
+      font-style: normal;
+      color: var(--ios-secondary);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* ---------- form: filled iOS fields ---------- */
+    .form-group { margin-bottom: 12px; }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ios-secondary);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea {
+      font-family: var(--ios-font);
+      font-size: 16px;
+      background: var(--ios-bg);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--ios-label);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      background: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 0 3px var(--ios-tint-soft);
+    }
+    .form-group textarea { min-height: 80px; }
+
+    /* ---------- delivery time: segmented control ---------- */
+    .delivery-time > label {
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      color: var(--ios-secondary) !important;
+      margin-bottom: 8px !important;
+    }
+    .time-options {
+      display: flex;
+      gap: 0;
+      background: var(--ios-fill);
+      border-radius: 11px;
+      padding: 3px;
+    }
+    .time-option {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      padding: 9px 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ios-label);
+    }
+    .time-option.selected {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .12), 0 .5px 1px rgba(0, 0, 0, .06);
+      font-weight: 600;
+    }
+    .time-option i { color: var(--ios-tint); margin-right: 6px; }
+
+    /* ---------- payment ---------- */
+    .payment-method { margin: 18px 0 4px; }
+    .payment-option {
+      background: var(--ios-bg);
+      border: none;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ios-label);
+      margin-bottom: 8px;
+    }
+    .payment-option.selected {
+      background: var(--ios-tint-soft);
+      box-shadow: inset 0 0 0 2px var(--ios-tint);
+    }
+    .payment-option input {
+      accent-color: var(--ios-tint);
+      width: 22px;
+      height: 22px;
+      transform: none;
+    }
+    .payment-icon { color: var(--ios-tint); font-size: 16px; }
+
+    /* ---------- primary action: iOS filled pill ---------- */
+    .checkout-btn {
+      background: var(--ios-tint);
+      border-radius: 999px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+      box-shadow: 0 10px 24px rgba(139, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .2);
+      margin-top: 12px;
+    }
+    .checkout-btn:hover { background: #6b0000; transform: none; box-shadow: 0 10px 24px rgba(139, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .2); }
+    .checkout-btn:active { transform: scale(.98); }
+
+    .info-text {
+      color: var(--ios-secondary);
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 12px;
+    }
+    .info-text i { color: var(--ios-secondary); }
+
+    /* ---------- empty cart ---------- */
+    .empty-cart p { color: var(--ios-label) !important; font-size: 17px !important; font-weight: 600; }
+    .empty-cart a {
+      border-radius: 999px !important;
+      background-color: var(--ios-tint) !important;
+      font-weight: 600 !important;
+      padding: 12px 26px !important;
+    }
+
+    /* ---------- mobile ---------- */
+    @media (max-width: 480px) {
+      body { padding: 0 12px 32px; }
+      .cart-items, .cart-summary { padding: 16px; }
+      .item-image { width: 68px; height: 68px; border-radius: 16px; }
+      .header h1 { font-size: 30px; }
+    }
+
+    @supports (corner-shape: squircle) {
+      .item-image, .time-options { corner-shape: squircle; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
 </body>
 </html>
