@@ -753,7 +753,7 @@
             
             <div class="item-price">${pricePerUnit.toFixed(2)} MAD x ${item.quantity} = ${item.totalPrice.toFixed(2)} MAD</div>
             <div class="item-controls">
-              <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
+              <button class="quantity-btn minus-btn" ${item.quantity <= 1 ? 'disabled' : ''} aria-label="Decrease quantity"><i class="fas fa-minus"></i></button>
               <span class="item-quantity">${item.quantity}</span>
               <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
               <button class="remove-item"><i class="fas fa-times"></i> Remove</button>
@@ -806,28 +806,22 @@
 
     // Update item quantity
     function updateQuantity(itemIndex, change) {
-      if (cart[itemIndex]) {
-        // تغيير الكمية
-        cart[itemIndex].quantity += change;
-        
-        // التأكد من أن الكمية لا تقل عن 1
-        if (cart[itemIndex].quantity < 1) {
-          cart[itemIndex].quantity = 1;
-        }
-        
-        // حساب السعر الإجمالي الجديد
-        const pricePerUnit = cart[itemIndex].price || (cart[itemIndex].totalPrice / (cart[itemIndex].quantity - change));
-        cart[itemIndex].totalPrice = pricePerUnit * cart[itemIndex].quantity;
-        
-        // إذا كانت الكمية 0، احذف العنصر
-        if (cart[itemIndex].quantity === 0) {
-          cart.splice(itemIndex, 1);
-        }
-        
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
-      }
+      const item = cart[itemIndex];
+      if (!item) return;
+
+      // Unit price is taken BEFORE the quantity changes, so it never drifts
+      const unitPrice = item.price || (item.totalPrice / item.quantity);
+
+      const newQuantity = item.quantity + change;
+      // Never go below 1: at quantity 1 the minus button does nothing
+      if (newQuantity < 1) return;
+
+      item.quantity = newQuantity;
+      item.totalPrice = unitPrice * newQuantity;
+
+      saveCart();
+      renderCartItems();
+      updateCartDisplay();
     }
 
     // Remove item from cart
@@ -1212,6 +1206,14 @@
     }
     .quantity-btn:hover { background: var(--ios-tint-soft); color: var(--ios-tint); }
     .quantity-btn:active { transform: scale(.9); }
+    .quantity-btn:disabled,
+    .quantity-btn:disabled:hover {
+      opacity: .35;
+      cursor: default;
+      background: var(--ios-fill);
+      color: var(--ios-tint);
+      transform: none;
+    }
     .item-quantity {
       font-size: 17px;
       font-weight: 600;
