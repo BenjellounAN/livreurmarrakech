@@ -8,12 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Brand colors: kept from the original page */
       --primary-red: #8B0000;
       --primary-red-light: #a52a2a;
       --primary-red-dark: #660000;
       --accent-gold: #D4AF37;
-      /* Neutral app-style palette */
       --text-dark: #1C1C1E;
       --text-light: #6E6E73;
       --bg-page: #F4F4F5;
@@ -37,7 +35,6 @@
 
     .container { max-width: 1040px; margin: 0 auto; }
 
-    /* Back button: unchanged brand button */
     .back-btn {
       position: fixed;
       top: 14px;
@@ -57,12 +54,10 @@
     }
     .back-btn:hover { background: var(--primary-red-dark); transform: translateX(-3px); }
 
-    /* Header: left-aligned, app style */
     .header { text-align: left; margin: 56px 0 20px; padding: 0 4px; }
     .header h1 { font-size: 1.6rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; letter-spacing: -0.01em; }
     .header p { color: var(--text-light); font-size: 0.9rem; }
 
-    /* Layout: two columns on desktop, stacked on mobile */
     .cart-container {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -81,7 +76,6 @@
     .cart-items { min-width: 0; }
     .cart-summary { position: sticky; top: 16px; }
 
-    /* Section header inside cart */
     .cart-header {
       display: flex;
       justify-content: space-between;
@@ -107,7 +101,6 @@
     }
     .clear-cart:hover { background: rgba(139, 0, 0, 0.1); }
 
-    /* Item rows */
     .item-card {
       display: flex;
       gap: 14px;
@@ -149,7 +142,6 @@
       flex-wrap: wrap;
     }
 
-    /* Quantity buttons: same brand style, pill group */
     .quantity-btn {
       width: 30px;
       height: 30px;
@@ -184,7 +176,6 @@
     }
     .remove-item:hover { background: rgba(231, 76, 60, 0.1); }
 
-    /* Customization badges */
     .customization-badges { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 6px; }
     .customization-badge {
       background: var(--bg-light);
@@ -206,7 +197,6 @@
       border-radius: 10px;
     }
 
-    /* Summary */
     .summary-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 14px; }
 
     .summary-item {
@@ -242,7 +232,6 @@
     }
     .delivery-note i { color: var(--primary-red); margin-right: 8px; }
 
-    /* Form sections */
     .customer-info {
       background: none;
       border: none;
@@ -296,7 +285,6 @@
       font-weight: normal;
     }
 
-    /* Delivery time: pill options */
     .delivery-time { margin-bottom: 4px; }
     .delivery-time > label {
       display: block;
@@ -325,7 +313,6 @@
     }
     .time-option i { margin-right: 6px; color: var(--primary-red); }
 
-    /* Payment: card row */
     .payment-method { margin: 18px 0; }
     .payment-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; }
     .payment-option {
@@ -348,7 +335,6 @@
     .payment-option label { flex: 1; cursor: pointer; }
     .payment-icon { color: var(--primary-red); font-size: 1rem; }
 
-    /* Checkout button: unchanged brand gradient */
     .checkout-btn {
       width: 100%;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
@@ -370,7 +356,6 @@
     .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(139, 0, 0, 0.35); }
     .checkout-btn:active { transform: translateY(0); }
 
-    /* Empty cart */
     .empty-cart { text-align: center; padding: 30px 0; }
     .browse-btn {
       background: var(--primary-red);
@@ -396,7 +381,6 @@
     }
     .info-text i { margin-right: 4px; }
 
-    /* Mobile */
     @media (max-width: 860px) {
       .cart-container { grid-template-columns: 1fr; }
       .cart-summary { position: static; }
@@ -410,7 +394,6 @@
       .item-card { gap: 12px; }
     }
 
-    /* Receipt paper: paper-colored background with semicircle holes (transparent) on the top and bottom edges */
     :root { --paper: #FBFAF7; }
     .cart-items, .cart-summary {
       background:
@@ -423,7 +406,6 @@
       filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
     }
   </style>
-  <!-- Google Ads tag for WhatsApp order-start tracking -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18159181033"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -434,20 +416,16 @@
 </head>
 <body>
   <div class="container">
-    <!-- Fixed Back Button -->
     <div class="back-btn" id="back-button">
       <i class="fas fa-arrow-left"></i>
     </div>
     
-    <!-- Header -->
     <div class="header">
       <h1>Checkout - Breakfast Marrakech</h1>
       <p>Review your order and complete your purchase</p>
     </div>
     
-    <!-- Cart Layout -->
     <div class="cart-container">
-      <!-- Cart Items -->
       <div class="cart-items">
         <div class="cart-header">
           <h2 id="cart-count">Order Items (0)</h2>
@@ -457,11 +435,9 @@
         </div>
         
         <div id="cart-items-container">
-          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
         </div>
       </div>
       
-      <!-- Cart Summary -->
       <div class="cart-summary">
         <h2 class="summary-title">Order Summary</h2>
         
@@ -475,13 +451,11 @@
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
-        <!-- رسالة توضيحية -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
         </div>
         
-        <!-- Customer Information (اختيارية) -->
         <div class="customer-info" style="margin-bottom: 20px;">
           <h3>Delivery Information <span class="optional-note">(Optional)</span></h3>
           <div class="form-group">
@@ -507,7 +481,6 @@
           </div>
         </div>
         
-        <!-- Payment Method (آخر) -->
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
           
@@ -536,10 +509,10 @@
     let cart = [];
 
     // Constants
-    const WHATSAPP_NUMBER = ""; // ← ضع رقم واتساب Breakfast Marrakech هنا
+    const WHATSAPP_NUMBER = "212709191563";
 
     // ── مفاتيح خاصة بـ Breakfast Marrakech ──────────────────────
-    const CART_KEY = 'breakfastMarrakechCart';
+    const CART_KEY = 'breakfastCart';
     const CUSTOMER_KEY = 'breakfastMarrakechCustomerInfo';
     const MENU_PAGE = 'breakfast.html';
     // ─────────────────────────────────────────────────────────────
@@ -581,103 +554,24 @@
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
+    // تحويل options (المصفوفة) إلى نصوص للعرض
     function formatCustomizationsForDisplay(item) {
-      let customizations = [];
-      
-      if (item.customizations) {
-        Object.keys(item.customizations).forEach(key => {
-          const value = item.customizations[key];
-          
-          if (!value || (Array.isArray(value) && value.length === 0)) {
-            return;
-          }
-          
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
-          
-          if (Array.isArray(value)) {
-            if (value.length > 0) {
-              if (typeof value[0] === 'object') {
-                const labels = value.map(v => v.label || v.value).filter(v => v);
-                if (labels.length > 0) {
-                  customizations.push(`${displayKey}: ${labels.join(', ')}`);
-                }
-              } else {
-                customizations.push(`${displayKey}: ${value.join(', ')}`);
-              }
-            }
-          } else if (typeof value === 'object' && value !== null) {
-            const label = value.label || value.value;
-            if (label) {
-              customizations.push(`${displayKey}: ${label}`);
-            }
-          } else if (value) {
-            customizations.push(`${displayKey}: ${value}`);
-          }
-        });
-      }
-      
-      return customizations;
+      if (!Array.isArray(item.options) || item.options.length === 0) return [];
+      return item.options.map(o => {
+        return o.price > 0 
+          ? `${o.name} (+${Number(o.price).toFixed(2)})` 
+          : o.name;
+      });
     }
     
-    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
+    // تحويل options إلى نصوص لرسالة واتساب
     function formatCustomizationsForMessage(item) {
-      let customizationsText = "";
-      
-      if (item.customizations) {
-        Object.keys(item.customizations).forEach(key => {
-          const value = item.customizations[key];
-          
-          if (!value || (Array.isArray(value) && value.length === 0)) {
-            return;
-          }
-          
-          let displayKey = key;
-          switch(key) {
-            case 'drink': displayKey = 'Drink'; break;
-            case 'size': displayKey = 'Size'; break;
-            case 'remove': displayKey = 'Remove'; break;
-            case 'extras': displayKey = 'Extras'; break;
-            case 'sauces': displayKey = 'Sauces'; break;
-            case 'dressing': displayKey = 'Dressing'; break;
-            case 'salt': displayKey = 'Salt Level'; break;
-            default: displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-          }
-          
-          if (Array.isArray(value)) {
-            if (value.length > 0) {
-              let itemsList = [];
-              value.forEach(v => {
-                if (typeof v === 'object') {
-                  itemsList.push(v.label || v.value);
-                } else {
-                  itemsList.push(v);
-                }
-              });
-              customizationsText += `   • ${displayKey}: ${itemsList.join(', ')}\n`;
-            }
-          } else if (typeof value === 'object' && value !== null) {
-            const label = value.label || value.value;
-            if (label) {
-              customizationsText += `   • ${displayKey}: ${label}\n`;
-            }
-          } else if (value) {
-            customizationsText += `   • ${displayKey}: ${value}\n`;
-          }
-        });
-      }
-      
-      return customizationsText;
+      if (!Array.isArray(item.options) || item.options.length === 0) return "";
+      let text = "";
+      item.options.forEach(o => {
+        text += `   • ${o.name}${o.price > 0 ? ` (+${Number(o.price).toFixed(2)} MAD)` : ""}\n`;
+      });
+      return text;
     }
     
     // Initialize the cart
@@ -695,7 +589,6 @@
       cartItemsContainer.innerHTML = '';
       
       if (cart.length === 0) {
-        // رمز سلة بدل الصورة
         cartItemsContainer.innerHTML = `
           <div class="empty-cart" style="text-align: center; padding: 20px;">
             <div style="font-size: 72px; color: #8B0000; margin-bottom: 16px; line-height: 1;">
@@ -716,7 +609,7 @@
         
         const customizations = formatCustomizationsForDisplay(item);
         
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
+        const pricePerUnit = item.unitPrice || item.basePrice || (item.totalPrice / item.quantity) || 0;
         const totalItemPrice = pricePerUnit * item.quantity;
         
         if (item.totalPrice !== totalItemPrice) {
@@ -761,7 +654,7 @@
     // Calculate cart totals
     function calculateTotals() {
       const subtotal = cart.reduce((sum, item) => {
-        const pricePerUnit = item.price || (item.totalPrice / item.quantity);
+        const pricePerUnit = item.unitPrice || item.basePrice || (item.totalPrice / item.quantity) || 0;
         const itemTotal = pricePerUnit * item.quantity;
         
         if (item.totalPrice !== itemTotal) {
@@ -795,7 +688,7 @@
       const item = cart[itemIndex];
       if (!item) return;
 
-      const unitPrice = item.price || (item.totalPrice / item.quantity);
+      const unitPrice = item.unitPrice || item.basePrice || (item.totalPrice / item.quantity) || 0;
 
       const newQuantity = item.quantity + change;
       if (newQuantity < 1) return;
@@ -877,14 +770,14 @@
 
     // Unit price of a single item
     function calculateUnitPrice(item) {
-      return item.price || (item.totalPrice / item.quantity);
+      // صفحة القائمة تحفظ unitPrice (السعر النهائي بعد الإضافات)
+      return item.unitPrice || item.basePrice || (item.totalPrice / item.quantity) || 0;
     }
 
     // Total extras price per unit
     function calculateExtrasTotal(item) {
-      const extras = item.customizations && item.customizations.extras;
-      if (!Array.isArray(extras)) return 0;
-      return extras.reduce((sum, e) => sum + (Number(e && e.price) || 0), 0);
+      if (!Array.isArray(item.options)) return 0;
+      return item.options.reduce((sum, o) => sum + (Number(o.price) || 0), 0);
     }
 
     // Send order via WhatsApp
@@ -908,13 +801,6 @@
         window.location.href = whatsappUrl;
         return;
       }
-
-      setTimeout(() => {
-        cart = [];
-        saveCart();
-        renderCartItems();
-        updateCartDisplay();
-      }, 1000);
     }
 
     // Generate WhatsApp message with ALL customizations
@@ -1038,9 +924,6 @@
   </script>
 
   <style>
-    /* =====================================================================
-       iOS 27 THEME (Pizza Hut checkout): same tokens as the other pages
-       ===================================================================== */
     :root {
       --ios-bg: #F2F2F7;
       --ios-card: #FFFFFF;
@@ -1066,7 +949,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ---------- back: glass capsule ---------- */
     .back-btn {
       top: 12px;
       left: 16px;
@@ -1082,7 +964,6 @@
     .back-btn:hover { background: var(--ios-glass); transform: none; }
     .back-btn:active { transform: scale(.92); }
 
-    /* ---------- large title ---------- */
     .header { margin: 64px 0 16px; padding: 0 4px; text-align: left; }
     .header h1 {
       font-size: 34px;
@@ -1093,7 +974,6 @@
     }
     .header p { color: var(--ios-secondary); font-size: 15px; margin-top: 4px; }
 
-    /* ---------- receipt panels: keep the paper edge from the original page ---------- */
     .cart-items { padding: 18px 18px 8px; }
     .cart-summary { padding: 20px 18px; }
     .cart-container { gap: 16px; }
@@ -1119,7 +999,6 @@
     }
     .clear-cart:hover { background: rgba(139, 0, 0, .18); }
 
-    /* ---------- item rows ---------- */
     .item-card {
       gap: 14px;
       padding: 14px 0;
@@ -1201,7 +1080,6 @@
       padding: 6px 10px;
     }
 
-    /* ---------- summary ---------- */
     .summary-title {
       font-size: 22px;
       font-weight: 700;
@@ -1238,7 +1116,6 @@
     }
     .delivery-note i { color: var(--ios-tint); margin-right: 8px; }
 
-    /* ---------- section headers (iOS grouped style) ---------- */
     .customer-info h3,
     .payment-title {
       font-size: 13px;
@@ -1258,7 +1135,6 @@
       letter-spacing: 0;
     }
 
-    /* ---------- form: filled iOS fields ---------- */
     .form-group { margin-bottom: 12px; }
     .form-group label {
       font-size: 13px;
@@ -1284,7 +1160,6 @@
     }
     .form-group textarea { min-height: 80px; }
 
-    /* ---------- delivery time: segmented control ---------- */
     .delivery-time > label {
       font-size: 13px !important;
       font-weight: 500 !important;
@@ -1316,7 +1191,6 @@
     }
     .time-option i { color: var(--ios-tint); margin-right: 6px; }
 
-    /* ---------- payment ---------- */
     .payment-method { margin: 18px 0 4px; }
     .payment-option {
       background: var(--ios-bg);
@@ -1340,7 +1214,6 @@
     }
     .payment-icon { color: var(--ios-tint); font-size: 16px; }
 
-    /* ---------- primary action: iOS filled pill ---------- */
     .checkout-btn {
       background: var(--ios-tint);
       border-radius: 999px;
@@ -1362,7 +1235,6 @@
     }
     .info-text i { color: var(--ios-secondary); }
 
-    /* ---------- empty cart ---------- */
     .empty-cart p { color: var(--ios-label) !important; font-size: 17px !important; font-weight: 600; }
     .empty-cart a {
       border-radius: 999px !important;
@@ -1371,7 +1243,6 @@
       padding: 12px 26px !important;
     }
 
-    /* ---------- mobile ---------- */
     @media (max-width: 480px) {
       body { padding: 0 12px 32px; }
       .cart-items, .cart-summary { padding: 16px; }
