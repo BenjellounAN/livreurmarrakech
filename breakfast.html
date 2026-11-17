@@ -419,6 +419,30 @@
       position: relative
     }
 
+    .promo-sticker {
+      position: absolute;
+      top: 19px;
+      left: 19px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      height: 27px;
+      padding: 0 8px;
+      border-radius: 7px 7px 7px 2px;
+      background: linear-gradient(135deg, #D71920, #A80000);
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: .25px;
+      box-shadow: 0 3px 9px rgba(120, 0, 0, .3);
+      transform: rotate(-7deg);
+      pointer-events: none;
+      white-space: nowrap
+    }
+
     .row+.row::before {
       content: "";
       position: absolute;
@@ -1541,7 +1565,7 @@
       PRODUCTS.push({
         name,
         price,
-        oldPrice,
+        oldPrice: cat.id === "promotions" ? Number((price / 0.6).toFixed(2)) : oldPrice,
         desc: d,
         img,
         cat: cat.title,
@@ -1575,7 +1599,8 @@
         cat.items.forEach(() => {
           const idx = k++,
             p = PRODUCTS[idx];
-          rows += `<div class="row">
+          rows += `<div class="row ${p.cat === "Promotions" ? "promo-row" : ""}">
+        ${p.cat === "Promotions" ? `<span class="promo-sticker">40% OFF</span>` : ""}
         <img src="${p.img}" alt="${esc(p.name)}" loading="lazy" data-idx="${idx}">
         <div class="row-info">
           <div class="row-name">${esc(p.name)}</div>
