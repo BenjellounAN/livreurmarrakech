@@ -8,10 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Brand colors: Breakfast Marrakech (warm terracotta / gold) */
-      --primary-red: #B45A2B;
-      --primary-red-light: #c96a33;
-      --primary-red-dark: #8a421c;
+      /* Brand colors: kept from the original page */
+      --primary-red: #8B0000;
+      --primary-red-light: #a52a2a;
+      --primary-red-dark: #660000;
       --accent-gold: #D4AF37;
       /* Neutral app-style palette */
       --text-dark: #1C1C1E;
@@ -37,7 +37,7 @@
 
     .container { max-width: 1040px; margin: 0 auto; }
 
-    /* Back button: brand button */
+    /* Back button: unchanged brand button */
     .back-btn {
       position: fixed;
       top: 14px;
@@ -105,7 +105,7 @@
       border-radius: 8px;
       transition: all 0.2s ease;
     }
-    .clear-cart:hover { background: rgba(180, 90, 43, 0.1); }
+    .clear-cart:hover { background: rgba(139, 0, 0, 0.1); }
 
     /* Item rows */
     .item-card {
@@ -149,7 +149,7 @@
       flex-wrap: wrap;
     }
 
-    /* Quantity buttons: pill group */
+    /* Quantity buttons: same brand style, pill group */
     .quantity-btn {
       width: 30px;
       height: 30px;
@@ -284,7 +284,7 @@
       outline: none;
       border-color: var(--primary-red);
       background-color: var(--surface);
-      box-shadow: 0 0 0 3px rgba(180, 90, 43, 0.08);
+      box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
     }
     .form-group textarea { resize: vertical; min-height: 72px; }
 
@@ -320,7 +320,7 @@
     }
     .time-option.selected {
       border-color: var(--primary-red);
-      background: rgba(180, 90, 43, 0.05);
+      background: rgba(139, 0, 0, 0.05);
       font-weight: 600;
     }
     .time-option i { margin-right: 6px; color: var(--primary-red); }
@@ -342,13 +342,13 @@
     }
     .payment-option.selected {
       border-color: var(--primary-red);
-      background: rgba(180, 90, 43, 0.05);
+      background: rgba(139, 0, 0, 0.05);
     }
     .payment-option input { accent-color: var(--primary-red); transform: scale(0.9); }
     .payment-option label { flex: 1; cursor: pointer; }
     .payment-icon { color: var(--primary-red); font-size: 1rem; }
 
-    /* Checkout button: brand gradient */
+    /* Checkout button: unchanged brand gradient */
     .checkout-btn {
       width: 100%;
       background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
@@ -363,11 +363,11 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(180, 90, 43, 0.25);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.25);
       transition: all 0.3s ease;
       margin-top: 8px;
     }
-    .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(180, 90, 43, 0.35); }
+    .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(139, 0, 0, 0.35); }
     .checkout-btn:active { transform: translateY(0); }
 
     /* Empty cart */
@@ -410,7 +410,7 @@
       .item-card { gap: 12px; }
     }
 
-    /* Receipt paper: paper-colored background with semicircle holes on top and bottom edges */
+    /* Receipt paper: paper-colored background with semicircle holes (transparent) on the top and bottom edges */
     :root { --paper: #FBFAF7; }
     .cart-items, .cart-summary {
       background:
@@ -457,7 +457,7 @@
         </div>
         
         <div id="cart-items-container">
-          <!-- Items will be added dynamically by JavaScript -->
+          <!-- سيتم إضافة العناصر ديناميكياً بواسطة JavaScript -->
         </div>
       </div>
       
@@ -475,13 +475,13 @@
           <span class="total-price" id="total-price">0.00 MAD</span>
         </div>
         
-        <!-- Explanatory message -->
+        <!-- رسالة توضيحية -->
         <div class="delivery-note">
           <i class="fas fa-info-circle"></i>
           <span>This total does not include delivery charges. Delivery fee will be calculated based on your location.</span>
         </div>
         
-        <!-- Customer Information (optional) -->
+        <!-- Customer Information (اختيارية) -->
         <div class="customer-info" style="margin-bottom: 20px;">
           <h3>Delivery Information <span class="optional-note">(Optional)</span></h3>
           <div class="form-group">
@@ -507,7 +507,7 @@
           </div>
         </div>
         
-        <!-- Payment Method -->
+        <!-- Payment Method (آخر) -->
         <div class="payment-method">
           <h3 class="payment-title">Payment Method</h3>
           
@@ -532,13 +532,19 @@
   </div>
 
   <script>
-    // Cart data structure - loaded from localStorage
+    // Cart data structure - سيتم تحميلها من localStorage
     let cart = [];
 
     // Constants
-    const WHATSAPP_NUMBER = "212642620325"; // WhatsApp number for Breakfast Marrakech
+    const WHATSAPP_NUMBER = ""; // ← ضع رقم واتساب Breakfast Marrakech هنا
 
-    // Customer Information (optional)
+    // ── مفاتيح خاصة بـ Breakfast Marrakech ──────────────────────
+    const CART_KEY = 'breakfastMarrakechCart';
+    const CUSTOMER_KEY = 'breakfastMarrakechCustomerInfo';
+    const MENU_PAGE = 'breakfast.html';
+    // ─────────────────────────────────────────────────────────────
+
+    // Customer Information (اختيارية)
     let customerInfo = {
       name: "",
       address: "",
@@ -554,19 +560,12 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     const backButton = document.getElementById('back-button');
 
-    // Customer Information Elements (optional)
+    // Customer Information Elements (اختيارية)
     const customerNameInput = document.getElementById('customerName');
     const customerAddressInput = document.getElementById('customerAddress');
     const timeOptions = document.querySelectorAll('.time-option');
 
-    // ── Breakfast-specific storage keys ──────────────────────────
-    // We use separate keys so we never mix with Pizza Hut's cart.
-    const CART_KEY = 'breakfastMarrakechCart';
-    const CUSTOMER_KEY = 'breakfastMarrakechCustomerInfo';
-    const MENU_PAGE = 'breakfast.html';
-    // ─────────────────────────────────────────────────────────────
-
-    // Get cart contents from localStorage
+    // دالة للحصول على محتويات السلة من localStorage
     function getCart() {
       try {
         const cartData = localStorage.getItem(CART_KEY);
@@ -577,12 +576,12 @@
       }
     }
     
-    // Save cart to localStorage
+    // دالة لحفظ السلة في localStorage
     function saveCart() {
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
     }
     
-    // Convert customization options to displayable text
+    // دالة لتحويل الخيارات المخصصة إلى نص قابل للعرض
     function formatCustomizationsForDisplay(item) {
       let customizations = [];
       
@@ -631,7 +630,7 @@
       return customizations;
     }
     
-    // Convert customization options to text for the WhatsApp message
+    // دالة لتحويل الخيارات المخصصة إلى نص للرسالة
     function formatCustomizationsForMessage(item) {
       let customizationsText = "";
       
@@ -696,15 +695,15 @@
       cartItemsContainer.innerHTML = '';
       
       if (cart.length === 0) {
-        // Empty cart: cart icon instead of the old image
+        // رمز سلة بدل الصورة
         cartItemsContainer.innerHTML = `
           <div class="empty-cart" style="text-align: center; padding: 20px;">
-            <div style="font-size: 72px; color: #B45A2B; margin-bottom: 16px; line-height: 1;">
+            <div style="font-size: 72px; color: #8B0000; margin-bottom: 16px; line-height: 1;">
               <i class="fas fa-shopping-cart"></i>
             </div>
             <p style="margin: 0 0 20px 0; font-size: 18px; color: #333;">Your cart is empty</p>
             <a href="${MENU_PAGE}" class="browse-btn"
-               style="display: inline-block; padding: 12px 25px; background-color: #B45A2B; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">Browse Menu</a>
+               style="display: inline-block; padding: 12px 25px; background-color: #8B0000; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">Browse Menu</a>
           </div>
         `;
         return;
@@ -717,11 +716,9 @@
         
         const customizations = formatCustomizationsForDisplay(item);
         
-        // Price per unit is stored in item.price
         const pricePerUnit = item.price || (item.totalPrice / item.quantity);
         const totalItemPrice = pricePerUnit * item.quantity;
         
-        // Make sure the total price is up to date
         if (item.totalPrice !== totalItemPrice) {
           item.totalPrice = totalItemPrice;
         }
@@ -733,7 +730,6 @@
           <div class="item-details">
             <div class="item-name">${item.name}</div>
             
-            <!-- Show customizations as badges -->
             ${customizations.length > 0 ? 
               `<div class="customization-badges">
                 ${customizations.map(custom => `<span class="customization-badge">${custom}</span>`).join('')}
@@ -741,7 +737,6 @@
               : ''
             }
             
-            <!-- Show special instructions if any -->
             ${item.specialInstructions ? 
               `<div class="special-instructions">Note: ${item.specialInstructions}</div>` 
               : ''
@@ -803,7 +798,6 @@
       const unitPrice = item.price || (item.totalPrice / item.quantity);
 
       const newQuantity = item.quantity + change;
-      // Never go below 1
       if (newQuantity < 1) return;
 
       item.quantity = newQuantity;
@@ -849,7 +843,7 @@
       sendWhatsAppOrder();
     }
 
-    // Save customer information (optional)
+    // Save customer information (اختيارية)
     function saveCustomerInfo() {
       customerInfo = {
         name: customerNameInput.value.trim(),
@@ -1037,7 +1031,7 @@
     // Initialize the cart when the page loads
     document.addEventListener('DOMContentLoaded', initCart);
     
-    // Debug helper
+    // دالة مساعدة لعرض البيانات المخزنة في localStorage (لتصحيح الأخطاء)
     function debugCart() {
       console.log("Cart from localStorage:", JSON.parse(localStorage.getItem(CART_KEY) || '[]'));
     }
@@ -1045,7 +1039,7 @@
 
   <style>
     /* =====================================================================
-       iOS 27 THEME (Breakfast Marrakech checkout) – same tokens as the menu
+       iOS 27 THEME (Pizza Hut checkout): same tokens as the other pages
        ===================================================================== */
     :root {
       --ios-bg: #F2F2F7;
@@ -1055,8 +1049,8 @@
       --ios-secondary: #8E8E93;
       --ios-separator: rgba(60, 60, 67, .14);
       --ios-fill: rgba(120, 120, 128, .12);
-      --ios-tint: #B45A2B;
-      --ios-tint-soft: rgba(180, 90, 43, .10);
+      --ios-tint: #8B0000;
+      --ios-tint-soft: rgba(139, 0, 0, .10);
       --ios-destructive: #FF3B30;
       --ios-glass: rgba(255, 255, 255, .82);
       --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Poppins, sans-serif;
@@ -1099,7 +1093,7 @@
     }
     .header p { color: var(--ios-secondary); font-size: 15px; margin-top: 4px; }
 
-    /* ---------- receipt panels ---------- */
+    /* ---------- receipt panels: keep the paper edge from the original page ---------- */
     .cart-items { padding: 18px 18px 8px; }
     .cart-summary { padding: 20px 18px; }
     .cart-container { gap: 16px; }
@@ -1123,7 +1117,7 @@
       border-radius: 999px;
       padding: 7px 12px;
     }
-    .clear-cart:hover { background: rgba(180, 90, 43, .18); }
+    .clear-cart:hover { background: rgba(139, 0, 0, .18); }
 
     /* ---------- item rows ---------- */
     .item-card {
@@ -1354,10 +1348,10 @@
       font-size: 17px;
       font-weight: 600;
       letter-spacing: -.2px;
-      box-shadow: 0 10px 24px rgba(180, 90, 43, .28), inset 0 1px 0 rgba(255, 255, 255, .2);
+      box-shadow: 0 10px 24px rgba(139, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .2);
       margin-top: 12px;
     }
-    .checkout-btn:hover { background: #8a421c; transform: none; box-shadow: 0 10px 24px rgba(180, 90, 43, .28), inset 0 1px 0 rgba(255, 255, 255, .2); }
+    .checkout-btn:hover { background: #6b0000; transform: none; box-shadow: 0 10px 24px rgba(139, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .2); }
     .checkout-btn:active { transform: scale(.98); }
 
     .info-text {
@@ -1370,7 +1364,7 @@
 
     /* ---------- empty cart ---------- */
     .empty-cart p { color: var(--ios-label) !important; font-size: 17px !important; font-weight: 600; }
-    .empty-cart .browse-btn {
+    .empty-cart a {
       border-radius: 999px !important;
       background-color: var(--ios-tint) !important;
       font-weight: 600 !important;
