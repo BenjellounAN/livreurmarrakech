@@ -11,5 +11,6 @@ Disallow: /kcheckout.html
 Disallow: /pcheckout.html
 Disallow: /scheckout.html
 Disallow: /zcheckout.html
+Disallow: /bcheckout.html
 
 Sitemap: https://delivery-marrakech.com/sitemap.xml
